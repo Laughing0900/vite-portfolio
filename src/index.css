@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap");
-
 @layer base {
     :root {
         --background: #1c1c1e;
@@ -46,6 +44,23 @@
         @apply bg-background text-foreground;
     }
 }
+
+html {
+    font-family:
+        segoe ui,
+        helvetica neue,
+        helvetica,
+        -apple-system,
+        BlinkMacSystemFont,
+        avenir next,
+        avenir,
+        Cantarell,
+        Ubuntu,
+        roboto,
+        noto,
+        arial,
+        sans-serif;
+}
 .goldman-bold {
     font-family: "Goldman", sans-serif;
     font-weight: 700;
@@ -56,4 +71,12 @@
     font-family: "Goldman", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+/* @TODO this using for crazy mode feature */
+.kablammo-regular {
+    font-family: "Kablammo", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "MORF" 0;
 }
