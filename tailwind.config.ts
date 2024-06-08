@@ -53,6 +53,7 @@ const config = {
                     DEFAULT: "var(--card)",
                     foreground: "var(--card-foreground)",
                 },
+                debug: "var(--debug)",
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -119,7 +120,13 @@ const config = {
 export default config;
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }: any) {
+function addVariablesForColors({
+    addBase,
+    theme,
+}: {
+    addBase: (styles: Record<string, Record<string, unknown>>) => void;
+    theme: (path: string) => Config["theme"];
+}) {
     const allColors = flattenColorPalette(theme("colors"));
     const newVars = Object.fromEntries(
         Object.entries(allColors).map(([key, val]) => [`--${key}`, val])

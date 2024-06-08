@@ -31,6 +31,8 @@
         --border: #d7c2a9;
         --input: #d7c2a9;
         --ring: hsl(197, 66%, 53%);
+
+        --debug: #ff007a;
     }
 }
 
