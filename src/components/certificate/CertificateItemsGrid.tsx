@@ -17,8 +17,8 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
 }) => {
     if (items.length === 0) return null;
     return (
-        <div className="py-2s grid grid-cols-4 gap-x-5 border-t-2 border-t-gray-500 text-xl">
-            <h3 className="p-4">{title}</h3>
+        <div className="grid grid-cols-4 gap-x-5 border-t-2 border-t-gray-500 text-xl">
+            <span className="p-4">{title}</span>
             {items.map((item, index) => {
                 return (
                     <LinkPreview
@@ -31,7 +31,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                                 "border-b-2 border-b-gray-500"
                         )}
                     >
-                        <span className="z-10">{item.label}</span>
+                        <span>{item.label}</span>
                         <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-60">
                             {item.institution}
                         </div>

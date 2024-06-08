@@ -18,7 +18,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
     };
 
     return (
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden" {...rest}>
             <div
                 style={{
                     transform: `translate(-40%,-60%) skewX(-48deg) skewY(14deg) scale(0.675) rotate(0deg) translateZ(0)`,
@@ -27,7 +27,6 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                     "absolute -top-1/4 left-1/4 z-0 flex h-full w-full -translate-x-1/2 -translate-y-1/2",
                     className
                 )}
-                {...rest}
             >
                 {rows.map((_, i) => (
                     <motion.div
@@ -44,7 +43,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                                     transition: { duration: 2 },
                                 }}
                                 key={`col` + j}
-                                className="relative h-8 w-16 border-r border-t border-gray-700/70"
+                                className="relative h-8 w-16 border-r border-t border-gray-700/40"
                             >
                                 {j % 2 === 0 && i % 2 === 0 ? (
                                     <svg

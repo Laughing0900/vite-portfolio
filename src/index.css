@@ -80,3 +80,13 @@ html {
     font-style: normal;
     font-variation-settings: "MORF" 0;
 }
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+    z-index: 0;
+    width: fit-content;
+}
