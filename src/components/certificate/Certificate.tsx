@@ -7,7 +7,7 @@ const Certificate: FC = () => {
 
     return (
         <div className="flex min-h-dvh flex-col justify-center px-20">
-            <h3 className="goldman-regular mb-10 text-6xl">
+            <h3 className="goldman-regular mb-20 text-6xl">
                 CERT. & EDUCATION
             </h3>
 
