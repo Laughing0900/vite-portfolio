@@ -29,8 +29,8 @@ export const LinkPreview = ({
     children,
     url,
     className,
-    width = 200,
-    height = 125,
+    width = 300,
+    height = 150,
     isStatic = false,
     imageSrc = "",
 }: LinkPreviewProps) => {
@@ -41,7 +41,7 @@ export const LinkPreview = ({
 
     useEffect(() => {
         setIsMounted(true);
-    }, [isOpen]);
+    }, [setIsMounted]);
 
     const springConfig = { stiffness: 100, damping: 15 };
     const x = useMotionValue(0);
