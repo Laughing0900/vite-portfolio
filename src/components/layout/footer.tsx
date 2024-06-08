@@ -1,10 +1,4 @@
-import {
-    motion,
-    useMotionValueEvent,
-    useScroll,
-    useSpring,
-    useTransform,
-} from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "@/components/ui/link";

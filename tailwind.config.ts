@@ -19,6 +19,9 @@ const config = {
             },
         },
         extend: {
+            fontFamily: {
+                goldman: ["Goldman", "sans-serif"],
+            },
             colors: {
                 border: "var(--border)",
                 input: "var(--input)",
@@ -125,7 +128,7 @@ function addVariablesForColors({
     theme,
 }: {
     addBase: (styles: Record<string, Record<string, unknown>>) => void;
-    theme: (path: string) => Config["theme"];
+    theme: any;
 }) {
     const allColors = flattenColorPalette(theme("colors"));
     const newVars = Object.fromEntries(

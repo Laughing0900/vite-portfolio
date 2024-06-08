@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Certificate from "@/components/certificate/Certificate";
 import MainLayout from "@/components/layout/mainLayout";
 
