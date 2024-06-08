@@ -17,7 +17,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
 }) => {
     if (items.length === 0) return null;
     return (
-        <div className="py-2s grid grid-cols-4 gap-x-2 border-t-2 border-t-gray-500 text-xl">
+        <div className="py-2s grid grid-cols-4 gap-x-5 border-t-2 border-t-gray-500 text-xl">
             <h3 className="p-4">{title}</h3>
             {items.map((item, index) => {
                 return (
