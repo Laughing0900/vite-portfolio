@@ -5,12 +5,12 @@ import {
   motion,
   useMotionValue,
   useSpring,
-  } from "framer-motion";
-  import Image from "next/image";
-  import Link from "next/link";
-  import { encode } from "qss";
-  import { cn } from "@/lib/utils";
+} from "framer-motion";
+import Link from "@/components/ui/link";
+import { cn } from "@/lib/utils";
+import { encode } from "qss";
 import React from "react";
+import Image from "@/components/ui/image";
 
 type LinkPreviewProps = {
   children: React.ReactNode;
@@ -31,8 +31,6 @@ export const LinkPreview = ({
   className,
   width = 200,
   height = 125,
-  quality = 50,
-  layout = "fixed",
   isStatic = false,
   imageSrc = "",
 }: LinkPreviewProps) => {
@@ -82,9 +80,6 @@ export const LinkPreview = ({
             src={src}
             width={width}
             height={height}
-            quality={quality}
-            layout={layout}
-            priority={true}
             alt="hidden image"
           />
         </div>
@@ -140,9 +135,6 @@ export const LinkPreview = ({
                     src={isStatic ? imageSrc : src}
                     width={width}
                     height={height}
-                    quality={quality}
-                    layout={layout}
-                    priority={true}
                     className="rounded-lg"
                     alt="preview image"
                   />
