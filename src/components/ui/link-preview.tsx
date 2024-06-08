@@ -9,7 +9,6 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { encode } from "qss";
 import React from "react";
 
 type LinkPreviewProps = {
@@ -21,9 +20,9 @@ type LinkPreviewProps = {
   quality?: number;
   layout?: string;
 } & (
-  | { isStatic: true; imageSrc: string }
-  | { isStatic?: false; imageSrc?: never }
-);
+    | { isStatic: true; imageSrc: string }
+    | { isStatic?: false; imageSrc?: never }
+  );
 
 export const LinkPreview = ({
   children,
@@ -34,23 +33,7 @@ export const LinkPreview = ({
   isStatic = false,
   imageSrc = "",
 }: LinkPreviewProps) => {
-  let src;
-  if (!isStatic) {
-    const params = encode({
-      url,
-      screenshot: true,
-      meta: false,
-      embed: "screenshot.url",
-      colorScheme: "dark",
-      "viewport.isMobile": true,
-      "viewport.deviceScaleFactor": 1,
-      "viewport.width": width * 3,
-      "viewport.height": height * 3,
-    });
-    src = `https://api.microlink.io/?${params}`;
-  } else {
-    src = imageSrc;
-  }
+  const src = imageSrc;
 
   const [isOpen, setOpen] = React.useState(false);
 
