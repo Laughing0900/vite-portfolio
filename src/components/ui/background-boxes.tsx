@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 
 /// @description this component install from Aceternity UI
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
-    const rows = new Array(150).fill(1);
-    const cols = new Array(100).fill(1);
+    const rows = new Array(60).fill(1);
+    const cols = new Array(50).fill(1);
     const colors = [
         "--gray-800",
         "--gray-700",
@@ -32,7 +32,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                 {rows.map((_, i) => (
                     <motion.div
                         key={`row` + i}
-                        className="relative h-8 w-16 border-l border-gray-700/70"
+                        className="relative h-16 w-32 border-l border-gray-700/70"
                     >
                         {cols.map((_, j) => (
                             <motion.div
@@ -44,7 +44,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                                     transition: { duration: 2 },
                                 }}
                                 key={`col` + j}
-                                className="relative h-8 w-16 border-r border-t border-gray-700/40"
+                                className="relative h-16 w-32 border-r border-t border-gray-700/40"
                             >
                                 {j % 2 === 0 && i % 2 === 0 ? (
                                     <svg
@@ -53,7 +53,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                                         viewBox="0 0 24 24"
                                         strokeWidth="1.5"
                                         stroke="currentColor"
-                                        className="pointer-events-none absolute -left-[22px] -top-[14px] h-6 w-10 stroke-[1px] text-gray-500/70"
+                                        className="pointer-events-none absolute -left-[40px] -top-[24px] h-10 w-16 stroke-[1px] text-gray-500/70"
                                     >
                                         <path
                                             strokeLinecap="round"
