@@ -122,15 +122,16 @@ const Experiences = () => {
                                 key={company.name + "_description"}
                                 id="experience-description"
                             >
-                                <ul>{company.description} </ul>
+                                <ul>{company.description}</ul>
 
-                                <div>
+                                <div className="mt-5 flex gap-2">
                                     {company.techStack.map((tech) => {
                                         return (
-                                            <div key={company.name + tech}>
-                                                <span className="text-lg font-light">
-                                                    {tech}
-                                                </span>
+                                            <div
+                                                key={company.name + tech}
+                                                className="text-md rounded-full bg-gradient-to-tr from-[#21d4fd]/60 to-[#b721ff]/60 px-3 py-1 font-light"
+                                            >
+                                                {tech}
                                             </div>
                                         );
                                     })}
