@@ -1,4 +1,5 @@
 import {
+    AnimatePresence,
     motion,
     useMotionValueEvent,
     useScroll,
@@ -71,15 +72,44 @@ const Experiences = () => {
                     <div className="absolute right-0 top-1/3 flex h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4">
                         {filedCompanies.map((_, index) => {
                             return (
-                                <motion.div
-                                    key={"exp_bar_" + index}
-                                    className="w-full bg-white transition-all ease-linear"
-                                    style={{
-                                        height: `calc(${selected === index ? 70 : 50}% /
+                                <>
+                                    <motion.div
+                                        key={"exp_bar_" + index}
+                                        className="relative w-full skew-y-12 bg-gray-700/50"
+                                        style={{
+                                            height: `calc(${selected === index ? 70 : 50}% /
                                             ${filedCompanies.length})`,
-                                        opacity: selected === index ? 1 : 0.25,
-                                    }}
-                                />
+                                        }}
+                                        animate={{
+                                            transition: {
+                                                duration: 0.15,
+                                            },
+                                        }}
+                                    >
+                                        <AnimatePresence>
+                                            {selected === index && (
+                                                <motion.span
+                                                    className="absolute inset-0 block h-full w-full bg-white"
+                                                    layoutId="hoverBackground"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        transition: {
+                                                            duration: 0.15,
+                                                        },
+                                                    }}
+                                                    exit={{
+                                                        opacity: 0,
+                                                        transition: {
+                                                            duration: 0.15,
+                                                            delay: 0.2,
+                                                        },
+                                                    }}
+                                                />
+                                            )}
+                                        </AnimatePresence>
+                                    </motion.div>
+                                </>
                             );
                         })}
                     </div>
