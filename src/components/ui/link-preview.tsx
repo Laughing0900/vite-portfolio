@@ -25,6 +25,7 @@ type LinkPreviewProps = {
     | { isStatic?: false; imageSrc?: never }
 );
 
+/// @description this component install from Aceternity UI
 export const LinkPreview = ({
     children,
     url,
@@ -48,8 +49,10 @@ export const LinkPreview = ({
 
     const translateX = useSpring(x, springConfig);
 
-    const handleMouseMove = (event: any) => {
-        const targetRect = event.target.getBoundingClientRect();
+    const handleMouseMove = (
+        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    ) => {
+        const targetRect = event.currentTarget.getBoundingClientRect();
         const eventOffsetX = event.clientX - targetRect.left;
         const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Reduce the effect to make it subtle
         x.set(offsetFromCenter);
@@ -58,7 +61,7 @@ export const LinkPreview = ({
     return (
         <>
             {isMounted ? (
-                <div className="hidden">
+                <div className="invisible hidden">
                     <Image
                         src={src}
                         width={width}
