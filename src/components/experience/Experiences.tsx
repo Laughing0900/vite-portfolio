@@ -1,5 +1,4 @@
 import {
-    inView,
     motion,
     useMotionValueEvent,
     useScroll,
@@ -27,15 +26,13 @@ const Experiences = () => {
     );
 
     const [selected, setSelected] = useState(0);
-    //useTransform ||
     useMotionValueEvent(opacity, "change", (latest) => {
-        console.log("Page scroll: ", latest.toFixed(0));
         setSelected(+latest.toFixed(0));
     });
 
     return (
         <section
-            className="min-h-dvh"
+            className="pointer-events-none min-h-dvh"
             style={{
                 height: `${filedCompanies.length * 75}vh`,
             }}
@@ -48,10 +45,10 @@ const Experiences = () => {
                         {companies.map((company, index) => {
                             return (
                                 <motion.div
-                                    className="py-4"
+                                    className="py-4 transition-all ease-linear"
                                     key={company.name}
                                     style={{
-                                        opacity: selected === index ? 1 : 0.5,
+                                        opacity: selected === index ? 1 : 0.25,
                                     }}
                                 >
                                     <p>
@@ -71,7 +68,21 @@ const Experiences = () => {
                         })}
                     </div>
 
-                    {/* <div className="absolute right-0 top-1/3 h-1/2 w-5 -translate-y-1/2 transform bg-white"></div> */}
+                    <div className="absolute right-0 top-1/3 flex h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4">
+                        {filedCompanies.map((_, index) => {
+                            return (
+                                <motion.div
+                                    key={"exp_bar_" + index}
+                                    className="w-full bg-white transition-all ease-linear"
+                                    style={{
+                                        height: `calc(${selected === index ? 70 : 50}% /
+                                            ${filedCompanies.length})`,
+                                        opacity: selected === index ? 1 : 0.25,
+                                    }}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
                 <div className="col-span-4 col-start-5 pt-40" ref={scrollRef}>
                     {filedCompanies.map((company) => {

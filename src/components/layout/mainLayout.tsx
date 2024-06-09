@@ -14,7 +14,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
     });
     const opacity = useTransform(scrollYProgress, [0.7, 1], [0.8, 0]);
 
-    const [openGrid, setOpenGrid] = useState(true);
+    const [openGrid, setOpenGrid] = useState(false);
 
     const toggleGrid = useCallback(() => {
         setOpenGrid((prev) => !prev);
