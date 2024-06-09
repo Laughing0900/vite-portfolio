@@ -9,8 +9,8 @@ function App() {
             <About />
             {/* Skills */}
             {/* Project */}
-            <Experiences />
-            <Certificate />
+            {/* <Experiences />
+            <Certificate /> */}
         </MainLayout>
     );
 }

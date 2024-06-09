@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { BentoGrid, BentoGridItem } from "@/components/about/bento-grid";
 import { useGetAbout } from "@/components/about/hooks/useGetAbout";
 import { cn } from "@/lib/utils";

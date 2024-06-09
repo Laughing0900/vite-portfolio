@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+const items = ["Performance", "Accessibility", "Best practices", "Visibility"];
 const PerformanceCard = () => {
     const variants = {
         line: {
@@ -36,12 +37,6 @@ const PerformanceCard = () => {
         },
     };
 
-    const items = [
-        "Performance",
-        "Accessibility",
-        "Best practices",
-        "Visibility",
-    ];
     return (
         <motion.div
             initial="initial"
