@@ -34,7 +34,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             <HeroBanner scrollYProgress={scrollYProgress} />
             <main className="relative z-10 mt-[100dvh] min-h-dvh w-full bg-background">
                 <BoxesBackground />
-                <div className="-mt-[100dvh] space-y-40">{children}</div>
+                <div className="-mt-[100dvh] space-y-40 pt-40">{children}</div>
             </main>
             <motion.div
                 ref={footerRef}
