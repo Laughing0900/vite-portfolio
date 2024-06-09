@@ -1,14 +1,11 @@
 import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
+import type { CertificateType } from "@/components/certificate/hooks/useGetCert";
 import type { FC } from "react";
 
 type CertificateItemsGridProps = {
     title: string;
-    items: {
-        label: string;
-        institution: string;
-        url: string;
-    }[];
+    items: ReadonlyArray<CertificateType>;
 };
 
 const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
