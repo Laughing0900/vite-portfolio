@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import CardContainer from "@/components/about/cards/cardContainer";
 import Image from "@/components/ui/image";
 
 const items = [
@@ -24,7 +25,7 @@ const items = [
 const SkillSetCard = () => {
     const variants = {
         initial: {
-            filter: "grayscale(0.9)",
+            filter: "grayscale(0.8)",
             y: 0,
         },
 
@@ -47,21 +48,19 @@ const SkillSetCard = () => {
     };
 
     return (
-        <motion.div
-            initial="initial"
-            whileHover="animate"
-            className="grid h-full min-h-[6rem] w-full grid-cols-4 place-items-center gap-2 overflow-clip"
-        >
-            {items.map((item, i) => (
-                <motion.div
-                    className="flex aspect-square w-full items-center p-1"
-                    variants={variants}
-                    custom={i}
-                >
-                    <Image src={`images/skills/${item}`} alt={item} />
-                </motion.div>
-            ))}
-        </motion.div>
+        <CardContainer>
+            <div className="grid h-full grid-cols-4 place-items-center gap-2 overflow-clip p-2">
+                {items.map((item, i) => (
+                    <motion.div
+                        className="flex aspect-square w-full items-center p-1"
+                        variants={variants}
+                        custom={i}
+                    >
+                        <Image src={`images/skills/${item}`} alt={item} />
+                    </motion.div>
+                ))}
+            </div>
+        </CardContainer>
     );
 };
 export default SkillSetCard;

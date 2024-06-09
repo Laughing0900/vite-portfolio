@@ -8,7 +8,7 @@ export const BentoGrid = ({
     children: React.ReactNode;
 }) => {
     return (
-        <div className="grid-template">
+        <div className="grid-template pointer-events-none">
             <div
                 className={cn(
                     "z-10 col-span-6 col-start-2 grid grid-cols-1 gap-5 md:auto-rows-[18rem] md:grid-cols-3",
@@ -35,7 +35,7 @@ export const BentoGridItem = ({
     return (
         <div
             className={cn(
-                "group/bento row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-gray-400/50 bg-black/80 p-4 shadow-none transition duration-200 hover:shadow-xl",
+                "group/bento pointer-events-auto relative row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-gray-400/50 bg-black/40 p-4 shadow-none transition duration-200 hover:shadow-xl",
                 className
             )}
         >
