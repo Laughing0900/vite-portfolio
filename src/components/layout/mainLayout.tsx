@@ -4,6 +4,8 @@ import HeroBanner from "@/components/heroBanner/heroBanner";
 import WithFooter from "@/components/layout/footer";
 import WithGrid from "@/components/layout/grid";
 import { BoxesBackground } from "@/components/ui/background-boxes";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import type { FC, PropsWithChildren } from "react";
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
@@ -24,12 +26,15 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         <>
             <header className="grid-template fixed top-0 z-50 grid w-full pt-8">
                 {/* @TODO disable on awwward */}
-                <button
-                    className="col-start-8 bg-white text-black"
-                    onClick={toggleGrid}
-                >
-                    toggleGrid
-                </button>
+
+                <div className="col-start-8 flex items-center gap-2">
+                    <Label htmlFor="grid-mode">Grid</Label>
+                    <Switch
+                        checked={openGrid}
+                        onCheckedChange={toggleGrid}
+                        id="grid-mode"
+                    />
+                </div>
             </header>
             <HeroBanner scrollYProgress={scrollYProgress} />
             <main className="relative z-10 mt-[100dvh] min-h-dvh w-full bg-background">
