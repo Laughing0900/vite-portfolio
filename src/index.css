@@ -46,6 +46,11 @@
     h3 {
         @apply mb-20 font-goldman text-6xl;
     }
+
+    li {
+        @apply mb-2 text-lg;
+    }
+
     .grid-template {
         @apply grid grid-cols-8 gap-5 px-20;
     }
@@ -71,10 +76,13 @@ h1,
 h2,
 h3,
 h4,
+a,
 p,
+li,
 span {
     z-index: 0;
     width: fit-content;
+    position: relative;
 }
 
 address {
@@ -102,4 +110,13 @@ address {
     left: 0%;
     right: 0%;
     overflow: hidden;
+}
+
+span.highlight {
+    @apply bg-clip-text text-transparent;
+    background: linear-gradient(90deg, #00cdda, #ad00ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
 }
