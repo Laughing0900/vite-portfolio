@@ -41,13 +41,15 @@
         @apply border-border;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply font-k2d bg-background text-foreground;
+    }
+    h3 {
+        @apply mb-20 font-goldman text-6xl;
     }
 }
 
 html {
     font-family:
-        segoe ui,
         helvetica neue,
         helvetica,
         -apple-system,
@@ -61,25 +63,6 @@ html {
         arial,
         sans-serif;
 }
-.goldman-bold {
-    font-family: "Goldman", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.goldman-regular {
-    font-family: "Goldman", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-/* @TODO this using for crazy mode feature */
-.kablammo-regular {
-    font-family: "Kablammo", system-ui;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "MORF" 0;
-}
 
 h1,
 h2,
@@ -89,4 +72,10 @@ p,
 span {
     z-index: 0;
     width: fit-content;
+}
+
+/* @TODO this using for crazy mode feature */
+.crazy {
+    font-optical-sizing: auto;
+    font-variation-settings: "MORF" 0;
 }

@@ -27,6 +27,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                             index !== items.length - 1 &&
                                 "border-b-2 border-b-gray-500"
                         )}
+                        key={item.label}
                     >
                         <span>{item.label}</span>
                         <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-60">

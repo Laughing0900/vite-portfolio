@@ -1,4 +1,5 @@
 import Certificate from "@/components/certificate/Certificate";
+import Experiences from "@/components/experience/Experiences";
 import MainLayout from "@/components/layout/mainLayout";
 
 function App() {
@@ -8,8 +9,7 @@ function App() {
             {/* hero wrapper */}
             {/* Project */}
             {/* Skills */}
-            {/* Exp */}
-            {/* Cert.  */}
+            <Experiences />
             <Certificate />
         </MainLayout>
     );

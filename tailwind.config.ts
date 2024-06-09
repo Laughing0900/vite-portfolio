@@ -1,5 +1,18 @@
 import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
+import { PluginAPI, RecursiveKeyValuePair } from "tailwindcss/types/config";
 import type { Config } from "tailwindcss";
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+const addVariablesForColors = ({ addBase, theme }: PluginAPI) => {
+    const allColors = flattenColorPalette(theme("colors"));
+    const newVars = Object.fromEntries(
+        Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    ) as RecursiveKeyValuePair<string>;
+
+    addBase({
+        ":root": newVars,
+    });
+};
 
 const config = {
     darkMode: ["class"],
@@ -21,6 +34,8 @@ const config = {
         extend: {
             fontFamily: {
                 goldman: ["Goldman", "sans-serif"],
+                k2d: ["K2D", "sans-serif"],
+                crazy: ["Kablammo", "sans-serif"],
             },
             colors: {
                 border: "var(--border)",
@@ -121,15 +136,3 @@ const config = {
 } satisfies Config;
 
 export default config;
-
-// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }: any) {
-    const allColors = flattenColorPalette(theme("colors"));
-    const newVars = Object.fromEntries(
-        Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-    );
-
-    addBase({
-        ":root": newVars,
-    });
-}
