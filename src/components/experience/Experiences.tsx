@@ -4,9 +4,9 @@ const Experiences = () => {
     const { companies } = useGetExperiences();
 
     return (
-        <div className="flex min-h-dvh flex-col justify-center px-20">
+        <section className="flex min-h-dvh flex-col justify-center px-20">
             <h3>Experience</h3>
-        </div>
+        </section>
     );
 };
 

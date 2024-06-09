@@ -19,7 +19,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
     };
 
     return (
-        <div className="absolute inset-0 overflow-hidden" {...rest}>
+        <div className="sticky top-0 h-dvh w-full overflow-hidden" {...rest}>
             <div
                 style={{
                     transform: `translate(-40%,-60%) skewX(-48deg) skewY(14deg) scale(0.675) rotate(0deg) translateZ(0)`,

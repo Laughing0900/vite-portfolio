@@ -29,7 +29,7 @@ const WithFooter = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            laughing0900@gmail.com
+                            <address>laughing0900@gmail.com</address>
                         </Link>
                     </Button>
 
