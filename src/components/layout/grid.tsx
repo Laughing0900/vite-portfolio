@@ -7,7 +7,7 @@ type WithGridProps = {
 const WithGrid: FC<WithGridProps> = ({ open }) => {
     return (
         <div className="pointer-events-none fixed bottom-auto left-0 right-0 top-0 z-50">
-            <div className="grid grid-cols-8 gap-5 px-20">
+            <div className="grid-template">
                 {open &&
                     new Array(8)
                         .fill(0)

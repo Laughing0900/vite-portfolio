@@ -23,7 +23,7 @@ const HeroBanner: FC<HeroBannerProps> = ({ scrollYProgress }) => {
             className="fixed bottom-auto left-0 right-0 top-0 z-10 h-dvh"
             style={{ opacity, visibility }}
         >
-            <HeroHighlight className="grid h-full w-full grid-cols-8 items-center gap-5 p-20">
+            <HeroHighlight className="grid-template h-full w-full items-center">
                 <div className="col-span-6 col-start-2 text-6xl font-normal text-foreground">
                     Build <FlipWords words={words} /> <br />
                     Project with

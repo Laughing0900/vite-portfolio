@@ -41,10 +41,13 @@
         @apply border-border;
     }
     body {
-        @apply font-k2d bg-background text-foreground;
+        @apply bg-background font-k2d text-foreground;
     }
     h3 {
         @apply mb-20 font-goldman text-6xl;
+    }
+    .grid-template {
+        @apply grid grid-cols-8 gap-5 px-20;
     }
 }
 

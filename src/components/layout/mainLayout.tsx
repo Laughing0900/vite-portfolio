@@ -22,7 +22,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 
     return (
         <>
-            <header className="fixed top-0 z-50 grid w-full grid-cols-8 gap-5 px-20 py-4">
+            <header className="grid-template fixed top-0 z-50 grid w-full pt-8">
                 {/* @TODO disable on awwward */}
                 <button
                     className="col-start-8 bg-white text-black"
