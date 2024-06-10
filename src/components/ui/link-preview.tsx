@@ -20,10 +20,8 @@ type LinkPreviewProps = {
     height?: number;
     quality?: number;
     layout?: string;
-} & (
-    | { isStatic: true; imageSrc: string }
-    | { isStatic?: false; imageSrc?: never }
-);
+    imageSrc: string;
+};
 
 /// @description this component install from Aceternity UI
 export const LinkPreview = ({
@@ -32,7 +30,6 @@ export const LinkPreview = ({
     className,
     width = 300,
     height = 150,
-    isStatic = false,
     imageSrc = "",
 }: LinkPreviewProps) => {
     const src = imageSrc;
@@ -90,7 +87,6 @@ export const LinkPreview = ({
                     className="[transform-origin:var(--radix-hover-card-content-transform-origin)]"
                     side="top"
                     align="center"
-                    sideOffset={10}
                 >
                     <AnimatePresence>
                         {isOpen && (
@@ -114,13 +110,14 @@ export const LinkPreview = ({
                             >
                                 <Link
                                     href={url}
-                                    className="block rounded-xl border-2 border-transparent bg-white p-1 shadow hover:border-neutral-200 dark:hover:border-neutral-800"
+                                    className="block rounded-xl bg-gray-400/50 p-1 shadow"
                                     style={{ fontSize: 0 }}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
+                                    {/* <div className="h-40 w-40 bg-gray-500"></div> */}
                                     <Image
-                                        src={isStatic ? imageSrc : src}
+                                        src={imageSrc}
                                         width={width}
                                         height={height}
                                         className="rounded-lg"

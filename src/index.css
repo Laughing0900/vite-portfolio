@@ -82,7 +82,6 @@ a,
 p,
 li,
 span {
-    z-index: 0;
     width: fit-content;
     position: relative;
     pointer-events: auto;
@@ -96,23 +95,6 @@ address {
 .crazy {
     font-optical-sizing: auto;
     font-variation-settings: "MORF" 0;
-}
-
-.debug {
-    z-index: 0;
-    background-color: var(--wide-white);
-    letter-spacing: 0.02rem;
-    width: 100vw;
-    height: 100vh;
-    min-height: 30rem;
-    padding-top: 6.5rem;
-    padding-bottom: 2.5rem;
-    position: fixed;
-    top: 0%;
-    bottom: auto;
-    left: 0%;
-    right: 0%;
-    overflow: hidden;
 }
 
 span.highlight {

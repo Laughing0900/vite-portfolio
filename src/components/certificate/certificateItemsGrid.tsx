@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
 import type { CertificateType } from "@/components/certificate/hooks/useGetCert";
@@ -19,7 +20,6 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
             {items.map((item, index) => {
                 return (
                     <LinkPreview
-                        isStatic={true}
                         imageSrc={item.url}
                         url={item.url}
                         className={cn(
@@ -29,7 +29,10 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                         )}
                         key={item.label}
                     >
-                        <span>{item.label}</span>
+                        <span>
+                            {item.label}
+                            <ArrowUpRight className="hidden group-hover:inline-block" />
+                        </span>
                         <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-60">
                             {item.institution}
                         </div>
