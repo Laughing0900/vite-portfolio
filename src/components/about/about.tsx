@@ -6,7 +6,7 @@ const About = () => {
     const { items } = useGetAbout();
     return (
         <section className="pb-40" id="about-me">
-            <h3 className="pl-20">Who's Laughing</h3>
+            <h3 className="pl-4 md:pl-20">Who's Laughing</h3>
 
             <BentoGrid className="md:auto-rows-[20rem]">
                 {items.map((item, i) => (

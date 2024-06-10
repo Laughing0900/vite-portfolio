@@ -6,7 +6,7 @@ const Certificate: FC = () => {
     const { courses, education } = useGetCert();
 
     return (
-        <section className="px-20 pb-40" id="certificate">
+        <section className="px-4 pb-40 md:px-20" id="certificate">
             <h3>CERT. & EDUCATION</h3>
 
             <CertificateItemsGrid title={"Certificate"} items={courses} />

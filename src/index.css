@@ -46,7 +46,7 @@
         @apply bg-background font-k2d text-foreground;
     }
     h3 {
-        @apply mb-20 font-goldman text-6xl;
+        @apply mb-20 font-goldman text-3xl md:text-6xl;
     }
 
     li {
@@ -54,7 +54,7 @@
     }
 
     .grid-template {
-        @apply grid grid-cols-8 gap-5 px-20;
+        @apply grid grid-cols-4 gap-5 px-4 md:grid-cols-8 md:px-20;
     }
 }
 
@@ -91,12 +91,12 @@ address {
     font-style: normal;
 }
 
-/* @TODO this using for crazy mode feature */
 .crazy {
     font-optical-sizing: auto;
     font-variation-settings: "MORF" 0;
 }
 
+/* custom class  */
 span.highlight {
     @apply bg-clip-text text-transparent;
     background: linear-gradient(90deg, #00cdda, #ad00ff);
@@ -104,4 +104,16 @@ span.highlight {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 500;
+}
+
+.name-horizontal {
+    @apply font-goldman;
+
+    position: absolute;
+    bottom: -0.5em;
+    right: 16px;
+
+    line-height: 1em;
+    transform-origin: top right;
+    transform: rotate(-90deg) translateX(100%) translateY(-0.8em);
 }

@@ -27,7 +27,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             <header className="grid-template fixed top-0 z-50 grid w-full pt-8">
                 {/* @TODO disable on awwward */}
 
-                <div className="col-start-8 flex items-center gap-2">
+                <div className="col-start-4 flex items-center gap-2 md:col-start-8">
                     <Label htmlFor="grid-mode">Grid</Label>
                     <Switch
                         checked={openGrid}

@@ -4,7 +4,7 @@ import Link from "@/components/ui/link";
 
 const WithFooter: FC = () => {
     return (
-        <footer className="fixed bottom-0 left-0 right-0 top-auto h-screen bg-black p-20 text-white">
+        <footer className="fixed bottom-0 left-0 right-0 top-auto h-screen bg-black px-4 py-40 text-white md:p-20">
             <div className="flex flex-col items-start gap-2 text-lg">
                 <Button variant="link" size="fit" asChild>
                     <Link
@@ -36,10 +36,18 @@ const WithFooter: FC = () => {
                     </Link>
                 </Button>
             </div>
-            <div className="absolute bottom-0 left-0 flex w-full items-end self-end px-20 py-4 md:justify-between">
+            {/* @desktop */}
+            <div className="absolute bottom-0 left-0 hidden w-full items-end px-20 py-4 md:flex md:justify-between">
                 <span className="text-9xl">Laughing Cheng</span>
                 <span>@2024</span>
             </div>
+            {/* @mobile */}
+            <span className="left-0px-4 absolute bottom-0 py-4 md:hidden">
+                @2024
+            </span>
+            <span className="name-horizontal text-nowrap text-7xl">
+                Laughing Cheng
+            </span>
         </footer>
     );
 };
