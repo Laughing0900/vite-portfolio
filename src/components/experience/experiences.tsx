@@ -7,11 +7,16 @@ import {
 } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import { useGetExperiences } from "@/components/experience/hooks/useGetExperiences";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
+    const breakpoint = useBreakpoint();
     const { companies } = useGetExperiences();
     const filedCompanies = useMemo(() => {
         return companies.filter((company) => company.description);
+    }, [companies]);
+    const otherCompanies = useMemo(() => {
+        return companies.filter((company) => !company.description);
     }, [companies]);
 
     const scrollRef = useRef(null);
@@ -35,96 +40,139 @@ const Experiences = () => {
         <section
             className="pointer-events-none min-h-dvh"
             style={{
-                height: `${filedCompanies.length * 75}vh`,
+                height:
+                    breakpoint === "xl" || breakpoint === "lg"
+                        ? `${filedCompanies.length * 75}vh`
+                        : "auto",
             }}
             id="experience"
         >
+            {/* @mobile */}
+            <h3 className="sticky top-12 z-10 rounded-lg p-4 backdrop-blur-sm md:hidden">
+                Experience
+            </h3>
+
             <div className="grid-template relative">
-                <div className="sticky top-20 col-span-4 h-dvh self-start">
-                    <h3>Experience</h3>
-                    <div>
-                        {companies.map((company, index) => {
-                            return (
-                                <motion.div
-                                    className="py-4 transition-all ease-linear"
-                                    key={company.name}
-                                    style={{
-                                        opacity: selected === index ? 1 : 0.25,
-                                    }}
-                                >
-                                    <p>
-                                        <span className="text-xl font-bold">
-                                            {company.role}{" "}
-                                        </span>
-                                        <span className="text-lg text-gray-300/50">
-                                            //{company.duration}
-                                        </span>
-                                    </p>
-
-                                    <p className="text-lg font-light">
-                                        {company.name}
-                                    </p>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-
-                    <div className="absolute right-0 top-1/3 flex h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4">
-                        {filedCompanies.map((_, index) => {
-                            return (
-                                <>
+                {/* @desktop */}
+                {breakpoint !== "md" && breakpoint !== "sm" && (
+                    <div className="sticky top-20 col-span-4 hidden h-dvh self-start md:block">
+                        <h3>Experience</h3>
+                        <div>
+                            {companies.map((company, index) => {
+                                return (
                                     <motion.div
-                                        key={"exp_bar_" + index}
-                                        className="relative w-full skew-y-12 bg-gray-700/50"
+                                        className="py-4 transition-all ease-linear"
+                                        key={company.name}
                                         style={{
-                                            height: `calc(${selected === index ? 70 : 50}% /
-                                            ${filedCompanies.length})`,
-                                        }}
-                                        animate={{
-                                            transition: {
-                                                duration: 0.15,
-                                            },
+                                            opacity:
+                                                selected === index ? 1 : 0.25,
                                         }}
                                     >
-                                        <AnimatePresence>
-                                            {selected === index && (
-                                                <motion.span
-                                                    className="absolute inset-0 block h-full w-full bg-white"
-                                                    layoutId="hoverBackground"
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{
-                                                        opacity: 1,
-                                                        transition: {
-                                                            duration: 0.15,
-                                                        },
-                                                    }}
-                                                    exit={{
-                                                        opacity: 0,
-                                                        transition: {
-                                                            duration: 0.15,
-                                                            delay: 0.2,
-                                                        },
-                                                    }}
-                                                />
+                                        <p>
+                                            <span className="text-xl font-bold">
+                                                {company.role}{" "}
+                                            </span>
+                                            {breakpoint === "lg" && (
+                                                <br className="hidden md:block" />
                                             )}
-                                        </AnimatePresence>
+                                            <span className="text-lg text-gray-300/50">
+                                                //{company.duration}
+                                            </span>
+                                        </p>
+
+                                        <p className="text-lg font-light">
+                                            {company.name}
+                                        </p>
                                     </motion.div>
-                                </>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
+
+                        <div className="absolute right-0 top-1/3 hidden h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4 md:flex">
+                            {filedCompanies.map((_, index) => {
+                                return (
+                                    <>
+                                        <motion.div
+                                            key={"exp_bar_" + index}
+                                            className="relative w-full skew-y-12 bg-gray-700/50"
+                                            style={{
+                                                height: `calc(${selected === index ? 70 : 50}% /
+                                            ${filedCompanies.length})`,
+                                            }}
+                                            animate={{
+                                                transition: {
+                                                    duration: 0.15,
+                                                },
+                                            }}
+                                        >
+                                            <AnimatePresence>
+                                                {selected === index && (
+                                                    <motion.span
+                                                        className="absolute inset-0 block h-full w-full md:bg-white"
+                                                        layoutId="hoverBackground"
+                                                        initial={{
+                                                            opacity: 0,
+                                                        }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            transition: {
+                                                                duration: 0.15,
+                                                            },
+                                                        }}
+                                                        exit={{
+                                                            opacity: 0,
+                                                            transition: {
+                                                                duration: 0.15,
+                                                                delay: 0.2,
+                                                            },
+                                                        }}
+                                                        key={
+                                                            "desktop_exp_bar" +
+                                                            index
+                                                        }
+                                                    />
+                                                )}
+                                            </AnimatePresence>
+                                        </motion.div>
+                                    </>
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
-                <div className="col-span-4 col-start-5 pt-40" ref={scrollRef}>
+                )}
+                <div
+                    className="col-span-4 pt-4 md:col-start-5 md:pt-40"
+                    ref={scrollRef}
+                >
                     {filedCompanies.map((company) => {
                         return (
                             <div
-                                className="h-[75vh] py-4"
+                                className="mb-20 py-4 md:mb-0 md:h-[75vh]"
                                 key={company.name + "_description"}
                                 id="experience-description"
                             >
+                                <div
+                                    className="mb-4 border-b-2 border-b-gray-500 py-2 md:hidden"
+                                    key={company.name}
+                                >
+                                    <p>
+                                        <span className="text-2xl font-bold">
+                                            {company.role}{" "}
+                                        </span>
+                                    </p>
+                                    <p className="flex w-full justify-between">
+                                        <span className="text-lg font-light">
+                                            {company.name}
+                                        </span>
+                                        <span className="text-md text-gray-300/50">
+                                            //{company.duration}
+                                        </span>
+                                    </p>
+                                </div>
+
                                 <ul>{company.description}</ul>
 
-                                <div className="mt-5 flex gap-2">
+                                <div className="mt-5 flex flex-wrap gap-2">
                                     {company.techStack.map((tech) => {
                                         return (
                                             <div
@@ -139,8 +187,38 @@ const Experiences = () => {
                             </div>
                         );
                     })}
+                    {breakpoint !== "lg" &&
+                        breakpoint !== "xl" &&
+                        otherCompanies.map((company) => {
+                            return (
+                                <div
+                                    className="mb-12 py-4 md:mb-0 md:h-[75vh]"
+                                    key={company.name + "_mobile_description"}
+                                    id="experience-description"
+                                >
+                                    <div
+                                        className="mb-4 border-b-2 border-b-gray-500 py-2"
+                                        key={company.name}
+                                    >
+                                        <p>
+                                            <span className="text-2xl font-bold">
+                                                {company.role}{" "}
+                                            </span>
+                                        </p>
+                                        <p className="flex w-full justify-between">
+                                            <span className="text-lg font-light">
+                                                {company.name}
+                                            </span>
+                                            <span className="text-sm text-gray-300/50">
+                                                //{company.duration}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })}
 
-                    <div className="hidden h-32 md:block" />
+                    <div className="hidden h-[25dvh] md:block" />
                 </div>
             </div>
         </section>

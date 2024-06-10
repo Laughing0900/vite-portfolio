@@ -84,7 +84,7 @@ export const LinkPreview = ({
                 </HoverCardPrimitive.Trigger>
 
                 <HoverCardPrimitive.Content
-                    className="[transform-origin:var(--radix-hover-card-content-transform-origin)]"
+                    className="z-10 [transform-origin:var(--radix-hover-card-content-transform-origin)]"
                     side="top"
                     align="center"
                 >
