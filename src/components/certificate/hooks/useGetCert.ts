@@ -16,7 +16,7 @@ const courses: ReadonlyArray<CertificateType> = [
         url: "images/cert/ThreejsJourney.jpg",
     },
     {
-        label: "UI / UX Web Design Professional Certificate",
+        label: "UI/UX Web Design Professional Cert",
         institution: "Maya Education center",
         url: "images/cert/UIUX_Maya.jpg",
     },

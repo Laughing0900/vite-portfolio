@@ -39,12 +39,12 @@ const Experiences = () => {
     return (
         <section
             className="pointer-events-none min-h-dvh"
-            style={{
-                height:
-                    breakpoint === "xl" || breakpoint === "lg"
-                        ? `${filedCompanies.length * 75}vh`
-                        : "auto",
-            }}
+            // style={{
+            //     height:
+            //         breakpoint === "xl" || breakpoint === "lg"
+            //             ? `${filedCompanies.length * 75}vh`
+            //             : "auto",
+            // }}
             id="experience"
         >
             {/* @mobile */}
@@ -55,7 +55,7 @@ const Experiences = () => {
             <div className="grid-template relative">
                 {/* @desktop */}
                 {breakpoint !== "md" && breakpoint !== "sm" && (
-                    <div className="sticky top-20 col-span-4 hidden h-dvh self-start md:block">
+                    <div className="sticky top-20 col-span-4 hidden h-fit self-start md:block">
                         <h3>Experience</h3>
                         <div>
                             {companies.map((company, index) => {
@@ -87,8 +87,8 @@ const Experiences = () => {
                                 );
                             })}
                         </div>
-
-                        <div className="absolute right-0 top-1/3 hidden h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4 md:flex">
+                        {/* @scroll bar */}
+                        <div className="absolute right-0 top-1/2 hidden h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4 md:flex">
                             {filedCompanies.map((_, index) => {
                                 return (
                                     <>
@@ -218,7 +218,7 @@ const Experiences = () => {
                             );
                         })}
 
-                    <div className="hidden h-[25dvh] md:block" />
+                    {/* <div className="hidden h-[25dvh] md:block" /> */}
                 </div>
             </div>
         </section>
