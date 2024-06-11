@@ -88,13 +88,13 @@ const Experiences = () => {
                             })}
                         </div>
                         {/* @scroll bar */}
-                        <div className="absolute right-0 top-1/2 hidden h-1/2 w-2 -translate-y-1/2 transform flex-col gap-4 md:flex">
+                        <div className="absolute right-0 top-1/2 hidden h-1/2 w-1 -translate-y-1/2 transform flex-col gap-4 md:flex">
                             {filedCompanies.map((_, index) => {
                                 return (
                                     <>
                                         <motion.div
                                             key={"exp_bar_" + index}
-                                            className="relative w-full skew-y-12 bg-gray-700/50"
+                                            className="relative w-full rounded-full bg-gray-700/50"
                                             style={{
                                                 height: `calc(${selected === index ? 70 : 50}% /
                                             ${filedCompanies.length})`,
@@ -108,7 +108,7 @@ const Experiences = () => {
                                             <AnimatePresence>
                                                 {selected === index && (
                                                     <motion.span
-                                                        className="absolute inset-0 block h-full w-full md:bg-white"
+                                                        className="absolute inset-0 block h-full w-full rounded-full md:bg-white"
                                                         layoutId="hoverBackground"
                                                         initial={{
                                                             opacity: 0,
