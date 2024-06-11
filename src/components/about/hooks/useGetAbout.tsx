@@ -4,51 +4,33 @@ import StatusCard from "@/components/about/cards/status";
 
 const items = [
     {
-        title: "Performance",
+        title: "Lightning-Fast",
         description: (
-            <span className="text-sm">Get high performance coding.</span>
+            <span className="text-sm">
+                Optimized coding for superior performance.
+            </span>
         ),
         header: <PerformanceCard />,
         className: "lg:col-span-2 md:col-span-3",
     },
     {
-        title: "Multiple skill set",
+        title: "Versatile",
         description: (
             <span className="text-sm">
-                A wide range of skills to help you with your project.
+                Leverage a wide array of skills to propel your project forward.
             </span>
         ),
         header: <SkillSetCard />,
         className: "lg:col-span-2 md:col-span-3",
     },
     {
-        title: "Contextual Suggestions",
+        title: "Stability",
         description: (
             <span className="text-sm">
-                Get AI-powered suggestions based on your writing context.
+                Ensuring systems robust stability for unparalleled reliability.
             </span>
         ),
         header: <StatusCard />,
-        className: "lg:col-span-2 md:col-span-3",
-    },
-    {
-        title: "Sentiment Analysis",
-        description: (
-            <span className="text-sm">
-                Understand the sentiment of your text with AI analysis.
-            </span>
-        ),
-        header: <PerformanceCard />,
-        className: "lg:col-span-4 md:col-span-6",
-    },
-    {
-        title: "Text Summarization",
-        description: (
-            <span className="text-sm">
-                Summarize your lengthy documents with AI technology.
-            </span>
-        ),
-        header: <PerformanceCard />,
         className: "lg:col-span-2 md:col-span-3",
     },
 ];
