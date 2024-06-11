@@ -37,16 +37,7 @@ const Experiences = () => {
     });
 
     return (
-        <section
-            className="pointer-events-none min-h-dvh"
-            // style={{
-            //     height:
-            //         breakpoint === "xl" || breakpoint === "lg"
-            //             ? `${filedCompanies.length * 75}vh`
-            //             : "auto",
-            // }}
-            id="experience"
-        >
+        <section className="pointer-events-none min-h-dvh" id="experience">
             {/* @mobile */}
             <h3 className="sticky top-12 z-10 rounded-lg p-4 backdrop-blur-sm md:hidden">
                 Experience
