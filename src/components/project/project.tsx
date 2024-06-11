@@ -1,7 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { useMemo, useRef } from "react";
 import { useGetProject } from "@/components/project/hooks/useGetProject";
 import Image from "@/components/ui/image";
+import Link from "@/components/ui/link";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Project = () => {
@@ -52,9 +54,17 @@ const Project = () => {
                             />
 
                             <div className="pointer-events-auto">
-                                <p className="mt-4 font-goldman text-2xl font-bold">
-                                    {project.name}
-                                </p>
+                                <Link
+                                    href={project.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group mt-4 flex items-center"
+                                >
+                                    <p className="border-b-2 border-b-transparent font-goldman text-2xl font-bold group-hover:border-b-gray-50">
+                                        {project.name}
+                                    </p>
+                                    <ArrowUpRight className="inline-block h-8 w-8 group-hover:inline-block md:hidden" />
+                                </Link>
                                 <p className="mt-2 text-lg text-gray-100/50">
                                     :- {project.company}
                                 </p>
