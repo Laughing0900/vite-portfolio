@@ -85,12 +85,12 @@ const PerformanceCard = () => {
                                 99
                             </motion.text>
                         </svg>
-                        <motion.span
+                        <motion.p
                             variants={variants.text}
-                            className="text-sm"
+                            className="text-center text-sm"
                         >
                             {item}
-                        </motion.span>
+                        </motion.p>
                     </div>
                 ))}
             </div>

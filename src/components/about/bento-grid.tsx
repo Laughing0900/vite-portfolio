@@ -11,7 +11,7 @@ export const BentoGrid = ({
         <div className="grid-template pointer-events-none">
             <div
                 className={cn(
-                    "z-10 col-span-6 grid auto-rows-[24rem] grid-cols-1 gap-5 md:col-start-2 md:auto-rows-[18rem] md:grid-cols-3",
+                    "z-10 col-span-6 grid auto-rows-[24rem] grid-cols-1 gap-5 md:col-start-2 md:auto-rows-[18rem] md:grid-cols-6",
                     className
                 )}
             >
