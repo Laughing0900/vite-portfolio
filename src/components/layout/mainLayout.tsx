@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import HeroBanner from "@/components/heroBanner/heroBanner";
 import WithFooter from "@/components/layout/footer";
 import WithGrid from "@/components/layout/grid";
@@ -26,13 +26,6 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         "hidden",
     ]);
 
-    const Background = useMemo(() => {
-        if (isMobile) {
-            return <GridBackground />;
-        }
-        return <BoxesBackground />;
-    }, [isMobile]);
-
     return (
         <>
             <WithHeader setOpenGrid={setOpenGrid} openGrid={openGrid} />
@@ -42,7 +35,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             </motion.div>
 
             <main className="relative z-10 mt-[100dvh] min-h-dvh w-full bg-background">
-                {Background}
+                {isMobile ? <GridBackground /> : <BoxesBackground />}
                 <div className="-mt-[100dvh] space-y-40 pt-40">{children}</div>
             </main>
 
