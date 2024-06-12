@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import React from "react";
+import React, { useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 /// @description this component install from Aceternity UI
@@ -17,17 +17,32 @@ export const HeroHighlight = ({
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    function handleMouseMove({
-        currentTarget,
-        clientX,
-        clientY,
-    }: React.MouseEvent<HTMLDivElement>) {
-        if (!currentTarget) return;
-        const { left, top } = currentTarget.getBoundingClientRect();
+    // function handleMouseMove({
+    //     currentTarget,
+    //     clientX,
+    //     clientY,
+    // }: React.MouseEvent<HTMLDivElement>) {
+    //     if (!currentTarget) return;
+    //     const { left, top } = currentTarget.getBoundingClientRect();
 
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
-    }
+    //     mouseX.set(clientX - left);
+    //     mouseY.set(clientY - top);
+    // }
+    const handleMouseMove = useCallback(
+        ({
+            currentTarget,
+            clientX,
+            clientY,
+        }: React.MouseEvent<HTMLDivElement>) => {
+            if (!currentTarget) return;
+            const { left, top } = currentTarget.getBoundingClientRect();
+
+            mouseX.set(clientX - left);
+            mouseY.set(clientY - top);
+        },
+        [mouseX, mouseY]
+    );
+
     return (
         <div
             className={cn(
@@ -36,9 +51,9 @@ export const HeroHighlight = ({
             )}
             onMouseMove={handleMouseMove}
         >
-            <div className="bg-dot-thick-neutral-800 pointer-events-none absolute inset-0" />
+            <div className="pointer-events-none absolute inset-0 bg-dot-thick-neutral-800" />
             <motion.div
-                className="bg-dot-thick-[#ff007a] pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+                className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 bg-dot-thick-[#ff007a] group-hover:opacity-100"
                 style={{
                     WebkitMaskImage: useMotionTemplate`
                       radial-gradient(

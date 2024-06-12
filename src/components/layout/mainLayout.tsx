@@ -1,14 +1,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import HeroBanner from "@/components/heroBanner/heroBanner";
 import WithFooter from "@/components/layout/footer";
 import WithGrid from "@/components/layout/grid";
 import { BoxesBackground } from "@/components/ui/background-boxes";
+import GridBackground from "@/components/ui/background-grids";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import type { FC, PropsWithChildren } from "react";
+import useBreakpoint from "@/hooks/useBreakpoint";
+import type { FC, PropsWithChildren, ReactNode } from "react";
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+    const { isMobile } = useBreakpoint();
     const footerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: footerRef,
@@ -21,6 +24,13 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
     const toggleGrid = useCallback(() => {
         setOpenGrid((prev) => !prev);
     }, []);
+
+    const Background = useMemo(() => {
+        if (isMobile) {
+            return <GridBackground />;
+        }
+        return <BoxesBackground />;
+    }, [isMobile]);
 
     return (
         <>
@@ -38,7 +48,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 
             <HeroBanner scrollYProgress={scrollYProgress} />
             <main className="relative z-10 mt-[100dvh] min-h-dvh w-full bg-background">
-                <BoxesBackground />
+                {Background}
                 <div className="-mt-[100dvh] space-y-40 pt-40">{children}</div>
             </main>
             <motion.div
