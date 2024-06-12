@@ -1,43 +1,63 @@
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 const items = ["Performance", "Accessibility", "Best practices", "Visibility"];
 const PerformanceCard = () => {
-    const variants = {
-        line: {
-            initial: {
-                pathLength: 0.3,
-                stroke: "#71717166",
-            },
+    const { isMobile } = useBreakpoint();
+    const variants = useMemo(() => {
+        if (!isMobile)
+            return {
+                line: {
+                    initial: {
+                        pathLength: 0.3,
+                        stroke: "#71717166",
+                    },
 
-            animate: (i: number) => {
-                const delay = i * 0.25;
-                return {
+                    animate: (i: number) => {
+                        const delay = i * 0.25;
+                        return {
+                            pathLength: 0.9,
+                            stroke: "#6cc070dd",
+                            transition: {
+                                pathLength: {
+                                    delay,
+                                    type: "spring",
+                                    duration: 0.8,
+                                    bounce: 0,
+                                },
+                            },
+                        };
+                    },
+                },
+                text: {
+                    initial: {
+                        fill: "#717171",
+                        color: "#717171",
+                    },
+                    animate: {
+                        fill: "#6cc070dd",
+                        color: "#f4f4f9dd",
+                    },
+                },
+            };
+        const cleanAnim = {
+            initial: {},
+            animate: {},
+        };
+
+        return {
+            line: {
+                ...cleanAnim,
+                initial: {
                     pathLength: 0.9,
                     stroke: "#6cc070dd",
-                    transition: {
-                        pathLength: {
-                            delay,
-                            type: "spring",
-                            duration: 0.8,
-                            bounce: 0,
-                        },
-                    },
-                };
+                },
             },
-        },
-        text: {
-            initial: {
-                fill: "#717171",
-                color: "#717171",
-            },
-            animate: {
-                fill: "#6cc070dd",
-                color: "#f4f4f9dd",
-            },
-        },
-    };
-
+            text: cleanAnim,
+        };
+    }, [isMobile]);
     return (
         <CardContainer>
             <div className="grid h-full grid-cols-2 grid-rows-2 place-items-center gap-y-2">

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
 import Image from "@/components/ui/image";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 const items = [
     "1nextjs.svg",
@@ -23,41 +25,55 @@ const items = [
 ];
 
 const SkillSetCard = () => {
-    const variants = {
-        initial: {
-            filter: "grayscale(0.8)",
-            y: 0,
-        },
+    const { isMobile } = useBreakpoint();
 
-        animate: (i: number) => {
-            const delay = (i % 4) * 0.05;
+    const variants = useMemo(() => {
+        if (!isMobile)
             return {
-                filter: "grayscale(0.2)",
-                y: -80,
-                transition: {
-                    y: {
-                        delay,
-                        type: "spring",
-                        duration: 0.8,
-                        bounce: 0,
-                    },
-                    duration: 0.3,
+                initial: {
+                    filter: "grayscale(0.8)",
+                    y: 0,
+                },
+
+                animate: (i: number) => {
+                    const delay = (i % 4) * 0.05;
+                    return {
+                        filter: "grayscale(0.2)",
+                        y: -80,
+                        transition: {
+                            y: {
+                                delay,
+                                type: "spring",
+                                duration: 0.8,
+                                bounce: 0,
+                            },
+                            duration: 0.3,
+                        },
+                    };
                 },
             };
-        },
-    };
+
+        return {
+            initial: {},
+            animate: {},
+        };
+    }, [isMobile]);
 
     return (
         <CardContainer>
-            <div className="grid h-full grid-cols-4 place-items-center gap-2 overflow-clip p-2">
+            <div className="grid h-full grid-cols-5 place-items-center gap-2 overflow-clip rounded-sm bg-gray-700/30 p-2 sm:grid-cols-6 md:grid-cols-4">
                 {items.map((item, i) => (
                     <motion.div
-                        className="flex aspect-square w-full items-center p-1"
+                        className="flex aspect-square w-full items-center p-1 drop-shadow"
                         key={"skill_" + i}
                         variants={variants}
                         custom={i}
                     >
-                        <Image src={`images/skills/${item}`} alt={item} />
+                        <Image
+                            className="drop-shadow"
+                            src={`images/skills/${item}`}
+                            alt={item}
+                        />
                     </motion.div>
                 ))}
             </div>
