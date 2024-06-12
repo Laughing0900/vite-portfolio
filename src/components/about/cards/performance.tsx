@@ -42,7 +42,10 @@ const PerformanceCard = () => {
         <CardContainer>
             <div className="grid h-full grid-cols-2 grid-rows-2 place-items-center gap-y-2">
                 {items.map((item, i) => (
-                    <div className="flex flex-col items-center gap-1">
+                    <div
+                        className="flex flex-col items-center gap-1"
+                        key={item}
+                    >
                         <svg
                             id="progress"
                             width="60"

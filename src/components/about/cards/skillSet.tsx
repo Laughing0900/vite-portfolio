@@ -53,6 +53,7 @@ const SkillSetCard = () => {
                 {items.map((item, i) => (
                     <motion.div
                         className="flex aspect-square w-full items-center p-1"
+                        key={"skill_" + i}
                         variants={variants}
                         custom={i}
                     >

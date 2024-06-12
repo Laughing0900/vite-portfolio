@@ -10,7 +10,7 @@ import { useGetExperiences } from "@/components/experience/hooks/useGetExperienc
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
-    const breakpoint = useBreakpoint();
+    const { breakpoint } = useBreakpoint();
     const { companies } = useGetExperiences();
     const filedCompanies = useMemo(() => {
         return companies.filter((company) => company.description);
@@ -82,50 +82,48 @@ const Experiences = () => {
                         <div className="absolute right-0 top-1/2 hidden h-1/2 w-1 -translate-y-1/2 transform flex-col gap-4 md:flex">
                             {filedCompanies.map((_, index) => {
                                 return (
-                                    <>
-                                        <motion.div
-                                            key={"exp_bar_" + index}
-                                            className="relative w-full rounded-full bg-gray-700/50"
-                                            style={{
-                                                height: `calc(${selected === index ? 70 : 50}% /
+                                    <motion.div
+                                        key={"exp_bar_" + index}
+                                        className="relative w-full rounded-full bg-gray-700/50"
+                                        style={{
+                                            height: `calc(${selected === index ? 70 : 50}% /
                                             ${filedCompanies.length})`,
-                                            }}
-                                            animate={{
-                                                transition: {
-                                                    duration: 0.15,
-                                                },
-                                            }}
-                                        >
-                                            <AnimatePresence>
-                                                {selected === index && (
-                                                    <motion.span
-                                                        className="absolute inset-0 block h-full w-full rounded-full md:bg-white"
-                                                        layoutId="hoverBackground"
-                                                        initial={{
-                                                            opacity: 0,
-                                                        }}
-                                                        animate={{
-                                                            opacity: 1,
-                                                            transition: {
-                                                                duration: 0.15,
-                                                            },
-                                                        }}
-                                                        exit={{
-                                                            opacity: 0,
-                                                            transition: {
-                                                                duration: 0.15,
-                                                                delay: 0.2,
-                                                            },
-                                                        }}
-                                                        key={
-                                                            "desktop_exp_bar" +
-                                                            index
-                                                        }
-                                                    />
-                                                )}
-                                            </AnimatePresence>
-                                        </motion.div>
-                                    </>
+                                        }}
+                                        animate={{
+                                            transition: {
+                                                duration: 0.15,
+                                            },
+                                        }}
+                                    >
+                                        <AnimatePresence>
+                                            {selected === index && (
+                                                <motion.span
+                                                    className="absolute inset-0 block h-full w-full rounded-full md:bg-white"
+                                                    layoutId="hoverBackground"
+                                                    initial={{
+                                                        opacity: 0,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        transition: {
+                                                            duration: 0.15,
+                                                        },
+                                                    }}
+                                                    exit={{
+                                                        opacity: 0,
+                                                        transition: {
+                                                            duration: 0.15,
+                                                            delay: 0.2,
+                                                        },
+                                                    }}
+                                                    key={
+                                                        "desktop_exp_bar" +
+                                                        index
+                                                    }
+                                                />
+                                            )}
+                                        </AnimatePresence>
+                                    </motion.div>
                                 );
                             })}
                         </div>

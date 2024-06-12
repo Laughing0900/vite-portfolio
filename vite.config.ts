@@ -6,11 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [
-        react(),
-        tsconfigPaths(),
-        // MillionLint.vite()
-    ],
+    plugins: [react(), tsconfigPaths(), MillionLint.vite()],
     base: "/vite-portfolio/", // git repository name
     resolve: {
         alias: {

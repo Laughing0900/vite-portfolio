@@ -60,6 +60,7 @@ const StatusCard = () => {
                             variants={variants.bar}
                             will-change="fill transform"
                             custom={i}
+                            key={"bar_" + i}
                         />
                     ))}
                 </svg>

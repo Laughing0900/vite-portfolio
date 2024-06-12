@@ -7,7 +7,8 @@ import Link from "@/components/ui/link";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Project = () => {
-    const breakpoint = useBreakpoint();
+    const { breakpoint } = useBreakpoint();
+
     const { projects } = useGetProject();
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -30,13 +31,13 @@ const Project = () => {
         <section
             id="project"
             ref={containerRef}
-            className="relative"
+            className="pointer-events-none relative"
             style={{ height: `${containerHeight}px` }}
         >
-            <h3 className="sticky top-20 h-screen rounded-lg pl-4 md:top-12 md:pl-20">
-                Project
-            </h3>
-            <div className="pointer-events-none sticky top-0 -mt-[110vh] flex h-screen items-center overflow-hidden">
+            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+                <h3 className="absolute left-0 top-20 rounded-lg pl-4 md:top-12 md:pl-20">
+                    Project
+                </h3>
                 <motion.div className="flex gap-4 pl-4 md:pl-40" style={{ x }}>
                     {projects.map((project, i) => (
                         <motion.div
