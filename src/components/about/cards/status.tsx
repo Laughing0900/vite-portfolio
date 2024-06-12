@@ -1,43 +1,64 @@
 import { easeInOut, motion } from "framer-motion";
+import { FC, useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
-const StatusCard = () => {
-    const variants = {
-        bar: {
-            initial: {
-                fill: "#71717166",
-                y: 0,
-            },
-            animate: (i: number) => {
-                const delay = i * 0.05;
-                return {
-                    fill: "#6cc070dd",
-                    y: -40,
-                    transition: {
-                        y: {
-                            delay,
-                            type: "spring",
-                            duration: 0.8,
-                            stiffness: 200,
-                            easeInOut,
-                        },
-                        duration: 0.3,
+const StatusCard: FC = () => {
+    const { isMobile } = useBreakpoint();
+
+    const variants = useMemo(() => {
+        if (!isMobile)
+            return {
+                bar: {
+                    initial: {
+                        fill: "#71717166",
+                        y: 0,
                     },
-                };
-            },
-        },
-        text: {
-            initial: {
-                color: "#717171",
-            },
-            animate: {
-                color: "#f4f4f9dd",
-                transition: {
-                    duration: 0.3,
+                    animate: (i: number) => {
+                        const delay = i * 0.05;
+                        return {
+                            fill: "#6cc070dd",
+                            y: -40,
+                            transition: {
+                                y: {
+                                    delay,
+                                    type: "spring",
+                                    duration: 0.8,
+                                    stiffness: 200,
+                                    easeInOut,
+                                },
+                                duration: 0.3,
+                            },
+                        };
+                    },
+                },
+                text: {
+                    initial: {
+                        color: "#717171",
+                    },
+                    animate: {
+                        color: "#f4f4f9dd",
+                        transition: {
+                            duration: 0.3,
+                        },
+                    },
+                },
+            };
+
+        const cleanAnim = {
+            initial: {},
+            animate: {},
+        };
+        return {
+            bar: {
+                ...cleanAnim,
+                initial: {
+                    fill: "#6cc070dd",
                 },
             },
-        },
-    };
+            text: cleanAnim,
+        };
+    }, [isMobile]);
 
     return (
         <CardContainer>

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { createBreakpoint } from "react-use";
 import tailwind from "tailwindcss/defaultTheme";
 
@@ -11,7 +12,9 @@ export const config = {
 const useBreakpoint = () => {
     const breakpoint = createBreakpoint(config)();
 
-    const isMobile = breakpoint === "md" || breakpoint === "sm";
+    const isMobile = useMemo(() => {
+        return breakpoint === "md" || breakpoint === "sm";
+    }, [breakpoint]);
 
     return { isMobile, breakpoint };
 };
