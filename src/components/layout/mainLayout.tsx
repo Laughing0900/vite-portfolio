@@ -5,6 +5,7 @@ import WithFooter from "@/components/layout/footer";
 import WithGrid from "@/components/layout/grid";
 import { BoxesBackground } from "@/components/ui/background-boxes";
 import GridBackground from "@/components/ui/background-grids";
+import { WithDevAlert } from "@/components/ui/developmentMode";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import useBreakpoint from "@/hooks/useBreakpoint";
@@ -64,6 +65,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             />
             <WithFooter />
             <WithGrid open={openGrid} />
+            {isMobile && <WithDevAlert />}
         </>
     );
 };
