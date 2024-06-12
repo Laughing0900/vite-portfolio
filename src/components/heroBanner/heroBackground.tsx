@@ -2,6 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import React, { useCallback } from "react";
+import useBreakpoint from "@/hooks/useBreakpoint";
 import { cn } from "@/lib/utils";
 
 /// @description this component install from Aceternity UI
@@ -14,20 +15,11 @@ export const HeroHighlight = ({
     className?: string;
     containerClassName?: string;
 }) => {
+    const { isMobile } = useBreakpoint();
+
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // function handleMouseMove({
-    //     currentTarget,
-    //     clientX,
-    //     clientY,
-    // }: React.MouseEvent<HTMLDivElement>) {
-    //     if (!currentTarget) return;
-    //     const { left, top } = currentTarget.getBoundingClientRect();
-
-    //     mouseX.set(clientX - left);
-    //     mouseY.set(clientY - top);
-    // }
     const handleMouseMove = useCallback(
         ({
             currentTarget,
@@ -35,12 +27,13 @@ export const HeroHighlight = ({
             clientY,
         }: React.MouseEvent<HTMLDivElement>) => {
             if (!currentTarget) return;
+            if (isMobile) return;
             const { left, top } = currentTarget.getBoundingClientRect();
 
             mouseX.set(clientX - left);
             mouseY.set(clientY - top);
         },
-        [mouseX, mouseY]
+        [isMobile, mouseX, mouseY]
     );
 
     return (
@@ -56,19 +49,19 @@ export const HeroHighlight = ({
                 className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 bg-dot-thick-[#ff007a] group-hover:opacity-100"
                 style={{
                     WebkitMaskImage: useMotionTemplate`
-                      radial-gradient(
-                        400px circle at ${mouseX}px ${mouseY}px,
-                        black 0%,
-                        transparent 100%
-                      )
-                    `,
+                              radial-gradient(
+                                400px circle at ${mouseX}px ${mouseY}px,
+                                black 0%,
+                                transparent 100%
+                              )
+                            `,
                     maskImage: useMotionTemplate`
-                      radial-gradient(
-                        400px circle at ${mouseX}px ${mouseY}px,
-                        black 0%,
-                        transparent 100%
-                      )
-                    `,
+                              radial-gradient(
+                                400px circle at ${mouseX}px ${mouseY}px,
+                                black 0%,
+                                transparent 100%
+                              )
+                            `,
                 }}
             />
 
