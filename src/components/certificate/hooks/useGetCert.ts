@@ -7,7 +7,7 @@ export type CertificateType = {
 const courses: ReadonlyArray<CertificateType> = [
     {
         label: "Google UX Design",
-        institution: "Google(Coursea)",
+        institution: "Google(Coursera)",
         url: "images/cert/GoogleUXDesign.webp",
     },
     {
