@@ -11,12 +11,12 @@ const HeroBanner: FC = () => {
             className="fixed bottom-auto left-0 right-0 top-0 z-10 h-dvh"
         >
             <HeroHighlight className="grid-template h-full w-full items-center">
-                <p className="col-span-4 pb-40 text-5xl font-normal leading-[1.25] text-foreground md:col-span-6 md:col-start-2 md:text-6xl">
+                <div className="col-span-4 pb-40 text-5xl font-normal leading-[1.25] text-foreground md:col-span-6 md:col-start-2 md:text-6xl">
                     Build
                     <br className="md:hidden" />
                     <FlipWords words={words} /> <br />
                     Project with
-                </p>
+                </div>
                 {/* @desktop */}
                 <div className="absolute bottom-20 right-20 hidden bg-gradient-to-tr from-gray-300 to-debug bg-clip-text font-goldman text-[120px] font-bold text-transparent md:inline-block">
                     Laughing
