@@ -39,7 +39,7 @@ const SkillSetCard = () => {
                     const delay = (i % 4) * 0.05;
                     return {
                         filter: "grayscale(0.2)",
-                        y: -80,
+                        y: i % 2 === 0 ? -20 : 20,
                         transition: {
                             y: {
                                 delay,
@@ -61,21 +61,23 @@ const SkillSetCard = () => {
 
     return (
         <CardContainer>
-            <div className="grid h-full grid-cols-5 place-items-center gap-2 overflow-clip rounded-sm bg-gray-700/30 p-2 sm:grid-cols-6 md:grid-cols-4">
-                {items.map((item, i) => (
-                    <motion.div
-                        className="flex aspect-square w-full items-center p-1 drop-shadow"
-                        key={"skill_" + i}
-                        variants={variants}
-                        custom={i}
-                    >
-                        <Image
-                            className="drop-shadow"
-                            src={`images/skills/${item}`}
-                            alt={item}
-                        />
-                    </motion.div>
-                ))}
+            <div className="mb-2 h-full overflow-clip rounded-s p-2">
+                <div className="grid h-full w-full -rotate-12 transform grid-cols-5 place-items-center gap-2 sm:grid-cols-6 md:grid-cols-4">
+                    {items.map((item, i) => (
+                        <motion.div
+                            className="flex aspect-square w-full items-center rounded-xl border border-gray-300/20 bg-gray-700/30 p-2 drop-shadow"
+                            key={"skill_" + i}
+                            variants={variants}
+                            custom={i}
+                        >
+                            <Image
+                                className="drop-shadow"
+                                src={`images/skills/${item}`}
+                                alt={item}
+                            />
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </CardContainer>
     );
