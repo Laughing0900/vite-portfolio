@@ -14,11 +14,14 @@ const items = [
     "Ethereum.svg",
     "Framer.svg",
     "Hardhat.svg",
+    "ChatGPT.svg",
     "Material.svg",
     "Moralis.svg",
     "openzeppelin.svg",
     "react.svg",
+    "Notion.svg",
     "Scss.svg",
+    "Scrum.svg",
     "1typescript.svg",
     "Vercel.svg",
     "vite.svg",
@@ -36,7 +39,7 @@ const SkillSetCard = () => {
                 },
 
                 animate: (i: number) => {
-                    const delay = (i % 4) * 0.05;
+                    const delay = (i % 6) * 0.05;
                     return {
                         filter: "grayscale(0.2)",
                         y: i % 2 === 0 ? -20 : 20,
@@ -62,7 +65,7 @@ const SkillSetCard = () => {
     return (
         <CardContainer>
             <div className="mb-2 h-full overflow-clip rounded-s p-2">
-                <div className="grid h-full w-full -rotate-12 transform grid-cols-5 place-items-center gap-2 sm:grid-cols-6 md:grid-cols-4">
+                <div className="grid h-full w-full -rotate-12 transform grid-cols-6 place-items-center gap-0.5">
                     {items.map((item, i) => (
                         <motion.div
                             className="flex aspect-square w-full items-center rounded-xl border border-gray-300/20 bg-gray-700/30 p-2 drop-shadow"
