@@ -25,6 +25,12 @@ const projects: ReadonlyArray<ProjectType> = [
         href: "https://www.itsglass.com.hk/",
     },
     {
+        name: "DearShare",
+        company: "WeMakeApp",
+        url: "images/project/DearShare.webp",
+        href: "https://www.dearshare.com/",
+    },
+    {
         name: "Beastroid",
         company: "Polkafantasy",
         url: "images/project/Beastroid.webp",
