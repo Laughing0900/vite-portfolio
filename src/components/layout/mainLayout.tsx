@@ -47,7 +47,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             />
             <WithFooter />
             <WithGrid open={openGrid} />
-            {isMobile && <WithDevAlert />}
+            {/* {isMobile && <WithDevAlert />} */}
         </>
     );
 };
