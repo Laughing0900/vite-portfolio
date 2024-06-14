@@ -1,3 +1,4 @@
+import ChartCard from "@/components/about/cards/chart";
 import PerformanceCard from "@/components/about/cards/performance";
 import SkillSetCard from "@/components/about/cards/skillSet";
 import StatusCard from "@/components/about/cards/status";
@@ -5,20 +6,10 @@ import TimeLineCard from "@/components/about/cards/timeLine";
 
 const items = [
     {
-        title: "Versatile",
-        description: (
-            <span className="text-sm">
-                Leverage a wide array of skills to propel your project forward.
-            </span>
-        ),
-        header: <SkillSetCard />,
-        className: "lg:col-span-3 md:col-span-3",
-    },
-    {
         title: "Lightning-Fast",
         description: (
             <span className="text-sm">
-                Optimized coding for superior performance.
+                Experience blazing speed with optimized coding.
             </span>
         ),
         header: <PerformanceCard />,
@@ -28,16 +19,38 @@ const items = [
         title: "Stability",
         description: (
             <span className="text-sm">
-                Ensuring systems robust stability for unparalleled reliability.
+                Achieve unmatched reliability with robust system stability.
             </span>
         ),
         header: <StatusCard />,
         className: "lg:col-span-2 md:col-span-3",
     },
     {
+        title: "Productivity",
+        description: (
+            <span className="text-sm">
+                Maximize efficiency and streamline production processes.
+            </span>
+        ),
+        header: <ChartCard />,
+        className: "lg:col-span-2 md:col-span-3",
+    },
+    {
+        title: "Versatile",
+        description: (
+            <span className="text-sm">
+                Harness a diverse skill set to drive your project to success.
+            </span>
+        ),
+        header: <SkillSetCard />,
+        className: "lg:col-span-3 md:col-span-3",
+    },
+    {
         title: "Schedule",
         description: (
-            <span className="text-sm">Ensuring systems delivery on time.</span>
+            <span className="text-sm">
+                Ensure timely delivery with efficient schedule management.
+            </span>
         ),
         header: <TimeLineCard />,
         className: "lg:col-span-3 md:col-span-3",
