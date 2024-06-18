@@ -6,12 +6,12 @@ import {
     useTransform,
 } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
-import { useGetExperiences } from "@/components/experience/hooks/useGetExperiences";
+import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
     const { breakpoint } = useBreakpoint();
-    const { companies } = useGetExperiences();
+    const { companies } = useExperiences();
     const filedCompanies = useMemo(() => {
         return companies.filter((company) => company.description);
     }, [companies]);
@@ -158,8 +158,15 @@ const Experiences = () => {
                                         </span>
                                     </p>
                                 </div>
-
-                                <ul>{company.description}</ul>
+                                {company.description && (
+                                    <ul
+                                        dangerouslySetInnerHTML={{
+                                            __html: company.description,
+                                        }}
+                                    >
+                                        {}
+                                    </ul>
+                                )}
 
                                 <div className="mt-5 flex flex-wrap gap-2">
                                     {company.techStack.map((tech) => {
