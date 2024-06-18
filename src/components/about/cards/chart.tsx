@@ -66,24 +66,24 @@ const ChartCard = () => {
                         // background
                         d="M4.11133 243.25L70.3336 195.4L136.556 163.5L202.778 201.78L269 128.41L335.222 67.8L401.445 102.89L467.667 115.65L533.889 4V259.2H467.667H401.445H335.222H269H202.778H136.556H70.3336H4.11133V243.25Z"
                         fill={isMobile ? "#94D13D" : "#000000ff"}
-                        fill-opacity="0.2"
+                        fillOpacity="0.2"
                         variants={variants.background}
                     />
                     <motion.path
                         // path
                         d="M4.11133 243.25L70.3336 195.4L136.556 163.5L202.778 201.78L269 128.41L335.222 67.8L401.445 102.89L467.667 115.65L533.889 4"
                         stroke="#717171"
-                        stroke-width="8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <motion.path
                         // path
                         d="M4.11133 243.25L70.3336 195.4L136.556 163.5L202.778 201.78L269 128.41L335.222 67.8L401.445 102.89L467.667 115.65L533.889 4"
                         stroke="#94D13D"
-                        stroke-width="8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         variants={variants.line}
                         className="z-10"
                     />
