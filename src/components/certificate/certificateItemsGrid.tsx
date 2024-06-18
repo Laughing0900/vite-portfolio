@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
-import type { CertificateType } from "@/components/certificate/hooks/useGetCert";
+import type { CertificateType } from "@/components/certificate/hooks/useCert";
 import type { FC } from "react";
 
 type CertificateItemsGridProps = {
@@ -23,16 +23,16 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                 return (
                     <LinkPreview
                         imageSrc={item.url}
-                        url={item.url}
+                        url={item.href || item.url}
                         className={cn(
                             "group relative col-span-4 overflow-hidden py-4 md:col-span-3 md:col-start-2",
                             index !== items.length - 1 &&
                                 "border-b-2 border-b-gray-500"
                         )}
-                        key={item.label}
+                        key={item.title}
                     >
                         <span className="max-w-sm">
-                            {item.label}
+                            {item.title}
                             <ArrowUpRight className="inline-block group-hover:inline-block md:hidden" />
                         </span>
                         <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-60">
