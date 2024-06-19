@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useMemo, useRef } from "react";
-import { useGetProject } from "@/components/project/hooks/useGetProject";
+import { useProject } from "@/components/project/hooks/useProject";
 import Image from "@/components/ui/image";
 import Link from "@/components/ui/link";
 import useBreakpoint from "@/hooks/useBreakpoint";
@@ -9,7 +9,8 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 const Project = () => {
     const { breakpoint } = useBreakpoint();
 
-    const { projects } = useGetProject();
+    const { projects } = useProject();
+    console.log(projects);
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -59,7 +60,7 @@ const Project = () => {
                                     href={project.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group mt-4 flex items-center"
+                                    className="group mt-4 flex w-full items-center justify-between"
                                 >
                                     <p className="border-b-2 border-b-transparent font-goldman text-2xl font-bold group-hover:border-b-gray-50">
                                         {project.name}

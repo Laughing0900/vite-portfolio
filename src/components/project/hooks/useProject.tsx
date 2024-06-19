@@ -1,3 +1,8 @@
+import { useMemo } from "react";
+import useSWR from "swr";
+import { API_ENDPOINT } from "@/consts/apis";
+import { fetcher } from "@/lib/utils";
+
 export type ProjectType = {
     name: string;
     url: string;
@@ -5,7 +10,7 @@ export type ProjectType = {
     company: string;
 };
 
-const projects: ReadonlyArray<ProjectType> = [
+const projects1: ReadonlyArray<ProjectType> = [
     {
         name: "KnightSafe",
         company: "KS Lab",
@@ -50,8 +55,25 @@ const projects: ReadonlyArray<ProjectType> = [
     },
 ];
 
-export const useGetProject = (): {
+export const useProject = (): {
     projects: ReadonlyArray<ProjectType>;
 } => {
+    const { data: response, isLoading } = useSWR(
+        API_ENDPOINT + "project",
+        fetcher
+    );
+
+    const projects = useMemo(() => {
+        if (isLoading) {
+            return [];
+        }
+
+        if (!response || response.status !== 200) {
+            return [];
+        }
+
+        return response.body;
+    }, [response, isLoading]);
+
     return { projects };
 };
