@@ -1,7 +1,7 @@
-import { format } from "date-fns";
 import { useMemo } from "react";
 import useSWR from "swr";
 import { API_ENDPOINT } from "@/consts/apis";
+import { formatDate } from "@/lib/display";
 import { fetcher } from "@/lib/utils";
 
 export type ExperiencesType = {
@@ -32,9 +32,9 @@ export const useExperiences = (): {
 
         return response.body.map(
             (d: ExperiencesType & { from: string; to: string }) => {
-                const formattedForm = format(d.from, "MMM yyyy");
+                const formattedForm = formatDate(d.from);
                 const formattedTo =
-                    d.to !== "Present" ? format(d.to, "MMM yyyy") : d.to;
+                    d.to !== "Present" ? formatDate(d.to) : d.to;
 
                 return {
                     ...d,
