@@ -38,7 +38,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                             {item.title}
                             <ArrowUpRight className="inline-block group-hover:inline-block md:hidden" />
                         </span>
-                        <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-60">
+                        <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-40">
                             {item.institution}
                         </div>
                     </LinkPreview>
