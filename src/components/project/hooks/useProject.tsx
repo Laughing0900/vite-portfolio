@@ -5,10 +5,10 @@ import { fetcher } from "@/lib/utils";
 
 export type ProjectType = {
     name: string;
-    url: string;
     href: string;
     company: string;
     imageId: string;
+    // url: string;
 };
 
 export const useProject = (): {

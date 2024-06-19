@@ -6,9 +6,9 @@ import { fetcher } from "@/lib/utils";
 export type CertificateType = {
     title: string;
     institution: string;
-    url: string;
     imageId: string;
     href?: string;
+    // url: string;
 };
 
 export const useCert = (): {
