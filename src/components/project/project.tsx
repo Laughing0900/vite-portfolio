@@ -10,7 +10,6 @@ const Project = () => {
     const { breakpoint } = useBreakpoint();
 
     const { projects } = useProject();
-    console.log(projects);
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
