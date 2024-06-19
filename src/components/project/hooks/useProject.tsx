@@ -8,6 +8,7 @@ export type ProjectType = {
     url: string;
     href: string;
     company: string;
+    imageId: string;
 };
 
 export const useProject = (): {

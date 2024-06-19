@@ -48,7 +48,7 @@ const Project = () => {
                             }}
                         >
                             <Image
-                                src={project.url}
+                                src={`https://drive.google.com/thumbnail?id=${project.imageId}&sz=w1500`}
                                 width="100%"
                                 className="aspect-video rounded-md border-4 border-foreground object-cover"
                                 alt="project image"

@@ -22,8 +22,11 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
             {items.map((item, index) => {
                 return (
                     <LinkPreview
-                        imageSrc={item.url}
-                        url={item.href || item.url}
+                        imageSrc={`https://drive.google.com/thumbnail?id=${item.imageId}&sz=w500`}
+                        url={
+                            item.href ||
+                            `https://drive.google.com/file/d/${item.imageId}/view?usp=drive_link`
+                        }
                         className={cn(
                             "group relative col-span-4 overflow-hidden py-4 md:col-span-3 md:col-start-2",
                             index !== items.length - 1 &&
