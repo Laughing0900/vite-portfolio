@@ -22,10 +22,10 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
             {items.map((item, index) => {
                 return (
                     <LinkPreview
-                        imageSrc={`https://drive.google.com/thumbnail?id=${item.imageId}&sz=w500`}
+                        imageSrc={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/cert/${item.imageId}`}
                         url={
                             item.href ||
-                            `https://drive.google.com/file/d/${item.imageId}/view?usp=drive_link`
+                            `https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/cert/${item.imageId}`
                         }
                         className={cn(
                             "group relative col-span-4 overflow-hidden py-4 md:col-span-3 md:col-start-2",
