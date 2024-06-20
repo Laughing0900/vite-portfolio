@@ -3,6 +3,7 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import React, { useCallback } from "react";
 import useBreakpoint from "@/hooks/useBreakpoint";
+import useDevice from "@/hooks/useDevice";
 import { cn } from "@/lib/utils";
 
 /// @description this component install from Aceternity UI
@@ -15,7 +16,9 @@ export const HeroHighlight = ({
     className?: string;
     containerClassName?: string;
 }) => {
-    const { isMobile } = useBreakpoint();
+    const { isMobile: md } = useBreakpoint();
+    const { isDesktop } = useDevice();
+    const isMobile = !isDesktop || md;
 
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -26,8 +29,7 @@ export const HeroHighlight = ({
             clientX,
             clientY,
         }: React.MouseEvent<HTMLDivElement>) => {
-            if (!currentTarget) return;
-            if (isMobile) return;
+            if (!currentTarget || isMobile) return;
             const { left, top } = currentTarget.getBoundingClientRect();
 
             mouseX.set(clientX - left);

@@ -117,7 +117,7 @@ export const LinkPreview = ({
                                 >
                                     {/* <div className="h-40 w-40 bg-gray-500"></div> */}
                                     <Image
-                                        src={imageSrc}
+                                        src={src}
                                         width={width}
                                         height={height}
                                         className="rounded-lg"

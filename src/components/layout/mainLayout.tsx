@@ -6,12 +6,15 @@ import WithGrid from "@/components/layout/grid";
 import WithHeader from "@/components/layout/header";
 import { BoxesBackground } from "@/components/ui/background-boxes";
 import GridBackground from "@/components/ui/background-grids";
-import { WithDevAlert } from "@/components/ui/developmentMode";
 import useBreakpoint from "@/hooks/useBreakpoint";
+import useDevice from "@/hooks/useDevice";
 import type { FC, PropsWithChildren } from "react";
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
-    const { isMobile } = useBreakpoint();
+    const { isMobile: md } = useBreakpoint();
+    const { isDesktop } = useDevice();
+    const isMobile = !isDesktop || md;
+
     const [openGrid, setOpenGrid] = useState(false);
     const footerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -25,7 +28,6 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         "inherit",
         "hidden",
     ]);
-
     return (
         <>
             <WithHeader setOpenGrid={setOpenGrid} openGrid={openGrid} />
@@ -47,7 +49,6 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             />
             <WithFooter />
             <WithGrid open={openGrid} />
-            {/* {isMobile && <WithDevAlert />} */}
         </>
     );
 };
