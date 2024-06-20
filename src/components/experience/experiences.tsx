@@ -10,7 +10,7 @@ import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
-    const { breakpoint } = useBreakpoint();
+    const { breakpoint, isMobile } = useBreakpoint();
     const { companies } = useExperiences();
     const filedCompanies = useMemo(() => {
         return companies.filter((company) => company.description);
@@ -45,7 +45,7 @@ const Experiences = () => {
 
             <div className="grid-template relative">
                 {/* @desktop */}
-                {breakpoint !== "md" && breakpoint !== "sm" && (
+                {!isMobile && (
                     <div className="sticky top-20 col-span-4 hidden h-fit self-start md:block">
                         <h3>Experience</h3>
                         <div>
@@ -183,8 +183,7 @@ const Experiences = () => {
                             </div>
                         );
                     })}
-                    {breakpoint !== "lg" &&
-                        breakpoint !== "xl" &&
+                    {isMobile &&
                         otherCompanies.map((company) => {
                             return (
                                 <div
