@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FC } from "react";
+import type { FC } from "react";
 
 type CardContainerProps = {
     children: React.ReactNode;

@@ -1,7 +1,8 @@
 import { easeInOut, motion } from "framer-motion";
-import { FC, useMemo } from "react";
+import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
 import useBreakpoint from "@/hooks/useBreakpoint";
+import type { FC } from "react";
 
 const StatusCard: FC = () => {
     const { isMobile } = useBreakpoint();

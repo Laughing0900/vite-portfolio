@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { useLocalStorage } from "react-use";
 import {
     Dialog,
@@ -7,6 +6,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+import type { FC } from "react";
 
 export const WithDevAlert: FC = () => {
     const [accept, setAccept] = useLocalStorage("devMode", false);

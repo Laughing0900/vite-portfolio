@@ -1,10 +1,11 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import useBreakpoint from "@/hooks/useBreakpoint";
 import useDevice from "@/hooks/useDevice";
 import { cn } from "@/lib/utils";
+import type React from "react";
 
 /// @description this component install from Aceternity UI
 export const HeroHighlight = ({

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useMemo, useRef } from "react";
-import { useProject } from "@/components/project/hooks/useProject";
+import { useProjects } from "@/components/project/hooks/useProjects";
 import Image from "@/components/ui/image";
 import Link from "@/components/ui/link";
 import useBreakpoint from "@/hooks/useBreakpoint";
@@ -9,7 +9,7 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 const Project = () => {
     const { breakpoint } = useBreakpoint();
 
-    const { projects } = useProject();
+    const { projects } = useProjects();
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,

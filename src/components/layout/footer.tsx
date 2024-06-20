@@ -1,6 +1,6 @@
-import { FC } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "@/components/ui/link";
+import type { FC } from "react";
 
 const WithFooter: FC = () => {
     return (

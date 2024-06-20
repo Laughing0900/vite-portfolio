@@ -11,13 +11,13 @@ export type CertificateType = {
     // url: string;
 };
 
-export const useCert = (): {
+export const useCertificates = (): {
     courses: ReadonlyArray<CertificateType>;
     education: ReadonlyArray<CertificateType>;
     isLoading: boolean;
 } => {
     const { data: response, isLoading } = useSWR(
-        API_ENDPOINT + "certificate",
+        API_ENDPOINT + "certificates",
         fetcher
     );
 

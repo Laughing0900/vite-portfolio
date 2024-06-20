@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
-import type { CertificateType } from "@/components/certificate/hooks/useCert";
+import type { CertificateType } from "@/components/certificate/hooks/useCertificates";
 import type { FC } from "react";
 
 type CertificateItemsGridProps = {

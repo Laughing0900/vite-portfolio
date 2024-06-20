@@ -1,6 +1,7 @@
-import { Dispatch, FC, SetStateAction, useCallback } from "react";
+import { useCallback } from "react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import type { Dispatch, FC, SetStateAction } from "react";
 
 type WithHeaderProps = {
     setOpenGrid: Dispatch<SetStateAction<boolean>>;

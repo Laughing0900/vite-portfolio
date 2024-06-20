@@ -1,6 +1,6 @@
-import { FC } from "react";
 import { FlipWords } from "@/components/heroBanner/flip-words";
 import { HeroHighlight } from "@/components/heroBanner/heroBackground";
+import type { FC } from "react";
 
 const words = ["a Remarkable", "a Successful", "a Stunning", "an Outstanding"];
 

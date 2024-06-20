@@ -11,11 +11,12 @@ export type ProjectType = {
     // url: string;
 };
 
-export const useProject = (): {
+export const useProjects = (): {
     projects: ReadonlyArray<ProjectType>;
+    isLoading: boolean;
 } => {
     const { data: response, isLoading } = useSWR(
-        API_ENDPOINT + "project",
+        API_ENDPOINT + "projects",
         fetcher
     );
 
@@ -31,5 +32,5 @@ export const useProject = (): {
         return response.body;
     }, [response, isLoading]);
 
-    return { projects };
+    return { projects, isLoading };
 };

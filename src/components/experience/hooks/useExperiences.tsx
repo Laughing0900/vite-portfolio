@@ -17,7 +17,7 @@ export const useExperiences = (): {
     isLoading: boolean;
 } => {
     const { data: response, isLoading } = useSWR(
-        API_ENDPOINT + "experience",
+        API_ENDPOINT + "experiences",
         fetcher
     );
 
