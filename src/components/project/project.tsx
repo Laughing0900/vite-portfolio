@@ -48,9 +48,9 @@ const Project = () => {
                             }}
                         >
                             <Image
-                                src={`https://drive.google.com/thumbnail?id=${project.imageId}&sz=w1500`}
+                                src={`https://drive.google.com/thumbnail?id=${project.imageId}&sz=w1000`}
                                 width="100%"
-                                className="aspect-video rounded-md border-4 border-foreground object-cover"
+                                className="aspect-video max-h-[60vh] rounded-md border-4 border-foreground object-cover"
                                 alt="project image"
                             />
 

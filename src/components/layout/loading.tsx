@@ -1,9 +1,11 @@
 const Loading = () => {
+    const getScreenFontSize = () => {};
     return (
         <div className="fixed left-0 top-0 h-screen w-full">
-            <div className="loading__container">
-                <div className="loading__spinner">LOADING</div>
-            </div>
+            <div className="">LOAD...ING</div>
+            <div className="">LAUGHING</div>
+
+            <div className="">READY</div>
         </div>
     );
 };

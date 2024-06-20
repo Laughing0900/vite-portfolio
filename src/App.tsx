@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLockBodyScroll, useToggle } from "react-use";
 import About from "@/components/about/about";
 import Certificate from "@/components/certificate/certificate";
 import Experiences from "@/components/experience/experiences";
@@ -8,6 +10,14 @@ import useOnFetching from "@/hooks/useOnFetching";
 
 function App() {
     const { isLoading } = useOnFetching();
+
+    const [locked, toggleLocked] = useToggle(false);
+    useLockBodyScroll(locked);
+
+    useEffect(() => {
+        toggleLocked(isLoading);
+    }, [isLoading, toggleLocked]);
+
     return (
         <>
             {isLoading ? (
@@ -15,8 +25,6 @@ function App() {
             ) : (
                 <MainLayout>
                     <About />
-                    {/* Skills */}
-                    {/* Project */}
                     <Project />
                     <Experiences />
                     <Certificate />
