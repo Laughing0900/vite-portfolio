@@ -48,7 +48,7 @@ const Project = () => {
                             }}
                         >
                             <Image
-                                src={`https://drive.google.com/thumbnail?id=${project.imageId}&sz=w1000`}
+                                src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${project.imageId}`}
                                 width="100%"
                                 className="aspect-video max-h-[60vh] rounded-md border-4 border-foreground object-cover"
                                 alt="project image"
