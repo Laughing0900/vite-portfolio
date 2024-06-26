@@ -20,9 +20,8 @@ function App() {
 
     return (
         <>
-            {isLoading ? (
-                <Loading />
-            ) : (
+            <Loading />
+            {!isLoading && (
                 <MainLayout>
                     <About />
                     <Project />
