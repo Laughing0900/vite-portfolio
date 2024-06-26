@@ -3,7 +3,6 @@ import {
     motion,
     useMotionValueEvent,
     useScroll,
-    useTransform,
 } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
@@ -12,11 +11,11 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 const Experiences = () => {
     const { breakpoint, isMobile } = useBreakpoint();
     const { companies } = useExperiences();
-    const filedCompanies = useMemo(() => {
-        return companies.filter((company) => company.description);
-    }, [companies]);
-    const otherCompanies = useMemo(() => {
-        return companies.filter((company) => !company.description);
+    const { filedCompanies, otherCompanies } = useMemo(() => {
+        return {
+            filedCompanies: companies.filter((company) => company.description),
+            otherCompanies: companies.filter((company) => !company.description),
+        };
     }, [companies]);
 
     const scrollRef = useRef(null);
@@ -24,16 +23,24 @@ const Experiences = () => {
         target: scrollRef,
     });
 
-    const opacity = useTransform(
-        scrollYProgress,
-        [0, 1 / (filedCompanies.length - 1)],
-        [0, 1],
-        { clamp: false }
-    );
-
     const [selected, setSelected] = useState(0);
-    useMotionValueEvent(opacity, "change", (latest) => {
-        setSelected(+latest.toFixed(0));
+    const cardLength = filedCompanies.length;
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        const cardsBreakpoints = filedCompanies.map(
+            (_, index) => index / cardLength
+        );
+        const closestBreakpointIndex = cardsBreakpoints.reduce(
+            (acc, breakpoint, index) => {
+                const distance = Math.abs(latest - breakpoint);
+                if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+                    return index;
+                }
+                return acc;
+            },
+            0
+        );
+        setSelected(closestBreakpointIndex);
     });
 
     return (
@@ -113,7 +120,6 @@ const Experiences = () => {
                                                         opacity: 0,
                                                         transition: {
                                                             duration: 0.15,
-                                                            delay: 0.2,
                                                         },
                                                     }}
                                                     key={
@@ -136,14 +142,12 @@ const Experiences = () => {
                     {filedCompanies.map((company) => {
                         return (
                             <div
-                                className="mb-20 py-4 md:mb-0 md:h-[75vh]"
+                                className="mb-20 py-4 md:sticky md:top-1/4 md:mb-0 md:h-[75vh]"
                                 key={company.name + "_description"}
                                 id="experience-description"
                             >
-                                <div
-                                    className="mb-4 border-b-2 border-b-gray-500 py-2 md:hidden"
-                                    key={company.name}
-                                >
+                                {/* @mobile */}
+                                <div className="mb-4 border-b-2 border-b-gray-500 py-2 md:hidden">
                                     <p>
                                         <span className="text-2xl font-bold">
                                             {company.role}{" "}
@@ -158,27 +162,30 @@ const Experiences = () => {
                                         </span>
                                     </p>
                                 </div>
-                                {company.description && (
-                                    <ul
-                                        dangerouslySetInnerHTML={{
-                                            __html: company.description,
-                                        }}
-                                    >
-                                        {}
-                                    </ul>
-                                )}
+                                {/* @default */}
+                                <div className="min-h-[60%] rounded md:bg-black/5 md:p-4 md:backdrop-blur-xl">
+                                    {company.description && (
+                                        <ul
+                                            dangerouslySetInnerHTML={{
+                                                __html: company.description,
+                                            }}
+                                        >
+                                            {}
+                                        </ul>
+                                    )}
 
-                                <div className="mt-5 flex flex-wrap gap-2">
-                                    {company.techStack.map((tech) => {
-                                        return (
-                                            <div
-                                                key={company.name + tech}
-                                                className="text-md rounded-full bg-gradient-to-tr from-[#21d4fd]/60 to-[#b721ff]/60 px-3 py-1 font-light"
-                                            >
-                                                {tech}
-                                            </div>
-                                        );
-                                    })}
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        {company.techStack.map((tech) => {
+                                            return (
+                                                <div
+                                                    key={company.name + tech}
+                                                    className="text-md rounded-full bg-gradient-to-tr from-[#21d4fd]/60 to-[#b721ff]/60 px-3 py-1 font-light"
+                                                >
+                                                    {tech}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         );
@@ -212,8 +219,6 @@ const Experiences = () => {
                                 </div>
                             );
                         })}
-
-                    {/* <div className="hidden h-[25dvh] md:block" /> */}
                 </div>
             </div>
         </section>
