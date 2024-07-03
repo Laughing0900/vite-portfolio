@@ -22,6 +22,7 @@ const items = [
     "Notion.svg",
     "Scss.svg",
     "Scrum.svg",
+    "theGraph.svg",
     "1typescript.svg",
     "Vercel.svg",
     "vite.svg",

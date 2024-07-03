@@ -43,9 +43,6 @@ const Project = () => {
                         <motion.div
                             className="h-fit w-[400px] rounded-lg border-2 border-foreground p-10 sm:w-[600px] md:w-[800px]"
                             key={"project" + i}
-                            style={{
-                                rotateZ: i % 2 === 0 ? "-5deg" : "5deg",
-                            }}
                         >
                             <Image
                                 src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${project.imageId}`}
@@ -54,7 +51,7 @@ const Project = () => {
                                 alt="project image"
                             />
 
-                            <div className="pointer-events-auto">
+                            <div className="pointer-events-auto mt-10">
                                 <Link
                                     href={project.href}
                                     target="_blank"
