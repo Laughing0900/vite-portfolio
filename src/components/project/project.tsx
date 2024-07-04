@@ -44,13 +44,17 @@ const Project = () => {
                             className="h-fit w-[400px] rounded-lg border-2 border-foreground p-10 sm:w-[600px] md:w-[800px]"
                             key={"project" + i}
                         >
-                            <Image
-                                src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${project.imageId}`}
-                                width="100%"
-                                className="aspect-video max-h-[60vh] rounded-md border-4 border-foreground object-cover"
-                                alt="project image"
-                            />
-
+                            <div className="aspect-video max-h-[60vh]">
+                                <Image
+                                    src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${project.imageId}`}
+                                    width="100%"
+                                    className="max-h-[60vh] rounded-md border-4 border-foreground object-cover"
+                                    alt="project image"
+                                    style={{
+                                        transform: `rotate(7deg)`,
+                                    }}
+                                />
+                            </div>
                             <div className="pointer-events-auto mt-10">
                                 <Link
                                     href={project.href}
