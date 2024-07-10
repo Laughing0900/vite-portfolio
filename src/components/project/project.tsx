@@ -51,7 +51,7 @@ const Project = () => {
                                     className="max-h-[60vh] rounded-md border-4 border-foreground object-cover"
                                     alt="project image"
                                     style={{
-                                        transform: `rotate(7deg)`,
+                                        transform: `rotate(3deg)`,
                                     }}
                                 />
                             </div>
