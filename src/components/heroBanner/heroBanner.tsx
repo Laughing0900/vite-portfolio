@@ -11,7 +11,7 @@ const HeroBanner: FC = () => {
             className="fixed bottom-auto left-0 right-0 top-0 z-10 h-dvh"
         >
             <HeroHighlight className="grid-template h-full w-full items-center">
-                <div className="col-span-4 pb-40 text-5xl font-normal leading-[1.25] text-foreground md:col-span-6 md:col-start-2 md:text-6xl">
+                <div className="col-span-4 pb-40 text-4xl font-normal leading-[1.25] text-foreground md:col-span-6 md:col-start-2 md:text-6xl">
                     Build <br className="md:hidden" />
                     <FlipWords words={words} /> <br />
                     Project with

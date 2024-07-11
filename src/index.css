@@ -110,8 +110,8 @@ span.highlight {
 .name-horizontal {
     position: absolute;
     right: 0;
-    bottom: -0.5em;
-    transform: rotate(-90deg) translate(100%, -50%);
+    bottom: 0em;
+    transform: rotate(-90deg) translate(100%, -100%);
     transform-origin: right center;
 }
 

@@ -47,7 +47,7 @@ const WithFooter: FC = () => {
             <span className="absolute bottom-0 left-0 px-4 py-4 md:hidden">
                 @2024
             </span>
-            <span className="name-horizontal font-cyborg text-nowrap text-6xl leading-3 text-gray-100 md:hidden">
+            <span className="name-horizontal font-cyborg text-nowrap text-6xl text-gray-100 md:hidden">
                 Laughing Cheng
             </span>
         </footer>
