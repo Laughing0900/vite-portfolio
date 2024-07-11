@@ -41,7 +41,7 @@ const Project = () => {
                 <motion.div className="flex gap-4 pl-4 md:pl-40" style={{ x }}>
                     {projects.map((project, i) => (
                         <motion.div
-                            className="h-fit w-[400px] rounded-lg border-2 border-foreground bg-black/5 p-10 backdrop-blur-sm sm:w-[600px] md:w-[800px]"
+                            className="relative h-fit w-[400px] rounded-lg border-2 border-foreground bg-black/5 p-10 backdrop-blur-sm sm:w-[600px] md:w-[800px]"
                             key={"project" + i}
                         >
                             <div className="aspect-video max-h-[60vh]">
@@ -71,6 +71,11 @@ const Project = () => {
                                     :- {project.company}
                                 </p>
                             </div>
+                            <Image
+                                className="absolute bottom-3 right-3 aspect-square w-12 opacity-10 drop-shadow md:w-20"
+                                src={`images/pawn-white.svg`}
+                                alt={"my-logo"}
+                            />
                         </motion.div>
                     ))}
                 </motion.div>
