@@ -62,9 +62,8 @@ const config = {
         },
         extend: {
             fontFamily: {
-                goldman: ["Goldman", "sans-serif"],
                 k2d: ["K2D", "sans-serif"],
-                crazy: ["Kablammo", "sans-serif"],
+                cyborg: ["Cyborg", "sans-serif"],
             },
             colors: {
                 border: "var(--border)",

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "Cyborg";
+    src: url("/fonts/Cyborg.ttf");
+}
 @layer base {
     :root {
         --background: #1c1c1e;
@@ -46,7 +50,7 @@
         @apply bg-background font-k2d text-foreground;
     }
     h3 {
-        @apply mb-20 font-goldman text-3xl md:text-6xl;
+        @apply font-cyborg mb-20 text-3xl leading-10 md:text-6xl;
     }
 
     li {
@@ -91,11 +95,6 @@ span {
 
 address {
     font-style: normal;
-}
-
-.crazy {
-    font-optical-sizing: auto;
-    font-variation-settings: "MORF" 0;
 }
 
 /* custom class  */

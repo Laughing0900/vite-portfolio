@@ -62,7 +62,7 @@ const Project = () => {
                                     rel="noopener noreferrer"
                                     className="group mt-4 flex w-full items-center justify-between"
                                 >
-                                    <p className="border-b-2 border-b-transparent font-goldman text-2xl font-bold group-hover:border-b-gray-50">
+                                    <p className="border-b-2 border-b-transparent text-2xl font-bold group-hover:border-b-gray-50">
                                         {project.name}
                                     </p>
                                     <ArrowUpRight className="inline-block h-8 w-8 group-hover:inline-block md:hidden" />
