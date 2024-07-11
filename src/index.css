@@ -72,6 +72,8 @@ html {
         noto,
         arial,
         sans-serif;
+    letter-spacing: 0.1em;
+    line-height: 1.3em;
 }
 
 h1,
@@ -104,6 +106,14 @@ span.highlight {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 500;
+}
+
+.name-horizontal {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: rotate(-90deg) translate(100%, -75%);
+    transform-origin: right center;
 }
 
 .glitch-loading {
