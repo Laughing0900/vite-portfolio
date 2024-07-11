@@ -54,7 +54,7 @@ const Experiences = () => {
                             {companies.map((company, index) => {
                                 return (
                                     <motion.div
-                                        className="py-4 pr-2 transition-all ease-linear"
+                                        className="py-4 pr-4 transition-all ease-linear"
                                         key={company.name}
                                         style={{
                                             opacity:
@@ -136,7 +136,7 @@ const Experiences = () => {
                     {filedCompanies.map((company) => {
                         return (
                             <div
-                                className="mb-20 py-4 md:sticky md:top-1/4 md:mb-0 md:h-[80vh]"
+                                className="mb-20 py-4 md:sticky md:top-40 md:mb-0 md:h-[80vh]"
                                 key={company.name + "_description"}
                                 id="experience-description"
                             >
@@ -157,7 +157,7 @@ const Experiences = () => {
                                     </p>
                                 </div>
                                 {/* @default */}
-                                <div className="min-h-[60%] rounded-lg md:flex md:flex-col md:justify-between md:border-2 md:border-foreground md:bg-black/55 md:p-4 md:backdrop-blur-md">
+                                <div className="min-h-[70%] rounded-lg md:flex md:flex-col md:justify-between md:border-2 md:border-foreground md:bg-black/55 md:p-8 md:backdrop-blur-md">
                                     {company.description && (
                                         <ul
                                             dangerouslySetInnerHTML={{
