@@ -38,14 +38,14 @@ const WithFooter: FC = () => {
             </div>
             {/* @desktop */}
             <div className="absolute bottom-0 left-0 hidden w-full items-end px-20 py-4 md:flex md:justify-between">
-                <span className="text-9xl">Laughing Cheng</span>
+                <span className="font-goldman text-9xl">Laughing Cheng</span>
                 <span>@2024</span>
             </div>
             {/* @mobile */}
             <span className="left-0px-4 absolute bottom-0 py-4 md:hidden">
                 @2024
             </span>
-            <span className="name-horizontal text-nowrap text-7xl md:hidden">
+            <span className="name-horizontal text-nowrap font-goldman text-7xl md:hidden">
                 Laughing Cheng
             </span>
         </footer>
