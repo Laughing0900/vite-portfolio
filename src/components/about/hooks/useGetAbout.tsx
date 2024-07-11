@@ -36,16 +36,6 @@ const items = [
         className: "lg:col-span-2 md:col-span-3",
     },
     {
-        title: "Versatile",
-        description: (
-            <span className="text-sm">
-                Harness a diverse skill set to drive your project to success.
-            </span>
-        ),
-        header: <SkillSetCard />,
-        className: "lg:col-span-3 md:col-span-3",
-    },
-    {
         title: "Schedule",
         description: (
             <span className="text-sm">
@@ -54,6 +44,16 @@ const items = [
         ),
         header: <TimeLineCard />,
         className: "lg:col-span-3 md:col-span-3",
+    },
+    {
+        title: "Versatile",
+        description: (
+            <span className="text-sm">
+                Harness a diverse skill set to drive your project to success.
+            </span>
+        ),
+        header: <SkillSetCard />,
+        className: "lg:col-span-3 md:col-span-6 sm:col-span-3",
     },
 ];
 

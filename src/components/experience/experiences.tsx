@@ -1,9 +1,4 @@
-import {
-    AnimatePresence,
-    motion,
-    useMotionValueEvent,
-    useScroll,
-} from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import useBreakpoint from "@/hooks/useBreakpoint";
@@ -59,17 +54,21 @@ const Experiences = () => {
                             {companies.map((company, index) => {
                                 return (
                                     <motion.div
-                                        className="py-4 transition-all ease-linear"
+                                        className="py-4 pr-2 transition-all ease-linear"
                                         key={company.name}
                                         style={{
                                             opacity:
                                                 selected === index ? 1 : 0.25,
                                         }}
                                     >
-                                        <p>
+                                        <p className="w-full text-right">
                                             <span className="text-xl font-bold">
                                                 {company.role}{" "}
                                             </span>
+                                        </p>
+
+                                        <p className="w-full text-right text-lg font-light">
+                                            {company.name}
                                             {breakpoint === "lg" && (
                                                 <br className="hidden md:block" />
                                             )}
@@ -77,24 +76,24 @@ const Experiences = () => {
                                                 //{company.duration}
                                             </span>
                                         </p>
-
-                                        <p className="text-lg font-light">
-                                            {company.name}
-                                        </p>
                                     </motion.div>
                                 );
                             })}
                         </div>
                         {/* @scroll bar */}
-                        <div className="absolute right-0 top-1/2 hidden h-1/2 w-1 -translate-y-1/2 transform flex-col gap-4 md:flex">
+                        <div
+                            className="absolute right-0 top-40 hidden w-1 flex-col gap-4 text-[88px] md:flex"
+                            style={{
+                                height: `${filedCompanies.length}em`,
+                            }}
+                        >
                             {filedCompanies.map((_, index) => {
                                 return (
                                     <motion.div
                                         key={"exp_bar_" + index}
                                         className="relative w-full rounded-full bg-gray-700/50"
                                         style={{
-                                            height: `calc(${selected === index ? 70 : 50}% /
-                                            ${filedCompanies.length})`,
+                                            height: `calc(100% / ${filedCompanies.length})`,
                                         }}
                                         animate={{
                                             transition: {
@@ -102,33 +101,28 @@ const Experiences = () => {
                                             },
                                         }}
                                     >
-                                        <AnimatePresence>
-                                            {selected === index && (
-                                                <motion.span
-                                                    className="absolute inset-0 block h-full w-full rounded-full md:bg-white"
-                                                    layoutId="hoverBackground"
-                                                    initial={{
-                                                        opacity: 0,
-                                                    }}
-                                                    animate={{
-                                                        opacity: 1,
-                                                        transition: {
-                                                            duration: 0.15,
-                                                        },
-                                                    }}
-                                                    exit={{
-                                                        opacity: 0,
-                                                        transition: {
-                                                            duration: 0.15,
-                                                        },
-                                                    }}
-                                                    key={
-                                                        "desktop_exp_bar" +
-                                                        index
-                                                    }
-                                                />
-                                            )}
-                                        </AnimatePresence>
+                                        {selected === index && (
+                                            <motion.span
+                                                className="absolute inset-0 block h-full w-full rounded-full md:bg-white"
+                                                layoutId="hoverBackground"
+                                                initial={{
+                                                    opacity: 0,
+                                                }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    transition: {
+                                                        duration: 0.15,
+                                                    },
+                                                }}
+                                                exit={{
+                                                    opacity: 0,
+                                                    transition: {
+                                                        duration: 0.15,
+                                                    },
+                                                }}
+                                                key={"desktop_exp_bar" + index}
+                                            />
+                                        )}
                                     </motion.div>
                                 );
                             })}
@@ -142,7 +136,7 @@ const Experiences = () => {
                     {filedCompanies.map((company) => {
                         return (
                             <div
-                                className="mb-20 py-4 md:sticky md:top-1/4 md:mb-0 md:h-[75vh]"
+                                className="mb-20 py-4 md:sticky md:top-1/4 md:mb-0 md:h-[80vh]"
                                 key={company.name + "_description"}
                                 id="experience-description"
                             >
@@ -163,7 +157,7 @@ const Experiences = () => {
                                     </p>
                                 </div>
                                 {/* @default */}
-                                <div className="min-h-[60%] rounded md:bg-black/5 md:p-4 md:backdrop-blur-xl">
+                                <div className="min-h-[60%] rounded-lg md:flex md:flex-col md:justify-between md:border-2 md:border-foreground md:bg-black/55 md:p-4 md:backdrop-blur-md">
                                     {company.description && (
                                         <ul
                                             dangerouslySetInnerHTML={{

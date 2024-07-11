@@ -17,14 +17,14 @@ const HeroBanner: FC = () => {
                     Project with
                 </div>
                 {/* @desktop */}
-                <div className="absolute bottom-20 right-20 hidden bg-gradient-to-tr from-gray-300 to-debug bg-clip-text font-goldman text-[120px] font-bold text-transparent md:inline-block">
-                    Laughing
-                </div>
-                {/* @mobile */}
-                <div className="name-horizontal col-span-4 bg-gradient-to-tr from-gray-300 to-debug bg-clip-text font-goldman text-[60px] font-semibold text-transparent md:hidden">
+                <div className="absolute bottom-20 left-20 hidden bg-gradient-to-tr from-gray-300 to-debug bg-clip-text font-goldman text-[120px] font-bold text-transparent md:inline-block">
                     Laughing
                 </div>
             </HeroHighlight>
+            {/* @mobile */}
+            <div className="name-horizontal col-span-4 bg-gradient-to-tr from-gray-300 to-debug bg-clip-text font-goldman text-[60px] font-semibold text-transparent md:hidden">
+                Laughing
+            </div>
         </section>
     );
 };

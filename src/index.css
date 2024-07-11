@@ -73,7 +73,7 @@ html {
         arial,
         sans-serif;
     letter-spacing: 0.1em;
-    line-height: 1.3em;
+    line-height: 1.3;
 }
 
 h1,
@@ -111,8 +111,8 @@ span.highlight {
 .name-horizontal {
     position: absolute;
     right: 0;
-    bottom: 0;
-    transform: rotate(-90deg) translate(100%, -75%);
+    bottom: -0.5em;
+    transform: rotate(-90deg) translate(100%, -50%);
     transform-origin: right center;
 }
 
