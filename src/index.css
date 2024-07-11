@@ -54,7 +54,7 @@
     }
 
     .grid-template {
-        @apply grid grid-cols-4 gap-5 px-4 md:grid-cols-8 md:px-20;
+        @apply m-auto grid max-w-[1680px] grid-cols-4 gap-5 px-4 md:grid-cols-8 md:px-20;
     }
 }
 
