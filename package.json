@@ -10,7 +10,7 @@
         "preview": "vite preview --port 8080"
     },
     "dependencies": {
-        "@million/lint": "^1.0.0-rc.26",
+        "@million/lint": "^1.0.0-rc.76",
         "@radix-ui/react-dialog": "^1.0.5",
         "@radix-ui/react-hover-card": "^1.0.7",
         "@radix-ui/react-label": "^2.0.2",

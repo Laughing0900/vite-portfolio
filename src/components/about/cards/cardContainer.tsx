@@ -9,7 +9,7 @@ const CardContainer: FC<CardContainerProps> = ({ children }) => {
         <motion.div
             initial="initial"
             whileHover="animate"
-            className="relative h-full min-h-[6rem] w-full rounded-md bg-white/5"
+            className="relative h-full min-h-[6rem] w-full rounded-md bg-white/5 backdrop-blur-sm"
         >
             {children}
         </motion.div>

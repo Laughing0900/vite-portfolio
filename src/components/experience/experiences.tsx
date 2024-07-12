@@ -173,7 +173,7 @@ const Experiences = () => {
                                             return (
                                                 <div
                                                     key={company.name + tech}
-                                                    className="text-md rounded-full bg-gradient-to-tr from-[#21d4fd]/60 to-[#b721ff]/60 px-3 py-1 font-light"
+                                                    className="text-md rounded-full bg-gradient-to-tr from-[#A61C81] to-[#1BA1BF] px-3 py-1 font-light"
                                                 >
                                                     {tech}
                                                 </div>

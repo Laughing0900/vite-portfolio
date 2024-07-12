@@ -38,7 +38,7 @@
 
         --radius: 10px;
 
-        --debug: #ff007a;
+        --debug: #bf34a8;
     }
 }
 
@@ -50,7 +50,7 @@
         @apply bg-background font-k2d text-foreground;
     }
     h3 {
-        @apply font-cyborg mb-20 text-3xl leading-[1.5em] drop-shadow-md md:text-6xl md:leading-[1.5em];
+        @apply mb-20 font-cyborg text-3xl leading-[1.5em] drop-shadow-md md:text-6xl md:leading-[1.5em];
     }
 
     li {
