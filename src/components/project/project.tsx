@@ -35,9 +35,11 @@ const Project = () => {
             style={{ height: `${containerHeight}px` }}
         >
             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-                <h3 className="absolute left-0 top-20 rounded-lg pl-4 md:top-12 md:pl-20">
-                    Project
-                </h3>
+                <div className="absolute left-0 top-20 w-full rounded-lg md:top-12">
+                    <h3 className="mx-auto w-[100vw] max-w-[1680px] px-4 text-left md:px-20">
+                        Project
+                    </h3>
+                </div>
                 <motion.div className="flex gap-4 pl-4 md:pl-40" style={{ x }}>
                     {projects.map((project, i) => (
                         <motion.div

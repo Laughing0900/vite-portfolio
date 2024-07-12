@@ -15,7 +15,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
 }) => {
     if (items.length === 0) return null;
     return (
-        <div className="mb-10 grid grid-cols-4 gap-x-5 border-t-gray-500 text-xl md:mb-0 md:border-t-2">
+        <div className="col-span-full mb-10 grid grid-cols-4 gap-x-5 border-t-gray-500 text-xl md:mb-0 md:border-t-2">
             <span className="col-span-4 text-gray-300 md:col-span-1 md:pt-4">
                 {title}
             </span>

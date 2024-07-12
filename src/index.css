@@ -50,7 +50,7 @@
         @apply bg-background font-k2d text-foreground;
     }
     h3 {
-        @apply font-cyborg mb-20 text-3xl leading-10 md:text-6xl;
+        @apply font-cyborg mb-20 text-3xl leading-[1.5em] drop-shadow-md md:text-6xl md:leading-[1.5em];
     }
 
     li {
