@@ -30,8 +30,6 @@ const Project = () => {
         return projects.length * (800 + 40) - 40;
     }, [breakpoint, projects]);
 
-    if (projects.length === 0) return <>Loading</>;
-
     return (
         <section
             id="project"
