@@ -30,7 +30,11 @@ const DATA = {
         },
     },
     navbar: [
-        { href: "#", icon: Send, label: "Contact me" },
+        {
+            href: "mailto:laughing0900@gmail.com",
+            icon: Send,
+            label: "Contact me",
+        },
         { href: "#", icon: HomeIcon, label: "Home" },
     ],
 };

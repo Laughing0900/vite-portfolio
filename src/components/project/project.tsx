@@ -1,10 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { useMemo, useRef } from "react";
 import { useProjects } from "@/components/project/hooks/useProjects";
 import { ProjectCard } from "@/components/project/projectCard";
-import Image from "@/components/ui/image";
-import Link from "@/components/ui/link";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Project = () => {
