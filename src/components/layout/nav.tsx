@@ -15,17 +15,17 @@ const DATA = {
     contact: {
         project: {
             name: "Projects",
-            url: "#",
+            url: "#project",
             icon: AppWindowMac,
         },
         Experience: {
             name: "Experiences",
-            url: "#",
+            url: "#experience",
             icon: Building2,
         },
         cert: {
             name: "Cert. & Edu.",
-            url: "#",
+            url: "#certificate",
             icon: GraduationCap,
         },
     },

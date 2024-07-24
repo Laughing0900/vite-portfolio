@@ -78,6 +78,7 @@ html {
         sans-serif;
     letter-spacing: 0.1em;
     line-height: 1.3;
+    scroll-behavior: smooth;
 }
 
 h1,
