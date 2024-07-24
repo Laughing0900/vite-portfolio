@@ -4,7 +4,7 @@ import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
-    const { breakpoint, isMobile } = useBreakpoint();
+    const { breakpoint, isTablet } = useBreakpoint();
     const { companies } = useExperiences();
     const { filedCompanies, otherCompanies } = useMemo(() => {
         return {
@@ -41,14 +41,14 @@ const Experiences = () => {
     return (
         <section className="pointer-events-none min-h-dvh" id="experience">
             {/* @mobile */}
-            <h3 className="sticky top-12 z-10 rounded-lg p-4 backdrop-blur-sm md:hidden">
+            <h3 className="sticky top-12 z-10 rounded-lg p-4 backdrop-blur-sm md:px-20 lg:hidden">
                 Experience
             </h3>
 
             <div className="grid-template relative">
                 {/* @desktop */}
-                {!isMobile && (
-                    <div className="sticky top-20 col-span-4 hidden h-fit self-start md:block">
+                {!isTablet && (
+                    <div className="sticky top-20 col-span-4 hidden h-fit self-start lg:block">
                         <h3>Experience</h3>
                         <div>
                             {companies.map((company, index) => {
@@ -70,7 +70,7 @@ const Experiences = () => {
                                         <p className="w-full text-right text-lg font-light">
                                             {company.name}
                                             {breakpoint === "lg" && (
-                                                <br className="hidden md:block" />
+                                                <br className="hidden lg:block" />
                                             )}
                                             <span className="text-lg text-gray-300/50">
                                                 //{company.duration}
@@ -82,7 +82,7 @@ const Experiences = () => {
                         </div>
                         {/* @scroll bar */}
                         <div
-                            className="absolute right-0 top-40 hidden w-1 flex-col gap-4 text-[88px] md:flex"
+                            className="absolute right-0 top-40 hidden w-1 flex-col gap-4 text-[88px] lg:flex"
                             style={{
                                 height: `${filedCompanies.length}em`,
                             }}
@@ -103,7 +103,7 @@ const Experiences = () => {
                                     >
                                         {selected === index && (
                                             <motion.span
-                                                className="absolute inset-0 block h-full w-full rounded-full md:bg-white"
+                                                className="absolute inset-0 block h-full w-full rounded-full lg:bg-white"
                                                 layoutId="hoverBackground"
                                                 initial={{
                                                     opacity: 0,
@@ -130,18 +130,18 @@ const Experiences = () => {
                     </div>
                 )}
                 <div
-                    className="col-span-4 pt-4 md:col-start-5 md:pt-40"
+                    className="col-span-8 pt-4 lg:col-span-4 lg:col-start-5 lg:pt-40"
                     ref={scrollRef}
                 >
                     {filedCompanies.map((company) => {
                         return (
                             <div
-                                className="mb-20 py-4 md:sticky md:top-40 md:mb-0 md:h-[80vh]"
+                                className="mb-20 py-4 lg:sticky lg:top-40 lg:mb-0 lg:h-[80vh]"
                                 key={company.name + "_description"}
                                 id="experience-description"
                             >
                                 {/* @mobile */}
-                                <div className="mb-4 border-b-2 border-b-gray-500 py-2 md:hidden">
+                                <div className="mb-4 border-b-2 border-b-gray-500 py-2 lg:hidden">
                                     <p>
                                         <span className="text-2xl font-bold">
                                             {company.role}{" "}
@@ -157,7 +157,7 @@ const Experiences = () => {
                                     </p>
                                 </div>
                                 {/* @default */}
-                                <div className="min-h-[70%] rounded-lg md:flex md:flex-col md:justify-between md:border-2 md:border-foreground md:bg-black/55 md:p-8 md:backdrop-blur-md">
+                                <div className="min-h-[70%] rounded-lg lg:flex lg:flex-col lg:justify-between lg:border-2 lg:border-foreground lg:bg-black/55 lg:p-8 lg:backdrop-blur-md">
                                     {company.description && (
                                         <ul
                                             dangerouslySetInnerHTML={{
@@ -184,11 +184,11 @@ const Experiences = () => {
                             </div>
                         );
                     })}
-                    {isMobile &&
+                    {isTablet &&
                         otherCompanies.map((company) => {
                             return (
                                 <div
-                                    className="mb-12 py-4 md:mb-0 md:h-[75vh]"
+                                    className="mb-12 py-4 lg:mb-0 lg:h-[75vh]"
                                     key={company.name + "_mobile_description"}
                                     id="experience-description"
                                 >

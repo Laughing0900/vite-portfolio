@@ -16,7 +16,13 @@ const useBreakpoint = () => {
         return breakpoint === "md" || breakpoint === "sm";
     }, [breakpoint]);
 
-    return { isMobile, breakpoint };
+    const isTablet = useMemo(() => {
+        return (
+            breakpoint === "md" || breakpoint === "sm" || breakpoint === "lg"
+        );
+    }, [breakpoint]);
+
+    return { isTablet, isMobile, breakpoint };
 };
 
 export default useBreakpoint;
