@@ -1,6 +1,6 @@
 ## Project Name & Pitch
 
-Laughing's portfolio
+Site: https://laughing0900.github.io/vite-portfolio/
 
 This is laughing's project portfolio. 
 
