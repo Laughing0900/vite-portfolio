@@ -114,6 +114,7 @@ const config = {
                 third: "moveInCircle 40s linear infinite",
                 fourth: "moveHorizontal 40s ease infinite",
                 fifth: "moveInCircle 20s ease infinite",
+                orbit: "orbit calc(var(--duration)*1s) linear infinite",
             },
             keyframes: {
                 "accordion-down": {
@@ -155,6 +156,16 @@ const config = {
                     },
                     "100%": {
                         transform: "translateY(-50%)",
+                    },
+                },
+                orbit: {
+                    "0%": {
+                        transform:
+                            "rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)",
+                    },
+                    "100%": {
+                        transform:
+                            "rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)",
                     },
                 },
             },

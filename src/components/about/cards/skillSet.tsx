@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
 import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
 import Image from "@/components/ui/image";
-import useBreakpoint from "@/hooks/useBreakpoint";
+import OrbitingCircles from "@/components/ui/orbitingCircles";
 
 const items = [
     "1nextjs.svg",
@@ -20,67 +19,60 @@ const items = [
     "openzeppelin.svg",
     "react.svg",
     "Notion.svg",
-    "Scss.svg",
     "Scrum.svg",
-    "theGraph.svg",
     "1typescript.svg",
     "Vercel.svg",
     "vite.svg",
+    "reactQuery.svg",
+    "jest.svg",
+    "mongodb.svg",
+    "postgresql.svg",
+    "prisma.svg",
 ];
 
 const SkillSetCard = () => {
-    const { isMobile } = useBreakpoint();
-
-    const variants = useMemo(() => {
-        if (!isMobile)
-            return {
-                initial: {
-                    filter: "grayscale(0.8)",
-                    y: 0,
-                },
-
-                animate: (i: number) => {
-                    const delay = (i % 6) * 0.05;
-                    return {
-                        filter: "grayscale(0.2)",
-                        y: i % 2 === 0 ? -20 : 20,
-                        transition: {
-                            y: {
-                                delay,
-                                type: "spring",
-                                duration: 0.8,
-                                bounce: 0,
-                            },
-                            duration: 0.3,
-                        },
-                    };
-                },
-            };
-
-        return {
-            initial: {},
-            animate: {},
-        };
-    }, [isMobile]);
+    const renderInnerIcons = useMemo(() => {
+        return items.slice(0, 6).map((item, i) => (
+            <OrbitingCircles
+                className="size-[30px] border-none bg-transparent"
+                duration={60}
+                delay={10 * i}
+                radius={80}
+                key={`skill_${i}`}
+            >
+                <Image
+                    className="aspect-square w-full drop-shadow-[2px_4px_1px_rgba(255,255,255,0.5)]"
+                    src={`images/skills/${item}`}
+                    alt={item}
+                />
+            </OrbitingCircles>
+        ));
+    }, []);
+    const renderOuterIcons = useMemo(() => {
+        return items.slice(6, 24).map((item, i) => (
+            <OrbitingCircles
+                className="size-[30px] border-none bg-transparent"
+                radius={160}
+                duration={380}
+                delay={20 * i}
+                reverse
+            >
+                <Image
+                    className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
+                    src={`images/skills/${item}`}
+                    alt={item}
+                />
+            </OrbitingCircles>
+        ));
+    }, []);
 
     return (
         <CardContainer>
             <div className="mb-2 h-full overflow-clip rounded-s p-2">
-                <div className="grid h-full w-full -rotate-12 transform grid-cols-6 place-items-center gap-0.5">
-                    {items.map((item, i) => (
-                        <motion.div
-                            className="flex aspect-square w-full items-center rounded-xl border border-gray-300/20 bg-gray-700/30 p-2 drop-shadow"
-                            key={"skill_" + i}
-                            variants={variants}
-                            custom={i}
-                        >
-                            <Image
-                                className="drop-shadow"
-                                src={`images/skills/${item}`}
-                                alt={item}
-                            />
-                        </motion.div>
-                    ))}
+                <div className="relative flex h-[500px] w-full -translate-y-[10%] flex-col items-center justify-center">
+                    {/* Inner Circles */}
+                    {renderInnerIcons}
+                    {renderOuterIcons}
                 </div>
             </div>
         </CardContainer>
