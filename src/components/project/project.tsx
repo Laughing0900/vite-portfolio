@@ -47,16 +47,13 @@ const Project = () => {
                     {isLoading
                         ? new Array(3)
                               .fill(0)
-                              .map((_, i) => (
+                              .map((i) => (
                                   <ProjectCard.Skeleton
-                                      key={"pj_skeleton_" + i}
+                                      name={"pj_skeleton_" + i}
                                   />
                               ))
                         : projects.map((project) => (
-                              <ProjectCard.Card
-                                  {...project}
-                                  key={project.name + project.company}
-                              />
+                              <ProjectCard.Card {...project} />
                           ))}
                 </motion.div>
             </div>

@@ -33,12 +33,12 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         },
         ref
     ) => {
-        const mousex = useMotionValue(Infinity);
+        const mouseX = useMotionValue(Infinity);
 
         const renderChildren = () => {
             return React.Children.map(children, (child: any) => {
                 return React.cloneElement(child, {
-                    mouseX: mousex,
+                    mouseX: mouseX,
                     magnification: magnification,
                     distance: distance,
                 });
@@ -48,8 +48,8 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         return (
             <motion.div
                 ref={ref}
-                onMouseMove={(e) => mousex.set(e.pageX)}
-                onMouseLeave={() => mousex.set(Infinity)}
+                onMouseMove={(e) => mouseX.set(e.pageX)}
+                onMouseLeave={() => mouseX.set(Infinity)}
                 {...props}
                 className={cn(dockVariants({ className }), {
                     "items-start": direction === "top",
