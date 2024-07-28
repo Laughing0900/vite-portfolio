@@ -24,20 +24,22 @@ const items = [
     "Vercel.svg",
     "vite.svg",
     "reactQuery.svg",
-    "jest.svg",
-    "mongodb.svg",
-    "postgresql.svg",
-    "prisma.svg",
+    "Jest.svg",
+    "mongoDB.svg",
+    "PostgreSQL.svg",
+    "Prisma.svg",
 ];
 
 const SkillSetCard = () => {
     const renderInnerIcons = useMemo(() => {
-        return items.slice(0, 6).map((item, i) => (
+        const icons = items.slice(0, 4);
+        const delay = 5;
+        return icons.map((item, i) => (
             <OrbitingCircles
                 className="size-[30px] border-none bg-transparent"
-                duration={60}
-                delay={10 * i}
                 radius={80}
+                duration={icons.length * delay}
+                delay={delay * i}
                 key={`skill_${i}`}
             >
                 <Image
@@ -48,14 +50,35 @@ const SkillSetCard = () => {
             </OrbitingCircles>
         ));
     }, []);
-    const renderOuterIcons = useMemo(() => {
-        return items.slice(6, 24).map((item, i) => (
+    const renderCenterIcons = useMemo(() => {
+        const icons = items.slice(4, 12);
+        const delay = 4;
+        return icons.map((item, i) => (
             <OrbitingCircles
                 className="size-[30px] border-none bg-transparent"
-                radius={160}
-                duration={380}
-                delay={20 * i}
+                radius={140}
+                duration={icons.length * delay}
+                delay={delay * i}
                 reverse
+            >
+                <Image
+                    className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
+                    src={`images/skills/${item}`}
+                    alt={item}
+                />
+            </OrbitingCircles>
+        ));
+    }, []);
+
+    const renderOuterIcons = useMemo(() => {
+        const icons = items.slice(12, 24);
+        const delay = 5;
+        return icons.map((item, i) => (
+            <OrbitingCircles
+                className="size-[30px] border-none bg-transparent"
+                radius={200}
+                duration={icons.length * delay}
+                delay={delay * i}
             >
                 <Image
                     className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
@@ -72,6 +95,7 @@ const SkillSetCard = () => {
                 <div className="relative flex h-[500px] w-full -translate-y-[10%] flex-col items-center justify-center">
                     {/* Inner Circles */}
                     {renderInnerIcons}
+                    {renderCenterIcons}
                     {renderOuterIcons}
                 </div>
             </div>
