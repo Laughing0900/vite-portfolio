@@ -1,7 +1,7 @@
 import ChartCard from "@/components/about/cards/chart";
+import DirectoryCard from "@/components/about/cards/directory";
 import PerformanceCard from "@/components/about/cards/performance";
 import SkillSetCard from "@/components/about/cards/skillSet";
-import StatusCard from "@/components/about/cards/status";
 import TimeLineCard from "@/components/about/cards/timeLine";
 
 const items = [
@@ -16,13 +16,13 @@ const items = [
         className: "lg:col-span-2 col-span-3",
     },
     {
-        title: "Stability",
+        title: "Structure",
         description: (
             <span className="text-sm">
-                Achieve unmatched reliability with robust system stability.
+                Built with a clear and organized structure.
             </span>
         ),
-        header: <StatusCard />,
+        header: <DirectoryCard />,
         className: "lg:col-span-2 col-span-3",
     },
     {
