@@ -23,7 +23,7 @@
         --secondary: #b9dad9;
         --secondary-foreground: #1c1c1e;
 
-        --muted: #f4f4f9;
+        --muted: #f4f4f950;
         --muted-foreground: #db1a9f;
 
         --accent: #f4f4f950;
@@ -32,7 +32,7 @@
         --destructive: #003f4e;
         --destructive-foreground: #d4f9fc;
 
-        --border: #f4f4f9;
+        --border: #f4f4f95b;
         --input: #f4f4f9;
         --ring: transparent;
 
