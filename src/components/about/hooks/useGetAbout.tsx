@@ -13,7 +13,7 @@ const items = [
             </span>
         ),
         header: <PerformanceCard />,
-        className: "lg:col-span-2 md:col-span-3",
+        className: "lg:col-span-2 col-span-3",
     },
     {
         title: "Stability",
@@ -23,7 +23,7 @@ const items = [
             </span>
         ),
         header: <StatusCard />,
-        className: "lg:col-span-2 md:col-span-3",
+        className: "lg:col-span-2 col-span-3",
     },
     {
         title: "Productivity",
@@ -33,7 +33,7 @@ const items = [
             </span>
         ),
         header: <ChartCard />,
-        className: "lg:col-span-2 md:col-span-3",
+        className: "lg:col-span-2 col-span-3",
     },
     {
         title: "Schedule",
@@ -43,7 +43,7 @@ const items = [
             </span>
         ),
         header: <TimeLineCard />,
-        className: "lg:col-span-3 md:col-span-3",
+        className: "lg:col-span-3 col-span-3",
     },
     {
         title: "Versatile",
@@ -53,7 +53,7 @@ const items = [
             </span>
         ),
         header: <SkillSetCard />,
-        className: "lg:col-span-3 md:col-span-6 sm:col-span-3",
+        className: "lg:col-span-3 md:col-span-6 col-span-3",
     },
 ];
 
