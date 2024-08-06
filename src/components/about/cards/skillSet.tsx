@@ -5,7 +5,7 @@ import Image from "@/components/ui/image";
 import OrbitingCircles from "@/components/ui/orbitingCircles";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
-const items = [
+const SKILL_ITEMS = [
     "1nextjs.svg",
     "1Solidity.svg",
     "1tailwind.svg",
@@ -32,29 +32,50 @@ const items = [
     "prisma.svg",
 ];
 
+// Constants for better readability and maintainability
+const INNER_ICONS_COUNT = 4;
+const CENTER_ICONS_COUNT = 8;
+const INNER_RADIUS = 80;
+const CENTER_RADIUS = 140;
+const OUTER_RADIUS = 200;
+
 const SkillSetCard = () => {
     const { isMobile } = useBreakpoint();
-    const variants = useMemo(() => {
-        if (!isMobile)
-            return {
-                initial: {
-                    filter: "grayscale(70%)",
-                },
 
-                animate: {
-                    filter: "grayscale(0%)",
-                },
-            };
-        const cleanAnim = {
-            initial: {},
-            animate: {},
-        };
+    const variants = useMemo(
+        () => ({
+            initial: isMobile ? {} : { filter: "grayscale(70%)" },
+            animate: isMobile ? {} : { filter: "grayscale(0%)" },
+        }),
+        [isMobile]
+    );
 
-        return {
-            ...cleanAnim,
-        };
-    }, [isMobile]);
+    const renderIcons = useMemo(() => {
+        const renderIconGroup = (
+            start: number,
+            end: number,
+            radius: number,
+            delay: number,
+            reverse = false
+        ) =>
+            SKILL_ITEMS.slice(start, end).map((item, i) => (
+                <OrbitingCircles
+                    key={`skill_${item}`}
+                    className="size-[30px] border-none bg-transparent"
+                    radius={radius}
+                    duration={(end - start) * delay}
+                    delay={delay * i}
+                    reverse={reverse}
+                >
+                    <Image
+                        className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
+                        src={`images/skills/${item}`}
+                        alt={item}
+                    />
+                </OrbitingCircles>
+            ));
 
+<<<<<<< Updated upstream
     const renderInnerIcons = useMemo(() => {
         return items.slice(0, 6).map((item, i) => (
             <OrbitingCircles
@@ -88,6 +109,26 @@ const SkillSetCard = () => {
                 />
             </OrbitingCircles>
         ));
+=======
+        return (
+            <>
+                {renderIconGroup(0, INNER_ICONS_COUNT, INNER_RADIUS, 5)}
+                {renderIconGroup(
+                    INNER_ICONS_COUNT,
+                    INNER_ICONS_COUNT + CENTER_ICONS_COUNT,
+                    CENTER_RADIUS,
+                    4,
+                    true
+                )}
+                {renderIconGroup(
+                    INNER_ICONS_COUNT + CENTER_ICONS_COUNT,
+                    SKILL_ITEMS.length,
+                    OUTER_RADIUS,
+                    5
+                )}
+            </>
+        );
+>>>>>>> Stashed changes
     }, []);
 
     return (
@@ -96,13 +137,20 @@ const SkillSetCard = () => {
                 <motion.div
                     className="relative flex h-[500px] w-full -translate-y-[10%] flex-col items-center justify-center"
                     variants={variants}
+                    initial="initial"
+                    animate="animate"
                 >
+<<<<<<< Updated upstream
                     {/* Inner Circles */}
                     {renderInnerIcons}
                     {renderOuterIcons}
+=======
+                    {renderIcons}
+>>>>>>> Stashed changes
                 </motion.div>
             </div>
         </CardContainer>
     );
 };
+
 export default SkillSetCard;

@@ -1,7 +1,34 @@
 import CardContainer from "@/components/about/cards/cardContainer";
 import { File, Folder, Tree } from "@/components/ui/file-tree";
 
+type TreeElement = {
+    id: string;
+    name: string;
+    children?: TreeElement[];
+};
+
 const DirectoryCard = () => {
+    const renderFolderList = (elements: TreeElement[]) => {
+        return elements.map((element) => {
+            if (element.children) {
+                return (
+                    <Folder
+                        key={element.id}
+                        element={element.name}
+                        value={element.id}
+                    >
+                        {renderFolderList(element.children)}
+                    </Folder>
+                );
+            } else {
+                return (
+                    <File key={element.id} value={element.id}>
+                        <p>{element.name}</p>
+                    </File>
+                );
+            }
+        });
+    };
     return (
         <CardContainer>
             <div className="h-full w-full overflow-hidden">
@@ -11,85 +38,7 @@ const DirectoryCard = () => {
                     initialExpandedItems={["1", "2", "7", "8", "14", "22"]}
                     elements={ELEMENTS}
                 >
-                    <Folder element="src" value="1">
-                        <Folder value="2" element="public">
-                            <Folder value="3" element="fonts">
-                                <File value="4">
-                                    <p>Cyborg.ttf</p>
-                                </File>
-                            </Folder>
-                            <Folder value="5" element="images">
-                                <File value="6">
-                                    <p>icon.svg</p>
-                                </File>
-                            </Folder>
-                        </Folder>
-
-                        <Folder value="7" element="components">
-                            <Folder value="8" element="about">
-                                <File value="9">
-                                    <p>index.tsx</p>
-                                </File>
-                            </Folder>
-                            <Folder value="10" element="certificate">
-                                <File value="11">
-                                    <p>index.tsx</p>
-                                </File>
-                            </Folder>
-                            <Folder value="12" element="experience">
-                                <File value="13">
-                                    <p>index.tsx</p>
-                                </File>
-                            </Folder>
-                            <Folder value="14" element="layout">
-                                <File value="15">
-                                    <p>header.tsx</p>
-                                </File>
-                                <File value="16">
-                                    <p>footer.tsx</p>
-                                </File>
-                            </Folder>
-                            <Folder value="17" element="project">
-                                <File value="18">
-                                    <p>index.tsx</p>
-                                </File>
-                                <File value="19">
-                                    <p>projectCard.tsx</p>
-                                </File>
-                            </Folder>
-                            <Folder value="20" element="ui">
-                                <File value="21">
-                                    <p>button.tsx</p>
-                                </File>
-                            </Folder>
-                        </Folder>
-                        <Folder value="22" element="lib">
-                            <File value="23">
-                                <p>utils.ts</p>
-                            </File>
-                            <File value="24">
-                                <p>display.ts</p>
-                            </File>
-                        </Folder>
-                        <File value="25">
-                            <p>App.ts</p>
-                        </File>
-                        <File value="26">
-                            <p>index.ts</p>
-                        </File>
-                    </Folder>
-                    <File value="27">
-                        <p>package.json</p>
-                    </File>
-                    <File value="28">
-                        <p>tsconfig.json</p>
-                    </File>
-                    <File value="29">
-                        <p>tailwind.config.ts</p>
-                    </File>
-                    <File value="30">
-                        <p>.eslintrc.cjs</p>
-                    </File>
+                    {renderFolderList(ELEMENTS)}
                 </Tree>
             </div>
         </CardContainer>
@@ -97,73 +46,150 @@ const DirectoryCard = () => {
 };
 export default DirectoryCard;
 
-const ELEMENTS = [
+const ELEMENTS: TreeElement[] = [
     {
         id: "1",
-        isSelectable: true,
         name: "src",
         children: [
             {
                 id: "2",
-                isSelectable: true,
-                name: "app",
+                name: "public",
                 children: [
                     {
                         id: "3",
-                        isSelectable: true,
-                        name: "layout.tsx",
+                        name: "fonts",
+                        children: [
+                            {
+                                id: "4",
+                                name: "Cyborg.ttf",
+                            },
+                        ],
                     },
                     {
-                        id: "4",
-                        isSelectable: true,
-                        name: "page.tsx",
+                        id: "5",
+                        name: "images",
+                        children: [
+                            {
+                                id: "6",
+                                name: "icon.svg",
+                            },
+                        ],
                     },
                 ],
             },
             {
-                id: "5",
-                isSelectable: true,
+                id: "7",
                 name: "components",
                 children: [
                     {
-                        id: "6",
-                        isSelectable: true,
-                        name: "header.tsx",
+                        id: "8",
+                        name: "about",
+                        children: [
+                            {
+                                id: "9",
+                                name: "about.tsx",
+                            },
+                        ],
                     },
                     {
-                        id: "7",
-                        isSelectable: true,
-                        name: "footer.tsx",
-                    },
-                ],
-            },
-            {
-                id: "8",
-                isSelectable: true,
-                name: "lib",
-                children: [
-                    {
-                        id: "9",
-                        isSelectable: true,
-                        name: "utils.ts",
+                        id: "10",
+                        name: "certificate",
+                        children: [
+                            {
+                                id: "11",
+                                name: "certificate.tsx",
+                            },
+                        ],
                     },
                     {
                         id: "12",
-                        isSelectable: true,
+                        name: "experience",
+                        children: [
+                            {
+                                id: "13",
+                                name: "experiences.tsx",
+                            },
+                        ],
+                    },
+                    {
+                        id: "14",
+                        name: "layout",
+                        children: [
+                            {
+                                id: "15",
+                                name: "header.tsx",
+                            },
+                            {
+                                id: "16",
+                                name: "footer.tsx",
+                            },
+                        ],
+                    },
+                    {
+                        id: "17",
+                        name: "project",
+                        children: [
+                            {
+                                id: "18",
+                                name: "project.tsx",
+                            },
+                            {
+                                id: "19",
+                                name: "projectCard.tsx",
+                            },
+                        ],
+                    },
+                    {
+                        id: "20",
+                        name: "ui",
+                        children: [
+                            {
+                                id: "21",
+                                name: "button.tsx",
+                            },
+                        ],
+                    },
+                ],
+            },
+
+            {
+                id: "22",
+                name: "lib",
+                children: [
+                    {
+                        id: "23",
+                        name: "utils.ts",
+                    },
+                    {
+                        id: "24",
                         name: "display.ts",
                     },
                 ],
             },
             {
-                id: "13",
-                isSelectable: true,
+                id: "25",
                 name: "App.ts",
             },
             {
-                id: "14",
-                isSelectable: true,
+                id: "26",
                 name: "index.ts",
             },
         ],
+    },
+    {
+        id: "27",
+        name: "package.json",
+    },
+    {
+        id: "28",
+        name: "tsconfig.json",
+    },
+    {
+        id: "29",
+        name: "tailwind.config.ts",
+    },
+    {
+        id: "30",
+        name: ".eslintrc.cjs",
     },
 ];

@@ -356,28 +356,31 @@ const CollapseButton = forwardRef<
         elements: TreeViewElement[];
         expandAll?: boolean;
     } & React.HTMLAttributes<HTMLButtonElement>
->(({ className, elements, expandAll = false, children, ...props }, ref) => {
+>(({ elements, expandAll = false, children, ...props }, ref) => {
     const { expandedItems, setExpandedItems } = useTree();
 
-    const expendAllTree = useCallback((elements: TreeViewElement[]) => {
-        const expandTree = (element: TreeViewElement) => {
-            const isSelectable = element.isSelectable ?? true;
-            if (
-                isSelectable &&
-                element.children &&
-                element.children.length > 0
-            ) {
-                setExpandedItems?.((prev) => [...(prev ?? []), element.id]);
-                element.children.forEach(expandTree);
-            }
-        };
+    const expendAllTree = useCallback(
+        (elements: TreeViewElement[]) => {
+            const expandTree = (element: TreeViewElement) => {
+                const isSelectable = element.isSelectable ?? true;
+                if (
+                    isSelectable &&
+                    element.children &&
+                    element.children.length > 0
+                ) {
+                    setExpandedItems?.((prev) => [...(prev ?? []), element.id]);
+                    element.children.forEach(expandTree);
+                }
+            };
 
-        elements.forEach(expandTree);
-    }, []);
+            elements.forEach(expandTree);
+        },
+        [setExpandedItems]
+    );
 
     const closeAll = useCallback(() => {
         setExpandedItems?.([]);
-    }, []);
+    }, [setExpandedItems]);
 
     useEffect(() => {
         if (expandAll) {
