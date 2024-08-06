@@ -75,41 +75,6 @@ const SkillSetCard = () => {
                 </OrbitingCircles>
             ));
 
-<<<<<<< Updated upstream
-    const renderInnerIcons = useMemo(() => {
-        return items.slice(0, 6).map((item, i) => (
-            <OrbitingCircles
-                className="size-[30px] border-none bg-transparent"
-                duration={60}
-                delay={10 * i}
-                radius={80}
-                key={`skill_${i}`}
-            >
-                <Image
-                    className="aspect-square w-full drop-shadow-[2px_4px_1px_rgba(255,255,255,0.5)]"
-                    src={`images/skills/${item}`}
-                    alt={item}
-                />
-            </OrbitingCircles>
-        ));
-    }, []);
-    const renderOuterIcons = useMemo(() => {
-        return items.slice(6, 24).map((item, i) => (
-            <OrbitingCircles
-                className="size-[30px] border-none bg-transparent"
-                radius={160}
-                duration={380}
-                delay={20 * i}
-                reverse
-            >
-                <Image
-                    className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
-                    src={`images/skills/${item}`}
-                    alt={item}
-                />
-            </OrbitingCircles>
-        ));
-=======
         return (
             <>
                 {renderIconGroup(0, INNER_ICONS_COUNT, INNER_RADIUS, 5)}
@@ -128,7 +93,6 @@ const SkillSetCard = () => {
                 )}
             </>
         );
->>>>>>> Stashed changes
     }, []);
 
     return (
@@ -140,13 +104,7 @@ const SkillSetCard = () => {
                     initial="initial"
                     animate="animate"
                 >
-<<<<<<< Updated upstream
-                    {/* Inner Circles */}
-                    {renderInnerIcons}
-                    {renderOuterIcons}
-=======
                     {renderIcons}
->>>>>>> Stashed changes
                 </motion.div>
             </div>
         </CardContainer>
