@@ -26,10 +26,10 @@ const SKILL_ITEMS = [
     "Vercel.svg",
     "vite.svg",
     "reactQuery.svg",
-    "jest.svg",
-    "mongodb.svg",
-    "postgresql.svg",
-    "prisma.svg",
+    "Jest.svg",
+    "mongoDB.svg",
+    "PostgreSQL.svg",
+    "Prisma.svg",
 ];
 
 const INNER_ICONS_COUNT = 6;
