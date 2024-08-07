@@ -32,9 +32,9 @@ const SKILL_ITEMS = [
     "prisma.svg",
 ];
 
-// Constants for better readability and maintainability
-const INNER_ICONS_COUNT = 4;
+const INNER_ICONS_COUNT = 6;
 const CENTER_ICONS_COUNT = 8;
+
 const INNER_RADIUS = 80;
 const CENTER_RADIUS = 140;
 const OUTER_RADIUS = 200;
