@@ -95,25 +95,6 @@ const SkillSetCard = () => {
         );
     }, []);
 
-    const renderOuterIcons = useMemo(() => {
-        const icons = items.slice(12, 24);
-        const delay = 5;
-        return icons.map((item, i) => (
-            <OrbitingCircles
-                className="size-[30px] border-none bg-transparent"
-                radius={200}
-                duration={icons.length * delay}
-                delay={delay * i}
-            >
-                <Image
-                    className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
-                    src={`images/skills/${item}`}
-                    alt={item}
-                />
-            </OrbitingCircles>
-        ));
-    }, []);
-
     return (
         <CardContainer>
             <div className="mb-2 h-full overflow-clip rounded-s p-2">
