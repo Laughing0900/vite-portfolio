@@ -4,7 +4,7 @@ import type { FC } from "react";
 
 const WithFooter: FC = () => {
     return (
-        <footer className="fixed bottom-0 left-0 right-0 top-auto h-screen bg-black px-4 py-40 text-white md:p-20">
+        <footer className="sticky left-0 right-0 top-0 h-screen bg-black px-4 py-40 text-white md:p-20">
             <div className="flex flex-col items-start gap-2 text-lg">
                 <Button variant="link" size="fit" asChild>
                     <Link
@@ -47,7 +47,7 @@ const WithFooter: FC = () => {
             <span className="absolute bottom-0 left-0 px-4 py-4 md:hidden">
                 @2024
             </span>
-            <span className="name-horizontal font-cyborg text-nowrap text-6xl text-gray-100 md:hidden">
+            <span className="name-horizontal text-nowrap font-cyborg text-6xl text-gray-100 md:hidden">
                 Laughing Cheng
             </span>
         </footer>
