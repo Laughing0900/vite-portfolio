@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { useProjects } from "@/components/project/hooks/useProjects";
 import { ProjectCard } from "@/components/project/projectCard";
+import ProjectCardSkeleton from "@/components/project/skeletons/projectCardSkeleton";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Project = () => {
@@ -48,12 +49,12 @@ const Project = () => {
                         ? new Array(3)
                               .fill(0)
                               .map((i) => (
-                                  <ProjectCard.Skeleton
+                                  <ProjectCardSkeleton
                                       name={"pj_skeleton_" + i}
                                   />
                               ))
                         : projects.map((project) => (
-                              <ProjectCard.Card {...project} />
+                              <ProjectCard {...project} />
                           ))}
                 </motion.div>
             </div>
