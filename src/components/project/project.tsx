@@ -5,6 +5,8 @@ import { ProjectCard } from "@/components/project/projectCard";
 import ProjectCardSkeleton from "@/components/project/skeletons/projectCardSkeleton";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
+const skeletons = new Array(3).fill(0);
+
 const Project = () => {
     const { breakpoint } = useBreakpoint();
     const { projects, isLoading } = useProjects();
@@ -46,13 +48,9 @@ const Project = () => {
                 </div>
                 <motion.div className="flex gap-20 pl-4 md:pl-40" style={{ x }}>
                     {isLoading
-                        ? new Array(3)
-                              .fill(0)
-                              .map((i) => (
-                                  <ProjectCardSkeleton
-                                      name={"pj_skeleton_" + i}
-                                  />
-                              ))
+                        ? skeletons.map((_, i) => (
+                              <ProjectCardSkeleton name={"pj_skeleton_" + i} />
+                          ))
                         : projects.map((project) => (
                               <ProjectCard {...project} />
                           ))}
