@@ -9,10 +9,16 @@ import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import Link from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 const DATA = {
-    contact: {
+    content: {
         project: {
             name: "Projects",
             url: "#project",
@@ -33,7 +39,7 @@ const DATA = {
         {
             href: "mailto:laughing0900@gmail.com",
             icon: Send,
-            label: "Contact me",
+            label: "Contact Me",
         },
         { href: "#", icon: HomeIcon, label: "Home" },
     ],
@@ -42,41 +48,57 @@ const DATA = {
 const WithNav = () => {
     return (
         <div className="fixed bottom-5 left-0 z-50 w-full">
-            <Dock direction="middle">
-                {Object.entries(DATA.contact).map(([name, contact]) => (
-                    <DockIcon key={name}>
-                        <Link
-                            href={contact.url}
-                            className={cn(
-                                buttonVariants({
-                                    variant: "ghost",
-                                    size: "icon",
-                                }),
-                                "size-12 rounded-full"
-                            )}
-                        >
-                            <contact.icon className="size-4" />
-                        </Link>
-                    </DockIcon>
-                ))}
-                <Separator orientation="vertical" className="h-full" />
-                {DATA.navbar.map((item) => (
-                    <DockIcon key={item.label}>
-                        <Link
-                            href={item.href}
-                            className={cn(
-                                buttonVariants({
-                                    variant: "ghost",
-                                    size: "icon",
-                                }),
-                                "size-12 rounded-full"
-                            )}
-                        >
-                            <item.icon className="size-4" />
-                        </Link>
-                    </DockIcon>
-                ))}
-            </Dock>
+            <TooltipProvider>
+                <Dock direction="middle">
+                    {Object.entries(DATA.content).map(([name, content]) => (
+                        <DockIcon key={name}>
+                            <Tooltip delayDuration={200}>
+                                <TooltipTrigger>
+                                    <Link
+                                        href={content.url}
+                                        className={cn(
+                                            buttonVariants({
+                                                variant: "ghost",
+                                                size: "icon",
+                                            }),
+                                            "size-12 rounded-full"
+                                        )}
+                                    >
+                                        <content.icon className="size-4" />
+                                    </Link>
+                                </TooltipTrigger>
+                                <TooltipContent sticky="always">
+                                    <p>{content.name}</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </DockIcon>
+                    ))}
+                    <Separator orientation="vertical" className="h-full" />
+                    {DATA.navbar.map((item) => (
+                        <DockIcon key={item.label}>
+                            <Tooltip delayDuration={0}>
+                                <TooltipTrigger>
+                                    <Link
+                                        href={item.href}
+                                        className={cn(
+                                            buttonVariants({
+                                                variant: "ghost",
+                                                size: "icon",
+                                            }),
+                                            "size-12 rounded-full"
+                                        )}
+                                    >
+                                        <item.icon className="size-4" />
+                                    </Link>
+                                </TooltipTrigger>
+                                <TooltipContent sticky="always">
+                                    <p>{item.label}</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </DockIcon>
+                    ))}
+                </Dock>
+            </TooltipProvider>
         </div>
     );
 };
