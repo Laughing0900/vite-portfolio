@@ -64,7 +64,7 @@ const ChartCard = () => {
                     viewBox="0 0 653 465"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-full w-4/5"
+                    className="h-full w-full"
                 >
                     <motion.path
                         // background
