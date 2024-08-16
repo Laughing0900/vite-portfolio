@@ -6,16 +6,7 @@ import { cn } from "@/lib/utils";
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
     const rows = new Array(60).fill(1);
     const cols = new Array(50).fill(1);
-    const colors = [
-        "#59163699",
-        "#A61C8199",
-        "#BF34A899",
-        "#0D437399",
-        "#1BA1BF99",
-    ];
-    const getRandomColor = () => {
-        return colors[Math.floor(Math.random() * colors.length)];
-    };
+    const colors = ["#1A1A1A99", "#E6E6E699"];
 
     return (
         <div className="sticky top-0 h-dvh w-full overflow-hidden" {...rest}>
@@ -36,7 +27,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                         {cols.map((_, j) => (
                             <motion.div
                                 whileHover={{
-                                    backgroundColor: `var(${getRandomColor()})`,
+                                    backgroundColor: `var(${colors[(i + j + 1) % 2]})`,
                                     transition: { duration: 0 },
                                 }}
                                 animate={{
@@ -44,6 +35,9 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                                 }}
                                 key={`col` + j}
                                 className="relative h-16 w-32 border-r border-t border-gray-700/40"
+                                // style={{
+                                //     backgroundColor: colors[(i + j) % 2],
+                                // }}
                             >
                                 {j % 2 === 0 && i % 2 === 0 ? (
                                     <svg
