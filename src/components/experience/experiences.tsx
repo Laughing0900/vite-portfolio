@@ -2,10 +2,11 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import RoleCard from "@/components/experience/roleCard";
+import TechSkill from "@/components/experience/techSkill";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
-    const { breakpoint, isTablet } = useBreakpoint();
+    const { isTablet } = useBreakpoint();
     const { companies } = useExperiences();
     const { filedCompanies, otherCompanies } = useMemo(() => {
         return {
@@ -132,11 +133,13 @@ const Experiences = () => {
                                 id="experience-description"
                             >
                                 {/* @mobile */}
-                                <RoleCard
-                                    name={company.name}
-                                    role={company.role}
-                                    duration={company.duration}
-                                />
+                                {isTablet && (
+                                    <RoleCard
+                                        name={company.name}
+                                        role={company.role}
+                                        duration={company.duration}
+                                    />
+                                )}
 
                                 {/* @default */}
                                 <div className="min-h-[70%] rounded-lg lg:flex lg:flex-col lg:justify-between lg:border-2 lg:border-foreground lg:bg-black/55 lg:p-8 lg:backdrop-blur-md">
@@ -153,12 +156,10 @@ const Experiences = () => {
                                     <div className="mt-5 flex flex-wrap gap-2">
                                         {company.techStack.map((tech) => {
                                             return (
-                                                <div
+                                                <TechSkill
                                                     key={company.name + tech}
-                                                    className="text-md rounded-full bg-gradient-to-tr from-[#A61C81] to-[#1BA1BF] px-3 py-1 font-light"
-                                                >
-                                                    {tech}
-                                                </div>
+                                                    tech={tech}
+                                                />
                                             );
                                         })}
                                     </div>
