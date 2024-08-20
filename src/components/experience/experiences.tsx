@@ -1,6 +1,7 @@
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
+import RoleCard from "@/components/experience/roleCard";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
@@ -61,21 +62,11 @@ const Experiences = () => {
                                                 selected === index ? 1 : 0.25,
                                         }}
                                     >
-                                        <p className="w-full text-right">
-                                            <span className="text-xl font-bold">
-                                                {company.role}{" "}
-                                            </span>
-                                        </p>
-
-                                        <p className="w-full text-right text-lg font-light">
-                                            {company.name}
-                                            {breakpoint === "lg" && (
-                                                <br className="hidden lg:block" />
-                                            )}
-                                            <span className="text-lg text-gray-300/50">
-                                                //{company.duration}
-                                            </span>
-                                        </p>
+                                        <RoleCard
+                                            name={company.name}
+                                            role={company.role}
+                                            duration={company.duration}
+                                        />
                                     </motion.div>
                                 );
                             })}
@@ -141,21 +132,12 @@ const Experiences = () => {
                                 id="experience-description"
                             >
                                 {/* @mobile */}
-                                <div className="mb-4 border-b-2 border-b-gray-500 py-2 lg:hidden">
-                                    <p>
-                                        <span className="text-2xl font-bold">
-                                            {company.role}{" "}
-                                        </span>
-                                    </p>
-                                    <p className="flex w-full justify-between">
-                                        <span className="text-lg font-light">
-                                            {company.name}
-                                        </span>
-                                        <span className="text-md text-gray-300/50">
-                                            //{company.duration}
-                                        </span>
-                                    </p>
-                                </div>
+                                <RoleCard
+                                    name={company.name}
+                                    role={company.role}
+                                    duration={company.duration}
+                                />
+
                                 {/* @default */}
                                 <div className="min-h-[70%] rounded-lg lg:flex lg:flex-col lg:justify-between lg:border-2 lg:border-foreground lg:bg-black/55 lg:p-8 lg:backdrop-blur-md">
                                     {company.description && (
@@ -192,24 +174,11 @@ const Experiences = () => {
                                     key={company.name + "_mobile_description"}
                                     id="experience-description"
                                 >
-                                    <div
-                                        className="mb-4 border-b-2 border-b-gray-500 py-2"
-                                        key={company.name}
-                                    >
-                                        <p>
-                                            <span className="text-2xl font-bold">
-                                                {company.role}{" "}
-                                            </span>
-                                        </p>
-                                        <p className="flex w-full justify-between">
-                                            <span className="text-lg font-light">
-                                                {company.name}
-                                            </span>
-                                            <span className="text-sm text-gray-300/50">
-                                                //{company.duration}
-                                            </span>
-                                        </p>
-                                    </div>
+                                    <RoleCard
+                                        name={company.name}
+                                        role={company.role}
+                                        duration={company.duration}
+                                    />
                                 </div>
                             );
                         })}
