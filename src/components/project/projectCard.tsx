@@ -1,7 +1,6 @@
-import { ArrowUpRight } from "lucide-react";
+import ProjectCardInfo from "@/components/project/projectCardInfo";
 import { ProjectCardProps } from "@/components/project/types/projectTypes";
 import Image from "@/components/ui/image";
-import Link from "@/components/ui/link";
 
 const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
     return (
@@ -17,20 +16,10 @@ const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
                     }}
                 />
             </div>
-            <div className="pointer-events-auto mt-10">
-                <Link
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group mt-4 flex w-full items-center justify-between"
-                >
-                    <p className="border-b-2 border-b-transparent text-2xl font-bold group-hover:border-b-gray-50">
-                        {name}
-                    </p>
-                    <ArrowUpRight className="inline-block h-8 w-8 group-hover:inline-block md:hidden" />
-                </Link>
-                <p className="mt-2 text-lg text-gray-100/50">:- {company}</p>
-            </div>
+
+            <ProjectCardInfo href={href} company={company} name={name} />
+
+            {/* Background icon */}
             <Image
                 className="absolute bottom-3 right-3 aspect-square w-12 opacity-10 drop-shadow md:w-20"
                 src={`images/pawn-white.svg`}
