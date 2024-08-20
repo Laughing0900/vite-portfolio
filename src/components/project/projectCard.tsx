@@ -5,10 +5,7 @@ import Link from "@/components/ui/link";
 
 const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
     return (
-        <div
-            className="relative h-fit w-[400px] rounded-lg border-2 border-foreground bg-black/5 p-10 backdrop-blur-sm sm:w-[600px] md:w-[800px]"
-            key={name + company}
-        >
+        <div className="relative h-fit w-[400px] rounded-lg border-2 border-foreground bg-black/5 p-10 backdrop-blur-sm sm:w-[600px] md:w-[800px]">
             <div className="aspect-video max-h-[50vh]">
                 <Image
                     src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
