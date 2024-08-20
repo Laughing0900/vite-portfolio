@@ -1,8 +1,8 @@
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
+import ExperienceCard from "@/components/experience/contentCard/experienceCard";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import RoleCard from "@/components/experience/roleCard";
-import TechSkill from "@/components/experience/techSkill";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
@@ -142,28 +142,7 @@ const Experiences = () => {
                                 )}
 
                                 {/* @default */}
-                                <div className="min-h-[70%] rounded-lg lg:flex lg:flex-col lg:justify-between lg:border-2 lg:border-foreground lg:bg-black/55 lg:p-8 lg:backdrop-blur-md">
-                                    {company.description && (
-                                        <ul
-                                            dangerouslySetInnerHTML={{
-                                                __html: company.description,
-                                            }}
-                                        >
-                                            {}
-                                        </ul>
-                                    )}
-
-                                    <div className="mt-5 flex flex-wrap gap-2">
-                                        {company.techStack.map((tech) => {
-                                            return (
-                                                <TechSkill
-                                                    key={company.name + tech}
-                                                    tech={tech}
-                                                />
-                                            );
-                                        })}
-                                    </div>
-                                </div>
+                                <ExperienceCard company={company} />
                             </div>
                         );
                     })}
