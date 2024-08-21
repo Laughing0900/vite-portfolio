@@ -15,7 +15,7 @@ const ExperiencesScrollBar = ({ selected }: ExperiencesScrollBarProps) => {
     }, [companies]);
     return (
         <div
-            className="absolute right-0 top-40 hidden w-1 flex-col gap-4 text-[88px] lg:flex"
+            className="absolute right-0 top-40 hidden w-1 flex-col gap-4 overflow-clip text-[88px] lg:flex"
             style={{
                 height: `${filedCompanies.length}em`,
             }}
