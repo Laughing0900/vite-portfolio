@@ -1,10 +1,13 @@
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
+import ExperienceCard from "@/components/experience/contentCard/experienceCard";
+import ExperiencesScrollBar from "@/components/experience/experiencesScrollBar";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
+import RoleCard from "@/components/experience/roleCard";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const Experiences = () => {
-    const { breakpoint, isTablet } = useBreakpoint();
+    const { isTablet } = useBreakpoint();
     const { companies } = useExperiences();
     const { filedCompanies, otherCompanies } = useMemo(() => {
         return {
@@ -61,72 +64,17 @@ const Experiences = () => {
                                                 selected === index ? 1 : 0.25,
                                         }}
                                     >
-                                        <p className="w-full text-right">
-                                            <span className="text-xl font-bold">
-                                                {company.role}{" "}
-                                            </span>
-                                        </p>
-
-                                        <p className="w-full text-right text-lg font-light">
-                                            {company.name}
-                                            {breakpoint === "lg" && (
-                                                <br className="hidden lg:block" />
-                                            )}
-                                            <span className="text-lg text-gray-300/50">
-                                                //{company.duration}
-                                            </span>
-                                        </p>
+                                        <RoleCard
+                                            name={company.name}
+                                            role={company.role}
+                                            duration={company.duration}
+                                        />
                                     </motion.div>
                                 );
                             })}
                         </div>
                         {/* @scroll bar */}
-                        <div
-                            className="absolute right-0 top-40 hidden w-1 flex-col gap-4 text-[88px] lg:flex"
-                            style={{
-                                height: `${filedCompanies.length}em`,
-                            }}
-                        >
-                            {filedCompanies.map((_, index) => {
-                                return (
-                                    <motion.div
-                                        key={"exp_bar_" + index}
-                                        className="relative w-full rounded-full bg-gray-700/50"
-                                        style={{
-                                            height: `calc(100% / ${filedCompanies.length})`,
-                                        }}
-                                        animate={{
-                                            transition: {
-                                                duration: 0.15,
-                                            },
-                                        }}
-                                    >
-                                        {selected === index && (
-                                            <motion.span
-                                                className="absolute inset-0 block h-full w-full rounded-full lg:bg-white"
-                                                layoutId="hoverBackground"
-                                                initial={{
-                                                    opacity: 0,
-                                                }}
-                                                animate={{
-                                                    opacity: 1,
-                                                    transition: {
-                                                        duration: 0.15,
-                                                    },
-                                                }}
-                                                exit={{
-                                                    opacity: 0,
-                                                    transition: {
-                                                        duration: 0.15,
-                                                    },
-                                                }}
-                                                key={"desktop_exp_bar" + index}
-                                            />
-                                        )}
-                                    </motion.div>
-                                );
-                            })}
-                        </div>
+                        <ExperiencesScrollBar selected={selected} />
                     </div>
                 )}
                 <div
@@ -141,46 +89,16 @@ const Experiences = () => {
                                 id="experience-description"
                             >
                                 {/* @mobile */}
-                                <div className="mb-4 border-b-2 border-b-gray-500 py-2 lg:hidden">
-                                    <p>
-                                        <span className="text-2xl font-bold">
-                                            {company.role}{" "}
-                                        </span>
-                                    </p>
-                                    <p className="flex w-full justify-between">
-                                        <span className="text-lg font-light">
-                                            {company.name}
-                                        </span>
-                                        <span className="text-md text-gray-300/50">
-                                            //{company.duration}
-                                        </span>
-                                    </p>
-                                </div>
-                                {/* @default */}
-                                <div className="min-h-[70%] rounded-lg lg:flex lg:flex-col lg:justify-between lg:border-2 lg:border-foreground lg:bg-black/55 lg:p-8 lg:backdrop-blur-md">
-                                    {company.description && (
-                                        <ul
-                                            dangerouslySetInnerHTML={{
-                                                __html: company.description,
-                                            }}
-                                        >
-                                            {}
-                                        </ul>
-                                    )}
+                                {isTablet && (
+                                    <RoleCard
+                                        name={company.name}
+                                        role={company.role}
+                                        duration={company.duration}
+                                    />
+                                )}
 
-                                    <div className="mt-5 flex flex-wrap gap-2">
-                                        {company.techStack.map((tech) => {
-                                            return (
-                                                <div
-                                                    key={company.name + tech}
-                                                    className="text-md rounded-full bg-gradient-to-tr from-[#A61C81] to-[#1BA1BF] px-3 py-1 font-light"
-                                                >
-                                                    {tech}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
+                                {/* @default */}
+                                <ExperienceCard company={company} />
                             </div>
                         );
                     })}
@@ -192,24 +110,11 @@ const Experiences = () => {
                                     key={company.name + "_mobile_description"}
                                     id="experience-description"
                                 >
-                                    <div
-                                        className="mb-4 border-b-2 border-b-gray-500 py-2"
-                                        key={company.name}
-                                    >
-                                        <p>
-                                            <span className="text-2xl font-bold">
-                                                {company.role}{" "}
-                                            </span>
-                                        </p>
-                                        <p className="flex w-full justify-between">
-                                            <span className="text-lg font-light">
-                                                {company.name}
-                                            </span>
-                                            <span className="text-sm text-gray-300/50">
-                                                //{company.duration}
-                                            </span>
-                                        </p>
-                                    </div>
+                                    <RoleCard
+                                        name={company.name}
+                                        role={company.role}
+                                        duration={company.duration}
+                                    />
                                 </div>
                             );
                         })}

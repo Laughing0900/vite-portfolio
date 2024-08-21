@@ -49,10 +49,13 @@ const Project = () => {
                 <motion.div className="flex gap-20 pl-4 md:pl-40" style={{ x }}>
                     {isLoading
                         ? skeletons.map((_, i) => (
-                              <ProjectCardSkeleton name={"pj_skeleton_" + i} />
+                              <ProjectCardSkeleton key={"pj_skeleton_" + i} />
                           ))
                         : projects.map((project) => (
-                              <ProjectCard {...project} />
+                              <ProjectCard
+                                  key={project.name + project.company}
+                                  {...project}
+                              />
                           ))}
                 </motion.div>
             </div>

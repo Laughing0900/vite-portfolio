@@ -1,9 +1,7 @@
-import { motion } from "framer-motion";
 import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
 import Image from "@/components/ui/image";
 import OrbitingCircles from "@/components/ui/orbitingCircles";
-import useBreakpoint from "@/hooks/useBreakpoint";
 
 const SKILL_ITEMS = [
     "1nextjs.svg",
@@ -40,16 +38,6 @@ const CENTER_RADIUS = 140;
 const OUTER_RADIUS = 200;
 
 const SkillSetCard = () => {
-    const { isMobile } = useBreakpoint();
-
-    const variants = useMemo(
-        () => ({
-            initial: isMobile ? {} : { filter: "grayscale(70%)" },
-            animate: isMobile ? {} : { filter: "grayscale(0%)" },
-        }),
-        [isMobile]
-    );
-
     const renderIcons = useMemo(() => {
         const renderIconGroup = (
             start: number,
@@ -97,15 +85,10 @@ const SkillSetCard = () => {
 
     return (
         <CardContainer>
-            <div className="mb-2 h-full overflow-clip rounded-s p-2">
-                <motion.div
-                    className="relative flex h-[500px] w-full -translate-y-[10%] flex-col items-center justify-center"
-                    variants={variants}
-                    initial="initial"
-                    animate="animate"
-                >
+            <div className="mb-2 h-full overflow-clip rounded-s p-2 lg:grayscale-[0.8] lg:hover:grayscale-0">
+                <div className="relative flex h-[500px] w-full -translate-y-[10%] flex-col items-center justify-center">
                     {renderIcons}
-                </motion.div>
+                </div>
             </div>
         </CardContainer>
     );
