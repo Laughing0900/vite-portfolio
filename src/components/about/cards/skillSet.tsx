@@ -23,17 +23,17 @@ const SKILL_ITEMS = [
     "1typescript.svg",
     "Vercel.svg",
     "vite.svg",
+    "Docker.svg",
     "reactQuery.svg",
     "Jest.svg",
     "mongoDB.svg",
     "PostgreSQL.svg",
     "Prisma.svg",
 ];
-
 const INNER_ICONS_COUNT = 6;
 const CENTER_ICONS_COUNT = 8;
-
-const INNER_RADIUS = 80;
+// [inner_count,center_count,skill.length]
+// n+ 60
 const CENTER_RADIUS = 140;
 const OUTER_RADIUS = 200;
 
