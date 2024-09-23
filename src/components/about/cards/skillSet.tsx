@@ -36,6 +36,7 @@ const CENTER_ICONS_COUNT = 8;
 // n+ 60
 const CENTER_RADIUS = 140;
 const OUTER_RADIUS = 200;
+const INNER_RADIUS = 80;
 
 const SkillSetCard = () => {
     const renderIcons = useMemo(() => {
