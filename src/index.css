@@ -39,14 +39,6 @@
         --radius: 10px;
 
         --debug: #bf34a8;
-
-        --first-color: 18, 113, 255;
-        --second-color: 221, 74, 255;
-        --third-color: 100, 220, 255;
-        --fourth-color: 200, 50, 50;
-        --fifth-color: 180, 180, 50;
-        --pointer-color: 140, 100, 255;
-        --size: 120%;
     }
 }
 
@@ -87,6 +79,14 @@ html {
     letter-spacing: 0.1em;
     line-height: 1.3;
     scroll-behavior: smooth;
+
+    --first-color: 18, 113, 255;
+    --second-color: 221, 74, 255;
+    --third-color: 100, 220, 255;
+    --fourth-color: 200, 50, 50;
+    --fifth-color: 180, 180, 50;
+    --pointer-color: 140, 100, 255;
+    --size: 120%;
 }
 
 h1,

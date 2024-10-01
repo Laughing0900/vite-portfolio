@@ -1,7 +1,6 @@
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import ExperienceCard from "@/components/experience/contentCard/experienceCard";
-import ExperiencesScrollBar from "@/components/experience/experiencesScrollBar";
 import { useExperiences } from "@/components/experience/hooks/useExperiences";
 import RoleCard from "@/components/experience/roleCard";
 import useBreakpoint from "@/hooks/useBreakpoint";
@@ -74,7 +73,7 @@ const Experiences = () => {
                             })}
                         </div>
                         {/* @scroll bar */}
-                        <ExperiencesScrollBar selected={selected} />
+                        {/* <ExperiencesScrollBar selected={selected} /> */}
                     </div>
                 )}
                 <div
