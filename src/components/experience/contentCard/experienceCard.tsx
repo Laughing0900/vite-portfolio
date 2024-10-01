@@ -36,7 +36,7 @@ const ExperienceCard = ({
 
     return (
         <motion.div
-            className="relative h-fit min-h-[40vh] origin-top rounded-lg lg:border-2 lg:border-foreground lg:bg-black/30 lg:p-8 lg:backdrop-blur-md"
+            className="relative h-fit min-h-[40vh] origin-top rounded-lg border-2 border-foreground bg-black/30 p-8 backdrop-blur-md"
             style={{
                 scale: isTablet ? 1 : scale,
                 top: isTablet ? 0 : `calc(${i * 40}px)`,

@@ -13,11 +13,9 @@ const ProjectCardInfo = ({
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-4 flex w-full items-center justify-between"
+                className="group mt-4 flex items-center border-b-2 border-b-transparent hover:border-b-gray-50"
             >
-                <p className="border-b-2 border-b-transparent text-2xl font-bold group-hover:border-b-gray-50">
-                    {name}
-                </p>
+                <p className="text-2xl font-bold">{name}</p>
                 <ArrowUpRight className="inline-block h-8 w-8 group-hover:inline-block md:hidden" />
             </Link>
             <p className="mt-2 text-lg text-gray-100/50">:- {company}</p>

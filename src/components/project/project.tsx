@@ -46,7 +46,10 @@ const Project = () => {
                         Project
                     </h3>
                 </div>
-                <motion.div className="flex gap-20 pl-4 md:pl-40" style={{ x }}>
+                <motion.div
+                    className="flex gap-8 pl-4 md:gap-20 md:pl-40"
+                    style={{ x }}
+                >
                     {isLoading
                         ? skeletons.map((_, i) => (
                               <ProjectCardSkeleton key={"pj_skeleton_" + i} />
