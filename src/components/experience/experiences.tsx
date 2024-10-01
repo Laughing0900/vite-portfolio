@@ -1,4 +1,4 @@
-import ExperienceDesktopView from "@/components/experience/ExperienceDesktopView";
+import ExperienceDesktopView from "@/components/experience/experienceDesktopView1";
 import ExperienceMobileView from "@/components/experience/experienceMobileView";
 import useBreakpoint from "@/hooks/useBreakpoint";
 

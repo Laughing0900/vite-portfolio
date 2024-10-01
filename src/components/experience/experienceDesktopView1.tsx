@@ -64,10 +64,7 @@ const ExperienceDesktopView = () => {
                         })}
                     </div>
                 </div>
-                <div
-                    className="col-span-4 col-start-5 pt-4 pt-40"
-                    ref={scrollRef}
-                >
+                <div className="col-span-4 col-start-5 pt-40" ref={scrollRef}>
                     {filedCompanies.map((company, i) => {
                         const targetScale =
                             1 - (filedCompanies.length - i) * 0.05;
