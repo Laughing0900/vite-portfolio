@@ -14,10 +14,10 @@ export default function ScrollableDescription() {
     const words = paragraph.split(" ");
 
     return (
-        <div className="grid-template mb-40">
+        <div className="grid-template mb-80">
             <p
                 ref={container}
-                className="col-span-4 flex flex-wrap text-2xl leading-[1.3] sm:text-4xl md:col-span-5"
+                className="col-span-4 flex flex-wrap text-3xl font-semibold leading-tight sm:text-5xl md:col-span-6 md:leading-tight"
             >
                 {words.map((word, i) => {
                     const start = i / words.length;
@@ -49,7 +49,7 @@ const Word = ({
     const amount = range[1] - range[0];
     const step = amount / (children as string).length;
     return (
-        <span className="relative mx-1">
+        <span className="relative mx-2">
             {(children as string).split("").map((char, i) => {
                 const start = range[0] + i * step;
                 const end = range[0] + (i + 1) * step;
