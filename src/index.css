@@ -39,13 +39,7 @@
         --radius: 10px;
 
         --debug: #bf34a8;
-        /*         
-        firstColor = "18, 113, 255",
-        secondColor = "221, 74, 255",
-        thirdColor = "100, 220, 255",
-        fourthColor = "200, 50, 50",
-        fifthColor = "180, 180, 50",
-        pointerColor = "140, 100, 255", */
+
         --first-color: 18, 113, 255;
         --second-color: 221, 74, 255;
         --third-color: 100, 220, 255;
