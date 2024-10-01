@@ -4,16 +4,13 @@ import Image from "@/components/ui/image";
 
 const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
     return (
-        <div className="relative h-fit w-[400px] rounded-lg border-2 border-foreground bg-black/5 p-10 backdrop-blur-sm sm:w-[600px] md:w-[800px]">
+        <div className="relative h-fit w-[400px] rounded-lg border-2 border-foreground bg-gray-700/25 p-10 backdrop-blur-xl sm:w-[600px] md:w-[800px]">
             <div className="aspect-video max-h-[50vh]">
                 <Image
                     src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
                     width="100%"
                     className="max-h-[60vh] rounded-md border-4 border-foreground object-cover"
                     alt="project image"
-                    style={{
-                        transform: `rotate(3deg)`,
-                    }}
                 />
             </div>
 

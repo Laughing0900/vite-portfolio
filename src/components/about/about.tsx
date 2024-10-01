@@ -10,7 +10,7 @@ const About = () => {
                 Who's Laughing
             </h3>
 
-            <BentoGrid className="md:auto-rows-[20rem]">
+            <BentoGrid>
                 {items.map((item, i) => (
                     <BentoGridItem
                         key={i}
