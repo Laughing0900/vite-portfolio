@@ -7,31 +7,58 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 
 const skeletons = new Array(3).fill(0);
 
+type Breakpoint = "sm" | "md" | "default";
+const CARD_WIDTHS: Record<Breakpoint, number> = {
+    sm: 600,
+    md: 600,
+    default: 800,
+};
+
 const Project = () => {
-    const { breakpoint } = useBreakpoint();
+    const { breakpoint, isMobile } = useBreakpoint();
     const { projects, isLoading } = useProjects();
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
     });
-    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-85%"]);
+
+    const cardWidth =
+        CARD_WIDTHS[breakpoint as Breakpoint] || CARD_WIDTHS.default;
+
+    const endPosition = useMemo(() => {
+        const totalWidth =
+            (isLoading ? skeletons.length : projects.length) *
+                (cardWidth + 80) -
+            80;
+        const viewportWidth =
+            typeof window !== "undefined" ? window.innerWidth : 0;
+
+        console.log({
+            leng: projects.length,
+            cardWidth,
+            viewportWidth,
+            totalWidth,
+        });
+
+        const fill = isMobile ? -cardWidth / 3 : cardWidth / 2;
+        return totalWidth - viewportWidth + fill;
+    }, [isLoading, projects.length, cardWidth, isMobile]);
+
+    console.log(endPosition);
+
+    const x = useTransform(
+        scrollYProgress,
+        [0, 1],
+        ["0px", `-${endPosition}px`]
+    );
+
     const containerHeight = useMemo(() => {
-        let cardWidth = 800;
-
-        if (breakpoint === "sm") {
-            cardWidth = 400;
-        }
-
-        if (breakpoint === "md") {
-            cardWidth = 600;
-        }
-
         if (isLoading) {
             return 3 * (cardWidth + 80) - 40;
         }
 
         return projects.length * (cardWidth + 80) - 40;
-    }, [breakpoint, projects, isLoading]);
+    }, [isLoading, projects.length, cardWidth]);
 
     return (
         <section

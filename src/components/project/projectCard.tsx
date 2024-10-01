@@ -12,7 +12,7 @@ const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
                 "sm:w-[600px] sm:p-10 md:w-[800px]"
             )}
         >
-            <div className="aspect-video max-h-[50vh]">
+            <div className="aspect-video md:max-h-[50vh]">
                 <Link
                     href={href}
                     target="_blank"
@@ -27,7 +27,7 @@ const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
                     <Image
                         src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
                         width="100%"
-                        className="object-cover"
+                        className="h-full w-full object-cover"
                         alt="project image"
                     />
                 </Link>

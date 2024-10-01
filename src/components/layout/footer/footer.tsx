@@ -37,17 +37,17 @@ const WithFooter: FC = () => {
                 </Button>
             </div>
             {/* @desktop */}
-            <div className="absolute bottom-0 left-0 hidden w-full items-end px-20 py-4 md:flex md:justify-between">
+            <div className="absolute bottom-0 left-0 hidden w-full items-end px-20 py-4 lg:flex lg:justify-between">
                 <span className="font-cyborg text-8xl leading-[1.5] text-gray-100">
                     Laughing Cheng
                 </span>
                 <span>@2024</span>
             </div>
             {/* @mobile */}
-            <span className="absolute bottom-0 left-0 px-4 py-4 md:hidden">
+            <span className="absolute bottom-0 left-0 px-4 py-4 lg:hidden">
                 @2024
             </span>
-            <span className="name-horizontal text-nowrap font-cyborg text-6xl text-gray-100 md:hidden">
+            <span className="name-horizontal text-nowrap font-cyborg text-6xl text-gray-100 lg:hidden">
                 Laughing Cheng
             </span>
         </footer>

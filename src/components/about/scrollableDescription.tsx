@@ -1,5 +1,6 @@
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
+import { cn } from "@/lib/utils";
 
 const paragraph =
     "I'm Laughing, a passionate Full-Stack Developer specializing in the blockchain industry. With a strong foundation in front-end development and smart contract expertise, I have a deep understanding of decentralized applications and Web3 ecosystems. My focus is on creating secure, scalable, and user-friendly blockchain solutions. I'm proficient in smart contract development, blockchain integrations, and web animation.";
@@ -14,10 +15,14 @@ export default function ScrollableDescription() {
     const words = paragraph.split(" ");
 
     return (
-        <div className="grid-template mb-80">
+        <div className="grid-template mb-20 lg:mb-80">
             <p
                 ref={container}
-                className="col-span-4 flex flex-wrap text-3xl font-semibold leading-tight sm:text-5xl md:col-span-6 md:leading-tight"
+                className={cn(
+                    "col-span-4 flex flex-wrap text-lg font-semibold leading-tight",
+                    "sm:text-2xl",
+                    "md:col-span-6 md:text-3xl md:leading-tight"
+                )}
             >
                 {words.map((word, i) => {
                     const start = i / words.length;
