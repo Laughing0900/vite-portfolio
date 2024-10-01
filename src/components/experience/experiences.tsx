@@ -85,12 +85,9 @@ const Experiences = () => {
                             1 - (filedCompanies.length - i) * 0.05;
                         return (
                             <div
-                                className="py-4 lg:sticky lg:h-[80vh]"
+                                className="top-40 py-4 lg:sticky"
                                 key={company.name + "_description"}
                                 id="experience-description"
-                                style={{
-                                    top: `calc(160px + ${i * 25}px)`,
-                                }}
                             >
                                 {/* @mobile */}
                                 {isTablet && (

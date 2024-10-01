@@ -25,23 +25,28 @@ const ExperienceCard = ({
     const container = useRef(null);
     const { scrollYProgress } = useScroll({
         target: container,
-
-        offset: [`start end`, `start ${160 + i * 25}px`],
+        offset: [`start end`, `start ${i * 40}px`],
     });
 
-    const opacity = useTransform(scrollYProgress, [0.95, 1], [1, 0], {
+    const opacity = useTransform(scrollYProgress, [0.8, 0.9], [1, 0], {
         clamp: false,
     });
 
     const scale = useTransform(progress, range, [1, targetScale]);
 
     return (
-        <div ref={container} className="h-full">
+        <motion.div
+            className="relative h-fit min-h-[40vh] origin-top rounded-lg lg:border-2 lg:border-foreground lg:bg-black/30 lg:p-8 lg:backdrop-blur-md"
+            style={{
+                scale: isTablet ? 1 : scale,
+                top: `calc(${i * 40}px)`,
+            }}
+            ref={container}
+        >
             <motion.div
-                className="min-h-[70%] origin-top rounded-lg lg:flex lg:flex-col lg:justify-between lg:border-2 lg:border-foreground lg:bg-black/55 lg:p-8 lg:backdrop-blur-md"
+                className="flex flex-col justify-between"
                 style={{
                     opacity: willDisappear && !isTablet ? opacity : 1,
-                    scale: isTablet ? 1 : scale,
                 }}
             >
                 {company.description && (
@@ -56,7 +61,7 @@ const ExperienceCard = ({
                     })}
                 </div>
             </motion.div>
-        </div>
+        </motion.div>
     );
 };
 
