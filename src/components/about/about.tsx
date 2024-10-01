@@ -1,5 +1,6 @@
 import { BentoGrid, BentoGridItem } from "@/components/about/bento-grid";
 import { useGetAbout } from "@/components/about/hooks/useGetAbout";
+import ScrollableDescription from "@/components/about/scrollableDescription";
 import { cn } from "@/lib/utils";
 
 const About = () => {
@@ -9,6 +10,8 @@ const About = () => {
             <h3 className="mx-auto w-full max-w-[1680px] pl-4 text-left md:pl-20">
                 Who's Laughing
             </h3>
+
+            <ScrollableDescription />
 
             <BentoGrid>
                 {items.map((item, i) => (

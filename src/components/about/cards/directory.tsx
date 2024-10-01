@@ -33,7 +33,7 @@ const DirectoryCard = () => {
         <CardContainer>
             <div className="h-full w-full overflow-hidden">
                 <Tree
-                    className="overflow-hidden rounded-md bg-background p-2"
+                    className="overflow-hidden rounded-md p-2"
                     initialSelectedId="7"
                     initialExpandedItems={["1", "2", "7", "8", "14", "22"]}
                     elements={ELEMENTS}
@@ -48,35 +48,35 @@ export default DirectoryCard;
 
 const ELEMENTS: TreeElement[] = [
     {
-        id: "1",
-        name: "src",
+        id: "2",
+        name: "public",
         children: [
             {
-                id: "2",
-                name: "public",
+                id: "3",
+                name: "fonts",
                 children: [
                     {
-                        id: "3",
-                        name: "fonts",
-                        children: [
-                            {
-                                id: "4",
-                                name: "Cyborg.ttf",
-                            },
-                        ],
-                    },
-                    {
-                        id: "5",
-                        name: "images",
-                        children: [
-                            {
-                                id: "6",
-                                name: "icon.svg",
-                            },
-                        ],
+                        id: "4",
+                        name: "Cyborg.ttf",
                     },
                 ],
             },
+            {
+                id: "5",
+                name: "images",
+                children: [
+                    {
+                        id: "6",
+                        name: "icon.svg",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        id: "1",
+        name: "src",
+        children: [
             {
                 id: "7",
                 name: "components",
@@ -151,7 +151,30 @@ const ELEMENTS: TreeElement[] = [
                     },
                 ],
             },
-
+            {
+                id: "31",
+                name: "consts",
+                children: [
+                    {
+                        id: "32",
+                        name: "apis.ts",
+                    },
+                ],
+            },
+            {
+                id: "32",
+                name: "hooks",
+                children: [
+                    {
+                        id: "33",
+                        name: "useBreakpoint.ts",
+                    },
+                    {
+                        id: "34",
+                        name: "useDevice.ts",
+                    },
+                ],
+            },
             {
                 id: "22",
                 name: "lib",
