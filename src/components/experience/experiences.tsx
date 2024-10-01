@@ -80,12 +80,17 @@ const Experiences = () => {
                     className="col-span-8 pt-4 lg:col-span-4 lg:col-start-5 lg:pt-40"
                     ref={scrollRef}
                 >
-                    {filedCompanies.map((company) => {
+                    {filedCompanies.map((company, i) => {
+                        const targetScale =
+                            1 - (filedCompanies.length - i) * 0.05;
                         return (
                             <div
-                                className="mb-20 py-4 lg:sticky lg:top-40 lg:mb-0 lg:h-[80vh]"
+                                className="py-4 lg:sticky lg:h-[80vh]"
                                 key={company.name + "_description"}
                                 id="experience-description"
+                                style={{
+                                    top: `calc(160px + ${i * 25}px)`,
+                                }}
                             >
                                 {/* @mobile */}
                                 {isTablet && (
@@ -97,7 +102,16 @@ const Experiences = () => {
                                 )}
 
                                 {/* @default */}
-                                <ExperienceCard company={company} />
+                                <ExperienceCard
+                                    company={company}
+                                    willDisappear={
+                                        i < filedCompanies.length - 1
+                                    }
+                                    range={[i * 0.25, 1]}
+                                    targetScale={targetScale}
+                                    progress={scrollYProgress}
+                                    i={i}
+                                />
                             </div>
                         );
                     })}
