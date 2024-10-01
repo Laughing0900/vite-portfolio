@@ -3,6 +3,7 @@ import {
     Building2,
     GraduationCap,
     HomeIcon,
+    Laugh,
     Send,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -19,12 +20,17 @@ import { cn } from "@/lib/utils";
 
 const DATA = {
     content: {
+        about: {
+            name: "This Is Laughing",
+            url: "#about-me",
+            icon: Laugh,
+        },
         project: {
             name: "Projects",
             url: "#project",
             icon: AppWindowMac,
         },
-        Experience: {
+        experience: {
             name: "Experiences",
             url: "#experience",
             icon: Building2,

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const About = () => {
     const { items } = useGetAbout();
     return (
-        <section id="about-me">
+        <section id="about-me" className="pt-20">
             <h3 className="mx-auto w-full max-w-[1680px] pl-4 text-left md:pl-20">
                 Who's Laughing
             </h3>
