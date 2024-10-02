@@ -22,7 +22,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
 
     const { imageId, company, name, content, href, techStack } = response;
     const btnSize = isMobile ? 40 : 60;
-    console.log(techStack);
+
     return (
         <MainLayout>
             <section className="grid-template py-20">
@@ -93,7 +93,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         dangerouslySetInnerHTML={{
                             __html: content || "",
                         }}
-                        className="rounded-8 space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
+                        className="rounded-8 project-details space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
                     ></div>
 
                     <div className="flex flex-wrap gap-4">

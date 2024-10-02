@@ -109,13 +109,18 @@ address {
     font-style: normal;
 }
 
-.project-details > p {
+.project-details p {
     font-size: 1.125rem;
     line-height: 1.5;
 }
 .project-details li {
     list-style-type: disc;
     margin-left: 1rem;
+}
+.project-details b {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* custom class  */
