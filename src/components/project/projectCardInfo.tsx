@@ -6,7 +6,7 @@ const ProjectCardInfo = ({
     href,
     company,
     name,
-}: Omit<ProjectCardProps, "imageId">) => {
+}: Omit<ProjectCardProps, "imageId" | "id">) => {
     return (
         <div className="pointer-events-auto mt-10">
             <Link

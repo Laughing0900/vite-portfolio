@@ -1,24 +1,19 @@
 import { useMemo } from "react";
 import useSWR from "swr";
+import { ProjectCardProps } from "@/components/project/types/projectTypes";
 import { API_ENDPOINT } from "@/consts/apis";
 import { fetcher } from "@/lib/utils";
 
-export type ProjectType = {
-    name: string;
-    href: string;
-    company: string;
-    imageId: string;
-    // url: string;
-};
-
 export const useProjects = (): {
-    projects: ReadonlyArray<ProjectType>;
+    projects: ReadonlyArray<ProjectCardProps>;
     isLoading: boolean;
 } => {
     const { data: response, isLoading } = useSWR(
         API_ENDPOINT + "projects",
         fetcher
     );
+
+    console.log(response);
 
     const projects = useMemo(() => {
         if (isLoading) {

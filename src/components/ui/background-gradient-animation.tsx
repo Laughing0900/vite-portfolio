@@ -30,7 +30,7 @@ export const BackgroundGradientAnimation = ({
     return (
         <div
             className={cn(
-                "sticky left-0 top-0 -mb-[100dvh] h-screen w-screen overflow-hidden",
+                "sticky left-0 top-0 z-[-1] -mb-[100dvh] h-screen w-screen overflow-hidden",
                 containerClassName
             )}
         >

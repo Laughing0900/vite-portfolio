@@ -1,10 +1,10 @@
+import { Link as RouterLink } from "react-router-dom";
 import ProjectCardInfo from "@/components/project/projectCardInfo";
 import { ProjectCardProps } from "@/components/project/types/projectTypes";
 import Image from "@/components/ui/image";
-import Link from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 
-const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
+const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
     return (
         <div
             className={cn(
@@ -13,11 +13,10 @@ const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
             )}
         >
             <div className="mx-auto aspect-video md:max-h-[50vh]">
-                <Link
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <RouterLink
+                    to={`/vite-portfolio/projects/${id}`}
                     className="group mt-4 flex h-full w-full items-center overflow-clip rounded-md border-2 border-gray-500"
+                    onClick={() => window.scrollTo(0, 0)}
                 >
                     <div className="absolute inset-0 grid place-items-center bg-black/50 opacity-0 backdrop-blur-sm transition-none group-hover:opacity-100">
                         <div className="inset-0 font-cyborg text-xl text-white">
@@ -30,7 +29,7 @@ const Card = ({ href, company, imageId, name }: ProjectCardProps) => {
                         className="h-full w-full object-cover"
                         alt="project image"
                     />
-                </Link>
+                </RouterLink>
             </div>
 
             <ProjectCardInfo href={href} company={company} name={name} />

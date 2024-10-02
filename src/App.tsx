@@ -15,18 +15,16 @@ function App() {
             element: <Navigate to="/vite-portfolio" />,
         },
         {
-            path: "/vite-portfolio",
+            path: "/vite-portfolio/",
             element: <LandingPage />,
         },
         {
-            path: "/vite-portfolio/projects",
+            path: "/vite-portfolio/projects/",
+            element: <Navigate to="/vite-portfolio" />,
+        },
+        {
+            path: "/vite-portfolio/projects/:id",
             element: <ProjectPage />,
-            children: [
-                {
-                    path: ":id",
-                    element: <ProjectPage />,
-                },
-            ],
         },
     ]);
 
