@@ -16,8 +16,8 @@ function App() {
             ),
         },
         {
-            path: "/projects/",
-            element: <Navigate to="/vite-portfolio" />,
+            path: "/projects",
+            element: <Navigate to="/" />,
         },
         {
             path: "/projects/:id",

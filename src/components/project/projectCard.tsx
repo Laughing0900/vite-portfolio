@@ -12,11 +12,13 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                 "sm:w-[600px] sm:p-10 md:w-[800px]"
             )}
         >
-            <div className="mx-auto aspect-video md:max-h-[50vh]">
+            <div
+                className="mx-auto aspect-video md:max-h-[50vh]"
+                onClick={() => window.scrollTo(0, 0)}
+            >
                 <RouterLink
                     to={`projects/${id}`}
                     className="group mt-4 flex h-full w-full items-center overflow-clip rounded-md border-2 border-gray-500"
-                    onClick={() => window.scrollTo(0, 0)}
                 >
                     <div className="absolute inset-0 grid place-items-center bg-black/50 opacity-0 backdrop-blur-sm transition-none group-hover:opacity-100">
                         <div className="inset-0 font-cyborg text-xl text-white">

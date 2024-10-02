@@ -1,6 +1,7 @@
 import { CornerDownLeft, SquareArrowOutUpRight } from "lucide-react";
-import { Link as RouterLink } from "react-router-dom";
+import { Navigate, Link as RouterLink } from "react-router-dom";
 import MainLayout from "@/components/layout/mainLayout";
+import { useProjects } from "@/components/project/hooks/useProjects";
 import { useProjectsDetails } from "@/components/projectDetails/hooks/useProjectsDetails";
 import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
 import Image from "@/components/ui/image";
@@ -14,8 +15,15 @@ import {
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
+    const { projects } = useProjects();
+
     const { data: response, isLoading } = useProjectsDetails({ projectId: id });
     const { isMobile } = useBreakpoint();
+
+    if (!projects.find((project) => project.id === id)) {
+        return <Navigate to="/" />;
+    }
+
     if (isLoading) return <ProjectDetailsSkeleton />;
 
     const { imageId, company, name, content, href } = response;
