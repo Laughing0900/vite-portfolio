@@ -22,7 +22,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
     const btnSize = isMobile ? 40 : 60;
     return (
         <MainLayout>
-            <section className="grid-template py-20" id="certificate">
+            <section className="grid-template py-20">
                 {/* Left */}
                 <div className="col-span-full lg:col-span-3">
                     <div className="rounded-8 w-full border-2 border-gray-500 p-10">
@@ -30,9 +30,9 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                             Project
                         </h2>
                         <p className="mt-4 text-2xl font-bold">{name}</p>
-                        <p className="mt-2 text-lg text-gray-100/50">
+                        <h4 className="mt-2 text-lg text-gray-100/50">
                             :- {company}
-                        </p>
+                        </h4>
                     </div>
                     <TooltipProvider>
                         <div className="mt-4 grid grid-cols-4 gap-5 md:grid-cols-3">
