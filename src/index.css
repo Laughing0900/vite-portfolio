@@ -113,6 +113,10 @@ address {
     font-size: 1.125rem;
     line-height: 1.5;
 }
+.project-details li {
+    list-style-type: disc;
+    margin-left: 1rem;
+}
 
 /* custom class  */
 span.highlight {
