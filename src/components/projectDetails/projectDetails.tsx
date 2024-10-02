@@ -1,7 +1,6 @@
 import { CornerDownLeft, SquareArrowOutUpRight } from "lucide-react";
-import { Navigate, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import MainLayout from "@/components/layout/mainLayout";
-import { useProjects } from "@/components/project/hooks/useProjects";
 import { useProjectsDetails } from "@/components/projectDetails/hooks/useProjectsDetails";
 import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
 import Image from "@/components/ui/image";
@@ -15,14 +14,8 @@ import {
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
-    const { projects, isLoading: isProjectsLoading } = useProjects();
-
     const { data: response, isLoading } = useProjectsDetails({ projectId: id });
     const { isMobile } = useBreakpoint();
-
-    if (!isProjectsLoading && !projects.find((project) => project.id === id)) {
-        return <Navigate to="/" />;
-    }
 
     if (isLoading) return <ProjectDetailsSkeleton />;
 
@@ -99,9 +92,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                             __html: content || "",
                         }}
                         className="rounded-8 project-details p.project-details space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
-                    >
-                        {}
-                    </div>
+                    ></div>
                 </div>
             </section>
         </MainLayout>
