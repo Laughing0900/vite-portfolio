@@ -15,12 +15,12 @@ import {
 import useBreakpoint from "@/hooks/useBreakpoint";
 
 const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
-    const { projects } = useProjects();
+    const { projects, isLoading: isProjectsLoading } = useProjects();
 
     const { data: response, isLoading } = useProjectsDetails({ projectId: id });
     const { isMobile } = useBreakpoint();
 
-    if (!projects.find((project) => project.id === id)) {
+    if (!isProjectsLoading && !projects.find((project) => project.id === id)) {
         return <Navigate to="/" />;
     }
 
@@ -98,7 +98,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         dangerouslySetInnerHTML={{
                             __html: content || "",
                         }}
-                        className="rounded-8 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
+                        className="rounded-8 project-details p.project-details space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
                     >
                         {}
                     </div>

@@ -50,7 +50,11 @@
         @apply bg-background font-k2d text-foreground;
     }
     h3 {
-        @apply mb-20 font-cyborg text-3xl leading-[1.5em] drop-shadow-md md:text-6xl md:leading-[1.5em];
+        @apply mb-20 font-cyborg text-3xl leading-normal drop-shadow-md md:text-6xl md:leading-normal;
+    }
+
+    h5 {
+        @apply font-cyborg text-xl leading-normal drop-shadow-md;
     }
 
     li {
@@ -103,6 +107,11 @@ span {
 
 address {
     font-style: normal;
+}
+
+.project-details > p {
+    font-size: 1.125rem;
+    line-height: 1.5;
 }
 
 /* custom class  */
