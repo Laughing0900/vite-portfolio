@@ -17,6 +17,7 @@ const CARD_WIDTHS: Record<Breakpoint, number> = {
 const Project = () => {
     const { breakpoint, isMobile } = useBreakpoint();
     const { projects, isLoading } = useProjects();
+
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,

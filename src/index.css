@@ -78,7 +78,6 @@ html {
         sans-serif;
     letter-spacing: 0.1em;
     line-height: 1.3;
-    scroll-behavior: smooth;
 
     --first-color: 18, 113, 255;
     --second-color: 221, 74, 255;

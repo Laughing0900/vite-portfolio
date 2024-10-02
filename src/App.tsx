@@ -1,3 +1,4 @@
+import { ReactLenis } from "lenis/react";
 import About from "@/components/about/about";
 import Certificate from "@/components/certificate/certificate";
 import Experiences from "@/components/experience/experiences";
@@ -6,12 +7,17 @@ import Project from "@/components/project/project";
 
 function App() {
     return (
-        <MainLayout>
-            <About />
-            <Project />
-            <Experiences />
-            <Certificate />
-        </MainLayout>
+        <ReactLenis
+            root
+            options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
+        >
+            <MainLayout>
+                <About />
+                <Project />
+                <Experiences />
+                <Certificate />
+            </MainLayout>
+        </ReactLenis>
     );
 }
 
