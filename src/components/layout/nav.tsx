@@ -1,3 +1,4 @@
+import { useLenis } from "lenis/react";
 import {
     AppWindowMac,
     Building2,
@@ -6,7 +7,7 @@ import {
     Laugh,
     Send,
 } from "lucide-react";
-import { HashLink } from "react-router-hash-link";
+import { useLocation, useNavigate } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import Link from "@/components/ui/link";
@@ -23,22 +24,22 @@ const DATA = {
     content: {
         about: {
             name: "This Is Laughing",
-            url: "/#about-me",
+            url: "#about-me",
             icon: Laugh,
         },
         project: {
             name: "Projects",
-            url: "/#project",
+            url: "#project",
             icon: AppWindowMac,
         },
         experience: {
             name: "Experiences",
-            url: "/#experience",
+            url: "#experience",
             icon: Building2,
         },
         cert: {
             name: "Cert. & Edu.",
-            url: "/#certificate",
+            url: "#certificate",
             icon: GraduationCap,
         },
     },
@@ -53,6 +54,16 @@ const DATA = {
 };
 
 const WithNav = () => {
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
+    const lenis = useLenis();
+
+    const handleNav = (url: string) => {
+        if (pathname !== "/") {
+            return navigate("/");
+        }
+        return lenis?.scrollTo(url);
+    };
     return (
         <div className="fixed bottom-5 left-0 z-50 w-full">
             <TooltipProvider>
@@ -61,8 +72,8 @@ const WithNav = () => {
                         <DockIcon key={name}>
                             <Tooltip delayDuration={200}>
                                 <TooltipTrigger>
-                                    <HashLink
-                                        to={content.url}
+                                    <div
+                                        onClick={() => handleNav(content.url)}
                                         className={cn(
                                             buttonVariants({
                                                 variant: "ghost",
@@ -72,7 +83,7 @@ const WithNav = () => {
                                         )}
                                     >
                                         <content.icon className="size-4" />
-                                    </HashLink>
+                                    </div>
                                 </TooltipTrigger>
                                 <TooltipContent sticky="always">
                                     <p>{content.name}</p>
