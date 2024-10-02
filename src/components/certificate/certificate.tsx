@@ -7,7 +7,7 @@ const Certificate: FC = () => {
 
     return (
         <section
-            className="grid-template px-4 pb-40 pt-20 md:px-20"
+            className="grid-template min-h-[80vh] px-4 pb-40 pt-20 md:px-20"
             id="certificate"
         >
             <h3 className="col-span-full">CERT. & EDUCATION</h3>

@@ -24,37 +24,29 @@ const Project = () => {
 
     const cardWidth =
         CARD_WIDTHS[breakpoint as Breakpoint] || CARD_WIDTHS.default;
+    const cardGap = isMobile ? 32 : 80;
+
+    const containerHeight = useMemo(() => {
+        if (isLoading) {
+            return 3 * (cardWidth + cardGap) - cardGap;
+        }
+
+        return projects.length * (cardWidth + cardGap) - cardGap;
+    }, [isLoading, projects.length, cardWidth, cardGap]);
 
     const endPosition = useMemo(() => {
-        const gap = isMobile ? 16 : 80;
-        const totalWidth =
-            (isLoading ? skeletons.length : projects.length) *
-                (cardWidth + gap) -
-            gap;
         const viewportWidth =
             typeof window !== "undefined" ? window.innerWidth : 0;
 
-        const fill = isMobile ? -cardWidth / 3 : cardWidth / 2;
-        return totalWidth - viewportWidth + fill;
-    }, [isLoading, projects.length, cardWidth, isMobile]);
-
-    console.log(endPosition);
+        const fill = cardWidth / 3;
+        return containerHeight - viewportWidth + fill;
+    }, [cardWidth, containerHeight]);
 
     const x = useTransform(
         scrollYProgress,
         [0, 1],
         ["0px", `-${endPosition}px`]
     );
-
-    const containerHeight = useMemo(() => {
-        const gap = isMobile ? 16 : 80;
-
-        if (isLoading) {
-            return 3 * (cardWidth + gap) - 40;
-        }
-
-        return projects.length * (cardWidth + gap) - 40;
-    }, [isMobile, isLoading, projects.length, cardWidth]);
 
     return (
         <section
@@ -65,7 +57,7 @@ const Project = () => {
         >
             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
                 <div className="absolute left-0 top-20 w-full rounded-lg md:top-20">
-                    <h3 className="z-10 mx-auto w-[100vw] max-w-[1680px] px-4 text-left md:px-20">
+                    <h3 className="z-10 mx-auto w-screen max-w-[1680px] px-4 text-left md:px-20">
                         Project
                     </h3>
                 </div>
