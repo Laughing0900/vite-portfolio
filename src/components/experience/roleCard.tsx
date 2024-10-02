@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { cn } from "@/lib/utils";
 
 type RoleCardProps = {
     name: string;
@@ -9,7 +10,10 @@ type RoleCardProps = {
 const RoleCard: FC<RoleCardProps> = ({ name, role, duration }) => {
     return (
         <div
-            className="mb-4 flex flex-col gap-2 border-b-2 border-b-gray-500 py-2 md:mb-0 md:border-b-0 md:py-4 md:pr-4 lg:items-end"
+            className={cn(
+                "mb-4 flex flex-col gap-2 border-b-2 border-b-gray-500 py-2",
+                "md:mb-0 md:border-b-0 md:py-4 lg:items-end"
+            )}
             key={name + "description"}
         >
             <p>

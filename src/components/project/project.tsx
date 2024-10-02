@@ -26,19 +26,13 @@ const Project = () => {
         CARD_WIDTHS[breakpoint as Breakpoint] || CARD_WIDTHS.default;
 
     const endPosition = useMemo(() => {
+        const gap = isMobile ? 16 : 80;
         const totalWidth =
             (isLoading ? skeletons.length : projects.length) *
-                (cardWidth + 80) -
-            80;
+                (cardWidth + gap) -
+            gap;
         const viewportWidth =
             typeof window !== "undefined" ? window.innerWidth : 0;
-
-        console.log({
-            leng: projects.length,
-            cardWidth,
-            viewportWidth,
-            totalWidth,
-        });
 
         const fill = isMobile ? -cardWidth / 3 : cardWidth / 2;
         return totalWidth - viewportWidth + fill;
@@ -53,12 +47,14 @@ const Project = () => {
     );
 
     const containerHeight = useMemo(() => {
+        const gap = isMobile ? 16 : 80;
+
         if (isLoading) {
-            return 3 * (cardWidth + 80) - 40;
+            return 3 * (cardWidth + gap) - 40;
         }
 
-        return projects.length * (cardWidth + 80) - 40;
-    }, [isLoading, projects.length, cardWidth]);
+        return projects.length * (cardWidth + gap) - 40;
+    }, [isMobile, isLoading, projects.length, cardWidth]);
 
     return (
         <section

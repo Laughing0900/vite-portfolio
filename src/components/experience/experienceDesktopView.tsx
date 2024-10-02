@@ -48,7 +48,7 @@ const ExperienceDesktopView = () => {
                         {companies.map((company, index) => {
                             return (
                                 <motion.div
-                                    className="py-4 pr-4 transition-all ease-linear"
+                                    className="py-4 transition-all ease-linear"
                                     key={company.name}
                                     style={{
                                         opacity: selected === index ? 1 : 0.25,
