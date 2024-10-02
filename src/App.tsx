@@ -15,6 +15,10 @@ function App() {
             element: <Navigate to="/vite-portfolio" />,
         },
         {
+            path: "/vite-portfolio",
+            element: <Navigate to="/vite-portfolio/" />,
+        },
+        {
             path: "/vite-portfolio/",
             element: <LandingPage />,
         },

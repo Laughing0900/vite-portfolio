@@ -2,6 +2,7 @@ import { CornerDownLeft, SquareArrowOutUpRight } from "lucide-react";
 import { Link as RouterLink } from "react-router-dom";
 import MainLayout from "@/components/layout/mainLayout";
 import { useProjectsDetails } from "@/components/projectDetails/hooks/useProjectsDetails";
+import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
 import Image from "@/components/ui/image";
 import Link from "@/components/ui/link";
 import {
@@ -14,6 +15,8 @@ import {
 const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
     const { data: response, isLoading } = useProjectsDetails({ projectId: id });
     const { imageId, company, name, content, href } = response;
+
+    if (isLoading) return <ProjectDetailsSkeleton />;
 
     return (
         <MainLayout>
@@ -65,11 +68,11 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                 </div>
 
                 {/* right */}
-                <div className="rounded-8 col-span-full h-fit overflow-clip border-2 border-gray-500 lg:col-span-5">
+                <div className="rounded-8 col-span-full h-fit overflow-clip lg:col-span-5">
                     <Image
                         src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
                         width="100%"
-                        className="object-cove mb-10 h-full w-full"
+                        className="object-cove rounded-8 mb-10 h-full w-full"
                         alt="project image"
                     />
 
@@ -77,7 +80,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         dangerouslySetInnerHTML={{
                             __html: content || "",
                         }}
-                        className="p-10 drop-shadow"
+                        className="rounded-8 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
                     >
                         {}
                     </div>
