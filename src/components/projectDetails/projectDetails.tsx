@@ -73,14 +73,14 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         alt="project image"
                     />
 
-                    <ul
+                    <div
                         dangerouslySetInnerHTML={{
                             __html: content || "",
                         }}
                         className="p-10 drop-shadow"
                     >
                         {}
-                    </ul>
+                    </div>
                 </div>
             </section>
         </MainLayout>
