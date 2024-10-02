@@ -1,5 +1,6 @@
 import { CornerDownLeft, SquareArrowOutUpRight } from "lucide-react";
 import { Link as RouterLink } from "react-router-dom";
+import TechSkill from "@/components/experience/contentCard/techSkill";
 import MainLayout from "@/components/layout/mainLayout";
 import { useProjectsDetails } from "@/components/projectDetails/hooks/useProjectsDetails";
 import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
@@ -19,8 +20,9 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
 
     if (isLoading) return <ProjectDetailsSkeleton />;
 
-    const { imageId, company, name, content, href } = response;
+    const { imageId, company, name, content, href, techStack } = response;
     const btnSize = isMobile ? 40 : 60;
+    console.log(techStack);
     return (
         <MainLayout>
             <section className="grid-template py-20">
@@ -79,11 +81,11 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                 </div>
 
                 {/* right */}
-                <div className="rounded-8 col-span-full h-fit overflow-clip lg:col-span-5">
+                <div className="col-span-full h-fit space-y-10 lg:col-span-5">
                     <Image
                         src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
                         width="100%"
-                        className="object-cove rounded-8 mb-10 h-full w-full"
+                        className="object-cove rounded-8 h-full w-full"
                         alt="project image"
                     />
 
@@ -91,8 +93,14 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         dangerouslySetInnerHTML={{
                             __html: content || "",
                         }}
-                        className="rounded-8 project-details p.project-details space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
+                        className="rounded-8 space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
                     ></div>
+
+                    <div className="flex flex-wrap gap-4">
+                        {techStack.map((tech) => {
+                            return <TechSkill key={tech} tech={tech} />;
+                        })}
+                    </div>
                 </div>
             </section>
         </MainLayout>

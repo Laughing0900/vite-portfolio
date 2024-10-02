@@ -6,6 +6,7 @@ import { fetcher } from "@/lib/utils";
 
 export type ProjectType = ProjectCardProps & {
     content: string;
+    techStack: string[];
 };
 
 export const useProjectsDetails = ({
