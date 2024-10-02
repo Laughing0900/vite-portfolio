@@ -22,22 +22,22 @@ const DATA = {
     content: {
         about: {
             name: "This Is Laughing",
-            url: "#about-me",
+            url: "/#about-me",
             icon: Laugh,
         },
         project: {
             name: "Projects",
-            url: "#project",
+            url: "/#project",
             icon: AppWindowMac,
         },
         experience: {
             name: "Experiences",
-            url: "#experience",
+            url: "/#experience",
             icon: Building2,
         },
         cert: {
             name: "Cert. & Edu.",
-            url: "#certificate",
+            url: "/#certificate",
             icon: GraduationCap,
         },
     },
@@ -47,7 +47,7 @@ const DATA = {
             icon: Send,
             label: "Contact Me",
         },
-        { href: "#", icon: HomeIcon, label: "Home" },
+        { href: "/#", icon: HomeIcon, label: "Home" },
     ],
 };
 

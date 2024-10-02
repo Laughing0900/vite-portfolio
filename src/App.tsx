@@ -1,24 +1,36 @@
-import { ReactLenis } from "lenis/react";
-import About from "@/components/about/about";
-import Certificate from "@/components/certificate/certificate";
-import Experiences from "@/components/experience/experiences";
-import MainLayout from "@/components/layout/mainLayout";
-import Project from "@/components/project/project";
+import { lazy } from "react";
+import {
+    createBrowserRouter,
+    Navigate,
+    RouterProvider,
+} from "react-router-dom";
+import LandingPage from "@/pages/landing";
+
+const ProjectPage = lazy(() => import("./pages/projects"));
 
 function App() {
-    return (
-        <ReactLenis
-            root
-            options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
-        >
-            <MainLayout>
-                <About />
-                <Project />
-                <Experiences />
-                <Certificate />
-            </MainLayout>
-        </ReactLenis>
-    );
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <Navigate to="/vite-portfolio" />,
+        },
+        {
+            path: "/vite-portfolio",
+            element: <LandingPage />,
+        },
+        {
+            path: "/vite-portfolio/projects",
+            element: <ProjectPage />,
+            children: [
+                {
+                    path: ":id",
+                    element: <ProjectPage />,
+                },
+            ],
+        },
+    ]);
+
+    return <RouterProvider router={router} />;
 }
 
 export default App;
