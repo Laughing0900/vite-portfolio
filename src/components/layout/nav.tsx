@@ -6,6 +6,7 @@ import {
     Laugh,
     Send,
 } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
 import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import Link from "@/components/ui/link";
@@ -22,22 +23,22 @@ const DATA = {
     content: {
         about: {
             name: "This Is Laughing",
-            url: "/vite-portfolio/#about-me",
+            url: "/#about-me",
             icon: Laugh,
         },
         project: {
             name: "Projects",
-            url: "/vite-portfolio/#project",
+            url: "/#project",
             icon: AppWindowMac,
         },
         experience: {
             name: "Experiences",
-            url: "/vite-portfolio/#experience",
+            url: "/#experience",
             icon: Building2,
         },
         cert: {
             name: "Cert. & Edu.",
-            url: "/vite-portfolio/#certificate",
+            url: "/#certificate",
             icon: GraduationCap,
         },
     },
@@ -60,8 +61,8 @@ const WithNav = () => {
                         <DockIcon key={name}>
                             <Tooltip delayDuration={200}>
                                 <TooltipTrigger>
-                                    <Link
-                                        href={content.url}
+                                    <HashLink
+                                        to={content.url}
                                         className={cn(
                                             buttonVariants({
                                                 variant: "ghost",
@@ -71,7 +72,7 @@ const WithNav = () => {
                                         )}
                                     >
                                         <content.icon className="size-4" />
-                                    </Link>
+                                    </HashLink>
                                 </TooltipTrigger>
                                 <TooltipContent sticky="always">
                                     <p>{content.name}</p>

@@ -14,7 +14,7 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
         >
             <div className="mx-auto aspect-video md:max-h-[50vh]">
                 <RouterLink
-                    to={`/vite-portfolio/projects/${id}`}
+                    to={`projects/${id}`}
                     className="group mt-4 flex h-full w-full items-center overflow-clip rounded-md border-2 border-gray-500"
                     onClick={() => window.scrollTo(0, 0)}
                 >

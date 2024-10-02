@@ -20,7 +20,6 @@ export const useProjectsDetails = ({
         API_ENDPOINT + `project-details?id=${projectId}`,
         fetcher
     );
-    console.log(response);
 
     const data = useMemo(() => {
         if (isLoading) {

@@ -1,34 +1,31 @@
-import { lazy } from "react";
-import {
-    createBrowserRouter,
-    Navigate,
-    RouterProvider,
-} from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { createHashRouter, Navigate, RouterProvider } from "react-router-dom";
+import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
 import LandingPage from "@/pages/landing";
 
 const ProjectPage = lazy(() => import("./pages/projects"));
 
 function App() {
-    const router = createBrowserRouter([
+    const router = createHashRouter([
         {
             path: "/",
+            element: (
+                <Suspense fallback={<div />}>
+                    <LandingPage />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/projects/",
             element: <Navigate to="/vite-portfolio" />,
         },
         {
-            path: "/vite-portfolio",
-            element: <Navigate to="/vite-portfolio/" />,
-        },
-        {
-            path: "/vite-portfolio/",
-            element: <LandingPage />,
-        },
-        {
-            path: "/vite-portfolio/projects/",
-            element: <Navigate to="/vite-portfolio" />,
-        },
-        {
-            path: "/vite-portfolio/projects/:id",
-            element: <ProjectPage />,
+            path: "/projects/:id",
+            element: (
+                <Suspense fallback={<ProjectDetailsSkeleton />}>
+                    <ProjectPage />
+                </Suspense>
+            ),
         },
     ]);
 

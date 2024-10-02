@@ -14,10 +14,9 @@ import {
 
 const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
     const { data: response, isLoading } = useProjectsDetails({ projectId: id });
-    const { imageId, company, name, content, href } = response;
-
     if (isLoading) return <ProjectDetailsSkeleton />;
 
+    const { imageId, company, name, content, href } = response;
     return (
         <MainLayout>
             <section className="grid-template py-10" id="certificate">
@@ -35,7 +34,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                     <TooltipProvider>
                         <div className="mt-4 grid grid-cols-3 gap-5">
                             <div className="rounded-8 aspect-square border-2 border-gray-500 p-10 hover:bg-gray-500/50">
-                                <RouterLink to="/vite-portfolio">
+                                <RouterLink to="/">
                                     <Tooltip delayDuration={100}>
                                         <TooltipTrigger asChild>
                                             <CornerDownLeft className="h-full w-full" />

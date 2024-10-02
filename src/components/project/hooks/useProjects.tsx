@@ -13,8 +13,6 @@ export const useProjects = (): {
         fetcher
     );
 
-    console.log(response);
-
     const projects = useMemo(() => {
         if (isLoading) {
             return [];
