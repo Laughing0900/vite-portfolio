@@ -11,15 +11,18 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
     const { data: response, isLoading } = useProjectsDetails({ projectId: id });
+    const { isMobile } = useBreakpoint();
     if (isLoading) return <ProjectDetailsSkeleton />;
 
     const { imageId, company, name, content, href } = response;
+    const btnSize = isMobile ? 40 : 60;
     return (
         <MainLayout>
-            <section className="grid-template py-10" id="certificate">
+            <section className="grid-template py-20" id="certificate">
                 {/* Left */}
                 <div className="col-span-full lg:col-span-3">
                     <div className="rounded-8 w-full border-2 border-gray-500 p-10">
@@ -32,12 +35,16 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         </p>
                     </div>
                     <TooltipProvider>
-                        <div className="mt-4 grid grid-cols-3 gap-5">
-                            <div className="rounded-8 aspect-square border-2 border-gray-500 p-10 hover:bg-gray-500/50">
+                        <div className="mt-4 grid grid-cols-4 gap-5 md:grid-cols-3">
+                            <div className="rounded-8 aspect-square border-2 border-gray-500 hover:bg-gray-500/50">
                                 <RouterLink to="/">
                                     <Tooltip delayDuration={100}>
                                         <TooltipTrigger asChild>
-                                            <CornerDownLeft className="h-full w-full" />
+                                            <div className="grid h-full w-full place-items-center">
+                                                <CornerDownLeft
+                                                    size={btnSize}
+                                                />
+                                            </div>
                                         </TooltipTrigger>
                                         <TooltipContent sticky="always">
                                             <p>Back to home</p>
@@ -50,11 +57,15 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-8 re col-start-3 block aspect-square border-2 border-gray-500 p-10 hover:bg-gray-500/50"
+                                className="rounded-8 col-start-4 aspect-square border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
                             >
                                 <Tooltip delayDuration={100}>
                                     <TooltipTrigger asChild>
-                                        <SquareArrowOutUpRight className="h-full w-full" />
+                                        <div className="grid h-full w-full place-items-center">
+                                            <SquareArrowOutUpRight
+                                                size={btnSize}
+                                            />
+                                        </div>
                                     </TooltipTrigger>
 
                                     <TooltipContent sticky="always">
