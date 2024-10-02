@@ -1,24 +1,35 @@
-import { ReactLenis } from "lenis/react";
-import About from "@/components/about/about";
-import Certificate from "@/components/certificate/certificate";
-import Experiences from "@/components/experience/experiences";
-import MainLayout from "@/components/layout/mainLayout";
-import Project from "@/components/project/project";
+import { lazy, Suspense } from "react";
+import { createHashRouter, Navigate, RouterProvider } from "react-router-dom";
+import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
+import LandingPage from "@/pages/landing";
+
+const ProjectPage = lazy(() => import("./pages/projects"));
 
 function App() {
-    return (
-        <ReactLenis
-            root
-            options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
-        >
-            <MainLayout>
-                <About />
-                <Project />
-                <Experiences />
-                <Certificate />
-            </MainLayout>
-        </ReactLenis>
-    );
+    const router = createHashRouter([
+        {
+            path: "/",
+            element: (
+                <Suspense fallback={<div />}>
+                    <LandingPage />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/projects/",
+            element: <Navigate to="/vite-portfolio" />,
+        },
+        {
+            path: "/projects/:id",
+            element: (
+                <Suspense fallback={<ProjectDetailsSkeleton />}>
+                    <ProjectPage />
+                </Suspense>
+            ),
+        },
+    ]);
+
+    return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -4,12 +4,7 @@ const ProjectCardSkeleton = () => {
     return (
         <div className="relative h-fit w-[400px] rounded-lg border-2 border-foreground bg-black/5 p-10 backdrop-blur-sm sm:w-[600px] md:w-[800px]">
             <div className="aspect-video max-h-[50vh]">
-                <div
-                    className="h-full max-h-[60vh] animate-pulse rounded-md border-foreground bg-slate-700 object-cover"
-                    style={{
-                        transform: `rotate(3deg)`,
-                    }}
-                />
+                <div className="h-full max-h-[60vh] animate-pulse rounded-md border-foreground bg-slate-700 object-cover" />
             </div>
             <div className="mt-10">
                 <p className="h-[1em] w-1/2 animate-pulse rounded-full bg-slate-700 text-2xl"></p>

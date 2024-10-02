@@ -1,5 +1,4 @@
 import { useState } from "react";
-import HeroBanner from "@/components/heroBanner/heroBanner";
 import WithFooter from "@/components/layout/footer/footer";
 import FooterOverlay from "@/components/layout/footer/footerOverlay";
 import WithGrid from "@/components/layout/grid";
@@ -16,12 +15,9 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
             <WithHeader setOpenGrid={setOpenGrid} openGrid={openGrid} />
             <WithNav />
 
-            {/* @hero banner */}
-            <HeroBanner />
-
-            <main className="relative z-30 mt-[100dvh] min-h-dvh w-full bg-background">
+            <main className="relative z-30 min-h-dvh w-full overflow-clip bg-background">
                 <BackgroundGradientAnimation />
-                <div className="-mt-[100dvh] space-y-40 pt-40">{children}</div>
+                {children}
             </main>
 
             {/* @footer overlay*/}

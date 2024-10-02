@@ -4,7 +4,7 @@ import type { FC } from "react";
 
 const WithFooter: FC = () => {
     return (
-        <footer className="sticky left-0 right-0 top-0 h-screen bg-black px-4 py-40 text-white md:p-20">
+        <footer className="fixed inset-0 h-screen bg-black px-4 py-40 text-white md:p-20">
             <div className="flex flex-col items-start gap-2 text-lg">
                 <Button variant="link" size="fit" asChild>
                     <Link

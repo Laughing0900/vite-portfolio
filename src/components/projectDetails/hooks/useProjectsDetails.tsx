@@ -4,16 +4,24 @@ import { ProjectCardProps } from "@/components/project/types/projectTypes";
 import { API_ENDPOINT } from "@/consts/apis";
 import { fetcher } from "@/lib/utils";
 
-export const useProjects = (): {
-    projects: ReadonlyArray<ProjectCardProps>;
+export type ProjectType = ProjectCardProps & {
+    content: string;
+};
+
+export const useProjectsDetails = ({
+    projectId,
+}: {
+    projectId: string;
+}): {
+    data: ProjectType;
     isLoading: boolean;
 } => {
     const { data: response, isLoading } = useSWR(
-        API_ENDPOINT + "projects",
+        API_ENDPOINT + `project-details?id=${projectId}`,
         fetcher
     );
 
-    const projects = useMemo(() => {
+    const data = useMemo(() => {
         if (isLoading) {
             return [];
         }
@@ -25,5 +33,5 @@ export const useProjects = (): {
         return response.body;
     }, [response, isLoading]);
 
-    return { projects, isLoading };
+    return { data, isLoading };
 };

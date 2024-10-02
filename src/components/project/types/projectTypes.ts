@@ -3,4 +3,5 @@ export type ProjectCardProps = {
     company: string;
     imageId: string;
     name: string;
+    id: string;
 };
