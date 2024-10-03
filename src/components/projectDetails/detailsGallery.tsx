@@ -31,6 +31,8 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
         }));
     }, [images]);
 
+    if (data.length < 1) return <></>;
+
     return (
         <section className="relative h-[300dvh] w-full" ref={container}>
             <div className="sticky top-0 h-screen w-full">
