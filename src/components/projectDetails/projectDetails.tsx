@@ -23,7 +23,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
 
     const { imageId, company, name, content, href, techStack, projectImage } =
         response;
-    const btnSize = isMobile ? 40 : 60;
+    const btnSize = isMobile ? 32 : 60;
 
     return (
         <MainLayout>
@@ -62,7 +62,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="col-start-4 aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
+                                className="col-start-4 block aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
                             >
                                 <Tooltip delayDuration={100}>
                                     <TooltipTrigger asChild>

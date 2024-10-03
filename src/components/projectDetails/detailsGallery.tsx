@@ -1,15 +1,26 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import Image from "@/components/ui/image";
+import useBreakpoint from "@/hooks/useBreakpoint";
 import { cn } from "@/lib/utils";
 
 const gridItems = [
+    { id: 0, gridArea: "7 / 6 / 9 / 7" },
     { id: 1, gridArea: "5 / 6 / 7 / 10" },
     { id: 2, gridArea: "2 / 8 / 5 / 12" },
     { id: 3, gridArea: "7 / 7 / 10 / 11" },
     { id: 4, gridArea: "5 / 2 / 8 / 6" },
     { id: 5, gridArea: "5 / 10 / 7 / 13" },
-    { id: 5, gridArea: "3 / 5 / 5 / 8 " },
+    { id: 6, gridArea: "3 / 5 / 5 / 8" },
+];
+const gridItemsMobile = [
+    { id: 0, gridArea: "5 / 4 / 6 / 4" }, // scroll down
+    { id: 1, gridArea: "4 / 1 / 7 / 4" }, // logo
+    { id: 2, gridArea: "7 / 1 / 10 / 4" },
+    { id: 3, gridArea: "10 / 1 / 13 / 3" },
+    { id: 4, gridArea: "1 / 3 / 4 / 5" },
+    { id: 5, gridArea: "1 / 1 / 4 / 3" },
+    { id: 6, gridArea: "10 / 3 / 13 / 5" },
 ];
 
 const DetailsGallery = ({ images }: { images: string[] }) => {
@@ -17,6 +28,7 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
     const { scrollYProgress } = useScroll({
         target: container,
     });
+    const { isTablet } = useBreakpoint();
 
     const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
 
@@ -26,7 +38,6 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
         }
         return images.map((image, index) => ({
             id: index + 1,
-            gridArea: gridItems[index].gridArea,
             image,
         }));
     }, [images]);
@@ -38,7 +49,8 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
             <div className="sticky top-0 h-screen w-full">
                 <motion.div
                     className={cn(
-                        "absolute inset-0 grid grid-cols-[repeat(14,1fr)] grid-rows-[repeat(10,1fr)] gap-4"
+                        "absolute inset-0 grid grid-cols-[repeat(4,1fr)] grid-rows-[repeat(12,1fr)] gap-4 px-4",
+                        "lg:grid-cols-[repeat(14,1fr)] lg:grid-rows-[repeat(10,1fr)]"
                     )}
                     style={{
                         scale: scale,
@@ -49,7 +61,9 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
                             <div
                                 key={item.id}
                                 style={{
-                                    gridArea: gridItems[index].gridArea,
+                                    gridArea: isTablet
+                                        ? gridItemsMobile[index + 1].gridArea
+                                        : gridItems[index + 1].gridArea,
                                 }}
                             >
                                 <motion.div
@@ -69,7 +83,9 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
                     <div
                         className="text-md flex flex-col items-center gap-4"
                         style={{
-                            gridArea: " 7 / 6 / 9 / 7 ",
+                            gridArea: isTablet
+                                ? gridItemsMobile[0].gridArea
+                                : gridItems[0].gridArea,
                         }}
                     >
                         <div className="mouse">
