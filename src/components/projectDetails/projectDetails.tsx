@@ -2,6 +2,7 @@ import { CornerDownLeft, SquareArrowOutUpRight } from "lucide-react";
 import { Link as RouterLink } from "react-router-dom";
 import TechSkill from "@/components/experience/contentCard/techSkill";
 import MainLayout from "@/components/layout/mainLayout";
+import DetailsGallery from "@/components/projectDetails/detailsGallery";
 import { useProjectsDetails } from "@/components/projectDetails/hooks/useProjectsDetails";
 import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
 import Image from "@/components/ui/image";
@@ -20,7 +21,8 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
 
     if (isLoading) return <ProjectDetailsSkeleton />;
 
-    const { imageId, company, name, content, href, techStack } = response;
+    const { imageId, company, name, content, href, techStack, projectImage } =
+        response;
     const btnSize = isMobile ? 40 : 60;
 
     return (
@@ -28,7 +30,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
             <section className="grid-template py-20">
                 {/* Left */}
                 <div className="col-span-full lg:col-span-3">
-                    <div className="rounded-8 w-full border-2 border-gray-500 p-10">
+                    <div className="w-full rounded-8 border-2 border-gray-500 p-10">
                         <h2 className="text-wrap font-cyborg text-2xl leading-normal">
                             Project
                         </h2>
@@ -39,7 +41,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                     </div>
                     <TooltipProvider>
                         <div className="mt-4 grid grid-cols-4 gap-5 md:grid-cols-3">
-                            <div className="rounded-8 aspect-square border-2 border-gray-500 hover:bg-gray-500/50">
+                            <div className="aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50">
                                 <RouterLink to="/">
                                     <Tooltip delayDuration={100}>
                                         <TooltipTrigger asChild>
@@ -60,7 +62,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-8 col-start-4 aspect-square border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
+                                className="col-start-4 aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
                             >
                                 <Tooltip delayDuration={100}>
                                     <TooltipTrigger asChild>
@@ -85,7 +87,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                     <Image
                         src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
                         width="100%"
-                        className="object-cove rounded-8 h-full w-full"
+                        className="object-cove h-full w-full rounded-8"
                         alt="project image"
                     />
 
@@ -93,7 +95,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         dangerouslySetInnerHTML={{
                             __html: content || "",
                         }}
-                        className="rounded-8 project-details space-y-5 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
+                        className="project-details space-y-5 rounded-8 border-2 border-gray-500 bg-white/10 p-10 drop-shadow backdrop-blur-xl"
                     ></div>
 
                     <div className="flex flex-wrap gap-4">
@@ -103,6 +105,8 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                     </div>
                 </div>
             </section>
+
+            <DetailsGallery images={projectImage} />
         </MainLayout>
     );
 };
