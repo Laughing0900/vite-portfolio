@@ -30,6 +30,7 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                         width="100%"
                         className="h-full w-full object-cover"
                         alt="project image"
+                        loading="lazy"
                     />
                 </RouterLink>
             </div>
