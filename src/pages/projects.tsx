@@ -1,4 +1,5 @@
-import { Navigate, useParams } from "react-router-dom";
+import { ReactLenis } from "lenis/react";
+import { Navigate, ScrollRestoration, useParams } from "react-router-dom";
 import { useProjects } from "@/components/project/hooks/useProjects";
 import ProjectDetails from "@/components/projectDetails/projectDetails";
 
@@ -13,7 +14,17 @@ const ProjectPage = () => {
         return <Navigate to="/" />;
     }
 
-    return <ProjectDetails id={id} />;
+    return (
+        <>
+            <ReactLenis
+                root
+                options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
+            >
+                <ProjectDetails id={id} />
+            </ReactLenis>
+            <ScrollRestoration />
+        </>
+    );
 };
 
 export default ProjectPage;
