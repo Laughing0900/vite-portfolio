@@ -65,11 +65,15 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
                         ))}
                     {/* Scroll Down */}
                     <div
-                        className="grid place-items-center text-2xl"
+                        className="text-md flex flex-col items-center gap-4"
                         style={{
                             gridArea: " 7 / 6 / 9 / 7 ",
                         }}
                     >
+                        <div className="mouse">
+                            <div className="roll"></div>
+                            <div className="rollshadow"></div>
+                        </div>
                         Scroll
                     </div>
                 </motion.div>
