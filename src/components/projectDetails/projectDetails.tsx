@@ -23,7 +23,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
 
     const { imageId, company, name, content, href, techStack, projectImage } =
         response;
-    const btnSize = isMobile ? 32 : 60;
+    const btnSize = isMobile ? 32 : 40;
 
     return (
         <MainLayout>
@@ -40,9 +40,9 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                         </h4>
                     </div>
                     <TooltipProvider>
-                        <div className="mt-4 grid grid-cols-4 gap-5 md:grid-cols-3">
-                            <div className="aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50">
-                                <RouterLink to="/">
+                        <div className="mt-4 flex justify-between">
+                            <RouterLink to="/">
+                                <div className="aspect-square rounded-8 border-2 border-gray-500 p-4 hover:bg-gray-500/50 md:p-10">
                                     <Tooltip delayDuration={100}>
                                         <TooltipTrigger asChild>
                                             <div className="grid h-full w-full place-items-center">
@@ -55,14 +55,14 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                                             <p>Back to home</p>
                                         </TooltipContent>
                                     </Tooltip>
-                                </RouterLink>
-                            </div>
+                                </div>
+                            </RouterLink>
 
                             <Link
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="col-span-1 col-start-4 block aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
+                                className="aspect-square rounded-8 border-2 border-gray-500 p-4 hover:bg-gray-500/50 md:p-10"
                             >
                                 <Tooltip delayDuration={100}>
                                     <TooltipTrigger asChild>
