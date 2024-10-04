@@ -63,7 +63,7 @@ const Project = () => {
                     </h3>
                 </div>
                 <motion.div
-                    className="flex gap-8 pl-4 md:gap-20 md:pl-40"
+                    className="flex gap-8 pl-4 will-change-transform md:gap-20 md:pl-40"
                     style={{ x }}
                 >
                     {isLoading

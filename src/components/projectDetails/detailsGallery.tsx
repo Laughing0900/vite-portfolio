@@ -49,7 +49,7 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
             <div className="sticky top-0 h-screen w-full">
                 <motion.div
                     className={cn(
-                        "absolute inset-0 grid grid-cols-[repeat(4,1fr)] grid-rows-[repeat(12,1fr)] gap-4 px-4",
+                        "absolute inset-0 grid grid-cols-[repeat(4,1fr)] grid-rows-[repeat(12,1fr)] gap-4 px-4 will-change-transform",
                         "lg:grid-cols-[repeat(14,1fr)] lg:grid-rows-[repeat(10,1fr)]"
                     )}
                     style={{

@@ -16,7 +16,7 @@ const FooterOverlay = ({ children }: FooterOverlayProps) => {
     return (
         <motion.div
             ref={footerRef}
-            className="pointer-events-none relative z-20 h-dvh bg-background will-change-auto"
+            className="pointer-events-none relative z-20 h-dvh bg-background will-change-[opacity]"
             style={{ opacity: opacity }}
         >
             {children}
