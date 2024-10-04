@@ -62,7 +62,7 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="col-start-4 block aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
+                                className="col-span-1 col-start-4 block aspect-square rounded-8 border-2 border-gray-500 hover:bg-gray-500/50 md:col-start-3"
                             >
                                 <Tooltip delayDuration={100}>
                                     <TooltipTrigger asChild>
