@@ -81,10 +81,9 @@ const Char = ({
     progress: MotionValue<number>;
     range: [number, number];
 }) => {
-    const opacity = useTransform(progress, range, [0, 1]);
+    const opacity = useTransform(progress, range, [0.2, 1]);
     return (
         <span>
-            <span className="absolute opacity-20">{children}</span>
             <motion.span
                 className="will-change-[opacity]"
                 style={{ opacity: opacity }}

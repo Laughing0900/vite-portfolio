@@ -60,6 +60,7 @@ const SkillSetCard = () => {
                         className="aspect-square w-full drop-shadow-[2px_2px_1px_rgba(255,255,255,0.25)]"
                         src={`images/skills/${item}`}
                         alt={item}
+                        loading="lazy"
                     />
                 </OrbitingCircles>
             ));

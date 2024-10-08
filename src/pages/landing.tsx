@@ -1,11 +1,18 @@
 import { ReactLenis } from "lenis/react";
+import { lazy } from "react";
 import { ScrollRestoration } from "react-router-dom";
-import About from "@/components/about/about";
-import Certificate from "@/components/certificate/certificate";
-import Experiences from "@/components/experience/experiences";
+// import About from "@/components/about/about";
+// import Certificate from "@/components/certificate/certificate";
+// import Experiences from "@/components/experience/experiences";
 import HeroBanner from "@/components/heroBanner/heroBanner";
 import MainLayout from "@/components/layout/mainLayout";
-import Project from "@/components/project/project";
+
+// import Project from "@/components/project/project";
+
+const About = lazy(() => import("@/components/about/about"));
+const Project = lazy(() => import("@/components/project/project"));
+const Experiences = lazy(() => import("@/components/experience/experiences"));
+const Certificate = lazy(() => import("@/components/certificate/certificate"));
 
 const LandingPage = () => {
     return (
