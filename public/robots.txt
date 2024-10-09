@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://laughing0900.github.io/vite-portfolio/sitemap.xml
+Sitemap: https://laughing-portfolio.vercel.app/sitemap.xml

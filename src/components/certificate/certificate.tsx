@@ -7,11 +7,10 @@ const Certificate: FC = () => {
 
     return (
         <section
-            className="grid-template min-h-[80vh] px-4 pb-40 pt-20 md:px-20"
+            className="m-auto min-h-[80vh] max-w-[1680px] px-4 pb-40 pt-20 md:px-20"
             id="certificate"
         >
-            <h3 className="col-span-full">CERT. & EDUCATION</h3>
-
+            <h3>CERT. & EDUCATION</h3>
             <CertificateItemsGrid title={"Cert & Reward"} items={courses} />
             <CertificateItemsGrid title={"Education"} items={education} />
         </section>

@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import useSWR from "swr";
-import { API_ENDPOINT } from "@/consts/apis";
 import { formatDate } from "@/lib/display";
 import { fetcher } from "@/lib/utils";
 
@@ -16,10 +15,7 @@ export const useExperiences = (): {
     companies: ReadonlyArray<ExperiencesType>;
     isLoading: boolean;
 } => {
-    const { data: response, isLoading } = useSWR(
-        API_ENDPOINT + "experiences",
-        fetcher
-    );
+    const { data: response, isLoading } = useSWR("/api/experiences", fetcher);
 
     const companies = useMemo(() => {
         if (isLoading) {

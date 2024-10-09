@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
+import { CertificateType } from "@/components/certificate/type/certificateTypes";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
-import type { CertificateType } from "@/components/certificate/hooks/useCertificates";
 import type { FC } from "react";
 
 type CertificateItemsGridProps = {
@@ -15,18 +15,15 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
 }) => {
     if (items.length === 0) return null;
     return (
-        <div className="col-span-full mb-10 grid grid-cols-4 gap-x-5 border-t-gray-500 text-xl md:mb-0 md:border-t-2">
+        <div className="mb-10 grid h-fit grid-cols-4 gap-x-5 border-t-gray-500 text-xl md:mb-0 md:border-t-2">
             <span className="col-span-4 text-gray-300 md:col-span-1 md:pt-4">
                 {title}
             </span>
             {items.map((item, index) => {
                 return (
                     <LinkPreview
-                        imageSrc={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/cert/${item.imageId}`}
-                        url={
-                            item.href ||
-                            `https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/cert/${item.imageId}`
-                        }
+                        imageSrc={`/cert/${item.imageId}`}
+                        url={item.href || `/portfolio/cert/${item.imageId}`}
                         className={cn(
                             "group relative col-span-4 overflow-hidden py-4 md:col-span-3 md:col-start-2",
                             index !== items.length - 1 &&

@@ -8,7 +8,7 @@ import {
     useSpring,
 } from "framer-motion";
 import React, { useEffect } from "react";
-import Image from "@/components/ui/image";
+import Image, { cloudinaryLoader } from "@/components/ui/image";
 import Link from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 
@@ -61,6 +61,7 @@ export const LinkPreview = ({
                 <div className="invisible hidden">
                     <Image
                         src={src}
+                        loader={cloudinaryLoader}
                         width={width}
                         height={height}
                         alt="hidden image"
@@ -119,6 +120,7 @@ export const LinkPreview = ({
                                     {/* <div className="h-40 w-40 bg-gray-500"></div> */}
                                     <Image
                                         src={src}
+                                        loader={cloudinaryLoader}
                                         width={width}
                                         height={height}
                                         className="rounded-lg"

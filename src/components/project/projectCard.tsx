@@ -1,7 +1,7 @@
-import { Link as RouterLink } from "react-router-dom";
+import Link from "next/link";
 import ProjectCardInfo from "@/components/project/projectCardInfo";
 import { ProjectCardProps } from "@/components/project/types/projectTypes";
-import Image from "@/components/ui/image";
+import Image, { cloudinaryLoader } from "@/components/ui/image";
 import { cn } from "@/lib/utils";
 
 const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
@@ -16,23 +16,24 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                 className="mx-auto aspect-video md:max-h-[50vh]"
                 onClick={() => window.scrollTo(0, 0)}
             >
-                <RouterLink
-                    to={`projects/${id}`}
+                <Link
+                    href={`projects/${id}`}
                     className="group mt-4 flex h-full w-full items-center overflow-clip rounded-md border-2 border-gray-500"
                 >
-                    <div className="absolute inset-0 grid place-items-center bg-black/50 opacity-0 backdrop-blur-sm transition-none group-hover:opacity-100">
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-black/30 opacity-0 backdrop-blur-sm transition-none group-hover:opacity-100">
                         <div className="inset-0 font-cyborg text-xl text-white">
                             Visit me ?
                         </div>
                     </div>
                     <Image
-                        src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
-                        width="100%"
+                        src={`/project/${imageId}`}
                         className="h-full w-full object-cover"
                         alt="project image"
-                        loading="lazy"
+                        loader={cloudinaryLoader}
+                        fill={true}
+                        sizes="(min-width: 768px) 800px, (min-width: 640px) 600px, 600px"
                     />
-                </RouterLink>
+                </Link>
             </div>
 
             <ProjectCardInfo href={href} company={company} name={name} />
@@ -42,6 +43,8 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                 className="absolute bottom-3 right-3 aspect-square w-12 opacity-10 drop-shadow md:w-20"
                 src={`images/pawn-white.svg`}
                 alt={"my-logo"}
+                width={48}
+                height={48}
             />
         </div>
     );

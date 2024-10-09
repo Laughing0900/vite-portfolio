@@ -1,3 +1,5 @@
+"use client";
+
 import { BentoGrid, BentoGridItem } from "@/components/about/bento-grid";
 import { useGetAbout } from "@/components/about/hooks/useGetAbout";
 import ScrollableDescription from "@/components/about/scrollableDescription";
@@ -8,7 +10,7 @@ const About = () => {
     return (
         <section id="about-me" className="pt-20">
             <h3 className="mx-auto w-full max-w-[1680px] pl-4 text-left md:pl-20">
-                Who's Laughing
+                Who&#39;s Laughing
             </h3>
 
             <ScrollableDescription />

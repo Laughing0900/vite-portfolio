@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import Image from "@/components/ui/image";
@@ -71,10 +73,10 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
                                 >
                                     <Image
                                         src={item.image}
-                                        width="100%"
                                         className="h-full w-full object-contain object-center"
                                         alt="project image"
                                         loading="lazy"
+                                        fill={true}
                                     />
                                 </motion.div>
                             </div>

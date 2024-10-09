@@ -22,7 +22,8 @@ const RoleCard: FC<RoleCardProps> = ({ name, role, duration }) => {
             <p className="flex w-full items-end justify-between lg:justify-end">
                 <span className="text-lg font-light">{name}</span>
                 <span className="text-sm text-gray-300/50 md:text-lg">
-                    //{duration}
+                    {"//"}
+                    {duration}
                 </span>
             </p>
         </div>

@@ -7,7 +7,6 @@ import {
     Laugh,
     Send,
 } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import Link from "@/components/ui/link";
@@ -54,14 +53,9 @@ const DATA = {
 };
 
 const WithNav = () => {
-    const { pathname } = useLocation();
-    const navigate = useNavigate();
     const lenis = useLenis();
 
     const handleNav = (url: string) => {
-        if (pathname !== "/") {
-            return navigate("/");
-        }
         return lenis?.scrollTo(url);
     };
     return (
