@@ -20,7 +20,7 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                     href={`projects/${id}`}
                     className="group mt-4 flex h-full w-full items-center overflow-clip rounded-md border-2 border-gray-500"
                 >
-                    <div className="absolute inset-0 grid place-items-center bg-black/50 opacity-0 backdrop-blur-sm transition-none group-hover:opacity-100">
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-black/30 opacity-0 backdrop-blur-sm transition-none group-hover:opacity-100">
                         <div className="inset-0 font-cyborg text-xl text-white">
                             Visit me ?
                         </div>

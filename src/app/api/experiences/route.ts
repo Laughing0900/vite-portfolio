@@ -36,10 +36,7 @@ export async function GET() {
             from: getPropertyDate(properties.Duration, "date"),
             to: getPropertyDateEnd(properties.Duration, "date") || "Present",
             description: getPropertyValue(properties.Description, "rich_text"),
-            techStack: getPropertyMultiSelect(
-                properties.Skills,
-                "multi_select"
-            ),
+            techStack: getPropertyMultiSelect(properties.Skills),
         };
     });
 

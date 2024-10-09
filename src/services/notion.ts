@@ -26,6 +26,6 @@ export const getPropertyDate = (prop: any, type: string) =>
 export const getPropertyDateEnd = (prop: any, type: string) =>
     prop.type === type ? prop[type].end : "";
 
-export const getPropertyMultiSelect = (prop: any, type: string) => {
-    return prop.multi_select.map((item: any) => item.name);
+export const getPropertyMultiSelect = (prop: any) => {
+    return prop.multi_select.map((item: { name: string }) => item.name);
 };
