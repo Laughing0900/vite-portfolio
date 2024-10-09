@@ -29,6 +29,8 @@ const SKILL_ITEMS = [
     "mongoDB.svg",
     "PostgreSQL.svg",
     "Prisma.svg",
+    "Nx.svg",
+    "Neon.svg",
 ];
 const INNER_ICONS_COUNT = 6;
 const CENTER_ICONS_COUNT = 8;
