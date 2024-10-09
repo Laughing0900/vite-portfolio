@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import Image from "@/components/ui/image";

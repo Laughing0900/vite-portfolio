@@ -18,10 +18,9 @@ export const useProjectsDetails = ({
     data: ProjectType;
     isLoading: boolean;
 } => {
-    const { data: response, isLoading } = useSWR(
-        API_ENDPOINT + `project-details?id=${projectId}`,
-        fetcher
-    );
+    const url = API_ENDPOINT + `project-details?id=${projectId}`;
+    console.log(url);
+    const { data: response, isLoading } = useSWR(url, fetcher);
 
     const data = useMemo(() => {
         if (isLoading) {

@@ -303,7 +303,6 @@ const File = forwardRef<
     HTMLButtonElement,
     {
         value: string;
-        handleSelect?: (id: string) => void;
         isSelectable?: boolean;
         isSelect?: boolean;
         fileIcon?: React.ReactNode;
@@ -313,7 +312,6 @@ const File = forwardRef<
         {
             value,
             className,
-            handleSelect,
             isSelectable = true,
             isSelect,
             fileIcon,

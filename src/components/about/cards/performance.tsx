@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
@@ -95,12 +97,14 @@ const PerformanceCard = () => {
                                 variants={variants.line}
                                 will-change="transform"
                                 custom={i}
+                                stroke="#6cc070dd"
                             />
                             <motion.text
                                 fill="#717171"
                                 className="text-xl"
                                 x="50"
                                 y="50"
+                                stroke={"#71717166"}
                                 dx={"-12"}
                                 dy={"7.5"}
                                 variants={variants.text}

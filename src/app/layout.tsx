@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import "./index.css";
 
 export const metadata: Metadata = {
     title: "Laughing's Portfolio",

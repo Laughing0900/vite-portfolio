@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import ExperienceCard from "@/components/experience/contentCard/experienceCard";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import WithFooter from "@/components/layout/footer/footer";
 import FooterOverlay from "@/components/layout/footer/footerOverlay";
