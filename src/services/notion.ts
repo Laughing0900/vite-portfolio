@@ -4,8 +4,8 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 export default notion;
 
 export const certDatabaseId = process.env.CERT_DATABASE_ID || "";
-export const educationDatabaseId = process.env.EDUCATION_DATABASE_ID || "";
-export const projectDatabaseId = process.env.PROJECT_DATABASE_ID || "";
+export const expDatabaseId = process.env.EXP_DATABASE_ID || "";
+export const projectDatabaseId = process.env.PROJ_DATABASE_ID || "";
 
 export const activeFilter = {
     property: "Active",
@@ -22,3 +22,10 @@ export const getPropertyValue = (
 
 export const getPropertyDate = (prop: any, type: string) =>
     prop.type === type ? prop[type].start : "";
+
+export const getPropertyDateEnd = (prop: any, type: string) =>
+    prop.type === type ? prop[type].end : "";
+
+export const getPropertyMultiSelect = (prop: any, type: string) => {
+    return prop.multi_select.map((item: any) => item.name);
+};
