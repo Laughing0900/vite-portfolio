@@ -18,13 +18,13 @@ export default defineConfig({
         },
     },
     build: {
-        rollupOptions: {
-            external: ["react"],
-            output: {
-                globals: {
-                    react: "React",
-                },
-            },
-        },
+        // rollupOptions: {
+        //     external: ["react"],
+        //     output: {
+        //         globals: {
+        //             react: "React",
+        //         },
+        //     },
+        // },
     },
 });
