@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import useSWR from "swr";
 import { ProjectCardProps } from "@/components/project/types/projectTypes";
-import { API_ENDPOINT } from "@/consts/apis";
 import { fetcher } from "@/lib/utils";
 
 export type ProjectType = ProjectCardProps & {
@@ -19,8 +18,6 @@ export const useProjectsDetails = ({
     isLoading: boolean;
 } => {
     const url = `/api/project-details?id=${projectId}`;
-    // const url = API_ENDPOINT + `/project-details?id=${projectId}`;
-    console.log(url);
     const { data: response, isLoading } = useSWR(url, fetcher);
 
     const data = useMemo(() => {
