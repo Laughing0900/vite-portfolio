@@ -63,6 +63,8 @@ const SkillSetCard = () => {
                         src={`images/skills/${item}`}
                         alt={item}
                         loading="lazy"
+                        width={30}
+                        height={30}
                     />
                 </OrbitingCircles>
             ));

@@ -14,6 +14,8 @@ const ProjectCardSkeleton = () => {
                 className="absolute bottom-3 right-3 aspect-square w-12 opacity-10 drop-shadow md:w-20"
                 src={`images/pawn-white.svg`}
                 alt={"my-logo"}
+                width={48}
+                height={48}
             />
         </div>
     );

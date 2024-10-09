@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProjectCardInfo from "@/components/project/projectCardInfo";
 import { ProjectCardProps } from "@/components/project/types/projectTypes";
-import Image from "@/components/ui/image";
+import Image, { cloudinaryLoader } from "@/components/ui/image";
 import { cn } from "@/lib/utils";
 
 const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
@@ -26,11 +26,12 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                         </div>
                     </div>
                     <Image
-                        src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
-                        width="100%"
+                        src={`/project/${imageId}`}
                         className="h-full w-full object-cover"
                         alt="project image"
-                        loading="lazy"
+                        loader={cloudinaryLoader}
+                        fill={true}
+                        sizes="(min-width: 768px) 800px, (min-width: 640px) 600px, 600px"
                     />
                 </Link>
             </div>
@@ -42,6 +43,8 @@ const Card = ({ href, company, imageId, name, id }: ProjectCardProps) => {
                 className="absolute bottom-3 right-3 aspect-square w-12 opacity-10 drop-shadow md:w-20"
                 src={`images/pawn-white.svg`}
                 alt={"my-logo"}
+                width={48}
+                height={48}
             />
         </div>
     );

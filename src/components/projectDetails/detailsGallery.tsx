@@ -73,10 +73,10 @@ const DetailsGallery = ({ images }: { images: string[] }) => {
                                 >
                                     <Image
                                         src={item.image}
-                                        width="100%"
                                         className="h-full w-full object-contain object-center"
                                         alt="project image"
                                         loading="lazy"
+                                        fill={true}
                                     />
                                 </motion.div>
                             </div>

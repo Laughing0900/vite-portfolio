@@ -1,7 +1,7 @@
 "use client";
 
 import { cva } from "class-variance-authority";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import React, { PropsWithChildren, useRef } from "react";
 import { cn } from "@/lib/utils";
 import type { VariantProps } from "class-variance-authority";
@@ -69,7 +69,6 @@ export interface DockIconProps {
     size?: number;
     magnification?: number;
     distance?: number;
-    mouseX?: any;
     className?: string;
     children?: React.ReactNode;
     props?: PropsWithChildren;
@@ -78,38 +77,15 @@ export interface DockIconProps {
 const DockIcon = ({
     magnification = DEFAULT_MAGNIFICATION,
     distance = DEFAULT_DISTANCE,
-    mouseX,
     className,
     children,
     ...props
 }: DockIconProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const distanceCalc = useTransform(mouseX, (val: number) => {
-        const bounds = ref.current?.getBoundingClientRect() ?? {
-            x: 0,
-            width: 0,
-        };
-
-        return val - bounds.x - bounds.width / 2;
-    });
-
-    const widthSync = useTransform(
-        distanceCalc,
-        [-distance, 0, distance],
-        [40, magnification, 40]
-    );
-
-    const width = useSpring(widthSync, {
-        mass: 0.1,
-        stiffness: 150,
-        damping: 12,
-    });
-
     return (
-        <motion.div
+        <div
             ref={ref}
-            style={{ width }}
             className={cn(
                 "flex aspect-square cursor-pointer items-center justify-center rounded-full",
                 className
@@ -117,7 +93,7 @@ const DockIcon = ({
             {...props}
         >
             {children}
-        </motion.div>
+        </div>
     );
 };
 

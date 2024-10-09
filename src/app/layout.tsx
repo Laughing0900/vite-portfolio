@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import "./index.css";
+import { cyborg, k2d } from "@/lib/fonts/font";
 
 export const metadata: Metadata = {
     title: "Laughing's Portfolio",
@@ -15,7 +16,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" className={`${cyborg.variable} ${k2d.variable}`}>
             <body>
                 <div id="root">{children}</div>
             </body>

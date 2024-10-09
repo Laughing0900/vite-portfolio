@@ -62,8 +62,8 @@ const config = {
         },
         extend: {
             fontFamily: {
-                k2d: ["K2D", "sans-serif"],
-                cyborg: ["Cyborg", "sans-serif"],
+                k2d: ["var(--font-k2d)", "sans-serif"],
+                cyborg: ["var(--font-cyborg)", "sans-serif"],
             },
             colors: {
                 border: "var(--border)",

@@ -97,7 +97,7 @@ const PerformanceCard = () => {
                                 variants={variants.line}
                                 will-change="transform"
                                 custom={i}
-                                stroke="#6cc070dd"
+                                stroke="#71717166"
                             />
                             <motion.text
                                 fill="#717171"

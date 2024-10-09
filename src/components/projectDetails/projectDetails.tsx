@@ -8,7 +8,7 @@ import MainLayout from "@/components/layout/mainLayout";
 import DetailsGallery from "@/components/projectDetails/detailsGallery";
 import { useProjectsDetails } from "@/components/projectDetails/hooks/useProjectsDetails";
 import ProjectDetailsSkeleton from "@/components/projectDetails/skeletons/projectDetailsSkeletons";
-import Image from "@/components/ui/image";
+import Image, { cloudinaryLoader } from "@/components/ui/image";
 import {
     Tooltip,
     TooltipContent,
@@ -90,12 +90,15 @@ const ProjectDetails: React.FC<{ id: string }> = ({ id }) => {
 
                     {/* right */}
                     <div className="col-span-full h-fit space-y-10 lg:col-span-5">
-                        <Image
-                            src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,q_auto/v1/Pawn/portfolio/project/${imageId}`}
-                            width="100%"
-                            className="object-cove h-full w-full rounded-8"
-                            alt="project image"
-                        />
+                        <div className="relative aspect-video w-full rounded-8">
+                            <Image
+                                src={`/project/${imageId}`}
+                                loader={cloudinaryLoader}
+                                className="rounded-8 object-cover"
+                                alt="project image"
+                                fill={true}
+                            />
+                        </div>
 
                         <div
                             dangerouslySetInnerHTML={{

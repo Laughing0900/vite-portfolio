@@ -2,51 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: "Cyborg";
-    src: url("/fonts/Cyborg.woff2");
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "K2D";
-    src: url("/fonts/K2D-Light.woff2");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "K2D";
-    src: url("/fonts/K2D-Regular.woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: "K2D";
-    src: url("/fonts/K2D-Medium.woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "K2D";
-    src: url("/fonts/K2D-SemiBold.woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "K2D";
-    src: url("/fonts/K2D-Bold.woff2");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
 @layer base {
     :root {
         --background: #1c1c1e;
