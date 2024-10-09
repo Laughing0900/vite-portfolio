@@ -1,6 +1,6 @@
 ## Project Name & Pitch
 
-Site: https://laughing0900.github.io/vite-portfolio/
+Site: [https://laughing-portfolio.vercel.app](https://laughing-portfolio.vercel.app/)
 
 This is laughing's project portfolio. 
 
