@@ -6,7 +6,9 @@ export async function generateStaticParams() {
         res.json()
     );
     const projects = data.body;
-
+    if (projects.length === 0) {
+        return [];
+    }
     return projects.map((post: any) => ({
         id: post.id,
     }));
