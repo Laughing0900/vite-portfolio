@@ -2,11 +2,18 @@
 
 Site: [https://laughing-portfolio.vercel.app](https://laughing-portfolio.vercel.app/)
 
-This is laughing's project portfolio. 
+This is laughing's project portfolio.
 
 ## Project Status
 
 This project is currently in development. 
+
+#### Recent Activity
+
+- [ ] Move to App router
+- [x] Replace all Image/Font/Link to Next.js component
+- [x] Migrate Vite to Next.js
+
 
 ## Installation and Setup Instructions
 
@@ -24,4 +31,4 @@ To Start Server:
 
 To Visit App:
 
-`http://localhost:3000/vite-portfolio/`  
+`http://localhost:3000/`  
