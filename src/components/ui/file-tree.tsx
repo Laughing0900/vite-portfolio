@@ -260,7 +260,7 @@ const Folder = forwardRef<
                         className,
                         {
                             "rounded-md bg-muted": isSelect && isSelectable,
-                            "cursor-pointer": isSelectable,
+                            "cursor-pointer hover:opacity-75": isSelectable,
                             "cursor-not-allowed opacity-50": !isSelectable,
                         }
                     )}
@@ -336,7 +336,7 @@ const File = forwardRef<
                             "bg-muted": isSelected && isSelectable,
                         },
                         isSelectable
-                            ? "cursor-pointer"
+                            ? "cursor-pointer hover:opacity-75"
                             : "cursor-not-allowed opacity-50",
                         className
                     )}
