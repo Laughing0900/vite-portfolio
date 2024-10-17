@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { ProjectCardProps } from "@/components/project/types/projectTypes";
 import { API_ENDPOINT, BASE_URL } from "@/consts/apis";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -7,11 +8,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     );
     const projects = data.body;
 
-    const projectSitemap = projects.map((project: any) => ({
-        url: `${BASE_URL}/project/${project.id}`,
-        changeFrequency: "yearly",
-        priority: 0.8,
-    }));
+    let projectSitemap: MetadataRoute.Sitemap = [];
+    if (projects && projects.length > 0) {
+        projectSitemap = projects.map((project: ProjectCardProps) => ({
+            url: `${BASE_URL}/project/${project.id}`,
+            changeFrequency: "yearly",
+            priority: 0.8,
+        }));
+    }
 
     return [
         {

@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 
+// @deprecated
 const GridBackground: FC<PropsWithChildren> = ({ children }) => {
     return (
         <div className="sticky top-0 h-dvh w-full">

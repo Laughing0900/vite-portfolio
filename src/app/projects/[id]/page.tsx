@@ -1,3 +1,4 @@
+import { ProjectCardProps } from "@/components/project/types/projectTypes";
 import ProjectDetails from "@/components/projectDetails/projectDetails";
 import { API_ENDPOINT } from "@/consts/apis";
 
@@ -6,10 +7,10 @@ export async function generateStaticParams() {
         res.json()
     );
     const projects = data.body;
-    if (projects.length === 0) {
+    if (!projects || projects.length === 0) {
         return [];
     }
-    return projects.map((post: any) => ({
+    return projects.map((post: ProjectCardProps) => ({
         id: post.id,
     }));
 }

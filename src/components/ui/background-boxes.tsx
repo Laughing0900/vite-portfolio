@@ -3,6 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 /// @description this component install from Aceternity UI
+// @deprecated
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
     const rows = new Array(60).fill(1);
     const cols = new Array(50).fill(1);
