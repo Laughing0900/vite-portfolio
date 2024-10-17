@@ -46,7 +46,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
                 if (React.isValidElement(child) && child.type === DockIcon) {
                     return React.cloneElement(child, {
                         ...child.props,
-                        mouseMove: mouseMove,
+                        mouseX: mouseMove,
                         magnification: magnification,
                         distance: distance,
                     });
@@ -78,7 +78,7 @@ Dock.displayName = "Dock";
 export interface DockIconProps {
     magnification?: number;
     distance?: number;
-    mouseMove: MotionValue<number>;
+    mouseX?: any;
     className?: string;
     children?: React.ReactNode;
     props?: PropsWithChildren;
@@ -87,14 +87,14 @@ export interface DockIconProps {
 const DockIcon = ({
     magnification = DEFAULT_MAGNIFICATION,
     distance = DEFAULT_DISTANCE,
-    mouseMove,
+    mouseX,
     className,
     children,
     ...props
 }: DockIconProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const distanceCalc = useTransform(mouseMove, (val: number) => {
+    const distanceCalc = useTransform(mouseX, (val: number) => {
         const bounds = ref.current?.getBoundingClientRect() ?? {
             x: 0,
             width: 0,
