@@ -1,7 +1,7 @@
 import ChartCard from "@/components/about/cards/chart";
 import DirectoryCard from "@/components/about/cards/directory";
 import PerformanceCard from "@/components/about/cards/performance";
-import SkillSetCard from "@/components/about/cards/skillSet";
+import SkillCloud from "@/components/about/cards/skillCloud";
 import TimeLineCard from "@/components/about/cards/timeLine";
 
 const items = [
@@ -52,7 +52,7 @@ const items = [
                 Harness a diverse skill set to drive your project to success.
             </span>
         ),
-        header: <SkillSetCard />,
+        header: <SkillCloud />,
         className: "lg:col-span-3 md:col-span-6 col-span-3",
     },
 ];
