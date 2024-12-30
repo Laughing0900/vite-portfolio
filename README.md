@@ -32,3 +32,12 @@ To Start Server:
 To Visit App:
 
 `http://localhost:3000/`  
+
+## Roadmap
+
+[x] First launch Home page
+[x] Project Details page first look
+[x] move to next.js 14
+[] replace to server component 
+[] 3d background
+[] tbd
