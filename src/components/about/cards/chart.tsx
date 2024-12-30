@@ -22,8 +22,8 @@ const chartConfig = {
 const ChartCard = () => {
     return (
         <CardContainer>
-            <div className="size-full">
-                <ChartContainer config={chartConfig}>
+            <div className="flex size-full items-center justify-center overflow-clip">
+                <ChartContainer config={chartConfig} className="h-full">
                     <AreaChart data={chartData}>
                         <defs>
                             <linearGradient

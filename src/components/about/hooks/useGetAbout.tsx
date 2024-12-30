@@ -6,6 +6,16 @@ import TimeLineCard from "@/components/about/cards/timeLine";
 
 const items = [
     {
+        title: "Versatile",
+        description: (
+            <span className="text-sm">
+                Harness a diverse skill set to drive your project to success.
+            </span>
+        ),
+        header: <SkillCloud />,
+        className: "md:col-span-8 xl:col-span-3 col-span-1 row-span-2",
+    },
+    {
         title: "Lightning-Fast",
         description: (
             <span className="text-sm">
@@ -13,7 +23,7 @@ const items = [
             </span>
         ),
         header: <PerformanceCard />,
-        className: "lg:col-span-2 col-span-3",
+        className: "md:col-span-3 xl:col-span-2 col-span-1",
     },
     {
         title: "Structure",
@@ -23,17 +33,7 @@ const items = [
             </span>
         ),
         header: <DirectoryCard />,
-        className: "lg:col-span-2 col-span-3",
-    },
-    {
-        title: "Productivity",
-        description: (
-            <span className="text-sm">
-                Maximize efficiency and streamline production processes.
-            </span>
-        ),
-        header: <ChartCard />,
-        className: "lg:col-span-2 col-span-3",
+        className: "md:col-span-5 xl:col-span-3 col-span-1",
     },
     {
         title: "Schedule",
@@ -43,17 +43,17 @@ const items = [
             </span>
         ),
         header: <TimeLineCard />,
-        className: "lg:col-span-3 col-span-3",
+        className: "md:col-span-5 xl:col-span-3 col-span-1",
     },
     {
-        title: "Versatile",
+        title: "Productivity",
         description: (
             <span className="text-sm">
-                Harness a diverse skill set to drive your project to success.
+                Maximize efficiency and streamline production processes.
             </span>
         ),
-        header: <SkillCloud />,
-        className: "lg:col-span-3 md:col-span-6 col-span-3",
+        header: <ChartCard />,
+        className: "md:col-span-3 xl:col-span-2 col-span-1",
     },
 ];
 
