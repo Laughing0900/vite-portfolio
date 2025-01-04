@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import "./index.css";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { cyborg, k2d } from "@/lib/fonts/font";
 
 export const metadata: Metadata = {
@@ -19,6 +21,8 @@ export default function RootLayout({
         <html lang="en" className={`${cyborg.variable} ${k2d.variable}`}>
             <body>
                 <div id="root">{children}</div>
+                <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
