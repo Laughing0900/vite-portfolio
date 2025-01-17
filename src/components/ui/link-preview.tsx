@@ -78,7 +78,10 @@ export const LinkPreview = ({
             >
                 <HoverCardPrimitive.Trigger
                     onMouseMove={handleMouseMove}
-                    className={cn("w-full text-white", className)}
+                    className={cn(
+                        "w-full cursor-pointer text-white",
+                        className
+                    )}
                 >
                     {children}
                 </HoverCardPrimitive.Trigger>
