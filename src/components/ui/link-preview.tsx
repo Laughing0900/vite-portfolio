@@ -9,7 +9,6 @@ import {
 } from "framer-motion";
 import React, { useEffect } from "react";
 import Image, { cloudinaryLoader } from "@/components/ui/image";
-import Link from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 
 type LinkPreviewProps = {
@@ -80,7 +79,6 @@ export const LinkPreview = ({
                 <HoverCardPrimitive.Trigger
                     onMouseMove={handleMouseMove}
                     className={cn("w-full text-white", className)}
-                    href={url}
                 >
                     {children}
                 </HoverCardPrimitive.Trigger>
@@ -110,14 +108,7 @@ export const LinkPreview = ({
                                     x: translateX,
                                 }}
                             >
-                                <Link
-                                    href={url}
-                                    className="block rounded-xl bg-gray-400/50 p-1 shadow"
-                                    style={{ fontSize: 0 }}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {/* <div className="h-40 w-40 bg-gray-500"></div> */}
+                                <div className="rounded-xl bg-gray-500/50 p-1 shadow">
                                     <Image
                                         src={src}
                                         loader={cloudinaryLoader}
@@ -127,7 +118,7 @@ export const LinkPreview = ({
                                         alt="preview image"
                                         loading="lazy"
                                     />
-                                </Link>
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>

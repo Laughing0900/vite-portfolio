@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { CertificateType } from "@/components/certificate/type/certificateTypes";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
@@ -23,7 +22,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                 return (
                     <LinkPreview
                         imageSrc={`/cert/${item.imageId}`}
-                        url={item.href || `/portfolio/cert/${item.imageId}`}
+                        url={item.href || `/cert/${item.imageId}`}
                         className={cn(
                             "group relative col-span-4 overflow-hidden py-4 md:col-span-3 md:col-start-2",
                             index !== items.length - 1 &&
@@ -31,11 +30,8 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                         )}
                         key={item.title}
                     >
-                        <span className="max-w-sm">
-                            {item.title}
-                            <ArrowUpRight className="inline-block group-hover:inline-block md:hidden" />
-                        </span>
-                        <div className="absolute -bottom-1 right-0 -z-10 transform text-6xl font-light text-secondary opacity-0 group-hover:opacity-40">
+                        <span className="max-w-sm">{item.title}</span>
+                        <div className="absolute -bottom-1 left-0 -z-10 transform text-nowrap text-6xl font-light text-secondary opacity-0 group-hover:opacity-40">
                             {item.institution}
                         </div>
                     </LinkPreview>
