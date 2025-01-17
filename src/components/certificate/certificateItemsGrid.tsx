@@ -22,7 +22,7 @@ const CertificateItemsGrid: FC<CertificateItemsGridProps> = ({
                 return (
                     <LinkPreview
                         imageSrc={`/cert/${item.imageId}`}
-                        url={item.href || `/cert/${item.imageId}`}
+                        // url={item.href || `/cert/${item.imageId}`}
                         className={cn(
                             "group relative col-span-4 overflow-hidden py-4 md:col-span-3 md:col-start-2",
                             index !== items.length - 1 &&
