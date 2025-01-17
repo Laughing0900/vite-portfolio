@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 type LinkPreviewProps = {
     children: React.ReactNode;
-    url: string;
+    // url: string;
     className?: string;
     width?: number;
     height?: number;
@@ -25,7 +25,7 @@ type LinkPreviewProps = {
 /// @description this component install from Aceternity UI
 export const LinkPreview = ({
     children,
-    url,
+    // url,
     className,
     width = 300,
     height = 150,
