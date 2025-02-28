@@ -86,6 +86,8 @@ html {
     --fifth-color: 180, 180, 50;
     --pointer-color: 140, 100, 255;
     --size: 120%;
+
+    scroll-behavior: smooth;
 }
 
 h1,

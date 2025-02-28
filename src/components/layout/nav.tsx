@@ -1,4 +1,3 @@
-import { useLenis } from "lenis/react";
 import {
     AppWindowMac,
     Building2,
@@ -53,11 +52,6 @@ const DATA = {
 };
 
 const WithNav = () => {
-    const lenis = useLenis();
-
-    const handleNav = (url: string) => {
-        return lenis?.scrollTo(url);
-    };
     return (
         <div className="fixed bottom-5 left-0 z-50 w-full">
             <TooltipProvider>
@@ -66,8 +60,8 @@ const WithNav = () => {
                         <DockIcon key={name}>
                             <Tooltip delayDuration={200}>
                                 <TooltipTrigger>
-                                    <div
-                                        onClick={() => handleNav(content.url)}
+                                    <Link
+                                        href={content.url}
                                         className={cn(
                                             buttonVariants({
                                                 variant: "ghost",
@@ -77,7 +71,7 @@ const WithNav = () => {
                                         )}
                                     >
                                         <content.icon className="size-4" />
-                                    </div>
+                                    </Link>
                                 </TooltipTrigger>
                                 <TooltipContent sticky="always">
                                     <p>{content.name}</p>

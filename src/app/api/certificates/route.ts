@@ -9,6 +9,7 @@ import notion, {
     getPropertyValue,
 } from "@/services/notion";
 
+// $ curl -X GET "http://localhost:3000/api/certificates"
 export async function GET() {
     const data = await notion.databases.query({
         database_id: certDatabaseId,
