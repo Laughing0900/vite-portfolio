@@ -19,9 +19,7 @@ const Project = () => {
     const { projects, isLoading } = useProjects();
 
     const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-    });
+    const { scrollYProgress } = useScroll({ target: containerRef });
 
     const cardWidth =
         CARD_WIDTHS[breakpoint as Breakpoint] || CARD_WIDTHS.default;
@@ -51,7 +49,7 @@ const Project = () => {
 
     return (
         <section
-            id="project"
+            // id="project"
             ref={containerRef}
             className="pointer-events-none relative"
             style={{ height: `${containerHeight}px` }}
