@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
 import useBreakpoint from "@/hooks/useBreakpoint";

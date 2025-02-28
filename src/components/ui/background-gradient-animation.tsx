@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue } from "motion/react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 

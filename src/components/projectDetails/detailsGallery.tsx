@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useMemo, useRef } from "react";
 import Image from "@/components/ui/image";
 import useBreakpoint from "@/hooks/useBreakpoint";

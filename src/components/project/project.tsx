@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useMemo, useRef } from "react";
 import { useProjects } from "@/components/project/hooks/useProjects";
 import { ProjectCard } from "@/components/project/projectCard";

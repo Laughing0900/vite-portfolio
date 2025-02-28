@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import { useCallback } from "react";
 import useBreakpoint from "@/hooks/useBreakpoint";
 import useDevice from "@/hooks/useDevice";

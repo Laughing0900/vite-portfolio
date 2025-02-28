@@ -6,7 +6,7 @@ import {
     motion,
     useMotionValue,
     useSpring,
-} from "framer-motion";
+} from "motion/react";
 import React, { useEffect } from "react";
 import Image, { cloudinaryLoader } from "@/components/ui/image";
 import { cn } from "@/lib/utils";

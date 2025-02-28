@@ -1,4 +1,4 @@
-import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, MotionValue, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import ExperienceDesc from "@/components/experience/contentCard/experienceDesc";
 import TechSkill from "@/components/experience/contentCard/techSkill";

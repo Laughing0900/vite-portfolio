@@ -1,4 +1,4 @@
-import { easeInOut, motion } from "framer-motion";
+import { easeInOut, motion } from "motion/react";
 import { useMemo } from "react";
 import CardContainer from "@/components/about/cards/cardContainer";
 import useBreakpoint from "@/hooks/useBreakpoint";

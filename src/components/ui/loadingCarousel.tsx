@@ -9,7 +9,7 @@ import {
     MotionProps,
     useAnimation,
     Variants,
-} from "framer-motion";
+} from "motion/react";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
