@@ -3,6 +3,7 @@
 "use client";
 
 import Autoplay from "embla-carousel-autoplay";
+import { ChevronRight } from "lucide-react";
 import {
     AnimatePresence,
     motion,
@@ -10,7 +11,6 @@ import {
     useAnimation,
     Variants,
 } from "motion/react";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import {
