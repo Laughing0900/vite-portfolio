@@ -16,22 +16,18 @@ const Talent = memo(() => {
     target: container,
   });
 
-  useEffect(() => {
-    if (!container.current) {
-      return;
-    }
-
-    window.snap.addElement(container.current, {
-      align: ["start", "end"],
-    });
-  }, []);
-
   const opacity = [
     useTransform(scrollYProgress, [0.1, 0.4], [0, 1]),
     useTransform(scrollYProgress, [0.3, 0.5], [0, 1]),
     useTransform(scrollYProgress, [0.75, 0.9], [0, 1]),
     useTransform(scrollYProgress, [0.75, 0.9], [0, 1]),
   ];
+
+  useEffect(() => {
+    window.snap.addElement(document.getElementById("talent") as HTMLElement, {
+      align: ["start"],
+    });
+  }, []);
 
   return (
     <section id="talent" ref={container}>

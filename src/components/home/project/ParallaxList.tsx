@@ -46,7 +46,7 @@ const ParallaxList = memo(({ project, index }: ParallaxListProps) => {
       >
         <p>#{index}</p>
         <h2 className="text-right text-4xl">{project.name}</h2>
-        <div className="-translate-y-1/2 absolute top-[1ch] right-0 h-6 w-6 translate-x-1/2 rotate-45 rounded-full border-4 border-primary max-md:hidden" />
+        <div className="-translate-y-1/2 -right-2 absolute top-[1ch] h-6 w-6 translate-x-1/2 rotate-45 rounded-full border-4 border-primary max-md:hidden" />
       </motion.div>
       <p
         className={cn(

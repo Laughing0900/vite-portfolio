@@ -13,7 +13,7 @@ const lenis = new Lenis({ lerp: 0.25 });
 
 const snap = new Snap(lenis, {
   type: "mandatory",
-  velocityThreshold: 0.9,
+  velocityThreshold: 1,
 });
 
 window.lenis = lenis;

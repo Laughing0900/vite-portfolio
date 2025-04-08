@@ -14,7 +14,7 @@ const Experience = memo(() => {
       window.snap.addElement(
         document.getElementById(`${exp.company}-experience`) as HTMLElement,
         {
-          align: ["center", "center"],
+          align: ["start", "end"],
         },
       );
     }

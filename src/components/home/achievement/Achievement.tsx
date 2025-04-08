@@ -5,10 +5,9 @@ import { credentials } from "@/components/home/achievement/constants/credentials
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import RightTitleCard from "@/components/views/RightTitleCard";
 import { useMotionValue, useSpring } from "motion/react";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 const Achievement = memo(() => {
-  const container = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<null | {
     side: "academic" | "credentials";
     imageId: string;
@@ -51,20 +50,20 @@ const Achievement = memo(() => {
   };
 
   useEffect(() => {
-    if (!container.current) {
-      return;
-    }
-    window.snap.addElement(container.current, {
-      align: ["start", "end"],
-    });
+    window.snap.addElement(
+      document.getElementById("achievement") as HTMLElement,
+      {
+        align: ["start"],
+      },
+    );
   }, []);
 
   return (
-    <section id="achievement" className="text-shadow-base" ref={container}>
+    <section id="achievement" className="text-shadow-base">
       <LeftTitleCard title="Credentials" />
       <RightTitleCard title="Academic" className="max-lg:hidden" />
 
-      <div className="container grid grid-cols-1 divide-x-2 divide-accent lg:grid-cols-2">
+      <div className="container grid grid-cols-1 divide-accent lg:grid-cols-2 lg:divide-x-2">
         <AchievementPreview
           selected={selected}
           translateX={translateX}
