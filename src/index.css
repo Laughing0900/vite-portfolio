@@ -87,7 +87,7 @@
   }
 
   section {
-    @apply snap-start h-fit min-h-dvh relative;
+    @apply h-fit min-h-dvh relative;
   }
 
   .text-title{
@@ -122,11 +122,6 @@
 * {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-}
-
-html {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
 }
 
 address {

@@ -1,7 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import HomePage from "@/pages/Home";
 import NotFoundPage from "@/pages/NotFound";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ReactLenis } from "lenis/react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -28,12 +29,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-export function AppRouter() {
-  return <RouterProvider router={router} />;
-}
-
 function App() {
-  return <AppRouter />;
+  return (
+    <ReactLenis root>
+      <RouterProvider router={router} />
+    </ReactLenis>
+  );
 }
 
 export default App;

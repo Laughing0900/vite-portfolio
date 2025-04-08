@@ -2,7 +2,7 @@ import ParallaxList from "@/components/home/project/ParallaxList";
 import LeftMenu from "@/components/views/LeftMenu";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useRef, useState, useCallback, useMemo, memo } from "react";
+import { memo, useCallback, useMemo, useRef, useState } from "react";
 import PreviewCard from "./PreviewCard";
 import { projects as projectRecords } from "./constants/ProjectHistories";
 
