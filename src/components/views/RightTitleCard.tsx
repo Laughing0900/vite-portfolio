@@ -15,7 +15,7 @@ const RightTitleCard = memo(({ title, className }: RightTitleCardProps) => {
           className,
         )}
       >
-        <div className="absolute right-0">
+        <div className="absolute right-0 px-5">
           <h2>{title}</h2>
         </div>
       </div>

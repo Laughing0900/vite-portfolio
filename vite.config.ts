@@ -8,7 +8,8 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [
     MillionLint.vite({
-      enabled: process.env.NODE_ENV !== "production",
+      // enabled: process.env.NODE_ENV !== "production",
+      enabled: false,
     }),
     react(),
     tailwindcss(),
