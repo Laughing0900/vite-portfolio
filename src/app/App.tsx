@@ -1,7 +1,7 @@
+import LenisProvider from "@/app/providers/LenisProvider";
 import Layout from "@/components/layout/Layout";
 import HomePage from "@/pages/Home";
 import NotFoundPage from "@/pages/NotFound";
-import { ReactLenis } from "lenis/react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -31,9 +31,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ReactLenis root>
+    <LenisProvider>
       <RouterProvider router={router} />
-    </ReactLenis>
+    </LenisProvider>
   );
 }
 

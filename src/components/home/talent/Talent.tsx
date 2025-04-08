@@ -5,15 +5,27 @@ import Skills from "@/components/home/talent/cards/Skills";
 import Structure from "@/components/home/talent/cards/Structure";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
+
 import { motion, useScroll, useTransform } from "motion/react";
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 
 const Talent = memo(() => {
   const isLg = useMediaQuery("lg");
-  const container = useRef(null);
+  const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
   });
+
+  useEffect(() => {
+    if (!container.current) {
+      return;
+    }
+
+    window.snap.addElement(container.current, {
+      align: ["start", "end"],
+    });
+  }, []);
+
   const opacity = [
     useTransform(scrollYProgress, [0.1, 0.4], [0, 1]),
     useTransform(scrollYProgress, [0.3, 0.5], [0, 1]),

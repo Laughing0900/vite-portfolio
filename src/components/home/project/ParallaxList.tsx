@@ -15,7 +15,7 @@ const ParallaxList = memo(({ project, index }: ParallaxListProps) => {
 
   return (
     <div
-      className="relative flex h-max-container snap-center items-end justify-end shadow-2xs md:items-center"
+      className="relative flex h-max-container items-end justify-end shadow-2xs md:items-center"
       ref={ref}
       id={`${project.id}-project`}
     >

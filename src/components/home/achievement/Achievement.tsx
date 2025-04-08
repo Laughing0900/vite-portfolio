@@ -5,9 +5,10 @@ import { credentials } from "@/components/home/achievement/constants/credentials
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import RightTitleCard from "@/components/views/RightTitleCard";
 import { useMotionValue, useSpring } from "motion/react";
-import { memo, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 const Achievement = memo(() => {
+  const container = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<null | {
     side: "academic" | "credentials";
     imageId: string;
@@ -49,8 +50,17 @@ const Achievement = memo(() => {
     y.set(0);
   };
 
+  useEffect(() => {
+    if (!container.current) {
+      return;
+    }
+    window.snap.addElement(container.current, {
+      align: ["start", "end"],
+    });
+  }, []);
+
   return (
-    <section id="achievement" className="text-shadow-base">
+    <section id="achievement" className="text-shadow-base" ref={container}>
       <LeftTitleCard title="Credentials" />
       <RightTitleCard title="Academic" className="max-lg:hidden" />
 
