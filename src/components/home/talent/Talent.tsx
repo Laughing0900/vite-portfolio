@@ -25,7 +25,7 @@ const Talent = memo(() => {
 
   useEffect(() => {
     window.snap.addElement(document.getElementById("talent") as HTMLElement, {
-      align: ["start"],
+      align: ["start", "end"],
     });
   }, []);
 
