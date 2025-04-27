@@ -2,7 +2,7 @@ import { scrollAtom } from "@/atoms/scrollAtom";
 import type { Projects } from "@/components/home/project/constants/ProjectHistories";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
-import { motion } from "motion/react";
+import { motion, px } from "motion/react";
 
 type PreviewCardProps = {
   project: Projects;
@@ -23,20 +23,24 @@ const PreviewCard = ({
       }}
     >
       <div className="background-radial sticky top-0 right-0 grid h-dvh w-full place-items-center">
-        <motion.div
-          className="absolute aspect-square w-4/5 origin-right delay-75 duration-150"
+        <div
+          className=" absolute aspect-13/9 w-4/5 origin-right"
           style={{
-            opacity: onScroll ? 0 : 1,
-            scaleX: onScroll ? 0.95 : 1,
-            translateX: onScroll ? 10 : 0,
+            background:
+              "repeating-linear-gradient(60deg, transparent,transparent 15px,var(--accent) 0,var(--accent) 30px)",
           }}
         >
-          <img
+          <motion.img
             src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,c_limit,w_3840,q_auto/v1/Pawn/portfolio/project/${previewImageId}`}
             alt={`${name} preview`}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover delay-75 duration-150"
+            style={{
+              opacity: onScroll ? 0 : 1,
+              scaleX: onScroll ? 0.95 : 1,
+              translateX: onScroll ? 10 : 0,
+            }}
           />
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );
