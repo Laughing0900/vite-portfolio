@@ -3,7 +3,7 @@ import BackgroundGraphic from "@/components/layout/BackgroundGraphic";
 import Footer from "@/components/layout/Footer";
 import Nav from "@/components/layout/nav";
 import { DotPattern } from "@/components/ui/magicui/dot-pattern";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
@@ -14,7 +14,9 @@ const Layout = () => {
       <Outlet />
       <div className="pointer-events-none fixed top-0 min-h-dvh w-full">
         <BackgroundGraphic />
-        <BrandIcon className="pt-5 pl-5" />
+        <Link to="/" className="pointer-events-auto">
+          <BrandIcon className="pt-5 pl-5" />
+        </Link>
       </div>
       <Nav />
       <Footer />
