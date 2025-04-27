@@ -16,18 +16,19 @@ const PreviewCard = ({
   return (
     <motion.div
       className={cn(
-        "absolute top-0 right-0 z-10 h-full w-1/2 transition-opacity duration-500 max-md:hidden",
+        "absolute top-0 right-0 z-10 h-full w-1/2 transition-opacity duration-250 max-md:hidden",
       )}
       style={{
-        opacity: onScroll ? 0 : 1,
+        opacity: onScroll ? 0.7 : 1,
       }}
     >
       <div className="background-radial sticky top-0 right-0 grid h-dvh w-full place-items-center">
         <motion.div
-          className="absolute aspect-square w-4/5 delay-75"
+          className="absolute aspect-square w-4/5 origin-right delay-75 duration-150"
           style={{
             opacity: onScroll ? 0 : 1,
-            scale: onScroll ? 0.98 : 1,
+            scaleX: onScroll ? 0.95 : 1,
+            translateX: onScroll ? 10 : 0,
           }}
         >
           <img

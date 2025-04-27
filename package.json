@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@million/lint": "^1.0.14",
+    "@radix-ui/react-slot": "^1.2.0",
     "@react-three/fiber": "^9.1.2",
     "@tabler/icons-react": "^3.31.0",
     "@tailwindcss/vite": "^4.0.15",
@@ -21,7 +22,6 @@
     "@types/three": "^0.175.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.6.3",
     "jotai": "^2.12.2",
     "lenis": "^1.2.3",
     "lucide-react": "^0.486.0",
