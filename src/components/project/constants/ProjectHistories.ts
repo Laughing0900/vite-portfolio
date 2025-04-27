@@ -8,6 +8,14 @@ export type Projects = {
 
 export const projects: Projects[] = [
   {
+    id: "bitbot",
+    name: "bitbot.tg",
+    company: "Bitbot",
+    previewImageId: "mwwr7szg97nxmwa0fnus",
+    shorts:
+      "The ultimate Telegram MEME trading protocol that seamlessly combines intuitive usability, lightning-fast performance, and military-grade security.",
+  },
+  {
     id: "knightsafe",
     name: "KnightSafe",
     company: "KS Lab",
