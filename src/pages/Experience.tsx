@@ -1,5 +1,5 @@
-import Achievement from "@/components/home/achievement/Achievement";
-import Experience from "@/components/home/experience/experience";
+import Achievement from "@/components/achievement/Achievement";
+import Experience from "@/components/experience/Experience";
 
 const ExperiencePage = () => {
   return (

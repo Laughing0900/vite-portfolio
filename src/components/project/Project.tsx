@@ -1,8 +1,8 @@
-import ParallaxList from "@/components/home/project/ParallaxList";
+import ParallaxList from "@/components/project/ParallaxList";
 import LeftMenu from "@/components/views/LeftMenu";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { memo, useCallback, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PreviewCard from "./PreviewCard";
 import { projects as projectRecords } from "./constants/ProjectHistories";
 const Project = memo(() => {
@@ -14,6 +14,17 @@ const Project = memo(() => {
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     setSelectedIndex(Math.round(latest / pageSize));
   });
+
+  useEffect(() => {
+    for (const project of projects) {
+      window.snap.addElement(
+        document.getElementById(`${project.id}-project`) as HTMLElement,
+        {
+          align: ["center", "center"],
+        },
+      );
+    }
+  }, [projects]);
 
   const getLinkStyle = useCallback(
     (index: number) => ({

@@ -1,8 +1,8 @@
 import { scrollAtom } from "@/atoms/scrollAtom";
-import type { Projects } from "@/components/home/project/constants/ProjectHistories";
+import type { Projects } from "@/components/project/constants/ProjectHistories";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
-import { motion, px } from "motion/react";
+import { motion } from "motion/react";
 
 type PreviewCardProps = {
   project: Projects;

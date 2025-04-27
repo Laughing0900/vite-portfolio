@@ -1,4 +1,4 @@
-import data from "@/components/home/experience/constants/legacy";
+import data from "@/components/experience/constants/legacy";
 import { Timeline } from "@/components/ui/aceternity/timeline";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import { memo } from "react";

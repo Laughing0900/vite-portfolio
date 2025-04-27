@@ -1,6 +1,6 @@
 import Lenis from "lenis";
 import { ReactLenis } from "lenis/react";
-import type Snap from "lenis/snap";
+import Snap from "lenis/snap";
 
 declare global {
   interface Window {
@@ -9,15 +9,17 @@ declare global {
   }
 }
 
-const lenis = new Lenis({ lerp: 0.25 });
+const lenis = new Lenis({ lerp: 0.1 });
 
-// const snap = new Snap(lenis, {
-//   type: "mandatory",
-//   velocityThreshold: 1,
-// });
+const snap = new Snap(lenis, {
+  type: "mandatory",
+  debounce: 0,
+  velocityThreshold: 1,
+  duration: 1.5,
+});
 
 window.lenis = lenis;
-// window.snap = snap;
+window.snap = snap;
 
 // snap.add(0, {
 //   index: 0,

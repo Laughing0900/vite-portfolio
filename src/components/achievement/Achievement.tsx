@@ -1,7 +1,7 @@
-import { AchievementItem } from "@/components/home/achievement/AchievementItem";
-import { AchievementPreview } from "@/components/home/achievement/components/AchievementPreview";
-import { academic } from "@/components/home/achievement/constants/academic";
-import { credentials } from "@/components/home/achievement/constants/credentials";
+import { AchievementItem } from "@/components/achievement/AchievementItem";
+import { AchievementPreview } from "@/components/achievement/components/AchievementPreview";
+import { academic } from "@/components/achievement/constants/academic";
+import { credentials } from "@/components/achievement/constants/credentials";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import RightTitleCard from "@/components/views/RightTitleCard";
 import { useMotionValue, useSpring } from "motion/react";
