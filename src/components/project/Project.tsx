@@ -49,7 +49,7 @@ const Project = memo(() => {
         {projects.map(({ id, name }, index) => (
           <motion.a
             key={`${id}-project`}
-            href={`/#${id}-project`}
+            href={`/project#${id}-project`}
             className="cursor-pointer text-base leading-relaxed hover:underline"
             style={getLinkStyle(index)}
           >
