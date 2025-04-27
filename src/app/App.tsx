@@ -1,7 +1,9 @@
 import LenisProvider from "@/app/providers/LenisProvider";
 import Layout from "@/components/layout/Layout";
+import ExperiencePage from "@/pages/Experience";
 import HomePage from "@/pages/Home";
 import NotFoundPage from "@/pages/NotFound";
+import ProjectPage from "@/pages/Project";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <HomePage />,
+          },
+          {
+            path: "/project",
+            element: <ProjectPage />,
+          },
+          {
+            path: "/experience",
+            element: <ExperiencePage />,
           },
         ],
       },

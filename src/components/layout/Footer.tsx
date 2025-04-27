@@ -18,7 +18,7 @@ const LINKS = [
 const Footer = () => {
   return (
     <>
-      <div className="h-10" />
+      {/* <div className="h-10" /> */}
       <div
         className="relative h-full max-h-[800px] bg-background"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}

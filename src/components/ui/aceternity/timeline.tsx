@@ -17,10 +17,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex md:[:last-child]:mb-max-container"
+            className="flex border-accent last:border-b-2 "
             id={`${item.company}-experience`}
           >
-            <div className="sticky top-one-six-dvh flex w-1/2 flex-col items-center self-start border-accent border-t-2 px-10 py-8 max-md:hidden md:w-1/2 md:items-end">
+            <div className="sticky top-[calc(100dvh/6)] flex w-1/2 flex-col items-center self-start border-accent border-t-2 px-10 py-8 max-md:hidden md:w-1/2 md:items-end">
               <div className="-translate-y-1/2 absolute top-1/2 right-0 h-6 w-6 translate-x-1/2 rotate-45 rounded-full border-4 border-primary" />
               <p className="mb-2.5 text-base">0{index + 1}</p>
               <h3 className="text-balance text-right text-4xl">
@@ -37,7 +37,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
             <div
               className={cn(
-                "relative w-full border-accent border-t-2 max-md:pt-one-six-dvh md:w-1/2 md:border-l-2",
+                "-z-10 relative w-full border-accent border-t-2 max-md:pt-one-six-dvh md:w-1/2 md:border-l-2",
                 !!item.content && "md:min-h-max-container",
               )}
             >
