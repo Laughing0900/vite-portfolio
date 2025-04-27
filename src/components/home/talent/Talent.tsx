@@ -7,7 +7,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { memo, useEffect, useRef } from "react";
+import { memo, useRef } from "react";
 
 const Talent = memo(() => {
   const isLg = useMediaQuery("lg");
@@ -23,12 +23,6 @@ const Talent = memo(() => {
     useTransform(scrollYProgress, [0.75, 0.9], [0, 1]),
   ];
 
-  useEffect(() => {
-    window.snap.addElement(document.getElementById("talent") as HTMLElement, {
-      align: ["start", "end"],
-    });
-  }, []);
-
   return (
     <section id="talent" ref={container}>
       <div className="container">
@@ -38,7 +32,7 @@ const Talent = memo(() => {
           <div
             className={cn(
               "relative col-span-full h-fit min-h-[50dvh] pt-40 pb-20",
-              "lg:-mb-[200dvh] md:pt-120 md:pb-80 lg:col-span-2 lg:col-start-2 lg:min-h-[200dvh]",
+              "lg:-mb-[200dvh] md:pt-40 md:pb-80 lg:col-span-2 lg:col-start-2 lg:min-h-[200dvh]",
             )}
           >
             <Introduction

@@ -5,7 +5,7 @@ import { credentials } from "@/components/home/achievement/constants/credentials
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import RightTitleCard from "@/components/views/RightTitleCard";
 import { useMotionValue, useSpring } from "motion/react";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 
 const Achievement = memo(() => {
   const [selected, setSelected] = useState<null | {
@@ -48,15 +48,6 @@ const Achievement = memo(() => {
     x.set(0);
     y.set(0);
   };
-
-  useEffect(() => {
-    window.snap.addElement(
-      document.getElementById("achievement") as HTMLElement,
-      {
-        align: ["start"],
-      },
-    );
-  }, []);
 
   return (
     <section id="achievement" className="text-shadow-base">

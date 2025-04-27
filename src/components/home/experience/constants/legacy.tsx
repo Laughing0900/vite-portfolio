@@ -53,11 +53,6 @@ const expData = [
     ),
   },
   {
-    title: "Technical Support",
-    company: "Speedy Group Ltd.",
-    duration: "Aug 2020 - Jul 202",
-  },
-  {
     title: "Web Developer",
     company: "Great Game Asia",
     duration: "Dec 2017 - Nov 2021",
