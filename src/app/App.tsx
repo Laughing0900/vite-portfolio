@@ -1,4 +1,3 @@
-import LenisProvider from "@/app/providers/LenisProvider";
 import Layout from "@/components/layout/Layout";
 import ExperiencePage from "@/pages/Experience";
 import HomePage from "@/pages/Home";
@@ -40,11 +39,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <LenisProvider>
-      <RouterProvider router={router} />
-    </LenisProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
