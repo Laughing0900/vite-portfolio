@@ -47,7 +47,7 @@ const Skills = memo(() => {
             item="React"
             color="text-black"
             backgroundColor="bg-[#61dafb]"
-            x="30%"
+            x="10%"
             y="10%"
           />
           <Pills
@@ -79,9 +79,24 @@ const Skills = memo(() => {
             y="20%"
           />
           <Pills
+            item="Tron"
+            color="text-white"
+            backgroundColor="bg-[#FE0301]"
+            x="40%"
+            y="20%"
+          />
+          <Pills
+            item="Cardano"
+            color="text-white"
+            backgroundColor="bg-[#0031B4]"
+            x="20%"
+            y="90%"
+          />
+
+          <Pills
             item="Solana"
             color="text-white"
-            backgroundColor="bg-gradient-to-r from-[#9945FF] to-[#14F195]"
+            backgroundColor="bg-gradient-to-br from-[#9945FF] to-[#14F195]"
             x="50%"
             y="10%"
           />
