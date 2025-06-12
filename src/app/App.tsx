@@ -34,7 +34,13 @@ const router = createBrowserRouter([
      * @dev: 404 fallback
      */
     path: "*",
-    element: <NotFoundPage />,
+    element: <Layout />,
+    children: [
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
+    ],
   },
 ]);
 
