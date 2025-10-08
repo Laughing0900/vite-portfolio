@@ -1,12 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @font-face {
-  font-family: 'Post No Bills Colombo Medium Regular';
+  font-family: "Post No Bills Colombo Medium Regular";
   font-style: normal;
   font-weight: normal;
-  src: local('Post No Bills Colombo Medium Regular'), url('/fonts/PostNoBillsColombo-Medium.woff') format('woff');
+  src: local("Post No Bills Colombo Medium Regular"),
+    url("/fonts/PostNoBillsColombo-Medium.woff") format("woff");
+  font-display: swap; /* Improve font loading performance */
 }
 
 :root {
@@ -23,8 +24,8 @@
   --primary-foreground: oklch(0.21 0.034 264.665);
   --secondary: oklch(65.06% 0.231 0.21);
   --secondary-foreground: oklch(59.92% 0.0151 226.71);
-  --muted:oklch(0.6 0 0);
-  --muted-foreground:oklch(0 0 0);
+  --muted: oklch(0.6 0 0);
+  --muted-foreground: oklch(0 0 0);
   --accent: oklch(33.13% 0.0033 228.88);
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
@@ -36,7 +37,6 @@
   --ease-in-out-circ: cubic-bezier(0.85, 0.09, 0.15, 0.91);
 
   --one-six-dvh: calc(100dvh / 6);
-  
 }
 
 @theme inline {
@@ -76,7 +76,6 @@
   --spacing-one-six-dvh: calc(100dvh / 6 + 1px);
   --spacing-one-two-dvh: 400px;
   --spacing-max-container: calc(100dvh * (4 / 6));
-
 }
 
 @layer base {
@@ -90,21 +89,21 @@
     @apply h-fit min-h-dvh relative;
   }
 
-  .text-title{
+  .text-title {
     @apply text-4xl font-medium leading-none;
-  } 
+  }
 }
 
 @utility container {
-    @apply w-full !max-w-4/6 mx-auto px-[1px] relative min-h-max-container pt-one-six-dvh;
+  @apply w-full !max-w-4/6 mx-auto px-[1px] relative min-h-max-container pt-one-six-dvh;
 }
 
 @utility text-shadow-base {
-     text-shadow:0 4px 4px rgba(0, 0, 0, 0.4), 0 2px 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.4), 0 2px 2px rgba(0, 0, 0, 0.8);
 }
 
 @utility background-radial {
-  @apply bg-[#090F10] bg-radial-[at_100%_15%] from-[#1B978D22] to-70% to-[#00000000]
+  @apply bg-[#090F10] bg-radial-[at_100%_15%] from-[#1B978D22] to-70% to-[#00000000];
 }
 
 .silkscreen {
@@ -120,11 +119,10 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 address {
   font-style: normal;
 }
-

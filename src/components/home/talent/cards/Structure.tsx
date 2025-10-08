@@ -1,6 +1,12 @@
 import Title from "@/components/home/talent/cards/Title";
-import { Compare } from "@/components/ui/aceternity/compile";
-import { memo } from "react";
+import { lazy, memo, Suspense } from "react";
+
+// Lazy load the Compare component with code highlighting
+const Compare = lazy(() =>
+  import("@/components/ui/aceternity/compile").then((module) => ({
+    default: module.Compare,
+  })),
+);
 
 const betterCode = `const UserProfile = ({ user, onUpdate, isLoading }) => {
   if (isLoading) return <Spinner size="medium" />;
@@ -60,12 +66,20 @@ const Schedule = memo(() => {
         description="Built with a clear and organized programme structure."
       />
 
-      <Compare
-        firstCode={betterCode}
-        secondCode={worseCode}
-        className="aspect-square w-[110%]"
-        slideMode="drag"
-      />
+      <Suspense
+        fallback={
+          <div className="flex aspect-square w-[110%] items-center justify-center">
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          </div>
+        }
+      >
+        <Compare
+          firstCode={betterCode}
+          secondCode={worseCode}
+          className="aspect-square w-[110%]"
+          slideMode="drag"
+        />
+      </Suspense>
     </div>
   );
 });

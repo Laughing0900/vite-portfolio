@@ -1,9 +1,19 @@
 import Layout from "@/components/layout/Layout";
-import ExperiencePage from "@/pages/Experience";
-import HomePage from "@/pages/Home";
-import NotFoundPage from "@/pages/NotFound";
-import ProjectPage from "@/pages/Project";
+import { lazy, Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+// Lazy load all pages for better code splitting
+const HomePage = lazy(() => import("@/pages/Home"));
+const ProjectPage = lazy(() => import("@/pages/Project"));
+const ExperiencePage = lazy(() => import("@/pages/Experience"));
+const NotFoundPage = lazy(() => import("@/pages/NotFound"));
+
+// Simple loading fallback
+const PageLoader = () => (
+  <div className="flex min-h-screen items-center justify-center">
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+  </div>
+);
 
 const router = createBrowserRouter([
   {
@@ -11,34 +21,36 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        errorElement: <NotFoundPage />,
-        children: [
-          {
-            path: "/",
-            element: <HomePage />,
-          },
-          {
-            path: "/project",
-            element: <ProjectPage />,
-          },
-          {
-            path: "/experience",
-            element: <ExperiencePage />,
-          },
-        ],
+        index: true,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <HomePage />
+          </Suspense>
+        ),
       },
-    ],
-  },
-  {
-    /**
-     * @dev: 404 fallback
-     */
-    path: "*",
-    element: <Layout />,
-    children: [
+      {
+        path: "project",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ProjectPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "experience",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ExperiencePage />
+          </Suspense>
+        ),
+      },
       {
         path: "*",
-        element: <NotFoundPage />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <NotFoundPage />
+          </Suspense>
+        ),
       },
     ],
   },

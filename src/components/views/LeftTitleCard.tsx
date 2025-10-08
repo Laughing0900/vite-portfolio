@@ -6,7 +6,6 @@ type LeftTitleCardProps = {
   className?: string;
 };
 
-
 const LeftTitleCard = memo(({ title, className }: LeftTitleCardProps) => {
   return (
     <>
@@ -22,6 +21,5 @@ const LeftTitleCard = memo(({ title, className }: LeftTitleCardProps) => {
     </>
   );
 });
-
 
 export default LeftTitleCard;

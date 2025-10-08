@@ -6,7 +6,7 @@ export const SKILL_ITEMS = [
   "mongoDB.svg",
   "PostgreSQL.svg",
   /** UI */
-  "1nextjs.svg",  
+  "1nextjs.svg",
   "1tailwind.svg",
   "react.svg",
   "reactQuery.svg",
@@ -23,7 +23,7 @@ export const SKILL_ITEMS = [
   "Docker.svg",
   /** Blockchain */
   "Hardhat.svg",
-  "1Solidity.svg", 
+  "1Solidity.svg",
   "Ethereum.svg",
   "Chainlink.svg",
   "Moralis.svg",
@@ -33,5 +33,4 @@ export const SKILL_ITEMS = [
   "ChatGPT.svg",
   "Notion.svg",
   "Scrum.svg",
-
 ];
