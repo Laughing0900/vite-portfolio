@@ -71,7 +71,7 @@ export default function useMediaQuery(
         matchMedia.removeEventListener("change", handleChange);
       }
     };
-  }, [query]);
+  }, [query, queryString]);
 
   return matches;
 }

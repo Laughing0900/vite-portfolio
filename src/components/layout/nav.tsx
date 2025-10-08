@@ -69,16 +69,16 @@ const Nav = () => {
             </motion.div>
           ))}
       </aside>
-      {isOpen && (
-        <AnimatePresence>
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
             className="-z-10 absolute inset-0 origin-top-right bg-background duration-150 ease-out"
             initial={{ scaleY: 0.2 }}
             animate={{ scaleY: 1 }}
             exit={{ scaleY: 0.2 }}
           />
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -61,104 +61,62 @@ const Skills = memo(() => {
           }
         >
           <Gravity>
-            <Suspense fallback={null}>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="10%"
-                y="10%"
-              >
-                <div className="rounded-full bg-[#61dafb] px-6 py-2 text-black text-lg hover:cursor-grab">
-                  React
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="30%"
-                y="30%"
-              >
-                <div className="rounded-full bg-[#3178C6] px-6 py-2 text-lg text-white hover:cursor-grab">
-                  TypeScript
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="40%"
-                y="20%"
-              >
-                <div className="rounded-full bg-[#00ADD9] px-6 py-2 text-black text-lg hover:cursor-grab">
-                  GoLang
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="75%"
-                y="10%"
-              >
-                <div className="rounded-full bg-[#2C2C2C] px-6 py-2 text-lg text-white hover:cursor-grab">
-                  Solidity
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="80%"
-                y="20%"
-              >
-                <div className="rounded-full bg-[#1C1C1C] px-6 py-2 text-lg text-white hover:cursor-grab">
-                  Ethereum
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="40%"
-                y="20%"
-              >
-                <div className="rounded-full bg-[#FE0301] px-6 py-2 text-lg text-white hover:cursor-grab">
-                  Tron
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="20%"
-                y="90%"
-              >
-                <div className="rounded-full bg-[#0031B4] px-6 py-2 text-lg text-white hover:cursor-grab">
-                  Cardano
-                </div>
-              </MatterBody>
-              <MatterBody
-                matterBodyOptions={{
-                  friction: 0.5,
-                  restitution: 0.2,
-                }}
-                x="50%"
-                y="10%"
-              >
-                <div className="rounded-full bg-gradient-to-br from-[#9945FF] to-[#14F195] px-6 py-2 text-lg text-white hover:cursor-grab">
-                  Solana
-                </div>
-              </MatterBody>
-            </Suspense>
+            <Pills
+              item="React"
+              backgroundColor="bg-[#61dafb]"
+              color="text-black"
+              x="10%"
+              y="10%"
+            />
+            <Pills
+              item="TypeScript"
+              backgroundColor="bg-[#3178C6]"
+              color="text-white"
+              x="30%"
+              y="30%"
+            />
+            <Pills
+              item="GoLang"
+              backgroundColor="bg-[#00ADD9]"
+              color="text-black"
+              x="40%"
+              y="20%"
+            />
+            <Pills
+              item="Solidity"
+              backgroundColor="bg-[#2C2C2C]"
+              color="text-white"
+              x="75%"
+              y="10%"
+            />
+            <Pills
+              item="Ethereum"
+              backgroundColor="bg-[#1C1C1C]"
+              color="text-white"
+              x="80%"
+              y="20%"
+            />
+            <Pills
+              item="Tron"
+              backgroundColor="bg-[#FE0301]"
+              color="text-white"
+              x="40%"
+              y="20%"
+            />
+            <Pills
+              item="Cardano"
+              backgroundColor="bg-[#0031B4]"
+              color="text-white"
+              x="20%"
+              y="90%"
+            />
+            <Pills
+              item="Solana"
+              backgroundColor="bg-gradient-to-br from-[#9945FF] to-[#14F195]"
+              color="text-white"
+              x="50%"
+              y="10%"
+            />
           </Gravity>
         </Suspense>
       </div>

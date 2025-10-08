@@ -386,6 +386,17 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         runner.current.enabled = true;
         startEngine();
       }
+
+      return () => {
+        if (canvas.current) {
+          canvas.current.removeEventListener("mousedown", () => {
+            mouseDown.current = true;
+          });
+          canvas.current.removeEventListener("mouseup", () => {
+            mouseDown.current = false;
+          });
+        }
+      };
     }, [updateElements, debug, autoStart, gravity, grabCursor]);
 
     // Clear the Matter.js world

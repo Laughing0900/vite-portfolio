@@ -79,8 +79,6 @@
 }
 
 @layer base {
-  /* @TODO: replace to needs */
-
   body {
     @apply bg-background text-foreground font-base;
   }
