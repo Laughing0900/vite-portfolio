@@ -57,6 +57,7 @@ const Talent = memo(() => {
                 "hover:background-radial transition-colors duration-200 ease-in-out-circ",
               )}
               style={{ opacity: isLg ? opacity[0] : 1 }}
+              will-change="opacity"
             >
               <Skills />
             </motion.div>
@@ -68,6 +69,7 @@ const Talent = memo(() => {
                 "hover:background-radial transition-colors duration-200 ease-in-out-circ",
               )}
               style={{ opacity: isLg ? opacity[2] : 1 }}
+              will-change="opacity"
             >
               <Structure />
             </motion.div>
@@ -79,6 +81,7 @@ const Talent = memo(() => {
                 "hover:background-radial transition-colors duration-200 ease-in-out-circ",
               )}
               style={{ opacity: isLg ? opacity[3] : 1 }}
+              will-change="opacity"
             >
               <Productivity />
             </motion.div>
@@ -89,6 +92,7 @@ const Talent = memo(() => {
                 "hover:background-radial transition-colors duration-200 ease-in-out-circ",
               )}
               style={{ opacity: isLg ? opacity[1] : 1 }}
+              will-change="opacity"
             >
               <Schedule />
             </motion.div>

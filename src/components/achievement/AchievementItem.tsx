@@ -58,7 +58,6 @@ export const AchievementItem = ({
       <AnimatePresence>
         {!onScroll && (
           <motion.div
-            layout
             className={cn(
               "absolute bottom-0 left-0 w-full border-accent border-b-2 transition-all duration-100 ease-in-out-circ",
             )}

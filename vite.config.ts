@@ -22,4 +22,16 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom"],
+          motion: ["motion/react", "framer-motion"],
+          "three-core": ["three", "@react-three/fiber"],
+          physics: ["matter-js"],
+        },
+      },
+    },
+  },
 });
