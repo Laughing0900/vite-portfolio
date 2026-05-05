@@ -8,6 +8,14 @@ export type Projects = {
 
 export const projects: Projects[] = [
   {
+    id: "Knightrade",
+    name: "Knightrade",
+    company: "KS Lab",
+    previewImageId: "Knightrade_lkdq2b",
+    shorts:
+      "Knightrade is an on-chain hedge fund platform offering secure, transparent DeFi trading with asset locking, rewards generation, verified traders, and investor governance.",
+  },
+  {
     id: "bitbot",
     name: "bitbot.tg",
     company: "Bitbot",
