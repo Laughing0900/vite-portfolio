@@ -1,19 +1,19 @@
 const expData = [
   {
     title: "Software Engineer",
-    company: "KS Labs Limited",
-    duration: "Aug 2023 - Present",
+    company: "HumbleBee Capital",
+    duration: "Aug 2023 - May 2026",
     tags: ["React", "Solidity", "Ethereum", "Cardano", "Solana"],
     content: (
       <p>
-        Forked a DEX to the ZkSync layer 2 chain and revamped the UI from
-        design, enhancing performance and user experience.
+        Led cross-region engineering teams across China and Hong Kong, aligning
+        technical direction, devel- opment priorities, and delivery milestones.
         <br />
-        Developed a comprehensive wallet solution project including application
-        and smart contract integration.
+        Translated business ideas into structured technical plans, managing
+        end-to-end execution from con- cept to production.
         <br />
-        Implemented Continuous Integration (CI) logic from GitLab to AWS Lambda
-        and S3, improving deployment efficiency and reliability.
+        Improved user investment and trading flows through UX enhancements,
+        increasing conversion and op- erational eﬃciency.
       </p>
     ),
   },
