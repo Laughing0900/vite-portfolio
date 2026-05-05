@@ -8,6 +8,14 @@ export type Projects = {
 
 export const projects: Projects[] = [
   {
+    id: "CEX Market Making Enging",
+    name: "CEX Market Making Enging",
+    company: "HumbleBee Capital",
+    previewImageId: "mmengine_ify4im",
+    shorts:
+      "CEX Market Making Engine is a comprehensive trading system designed to optimize market making strategies for cryptocurrency exchanges.",
+  },
+  {
     id: "Knightrade",
     name: "Knightrade",
     company: "KS Lab",

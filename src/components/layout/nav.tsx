@@ -27,19 +27,19 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const triggerNav = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+    setIsOpen((current) => !current);
+  }, []);
 
   const handleClick = useCallback(() => {
     setIsOpen(false);
   }, []);
 
   return (
-    <div className="fixed top-0 right-0 z-[100] h-full w-1/2">
+    <div className="pointer-events-none fixed top-0 right-0 z-[100] h-full w-1/2">
       <Button
         onClick={triggerNav}
         variant={"link"}
-        className="silkscreen absolute top-0 right-0 z-10"
+        className="silkscreen pointer-events-auto absolute top-0 right-0 z-10"
       >
         {isOpen ? "Close" : "Menu"}
       </Button>
@@ -48,6 +48,7 @@ const Nav = () => {
           "relative flex h-full w-full flex-col items-center justify-center gap-10",
           "text-4xl",
           "delay-75 duration-150",
+          isOpen ? "pointer-events-auto" : "pointer-events-none",
         )}
       >
         {isOpen &&
@@ -72,7 +73,7 @@ const Nav = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="-z-10 absolute inset-0 origin-top-right bg-background duration-150 ease-out"
+            className="-z-10 pointer-events-auto absolute inset-0 origin-top-right bg-background duration-150 ease-out"
             initial={{ scaleY: 0.2 }}
             animate={{ scaleY: 1 }}
             exit={{ scaleY: 0.2 }}
