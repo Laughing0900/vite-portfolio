@@ -95,25 +95,6 @@ const HERO_PRIMARY_HEX = "#6dd4c8";
 /** Quoted for canvas `font` shorthand (matches Google Fonts family name). */
 const FONT_HERO_TITLE = '"Silkscreen", sans-serif';
 
-async function waitForHeroCanvasFonts(): Promise<void> {
-  if (typeof document === "undefined") return;
-  const timeoutMs = 800;
-  const timeout = new Promise<void>((resolve) =>
-    setTimeout(resolve, timeoutMs),
-  );
-  const tryLoad = async () => {
-    try {
-      if (document.fonts?.load) {
-        await document.fonts.load("700 120px Silkscreen");
-      } else if (document.fonts?.ready) {
-        await document.fonts.ready;
-      }
-    } catch {
-      /* ignore — paint with fallback fonts */
-    }
-  };
-  await Promise.race([tryLoad(), timeout]);
-}
 
 function paintHeroBackdrop(
   texture: THREE.CanvasTexture,
@@ -217,20 +198,23 @@ function BackdropPlane({ z }: { z: number }) {
       );
     };
 
+    // Paint immediately with fallback fonts
     paint();
 
-    const refineAfterFonts = async () => {
-      await waitForHeroCanvasFonts();
-      if (!cancelled) paint();
-    };
-    void refineAfterFonts();
+    // When font is ready, repaint with proper font
+    if (document.fonts.check("700 120px Silkscreen")) {
+      paint();
+    } else {
+      document.fonts.addEventListener("loadingdone", () => {
+        if (!cancelled) paint();
+      });
+    }
 
     let resizeT: ReturnType<typeof setTimeout>;
     const onResize = () => {
       clearTimeout(resizeT);
       resizeT = setTimeout(() => {
         paint();
-        void refineAfterFonts();
       }, 160);
     };
     window.addEventListener("resize", onResize);
