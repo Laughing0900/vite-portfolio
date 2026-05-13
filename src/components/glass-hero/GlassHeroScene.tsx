@@ -3,6 +3,7 @@ import {
   MeshTransmissionMaterial,
   PerspectiveCamera,
   RoundedBox,
+  useFBO,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import {
@@ -14,12 +15,24 @@ import {
 } from "react";
 import * as THREE from "three";
 
-const TEXT_Z = -3.15;
-const GAP = 0.1;
-const DEPTH = 0.12;
+type HeroBackdropCopy = {
+  line1: string;
+  line2: string;
+};
 
 /** `"O"` = glass plate, `"X"` = empty. Row `0` is the top row visually. */
 type GlassCell = "O" | "X";
+type PointerRef = { current: { x: number; y: number } };
+
+type ShardLayout = {
+  col: number;
+  row: number;
+  cx: number;
+  cy: number;
+  zLift: number;
+  inner: number;
+  chessLight: boolean;
+};
 
 /**
  * Edit this 2D array to choose the layout. Every row must have the same length.
@@ -27,17 +40,25 @@ type GlassCell = "O" | "X";
  * the layout reads horizontally on phones: fewer tiles across, more down-screen.
  */
 const GLASS_PLANE: GlassCell[][] = [
-  ["X", "X", "X", "X", "X", "X", "X"],
-  ["X", "X", "X", "X", "X", "X", "O"],
-  ["O", "X", "X", "X", "X", "O", "O"],
-  ["O", "O", "X", "X", "O", "O", "O"],
-  ["X", "X", "O", "O", "O", "O", "O"],
+  ["O", "X", "X", "X", "X", "X", "X"],
+  ["O", "O", "X", "X", "X", "X", "O"],
+  ["X", "X", "O", "X", "X", "O", "O"],
+  ["X", "X", "X", "X", "O", "O", "O"],
+  ["X", "X", "X", "X", "X", "O", "O"],
 ];
 
 const PLANE_ROWS = GLASS_PLANE.length;
 const PLANE_COLS = GLASS_PLANE[0]?.length ?? 0;
 
+const TEXT_Z = -3.15;
+const GAP = 0.02;
+const DEPTH = 0.12;
+
 const MOBILE_LAYOUT_MAX_WIDTH = 768;
+const DEFAULT_HERO_BACKDROP_COPY: HeroBackdropCopy = {
+  line1: "Laughing",
+  line2: "Portfolio",
+};
 
 /** Logical cell in `GLASS_PLANE` when rendering with optional transpose (mobile). */
 function effectivePlaneCell(
@@ -49,16 +70,6 @@ function effectivePlaneCell(
     ? GLASS_PLANE[effCol]?.[effRow]
     : GLASS_PLANE[effRow]?.[effCol];
 }
-
-type ShardLayout = {
-  col: number;
-  row: number;
-  cx: number;
-  cy: number;
-  zLift: number;
-  inner: number;
-  chessLight: boolean;
-};
 
 function subscribeReducedMotion(cb: () => void) {
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -78,46 +89,100 @@ function usePrefersReducedMotion() {
   );
 }
 
-function paintBackdropTexture(texture: THREE.CanvasTexture, headline: string) {
+/** Theme primary oklch(76.66% 0.1321 182.38) — canvas cannot read CSS variables. */
+const HERO_PRIMARY_HEX = "#6dd4c8";
+
+/** Quoted for canvas `font` shorthand (matches Google Fonts family name). */
+const FONT_HERO_TITLE = '"Silkscreen", sans-serif';
+
+async function waitForHeroCanvasFonts(): Promise<void> {
+  if (typeof document === "undefined") return;
+  const timeoutMs = 800;
+  const timeout = new Promise<void>((resolve) =>
+    setTimeout(resolve, timeoutMs),
+  );
+  const tryLoad = async () => {
+    try {
+      if (document.fonts?.load) {
+        await document.fonts.load("700 120px Silkscreen");
+      } else if (document.fonts?.ready) {
+        await document.fonts.ready;
+      }
+    } catch {
+      /* ignore — paint with fallback fonts */
+    }
+  };
+  await Promise.race([tryLoad(), timeout]);
+}
+
+function paintHeroBackdrop(
+  texture: THREE.CanvasTexture,
+  line1: string,
+  line2: string,
+) {
   const canvas = texture.image as HTMLCanvasElement;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const w = Math.max(1024, Math.round(window.innerWidth * dpr));
   const h = Math.max(768, Math.round(window.innerHeight * dpr));
   canvas.width = w;
   canvas.height = h;
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
 
-  const base = ctx.createLinearGradient(0, 0, w, h);
-  base.addColorStop(0, "#030407");
-  base.addColorStop(0.52, "#080b12");
-  base.addColorStop(1, "#030407");
-  ctx.fillStyle = base;
+  ctx.clearRect(0, 0, w, h);
+
+  /**
+   * Transmission refracts in screen space; mostly-transparent backdrop means
+   * samples miss glyphs and read as empty. A soft gradient gives refracted
+   * rays something to hit while staying lighter than a flat fill.
+   */
+  const g = ctx.createLinearGradient(0, 0, w, h);
+  g.addColorStop(0, "rgba(3, 6, 16, 0.14)");
+  g.addColorStop(1, "rgba(6, 12, 32, 0.62)");
+  ctx.fillStyle = g;
   ctx.fillRect(0, 0, w, h);
 
-  let fontSize = Math.floor(Math.min(w / 7.4, h / 3.8));
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.font = `900 ${fontSize}px Inter, ui-sans-serif, system-ui, sans-serif`;
-  while (ctx.measureText(headline).width > w * 0.86 && fontSize > 44) {
-    fontSize -= 4;
-    ctx.font = `900 ${fontSize}px Inter, ui-sans-serif, system-ui, sans-serif`;
+  const iw = window.innerWidth;
+  const isLg = iw >= 1024;
+  const isMd = iw >= 768;
+
+  const padX = w * (isMd ? 0.06 : 0.05);
+  const titleSize1 = Math.round(
+    (isLg ? 0.072 : isMd ? 0.058 : 0.09) * Math.min(w, h * 1.1),
+  );
+  const titleSize2 = Math.round(titleSize1 * (isLg ? 0.55 : 0.52));
+
+  ctx.textBaseline = "top";
+  ctx.shadowColor = "rgba(0,0,0,0.45)";
+  ctx.shadowBlur = Math.round(6 * dpr);
+
+  if (isMd) {
+    const titleX = w * 0.2 + padX;
+    let y = h * (isLg ? 0.34 : 0.36);
+    ctx.textAlign = "left";
+    ctx.font = `700 ${titleSize1}px ${FONT_HERO_TITLE}`;
+    ctx.fillStyle = "rgba(248,249,253,0.96)";
+    ctx.fillText(line1, titleX, y);
+    y += titleSize1 * 1.08;
+    ctx.font = `700 ${titleSize2}px ${FONT_HERO_TITLE}`;
+    ctx.fillStyle = HERO_PRIMARY_HEX;
+    ctx.fillText(line2, titleX, y);
+  } else {
+    ctx.textAlign = "left";
+    let y = h * 0.28;
+    ctx.font = `700 ${titleSize1}px ${FONT_HERO_TITLE}`;
+    ctx.fillStyle = "rgba(248,249,253,0.96)";
+    ctx.fillText(line1, padX, y);
+    y += titleSize1 * 1.08;
+    ctx.font = `700 ${titleSize2}px ${FONT_HERO_TITLE}`;
+    ctx.fillStyle = HERO_PRIMARY_HEX;
+    ctx.fillText(line2, padX, y);
   }
-  ctx.shadowColor = "rgba(255,255,255,0.25)";
-  ctx.shadowBlur = fontSize * 0.12;
-  ctx.fillStyle = "rgba(248,249,253,0.94)";
-  ctx.fillText(headline, w * 0.5, h * 0.5);
+
   texture.needsUpdate = true;
 }
 
-/**
- * Full-screen backdrop behind the glass grid. Edit `BACKDROP_*` below — the
- * plane is filled by painting a canvas texture (no DOM rasterization).
- */
 function BackdropPlane({ z }: { z: number }) {
-  /** Main line drawn on the backdrop texture. */
-  const BACKDROP_HEADLINE = "Designed in glass.";
-
   const texture = useMemo(() => {
     const canvas = document.createElement("canvas");
     const tex = new THREE.CanvasTexture(canvas);
@@ -141,16 +206,36 @@ function BackdropPlane({ z }: { z: number }) {
   }, [camera, viewport.aspect, z]);
 
   useEffect(() => {
-    const redraw = () => paintBackdropTexture(texture, BACKDROP_HEADLINE);
-    redraw();
+    let cancelled = false;
+
+    const paint = () => {
+      if (cancelled) return;
+      paintHeroBackdrop(
+        texture,
+        DEFAULT_HERO_BACKDROP_COPY.line1,
+        DEFAULT_HERO_BACKDROP_COPY.line2,
+      );
+    };
+
+    paint();
+
+    const refineAfterFonts = async () => {
+      await waitForHeroCanvasFonts();
+      if (!cancelled) paint();
+    };
+    void refineAfterFonts();
 
     let resizeT: ReturnType<typeof setTimeout>;
     const onResize = () => {
       clearTimeout(resizeT);
-      resizeT = setTimeout(redraw, 160);
+      resizeT = setTimeout(() => {
+        paint();
+        void refineAfterFonts();
+      }, 160);
     };
     window.addEventListener("resize", onResize);
     return () => {
+      cancelled = true;
       clearTimeout(resizeT);
       window.removeEventListener("resize", onResize);
       texture.dispose();
@@ -160,59 +245,88 @@ function BackdropPlane({ z }: { z: number }) {
   return (
     <mesh ref={meshRef} position={[0, 0, z]} renderOrder={-1000}>
       <planeGeometry args={[1, 1]} />
-      <meshBasicMaterial map={texture} toneMapped={false} />
+      <meshBasicMaterial
+        map={texture}
+        transparent
+        toneMapped={false}
+        side={THREE.DoubleSide}
+        depthWrite={false}
+      />
     </mesh>
   );
 }
 
-type PointerRef = { current: { x: number; y: number } };
-
 function GlassGrid({
   pointer,
   reducedMotion,
+  backdropTexture,
 }: {
   pointer: PointerRef;
   reducedMotion: boolean;
+  backdropTexture: THREE.Texture | undefined;
 }) {
   const rigRef = useRef<THREE.Group>(null);
   const shardRefs = useRef<(THREE.Group | null)[]>([]);
-  const { width } = useThree((s) => s.size);
+  const width = useThree((s) => s.size.width);
+  const viewport = useThree((s) => s.viewport);
+  const camera = useThree((s) => s.camera);
+  const size = useThree((s) => s.size);
 
-  const { layouts, txResolution, samples } = useMemo(() => {
-    const transposeLayout = width < MOBILE_LAYOUT_MAX_WIDTH;
-    const effRows = transposeLayout ? PLANE_COLS : PLANE_ROWS;
-    const effCols = transposeLayout ? PLANE_ROWS : PLANE_COLS;
-    const chessWhiteParity = (effRows - 1 + effCols - 1) % 2;
+  const { layouts, txResolution, samples, bboxRight, bboxBottom } =
+    useMemo(() => {
+      const transposeLayout = width < MOBILE_LAYOUT_MAX_WIDTH;
+      const effRows = transposeLayout ? PLANE_COLS : PLANE_ROWS;
+      const effCols = transposeLayout ? PLANE_ROWS : PLANE_COLS;
+      const chessWhiteParity = (effRows - 1 + effCols - 1) % 2;
 
-    const gapCols = (effCols - 1) * GAP;
-    const gapRows = (effRows - 1) * GAP;
-    /** Narrower span on mobile so tiles stay smaller (transpose already widens each cell). */
-    const boardW = transposeLayout ? 3.2 : 5.05;
-    const cell = (boardW - gapCols) / effCols;
-    const boardH = effRows * cell + gapRows;
-    const inner = cell - GAP * 0.55;
+      const boardDim = Math.min(viewport.width, viewport.height);
+      const gapCols = (effCols - 1) * GAP;
+      const cell = (boardDim - gapCols) / effCols;
+      const boardH = effRows * cell + (effRows - 1) * GAP;
+      const inner = cell - GAP * 0.55;
 
-    const layouts: ShardLayout[] = [];
-    for (let row = 0; row < effRows; row++) {
-      for (let col = 0; col < effCols; col++) {
-        if (effectivePlaneCell(transposeLayout, row, col) !== "O") continue;
-        const cx = -boardW / 2 + cell / 2 + col * (cell + GAP);
-        const cy = boardH / 2 - cell / 2 - row * (cell + GAP);
-        layouts.push({
-          col,
-          row,
-          cx,
-          cy,
-          zLift: 0.02 * Math.sin(col * 1.7 + row * 2.1),
-          inner,
-          chessLight: (row + col) % 2 === chessWhiteParity,
-        });
+      const layouts: ShardLayout[] = [];
+      for (let row = 0; row < effRows; row++) {
+        for (let col = 0; col < effCols; col++) {
+          if (effectivePlaneCell(transposeLayout, row, col) !== "O") continue;
+          const cx = -boardDim / 2 + cell / 2 + col * (cell + GAP);
+          const cy = boardH / 2 - cell / 2 - row * (cell + GAP);
+          layouts.push({
+            col,
+            row,
+            cx,
+            cy,
+            zLift: 0.02 * Math.sin(col * 1.7 + row * 2.1),
+            inner,
+            chessLight: (row + col) % 2 === chessWhiteParity,
+          });
+        }
       }
-    }
-    const txResolution = width < MOBILE_LAYOUT_MAX_WIDTH ? 108 : 272;
-    const samples = reducedMotion ? 2 : width < MOBILE_LAYOUT_MAX_WIDTH ? 2 : 3;
-    return { layouts, txResolution, samples };
-  }, [width, reducedMotion]);
+      const half = inner * 0.5;
+      let br = Number.NEGATIVE_INFINITY;
+      let bb = Number.POSITIVE_INFINITY;
+      for (const L of layouts) {
+        br = Math.max(br, L.cx + half);
+        bb = Math.min(bb, L.cy - half);
+      }
+      if (!Number.isFinite(br) || !Number.isFinite(bb)) {
+        br = boardDim / 2;
+        bb = -boardH / 2;
+      }
+      const txResolution = width < MOBILE_LAYOUT_MAX_WIDTH ? 220 : 480;
+      const samples = reducedMotion
+        ? 2
+        : width < MOBILE_LAYOUT_MAX_WIDTH
+          ? 3
+          : 4;
+      return {
+        layouts,
+        txResolution,
+        samples,
+        bboxRight: br,
+        bboxBottom: bb,
+      };
+    }, [width, viewport.width, viewport.height, reducedMotion]);
 
   useFrame(() => {
     const p = pointer.current;
@@ -256,46 +370,60 @@ function GlassGrid({
     }
   });
 
+  /** World Z of glass tiles — matches `getCurrentViewport` target so margins track frustum. */
+  const gridPlaneZ = 0.19;
+  const v = viewport.getCurrentViewport(camera, [0, 0, gridPlaneZ], size);
+  const marginX = v.width * (width < 640 ? 0.04 : width < 1024 ? 0.045 : 0.04);
+  const marginY = v.height * (width < 640 ? 0.12 : 0.08);
+  const anchorX = v.width / 2 - marginX;
+  const anchorY = -v.height / 2 + marginY;
+  const boardPos: [number, number, number] = [
+    anchorX - bboxRight,
+    anchorY - bboxBottom,
+    0,
+  ];
+
   return (
-    <group ref={rigRef}>
-      {layouts.map((layout, i) => (
-        <group
-          key={`shard-${layout.col}-${layout.row}`}
-          ref={(node) => {
-            shardRefs.current[i] = node;
-          }}
-          position={[layout.cx, layout.cy, 0.18 + layout.zLift]}
-        >
-          <RoundedBox
-            args={[layout.inner, layout.inner, DEPTH]}
-            radius={0.02}
-            smoothness={2}
+    <group position={boardPos}>
+      <group ref={rigRef}>
+        {layouts.map((layout, i) => (
+          <group
+            key={`shard-${layout.col}-${layout.row}`}
+            ref={(node) => {
+              shardRefs.current[i] = node;
+            }}
+            position={[layout.cx, layout.cy, 0.18 + layout.zLift]}
           >
-            <MeshTransmissionMaterial
-              transmissionSampler
-              samples={samples}
-              resolution={txResolution}
-              transmission={1}
-              roughness={0.048}
-              thickness={0.8}
-              ior={1.5}
-              chromaticAberration={0.045}
-              anisotropicBlur={0.5}
-              distortion={0.06}
-              distortionScale={1}
-              temporalDistortion={0}
-              color={layout.chessLight ? "#ffffff" : "#38445e"}
-              attenuationColor={layout.chessLight ? "#ffffff" : "#d1d1d1"}
-              attenuationDistance={25}
-              emissive={layout.chessLight ? "#ffffff" : "#000000"}
-              emissiveIntensity={0.05}
-              // clearcoat={1}
-              // clearcoatRoughness={0.06}
-              // envMapIntensity={layout.chessLight ? 2.15 : 1.35}
-            />
-          </RoundedBox>
-        </group>
-      ))}
+            <RoundedBox
+              args={[layout.inner, layout.inner, DEPTH]}
+              radius={0.02}
+              smoothness={2}
+            >
+              <MeshTransmissionMaterial
+                background={backdropTexture}
+                samples={samples}
+                resolution={txResolution}
+                transmission={1}
+                roughness={0.035}
+                thickness={0.42}
+                ior={1.5}
+                chromaticAberration={0.018}
+                anisotropicBlur={0.22}
+                distortion={0.022}
+                distortionScale={0.006}
+                temporalDistortion={0}
+                color={layout.chessLight ? "#f7f9ff" : "#c5cedf"}
+                attenuationColor={layout.chessLight ? "#ffffff" : "#5c6b82"}
+                attenuationDistance={layout.chessLight ? 12 : 5.5}
+                emissive={layout.chessLight ? "#ffffff" : "#a8b8d0"}
+                emissiveIntensity={layout.chessLight ? 0.02 : 0.04}
+                // clearcoat={1}
+                // clearcoatRoughness={0.06}
+              />
+            </RoundedBox>
+          </group>
+        ))}
+      </group>
     </group>
   );
 }
@@ -333,6 +461,32 @@ function useGlassPointer(reducedMotion: boolean) {
 export function GlassHeroScene() {
   const reducedMotion = usePrefersReducedMotion();
   const pointer = useGlassPointer(reducedMotion);
+  const { gl, scene, camera } = useThree();
+
+  const backdropFBO = useFBO();
+  const backdropTexture = useMemo(() => {
+    const tex = new THREE.CanvasTexture(document.createElement("canvas"));
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    return tex;
+  }, []);
+
+  useEffect(() => {
+    const canvas = backdropTexture.image as HTMLCanvasElement;
+    paintHeroBackdrop(
+      { image: canvas } as THREE.CanvasTexture,
+      DEFAULT_HERO_BACKDROP_COPY.line1,
+      DEFAULT_HERO_BACKDROP_COPY.line2,
+    );
+    backdropTexture.needsUpdate = true;
+  }, [backdropTexture]);
+
+  useFrame(() => {
+    gl.setRenderTarget(backdropFBO);
+    gl.render(scene, camera);
+    gl.setRenderTarget(null);
+  });
 
   return (
     <>
@@ -362,7 +516,11 @@ export function GlassHeroScene() {
         color="#9edaff"
       />
 
-      <GlassGrid pointer={pointer} reducedMotion={reducedMotion} />
+      <GlassGrid
+        pointer={pointer}
+        reducedMotion={reducedMotion}
+        backdropTexture={backdropFBO.texture ?? undefined}
+      />
     </>
   );
 }
