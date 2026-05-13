@@ -7,6 +7,7 @@ const HomePage = lazy(() => import("@/pages/Home"));
 const ProjectPage = lazy(() => import("@/pages/Project"));
 const ExperiencePage = lazy(() => import("@/pages/Experience"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound"));
+const GlassHeroPage = lazy(() => import("@/pages/GlassHeroPage"));
 
 // Simple loading fallback
 const PageLoader = () => (
@@ -16,6 +17,14 @@ const PageLoader = () => (
 );
 
 const router = createBrowserRouter([
+  {
+    path: "/glass-hero",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <GlassHeroPage />
+      </Suspense>
+    ),
+  },
   {
     path: "/",
     element: <Layout />,
