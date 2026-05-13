@@ -1,19 +1,11 @@
-import { GlassHeroOverlay } from "@/components/glass-hero/GlassHeroOverlay";
 import { GlassHeroScene } from "@/components/glass-hero/GlassHeroScene";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense } from "react";
 import * as THREE from "three";
 
-/**
- * Full-viewport liquid-glass hero: HTML underlay for copy + raster source,
- * WebGL canvas with transmission shards and mouse parallax.
- */
 export function GlassHero() {
-  const sourceRef = useRef<HTMLDivElement>(null);
-
   return (
     <div className="relative min-h-dvh w-full bg-[#030407]">
-      <GlassHeroOverlay sourceRef={sourceRef} />
       <div className="fixed inset-0 z-10 cursor-grab touch-none active:cursor-grabbing">
         <Canvas
           gl={{
@@ -37,7 +29,7 @@ export function GlassHero() {
           }}
         >
           <Suspense fallback={null}>
-            <GlassHeroScene sourceRef={sourceRef} />
+            <GlassHeroScene />
           </Suspense>
         </Canvas>
       </div>
