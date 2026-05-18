@@ -24,6 +24,7 @@ type HeroBackdropCopy = {
 type GlassCell = "O" | "X";
 type PointerRef = { current: { x: number; y: number } };
 type BooleanRef = { current: boolean };
+type NumberRef = { current: number };
 
 type ShardLayout = {
   col: number;
@@ -162,6 +163,21 @@ function paintHeroBackdrop(
   }
 
   texture.needsUpdate = true;
+}
+
+function createBackdropTexture() {
+  const tex = new THREE.CanvasTexture(document.createElement("canvas"));
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.minFilter = THREE.LinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.anisotropy = 2;
+  // Paint immediately so first visible frame never samples an empty canvas.
+  paintHeroBackdrop(
+    tex,
+    DEFAULT_HERO_BACKDROP_COPY.line1,
+    DEFAULT_HERO_BACKDROP_COPY.line2,
+  );
+  return tex;
 }
 
 function BackdropPlane({ z, texture }: { z: number; texture: THREE.Texture }) {
@@ -430,21 +446,19 @@ export function GlassHeroScene() {
   const { gl, scene, camera } = useThree();
   const backdropFBO = useFBO();
   const liveBackdropReady = useRef(false);
+  const captureFrames = useRef(0) as NumberRef;
 
-  const backdropTexture = useMemo(() => {
-    const tex = new THREE.CanvasTexture(document.createElement("canvas"));
-    tex.colorSpace = THREE.SRGBColorSpace;
-    tex.minFilter = THREE.LinearFilter;
-    tex.magFilter = THREE.LinearFilter;
-    tex.anisotropy = 2;
-    return tex;
-  }, []);
+  const backdropTexture = useMemo(() => createBackdropTexture(), []);
 
   useFrame(() => {
     gl.setRenderTarget(backdropFBO);
     gl.render(scene, camera);
     gl.setRenderTarget(null);
-    liveBackdropReady.current = true;
+    captureFrames.current += 1;
+    // Wait an extra frame so upgrades never happen against a not-yet-stable capture.
+    if (captureFrames.current >= 2) {
+      liveBackdropReady.current = true;
+    }
   }, -1);
 
   useEffect(() => {
@@ -458,9 +472,6 @@ export function GlassHeroScene() {
         DEFAULT_HERO_BACKDROP_COPY.line2,
       );
     };
-
-    // Paint immediately with fallback fonts.
-    paint();
 
     // Repaint once web fonts are ready to avoid first-load glyph mismatch.
     let onFontsDone: (() => void) | undefined;
