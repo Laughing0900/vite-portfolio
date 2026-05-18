@@ -466,6 +466,13 @@ export function GlassHeroScene() {
     backdropTexture.needsUpdate = true;
   }, [backdropTexture]);
 
+  useLayoutEffect(() => {
+    // Seed FBO once before the regular frame loop to avoid first-tick empty sampling.
+    gl.setRenderTarget(backdropFBO);
+    gl.render(scene, camera);
+    gl.setRenderTarget(null);
+  }, [gl, backdropFBO, scene, camera]);
+
   useFrame(() => {
     gl.setRenderTarget(backdropFBO);
     gl.render(scene, camera);
@@ -503,7 +510,7 @@ export function GlassHeroScene() {
       <GlassGrid
         pointer={pointer}
         reducedMotion={reducedMotion}
-        backdropTexture={backdropFBO.texture ?? undefined}
+        backdropTexture={backdropFBO.texture ?? backdropTexture}
       />
     </>
   );
