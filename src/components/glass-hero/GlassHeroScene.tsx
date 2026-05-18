@@ -23,6 +23,7 @@ type HeroBackdropCopy = {
 /** `"O"` = glass plate, `"X"` = empty. Row `0` is the top row visually. */
 type GlassCell = "O" | "X";
 type PointerRef = { current: { x: number; y: number } };
+type BooleanRef = { current: boolean };
 
 type ShardLayout = {
   col: number;
@@ -163,17 +164,7 @@ function paintHeroBackdrop(
   texture.needsUpdate = true;
 }
 
-function BackdropPlane({ z }: { z: number }) {
-  const texture = useMemo(() => {
-    const canvas = document.createElement("canvas");
-    const tex = new THREE.CanvasTexture(canvas);
-    tex.colorSpace = THREE.SRGBColorSpace;
-    tex.minFilter = THREE.LinearFilter;
-    tex.magFilter = THREE.LinearFilter;
-    tex.anisotropy = 2;
-    return tex;
-  }, []);
-
+function BackdropPlane({ z, texture }: { z: number; texture: THREE.Texture }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const { viewport, camera } = useThree();
 
@@ -185,46 +176,6 @@ function BackdropPlane({ z }: { z: number }) {
     const planeW = planeH * viewport.aspect;
     meshRef.current?.scale.set(planeW * 1.14, planeH * 1.14, 1);
   }, [camera, viewport.aspect, z]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const paint = () => {
-      if (cancelled) return;
-      paintHeroBackdrop(
-        texture,
-        DEFAULT_HERO_BACKDROP_COPY.line1,
-        DEFAULT_HERO_BACKDROP_COPY.line2,
-      );
-    };
-
-    // Paint immediately with fallback fonts
-    paint();
-
-    // When font is ready, repaint with proper font
-    if (document.fonts.check("700 120px Silkscreen")) {
-      paint();
-    } else {
-      document.fonts.addEventListener("loadingdone", () => {
-        if (!cancelled) paint();
-      });
-    }
-
-    let resizeT: ReturnType<typeof setTimeout>;
-    const onResize = () => {
-      clearTimeout(resizeT);
-      resizeT = setTimeout(() => {
-        paint();
-      }, 160);
-    };
-    window.addEventListener("resize", onResize);
-    return () => {
-      cancelled = true;
-      clearTimeout(resizeT);
-      window.removeEventListener("resize", onResize);
-      texture.dispose();
-    };
-  }, [texture]);
 
   return (
     <mesh ref={meshRef} position={[0, 0, z]} renderOrder={-1000}>
@@ -244,13 +195,21 @@ function GlassGrid({
   pointer,
   reducedMotion,
   backdropTexture,
+  liveBackdropTexture,
+  liveBackdropReady,
 }: {
   pointer: PointerRef;
   reducedMotion: boolean;
   backdropTexture: THREE.Texture | undefined;
+  liveBackdropTexture: THREE.Texture | undefined;
+  liveBackdropReady: BooleanRef;
 }) {
   const rigRef = useRef<THREE.Group>(null);
   const shardRefs = useRef<(THREE.Group | null)[]>([]);
+  const materialRefs = useRef<
+    ((THREE.MeshPhysicalMaterial & { background?: THREE.Texture | null }) | null)[]
+  >([]);
+  const upgradedToLiveBackdropRef = useRef(false);
   const width = useThree((s) => s.size.width);
   const viewport = useThree((s) => s.viewport);
   const camera = useThree((s) => s.camera);
@@ -352,6 +311,23 @@ function GlassGrid({
         0.065,
       );
     }
+
+    /**
+     * First frame uses deterministic canvas fallback. As soon as the FBO has at
+     * least one capture, upgrade all transmission materials in-place (no state).
+     */
+    if (
+      !upgradedToLiveBackdropRef.current &&
+      liveBackdropReady.current &&
+      liveBackdropTexture
+    ) {
+      for (const mat of materialRefs.current) {
+        if (!mat) continue;
+        mat.background = liveBackdropTexture;
+        mat.needsUpdate = true;
+      }
+      upgradedToLiveBackdropRef.current = true;
+    }
   });
 
   /** World Z of glass tiles — matches `getCurrentViewport` target so margins track frustum. */
@@ -384,6 +360,12 @@ function GlassGrid({
               smoothness={2}
             >
               <MeshTransmissionMaterial
+                ref={(node) => {
+                  materialRefs.current[i] =
+                    (node as unknown as THREE.MeshPhysicalMaterial & {
+                      background?: THREE.Texture | null;
+                    }) ?? null;
+                }}
                 background={backdropTexture}
                 samples={samples}
                 resolution={txResolution}
@@ -446,31 +428,68 @@ export function GlassHeroScene() {
   const reducedMotion = usePrefersReducedMotion();
   const pointer = useGlassPointer(reducedMotion);
   const { gl, scene, camera } = useThree();
-
   const backdropFBO = useFBO();
+  const liveBackdropReady = useRef(false);
+
   const backdropTexture = useMemo(() => {
     const tex = new THREE.CanvasTexture(document.createElement("canvas"));
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.minFilter = THREE.LinearFilter;
     tex.magFilter = THREE.LinearFilter;
+    tex.anisotropy = 2;
     return tex;
   }, []);
-
-  useEffect(() => {
-    const canvas = backdropTexture.image as HTMLCanvasElement;
-    paintHeroBackdrop(
-      { image: canvas } as THREE.CanvasTexture,
-      DEFAULT_HERO_BACKDROP_COPY.line1,
-      DEFAULT_HERO_BACKDROP_COPY.line2,
-    );
-    backdropTexture.needsUpdate = true;
-  }, [backdropTexture]);
 
   useFrame(() => {
     gl.setRenderTarget(backdropFBO);
     gl.render(scene, camera);
     gl.setRenderTarget(null);
-  });
+    liveBackdropReady.current = true;
+  }, -1);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const paint = () => {
+      if (cancelled) return;
+      paintHeroBackdrop(
+        backdropTexture as THREE.CanvasTexture,
+        DEFAULT_HERO_BACKDROP_COPY.line1,
+        DEFAULT_HERO_BACKDROP_COPY.line2,
+      );
+    };
+
+    // Paint immediately with fallback fonts.
+    paint();
+
+    // Repaint once web fonts are ready to avoid first-load glyph mismatch.
+    let onFontsDone: (() => void) | undefined;
+    if (document.fonts.check("700 120px Silkscreen")) {
+      paint();
+    } else {
+      onFontsDone = () => paint();
+      document.fonts.addEventListener("loadingdone", onFontsDone);
+    }
+
+    let resizeT: ReturnType<typeof setTimeout>;
+    const onResize = () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => {
+        paint();
+      }, 160);
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(resizeT);
+      window.removeEventListener("resize", onResize);
+      if (onFontsDone) {
+        document.fonts.removeEventListener("loadingdone", onFontsDone);
+      }
+      backdropTexture.dispose();
+    };
+  }, [backdropTexture]);
 
   return (
     <>
@@ -481,7 +500,7 @@ export function GlassHeroScene() {
         near={0.1}
         far={80}
       />
-      <BackdropPlane z={TEXT_Z} />
+      <BackdropPlane z={TEXT_Z} texture={backdropTexture} />
 
       <Environment
         preset="night"
@@ -503,7 +522,9 @@ export function GlassHeroScene() {
       <GlassGrid
         pointer={pointer}
         reducedMotion={reducedMotion}
-        backdropTexture={backdropFBO.texture ?? undefined}
+        backdropTexture={backdropTexture}
+        liveBackdropTexture={backdropFBO.texture ?? undefined}
+        liveBackdropReady={liveBackdropReady}
       />
     </>
   );
