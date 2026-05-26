@@ -9,7 +9,7 @@ import {
 } from "motion/react";
 import { domAnimation } from "motion/react";
 import { useAtom } from "jotai";
-import { useEffect, useReducer } from "react";
+import { useEffect, useRef } from "react";
 
 type BackgroundGraphicProps = { className?: string };
 
@@ -27,53 +27,36 @@ const variants = {
   },
 };
 
-type ScrollState =
-  | { status: "idle" }
-  | { status: "scrolling"; initialScroll: number };
-
-const scrollReducer = (
-  state: ScrollState,
-  action: { type: "start"; initialScroll: number } | { type: "end" },
-): ScrollState => {
-  switch (action.type) {
-    case "start":
-      return { status: "scrolling", initialScroll: action.initialScroll };
-    case "end":
-      return { status: "idle" };
-  }
-};
-
 const BackgroundGraphic = ({ className }: BackgroundGraphicProps) => {
   const width = useMotionValue(1);
   const [, setIsScrollingAtom] = useAtom(scrollAtom);
-  const [scrollState, dispatch] = useReducer(scrollReducer, { status: "idle" });
+  const isScrolling = useRef(false);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-    const handleScrollEvent = () => {
-      if (scrollState.status === "idle") {
-        dispatch({ type: "start", initialScroll: window.scrollY });
+    const handleScroll = () => {
+      if (!isScrolling.current) {
+        isScrolling.current = true;
         setIsScrollingAtom(true);
       }
-
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        if (scrollState.status === "scrolling") {
-          dispatch({ type: "end" });
+        if (isScrolling.current) {
+          isScrolling.current = false;
           setIsScrollingAtom(false);
           width.set(1);
         }
       }, 50);
     };
 
-    window.addEventListener("scroll", handleScrollEvent, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScrollEvent);
+      window.removeEventListener("scroll", handleScroll);
       clearTimeout(timeoutId);
     };
-  }, [scrollState, setIsScrollingAtom, width]);
+  }, [setIsScrollingAtom, width]);
 
   return (
     <LazyMotion features={domAnimation}>
@@ -93,7 +76,7 @@ const BackgroundGraphic = ({ className }: BackgroundGraphicProps) => {
         <div className="absolute top-0 left-1/6 h-full w-0.5 bg-accent delay-75 duration-300 ease-in-out-circ" />
         <div className="absolute right-1/6 bottom-0 h-full w-0.5 bg-accent duration-500 ease-in-out-circ" />
         <AnimatePresence>
-          {scrollState.status === "idle" && (
+          {!isScrolling.current && (
             <m.div
               variants={variants}
               initial="initial"
