@@ -27,6 +27,8 @@ export const AchievementPreview = memo(
                   alt={`${selected.imageId} preview`}
                   className="max-w-xs rounded-sm border-2 border-accent object-cover opacity-90"
                   style={{ x: translateX, y: translateY }}
+                  loading="lazy"
+                  decoding="async"
                 />
               )}
             </AnimatePresence>

@@ -41,7 +41,6 @@ export const AchievementItem = ({
 
   return (
     <div
-      key={item.title}
       className={cn(
         "relative flex h-fit min-h-40 flex-col p-5 md:p-10 lg:cursor-pointer",
         side === "academic" ? "lg:items-end" : "",

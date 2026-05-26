@@ -10,9 +10,10 @@ const Project = memo(() => {
   const { scrollYProgress } = useScroll({ target: ref });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const projects = projectRecords.slice(0, 6);
-  const pageSize = 1 / (projects.length - 1);
+  const pageSize = projects.length > 1 ? 1 / (projects.length - 1) : 1;
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setSelectedIndex(Math.round(latest / pageSize));
+    const newIndex = Math.round(latest / pageSize);
+    setSelectedIndex(Math.max(0, Math.min(newIndex, projects.length - 1)));
   });
 
   const getLinkStyle = useCallback(

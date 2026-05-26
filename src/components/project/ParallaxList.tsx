@@ -32,6 +32,8 @@ const ParallaxList = memo(({ project, index }: ParallaxListProps) => {
           src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,c_limit,w_3840,q_auto/v1/Pawn/portfolio/project/${project.previewImageId}`}
           alt={`${project.name} preview`}
           className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </motion.div>
 

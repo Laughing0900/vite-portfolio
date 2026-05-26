@@ -34,6 +34,8 @@ const PreviewCard = ({
             src={`https://res.cloudinary.com/dicmdiiov/image/upload/f_auto,c_limit,w_3840,q_auto/v1/Pawn/portfolio/project/${previewImageId}`}
             alt={`${name} preview`}
             className="h-full w-full object-cover delay-75 duration-150"
+            loading="lazy"
+            decoding="async"
             style={{
               opacity: onScroll ? 0 : 1,
               scaleX: onScroll ? 0.95 : 1,

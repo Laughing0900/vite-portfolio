@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const route = [
@@ -25,51 +24,112 @@ const route = [
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback(() => {
+    setIsOpen(false);
+    triggerRef.current?.focus();
+  }, []);
 
   const triggerNav = useCallback(() => {
     setIsOpen((current) => !current);
   }, []);
 
   const handleClick = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+    closeMenu();
+  }, [closeMenu]);
+
+  // Close on escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        e.preventDefault();
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeMenu]);
+
+  // Focus trap when menu is open
+  useEffect(() => {
+    if (!isOpen || !menuRef.current) return;
+
+    const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+      "a[href], button:not([disabled])",
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTabKey);
+    firstElement?.focus();
+
+    return () => document.removeEventListener("keydown", handleTabKey);
+  }, [isOpen]);
 
   return (
     <div className="pointer-events-none fixed top-0 right-0 z-[100] h-full w-1/2">
       <Button
+        ref={triggerRef}
         onClick={triggerNav}
         variant={"link"}
+        aria-expanded={isOpen}
+        aria-controls="nav-menu"
+        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
         className="silkscreen pointer-events-auto absolute top-0 right-0 z-10"
       >
         {isOpen ? "Close" : "Menu"}
       </Button>
-      <aside
-        className={cn(
-          "relative flex h-full w-full flex-col items-center justify-center gap-10",
-          "text-4xl",
-          "delay-75 duration-150",
-          isOpen ? "pointer-events-auto" : "pointer-events-none",
-        )}
-      >
-        {isOpen &&
-          route.map(({ label, href }, index) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: index * 0.1 + 0.1 }}
-            >
-              <Button
-                variant={"link"}
-                className="text-4xl"
-                onClick={handleClick}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="nav-menu"
+            ref={menuRef}
+            role="dialog"
+            aria-label="Navigation menu"
+            className="relative flex h-full w-full flex-col items-center justify-center gap-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {route.map(({ label, href }) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.15 }}
               >
-                <Link to={href}>{label}</Link>
-              </Button>
-            </motion.div>
-          ))}
-      </aside>
+                <Button
+                  variant={"link"}
+                  className="text-4xl"
+                  onClick={handleClick}
+                >
+                  <Link to={href}>{label}</Link>
+                </Button>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -77,6 +137,7 @@ const Nav = () => {
             initial={{ scaleY: 0.2 }}
             animate={{ scaleY: 1 }}
             exit={{ scaleY: 0.2 }}
+            onClick={closeMenu}
           />
         )}
       </AnimatePresence>
