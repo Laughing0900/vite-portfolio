@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "biome format --write ./src",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "doctor": "react-doctor"
   },
   "dependencies": {
     "@million/lint": "^1.0.14",
     "@radix-ui/react-slot": "^1.2.0",
+    "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.1.2",
     "@tabler/icons-react": "^3.31.0",
     "@tailwindcss/vite": "^4.0.15",
@@ -42,13 +44,14 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/lodash": "^4.17.16",
+    "@types/matter-js": "^0.19.8",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "@types/matter-js": "^0.19.8",
     "@vitejs/plugin-react": "^4.3.4",
     "globals": "^15.15.0",
     "typescript": "~5.7.2",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "react-doctor": "^0.2.6"
   }
 }
