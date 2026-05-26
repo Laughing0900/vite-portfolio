@@ -1,7 +1,8 @@
 import ParallaxList from "@/components/project/ParallaxList";
 import LeftMenu from "@/components/views/LeftMenu";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { LazyMotion, m, useMotionValueEvent, useScroll } from "motion/react";
+import { domAnimation } from "motion/react";
 import { memo, useCallback, useMemo, useRef, useState } from "react";
 import PreviewCard from "./PreviewCard";
 import { projects as projectRecords } from "./constants/ProjectHistories";
@@ -10,9 +11,10 @@ const Project = memo(() => {
   const { scrollYProgress } = useScroll({ target: ref });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const projects = projectRecords.slice(0, 6);
-  const pageSize = 1 / (projects.length - 1);
+  const pageSize = projects.length > 1 ? 1 / (projects.length - 1) : 1;
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setSelectedIndex(Math.round(latest / pageSize));
+    const newIndex = Math.round(latest / pageSize);
+    setSelectedIndex(Math.max(0, Math.min(newIndex, projects.length - 1)));
   });
 
   const getLinkStyle = useCallback(
@@ -35,16 +37,18 @@ const Project = memo(() => {
       <LeftTitleCard title="Projects" />
 
       <LeftMenu className=" flex flex-col justify-center gap-4">
-        {projects.map(({ id, name }, index) => (
-          <motion.a
-            key={`${id}-project`}
-            href={`/project#${id}-project`}
-            className="cursor-pointer text-base leading-relaxed hover:underline"
-            style={getLinkStyle(index)}
-          >
-            {name}
-          </motion.a>
-        ))}
+        <LazyMotion features={domAnimation}>
+          {projects.map(({ id, name }, index) => (
+            <m.a
+              key={`${id}-project`}
+              href={`/project#${id}-project`}
+              className="cursor-pointer text-base leading-relaxed hover:underline"
+              style={getLinkStyle(index)}
+            >
+              {name}
+            </m.a>
+          ))}
+        </LazyMotion>
       </LeftMenu>
 
       <PreviewCard project={project} />

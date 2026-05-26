@@ -1,9 +1,11 @@
 import {
-  motion,
+  LazyMotion,
+  m,
   type MotionValue,
   useScroll,
   useTransform,
 } from "motion/react";
+import { domAnimation } from "motion/react";
 import type React from "react";
 import { memo, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -84,11 +86,13 @@ const Char = ({
 }) => {
   const opacity = useTransform(progress, range, [0.2, 1]);
   return (
-    <motion.span
-      className="mx-[0.05ch] will-change-[opacity]"
-      style={{ opacity: opacity }}
-    >
-      {children}
-    </motion.span>
+    <LazyMotion features={domAnimation}>
+      <m.span
+        className="mx-[0.05ch] will-change-[opacity]"
+        style={{ opacity: opacity }}
+      >
+        {children}
+      </m.span>
+    </LazyMotion>
   );
 };

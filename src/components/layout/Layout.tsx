@@ -7,7 +7,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="relative min-h-dvh w-full bg-radial-[at_50%_100%] from-[#0D9FC71A] to-55% to-[#0D352A00]">
+    <div className="relative min-h-dvh w-full bg-radial-[at_50%_100%] from-layout-gradient-start to-55% to-layout-gradient-end">
       <div className="-z-50 pointer-events-none fixed min-h-dvh w-full">
         <DotPattern />
       </div>

@@ -63,56 +63,56 @@ const Skills = memo(() => {
           <Gravity>
             <Pills
               item="React"
-              backgroundColor="bg-[#61dafb]"
+              backgroundColor="bg-[var(--color-react)]"
               color="text-black"
               x="10%"
               y="10%"
             />
             <Pills
               item="TypeScript"
-              backgroundColor="bg-[#3178C6]"
+              backgroundColor="bg-[var(--color-typescript)]"
               color="text-white"
               x="30%"
               y="30%"
             />
             <Pills
               item="GoLang"
-              backgroundColor="bg-[#00ADD9]"
+              backgroundColor="bg-[var(--color-golang)]"
               color="text-black"
               x="40%"
               y="20%"
             />
             <Pills
               item="Solidity"
-              backgroundColor="bg-[#2C2C2C]"
+              backgroundColor="bg-[var(--color-solidity)]"
               color="text-white"
               x="75%"
               y="10%"
             />
             <Pills
               item="Ethereum"
-              backgroundColor="bg-[#1C1C1C]"
+              backgroundColor="bg-[var(--color-ethereum)]"
               color="text-white"
               x="80%"
               y="20%"
             />
             <Pills
               item="Tron"
-              backgroundColor="bg-[#FE0301]"
+              backgroundColor="bg-[var(--color-tron)]"
               color="text-white"
               x="40%"
               y="20%"
             />
             <Pills
               item="Cardano"
-              backgroundColor="bg-[#0031B4]"
+              backgroundColor="bg-[var(--color-cardano)]"
               color="text-white"
               x="20%"
               y="90%"
             />
             <Pills
               item="Solana"
-              backgroundColor="bg-gradient-to-br from-[#9945FF] to-[#14F195]"
+              backgroundColor="bg-gradient-to-br from-[var(--color-solana-start)] to-[var(--color-solana-end)]"
               color="text-white"
               x="50%"
               y="10%"

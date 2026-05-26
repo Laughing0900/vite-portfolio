@@ -1,8 +1,6 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 /**
  *  DotPattern Component Props
@@ -74,9 +72,12 @@ export function DotPattern({
   ...props
 }: DotPatternProps) {
   const containerRef = useRef<SVGSVGElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [dimensions, setDimensions] = useState<{
+    width: number;
+    height: number;
+  }>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const { width, height } = containerRef.current.getBoundingClientRect();
@@ -92,12 +93,12 @@ export function DotPattern({
   const dots = Array.from(
     {
       length:
-        Math.ceil(dimensions.width / width) *
-        Math.ceil(dimensions.height / height),
+        Math.ceil((dimensions?.width ?? 0) / width) *
+        Math.ceil((dimensions?.height ?? 0) / height),
     },
     (_, i) => {
-      const col = i % Math.ceil(dimensions.width / width);
-      const row = Math.floor(i / Math.ceil(dimensions.width / width));
+      const col = i % Math.ceil((dimensions?.width ?? 0) / width);
+      const row = Math.floor(i / Math.ceil((dimensions?.width ?? 0) / width));
       return {
         x: col * width + cx + cx / 2,
         y: row * height + cy + cy / 2,
@@ -117,16 +118,17 @@ export function DotPattern({
       )}
       {...props}
     >
-      {dots.map((dot) => (
-        <circle
-          key={`${dot.x}-${dot.y}`}
-          cx={dot.x}
-          cy={dot.y}
-          r={cr}
-          fill={"#FFFFFF22"}
-          className="text-neutral-400/80 "
-        />
-      ))}
+      {dimensions &&
+        dots.map((dot) => (
+          <circle
+            key={`${dot.x}-${dot.y}`}
+            cx={dot.x}
+            cy={dot.y}
+            r={cr}
+            fill={"#FFFFFF22"}
+            className="text-neutral-400/80 "
+          />
+        ))}
     </svg>
   );
 }

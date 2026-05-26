@@ -16,7 +16,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       <div className="relative pb-20">
         {data.map((item, index) => (
           <div
-            key={index}
+            key={item.company}
             className="flex border-accent last:border-b-2 "
             id={`${item.company}-experience`}
           >

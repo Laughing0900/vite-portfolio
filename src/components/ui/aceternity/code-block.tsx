@@ -57,7 +57,7 @@ export const CodeBlock = ({ language, code, className }: CodeBlockProps) => {
     return (
       <div className={className}>
         <div className="relative flex h-full w-full items-center justify-center rounded-lg p-4 text-sm">
-          <div className="animate-pulse text-muted-foreground">Loading...</div>
+          <div className="animate-pulse text-muted-foreground">Loading…</div>
         </div>
       </div>
     );
