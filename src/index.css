@@ -36,6 +36,30 @@
 
   --ease-in-out-circ: cubic-bezier(0.85, 0.09, 0.15, 0.91);
 
+  /* Brand colors for tech stack pills */
+  --color-react: oklch(75% 0.15 195);
+  --color-typescript: oklch(45% 0.18 255);
+  --color-golang: oklch(65% 0.19 195);
+  --color-solidity: oklch(25% 0 0);
+  --color-ethereum: oklch(20% 0 0);
+  --color-tron: oklch(50% 0.2 25);
+  --color-cardano: oklch(35% 0.15 255);
+  --color-solana-start: oklch(65% 0.25 300);
+  --color-solana-end: oklch(75% 0.2 160);
+
+  /* Chart colors */
+  --color-chart-line: oklch(75% 0.15 175);
+  --color-chart-area-start: oklch(98% 0 0);
+  --color-chart-area-mid: oklch(60% 0.12 280);
+  --color-chart-area-end: oklch(75% 0.1 175);
+  --color-chart-bar-inactive: oklch(25% 0 0 / 50%);
+  --color-chart-bar-active: oklch(70% 0.18 140);
+  --color-chart-bar-accent: oklch(65% 0.12 175);
+
+  /* Glow/accent colors */
+  --color-glow-base: oklch(4% 0.002 286);
+  --color-glow-accent: oklch(45% 0.06 175 / 13%);
+
   --one-six-dvh: calc(100dvh / 6);
 }
 
@@ -69,6 +93,30 @@
   /* Animation */
   --ease-in-out-circ: var(--ease-in-out-circ);
 
+  /* Brand colors for tech stack pills */
+  --color-react: var(--color-react);
+  --color-typescript: var(--color-typescript);
+  --color-golang: var(--color-golang);
+  --color-solidity: var(--color-solidity);
+  --color-ethereum: var(--color-ethereum);
+  --color-tron: var(--color-tron);
+  --color-cardano: var(--color-cardano);
+  --color-solana-start: var(--color-solana-start);
+  --color-solana-end: var(--color-solana-end);
+
+  /* Chart colors */
+  --color-chart-line: var(--color-chart-line);
+  --color-chart-area-start: var(--color-chart-area-start);
+  --color-chart-area-mid: var(--color-chart-area-mid);
+  --color-chart-area-end: var(--color-chart-area-end);
+  --color-chart-bar-inactive: var(--color-chart-bar-inactive);
+  --color-chart-bar-active: var(--color-chart-bar-active);
+  --color-chart-bar-accent: var(--color-chart-bar-accent);
+
+  /* Glow/accent colors */
+  --color-glow-base: var(--color-glow-base);
+  --color-glow-accent: var(--color-glow-accent);
+
   /* Font */
   --font-base: "Post No Bills Colombo Medium Regular", "sans-serif";
 
@@ -101,7 +149,7 @@
 }
 
 @utility background-radial {
-  @apply bg-[#090F10] bg-radial-[at_100%_15%] from-[#1B978D22] to-70% to-[#00000000];
+  @apply bg-glow-base bg-radial-[at_100%_15%] from-glow-accent to-70% to-transparent;
 }
 
 .silkscreen {

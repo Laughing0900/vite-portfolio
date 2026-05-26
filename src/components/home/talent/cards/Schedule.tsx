@@ -23,8 +23,7 @@ const Schedule = memo(() => {
             height="16"
             rx="8"
             ry="8"
-            fill="#333333"
-            opacity="0.5"
+            fill="var(--color-chart-bar-inactive)"
           />
           <rect
             x="0"
@@ -33,7 +32,7 @@ const Schedule = memo(() => {
             height="16"
             rx="8"
             ry="8"
-            fill="#7ed957"
+            fill="var(--color-chart-bar-active)"
           />
 
           <rect
@@ -43,8 +42,7 @@ const Schedule = memo(() => {
             height="16"
             rx="8"
             ry="8"
-            fill="#555555"
-            opacity="0.5"
+            fill="var(--color-chart-bar-inactive)"
           />
 
           <rect
@@ -54,8 +52,7 @@ const Schedule = memo(() => {
             height="16"
             rx="8"
             ry="8"
-            fill="#333333"
-            opacity="0.5"
+            fill="var(--color-chart-bar-inactive)"
           />
           <rect
             x="120"
@@ -71,11 +68,11 @@ const Schedule = memo(() => {
             <linearGradient id="greenToTeal" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop
                 offset="0%"
-                style={{ stopColor: "#7ed957", stopOpacity: 1 }}
+                style={{ stopColor: "oklch(70% 0.18 140)", stopOpacity: 1 }}
               />
               <stop
                 offset="100%"
-                style={{ stopColor: "#00c2a8", stopOpacity: 1 }}
+                style={{ stopColor: "oklch(65% 0.12 175)", stopOpacity: 1 }}
               />
             </linearGradient>
           </defs>

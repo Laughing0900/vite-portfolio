@@ -7,16 +7,16 @@ const Productivity = memo(() => {
         <path
           d="M15,560 C38,600 75,640 113,560 C150,480 188,400 225,370 C263,340 300,390 338,400 C375,410 413,380 450,500 C488,620 525,560 563,360"
           fill="none"
-          stroke="#EEEEEE44"
+          stroke="oklch(25% 0 0 / 25%)"
           strokeWidth="3"
           strokeDasharray="10,5"
         />
 
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="40%" stopColor="#8A85D2" />
-            <stop offset="100%" stopColor="#21CEBA" />
+            <stop offset="0%" stopColor="oklch(98% 0 0)" />
+            <stop offset="40%" stopColor="oklch(60% 0.12 280)" />
+            <stop offset="100%" stopColor="oklch(75% 0.1 175)" />
           </linearGradient>
         </defs>
 
