@@ -27,3 +27,4 @@ function Button({
 }
 
 export { Button };
+export type { VariantProps } from "class-variance-authority";
