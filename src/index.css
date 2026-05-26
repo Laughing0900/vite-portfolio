@@ -60,6 +60,10 @@
   --color-glow-base: oklch(4% 0.002 286);
   --color-glow-accent: oklch(45% 0.06 175 / 13%);
 
+  /* Layout gradient */
+  --color-layout-gradient-start: oklch(65% 0.15 175 / 10%);
+  --color-layout-gradient-end: oklch(45% 0.08 175 / 0%);
+
   --one-six-dvh: calc(100dvh / 6);
 }
 
@@ -116,6 +120,10 @@
   /* Glow/accent colors */
   --color-glow-base: var(--color-glow-base);
   --color-glow-accent: var(--color-glow-accent);
+
+  /* Layout gradient colors */
+  --color-layout-gradient-start: var(--color-layout-gradient-start);
+  --color-layout-gradient-end: var(--color-layout-gradient-end);
 
   /* Font */
   --font-base: "Post No Bills Colombo Medium Regular", "sans-serif";
