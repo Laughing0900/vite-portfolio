@@ -1,0 +1,345 @@
+  ---
+  Design & Quality Audit Report
+
+  Anti-Patterns Verdict: PARTIAL FAIL
+
+  The portfolio has a distinctive dark aesthetic with OKLCH colors and a custom font (Post No Bills
+  Colombo), avoiding some generic AI patterns. However, several anti-patterns detected:
+
+  AI Slop Tells:
+  - Glassmorphism: Heavy use in GlassHero, GlassGrid, GlassHeroScene — decorative blur effects without functional purpose
+  - Hardcoded hex colors in Skills.tsx pills (React #61dafb, TypeScript #3178C6, etc.)
+  - Gray on colored backgrounds in Schedule.tsx SVG (#333333, #555555 on colored backgrounds)
+  - Solana pill gradient: bg-gradient-to-br from-[#9945FF] to-[#14F195] — decorative gradient
+
+  What's Working Well:
+  - Custom distinctive font (not Inter/Roboto)
+  - OKLCH color palette with proper tinting
+  - Dark theme consistently applied
+  - No gradient text on headings
+  - Good use of design tokens in index.css
+
+  ---
+  Executive Summary
+
+  ┌──────────┬───────┐
+  │ Severity │ Count │
+  ├──────────┼───────┤
+  │ Critical │ 3     │
+  ├──────────┼───────┤
+  │ High     │ 5     │
+  ├──────────┼───────┤
+  │ Medium   │ 8     │
+  ├──────────┼───────┤
+  │ Low      │ 6     │
+  └──────────┴───────┘
+
+  Top 3 Critical Issues:
+  1. Accessibility: Missing keyboard navigation in Nav menu (focus trap)
+  2. Performance: Three.js/React-Three-Fiber loads on all pages
+  3. Theming: Hardcoded hex colors in 8+ components
+
+  Overall Quality Score: 6/10
+
+  ---
+  Detailed Findings
+
+  Critical Issues
+
+  1. Nav Menu Keyboard Traps
+
+  - Location: src/components/layout/nav.tsx:38-84
+  - Severity: Critical
+  - Category: Accessibility
+  - Description: Nav overlay can trap keyboard users. No focus management, escape key handling, or
+  focus trap when open.
+  - Impact: Keyboard users cannot navigate the site when menu is open.
+  - WCAG: WCAG 2.1 Criterion 2.1.2 (No Keyboard Trap)
+  - Recommendation: Add escape key listener, focus trap, and proper ARIA attributes.
+  - Suggested command: /harden
+
+  2. Three.js Bundle on Non-GlassHero Pages
+
+  - Location: src/components/glass-hero/* entire directory
+  - Severity: Critical
+  - Category: Performance
+  - Description: Three.js and React-Three-Fiber dependencies load site-wide even when only used on
+  /glass-hero page. Should be code-split.
+  - Impact: Increases initial bundle size significantly for all routes.
+  - Recommendation: Lazy load GlassHeroScene only when GlassHeroPage is accessed.
+  - Suggested command: /optimize
+
+  3. Images Missing Lazy Loading
+
+  - Location: Multiple files (ParallaxList.tsx:31-35, PreviewCard.tsx:33-42,
+  AchievementPreview.tsx:25-30)
+  - Severity: Critical
+  - Category: Performance
+  - Description: <img> tags lack loading="lazy" attribute.
+  - Impact: Images load eagerly, degrading initial page load performance.
+  - Recommendation: Add loading="lazy" to all below-fold images.
+  - Suggested command: /optimize
+
+  ---
+  High-Severity Issues
+
+  4. Hardcoded Brand Colors in Skills Pills
+
+  - Location: src/components/home/talent/cards/Skills.tsx:64-119
+  - Severity: High
+  - Category: Theming
+  - Description: Direct hex values for React (#61dafb), TypeScript (#3178C6), Go (#00ADD9), Solidity
+   (#2C2C2C), Ethereum (#1C1C1C), Tron (#FE0301), Cardano (#0031B4), Solana (gradient)
+  - Impact: Cannot switch themes; colors break on different backgrounds.
+  - Recommendation: Convert to CSS custom properties or Tailwind theme colors.
+  - Suggested command: /normalize
+
+  5. SVG Hardcoded Colors Not Using Tokens
+
+  - Location:
+    - src/components/home/talent/cards/Productivity.tsx:10,17-19 (#EEEEEE44, #FFFFFF, #8A85D2,
+  #21CEBA)
+    - src/components/home/talent/cards/Schedule.tsx:26-28,36,46,57,67-68 (#333333, #7ed957, #555555,
+   #00c2a8)
+  - Severity: High
+  - Category: Theming
+  - Description: SVG elements use raw hex colors instead of CSS variables.
+  - Impact: Inconsistent theming, cannot adapt to dark/light mode.
+  - Recommendation: Define these as CSS custom properties.
+  - Suggested command: /normalize
+
+  6. Non-Descriptive Alt Text
+
+  - Location: src/components/achievement/components/AchievementPreview.tsx:27
+  - Severity: High
+  - Category: Accessibility
+  - Description: Alt text is ${selected.imageId} preview — the imageId is not meaningful to screen
+  readers.
+  - Impact: Screen reader users cannot understand image content.
+  - WCAG: WCAG 1.1.1 (Non-text Content)
+  - Recommendation: Use item title or institution name for alt text.
+  - Suggested command: /clarify
+
+  7. Missing Section Headings (A11y Hierarchy)
+
+  - Location: src/components/project/Project.tsx, src/components/experience/Experience.tsx,
+  src/components/achievement/Achievement.tsx
+  - Severity: High
+  - Category: Accessibility
+  - Description: <section> elements lack accessible names (no <h1>-<h6> that describes the section).
+  - Impact: Screen reader users cannot navigate by headings.
+  - WCAG: WCAG 1.3.1 (Info and Relationships)
+  - Recommendation: Ensure each section has a proper heading hierarchy.
+  - Suggested command: /harden
+
+  8. Duplicate key Prop Warning
+
+  - Location: src/components/achievement/AchievementItem.tsx:44
+  - Severity: High
+  - Category: Performance
+  - Description: key is set both on the parent div and the AnimatePresence child.
+  - Impact: React reconciliation warnings, potential rendering issues.
+  - Recommendation: Remove duplicate key.
+  - Suggested command: /polish
+
+  ---
+  Medium-Severity Issues
+
+  9. Fixed Footer Height
+
+  - Location: src/components/layout/Footer.tsx:26
+  - Severity: Medium
+  - Category: Responsive
+  - Description: h-[800px] is fixed and doesn't adapt to viewport.
+  - Impact: May cause overflow or unused space on different screen sizes.
+  - Recommendation: Use fluid units or container queries.
+  - Suggested command: /adapt
+
+  10. Glassmorphism Without Purpose
+
+  - Location: src/components/glass-hero/GlassGrid.tsx, src/components/glass-hero/GlassHeroScene.tsx
+  - Severity: Medium
+  - Category: Anti-Pattern
+  - Description: Blur effects and glass aesthetic used decoratively rather than functionally.
+  - Impact: Performance cost (backdrop-filter is expensive) without clear UX benefit.
+  - Recommendation: Evaluate if glass effect serves a purpose or can be simplified.
+  - Suggested command: /quieter or /distill
+
+  11. Matter.js Physics Not Lazy Loaded
+
+  - Location: src/components/ui/fancy/physics/gravity.tsx
+  - Severity: Medium
+  - Category: Performance
+  - Description: Physics engine is large (~100KB) but imported in Skills component which may not
+  need it immediately.
+  - Impact: Bundle size increase.
+  - Recommendation: Already lazy-loaded via React.lazy, but verify tree-shaking works.
+  - Suggested command: /optimize
+
+  12. Button Focus Ring Visibility
+
+  - Location: src/components/ui/button.tsx:8
+  - Severity: Medium
+  - Category: Accessibility
+  - Description: Focus-visible ring uses focus-visible:ring-[3px] but may not be visible on all
+  backgrounds.
+  - Impact: Keyboard users may lose focus indication.
+  - Recommendation: Ensure 3:1 contrast ratio for focus indicators against all backgrounds.
+  - Suggested command: /harden
+
+  13. Missing Image Width/Height
+
+  - Location: src/components/project/ParallaxList.tsx:31-35,
+  src/components/achievement/components/AchievementPreview.tsx:25-30
+  - Severity: Medium
+  - Category: Performance
+  - Description: Images lack explicit width/height attributes for CLS prevention.
+  - Impact: Content layout shift during load.
+  - Recommendation: Add width/height or use aspect-ratio CSS.
+  - Suggested command: /optimize
+
+  14. Hover Background Radial Repeated
+
+  - Location: src/components/home/talent/Talent.tsx:57,69,81,92
+  - Severity: Medium
+  - Category: DRY
+  - Description: hover:background-radial class repeated 4 times identically.
+  - Impact: Maintenance burden, inconsistent updates.
+  - Recommendation: Extract to a component or CSS class.
+  - Suggested command: /extract
+
+  15. Background Radial Hardcoded
+
+  - Location: src/index.css:103-105
+  - Severity: Medium
+  - Category: Theming
+  - Description: Background radial uses #090F10 and #1B978D22 hardcoded.
+  - Impact: Not theme-adaptable.
+  - Recommendation: Convert to CSS custom properties.
+  - Suggested command: /normalize
+
+  16. No Dark Mode Alternative
+
+  - Location: Global
+  - Severity: Medium
+  - Category: Theming
+  - Description: Site only has dark theme. If light mode is needed, all hardcoded colors will break.
+  - Impact: Limited flexibility for user preference.
+  - Recommendation: Consider adding light mode tokens.
+  - Suggested command: /adapt
+
+  ---
+  Low-Severity Issues
+
+  17. Redundant Section Offset Divs
+
+  - Location: src/components/views/LeftTitleCard.tsx:20
+  - Severity: Low
+  - Description: -mt-one-six-dvh div used for offset, could be done with padding/margin on section.
+  - Suggestion: Simplify structure.
+
+  18. Magic Numbers in Scroll Calculations
+
+  - Location: src/components/project/Project.tsx:13-16
+  - Severity: Low
+  - Description: pageSize = 1 / (projects.length - 1) has no guard for edge cases.
+  - Suggestion: Add bounds checking.
+
+  19. Unused index in Timeline
+
+  - Location: src/components/ui/aceternity/timeline.tsx:25
+  - Severity: Low
+  - Description: index not used in sticky column.
+  - Suggestion: Remove or use for something.
+
+  20. Hardcoded Text in Code Blocks
+
+  - Location: src/components/home/talent/cards/Schedule.tsx:11-82
+  - Severity: Low
+  - Description: SVG chart has hardcoded "better/worse" sample code embedded.
+  - Suggestion: Consider if this content should be data-driven.
+
+  21. Console.log Pattern in Code
+
+  - Location: src/components/glass-hero/GlassHeroScene.tsx
+  - Severity: Low
+  - Description: May contain debug logs.
+  - Suggestion: Remove before production.
+
+  22. Spinner Colors
+
+  - Location: Multiple fallback spinners (Skills.tsx, Schedule.tsx)
+  - Severity: Low
+  - Description: Spinner uses border-primary but border-t-transparent may not match design.
+  - Suggestion: Verify spinner aesthetics.
+
+  ---
+  Patterns & Systemic Issues
+
+  1. Hardcoded hex colors appear in 8+ components — Should use CSS custom properties from index.css
+  2. Missing loading="lazy" on all images — Performance impact site-wide
+  3. Glassmorphism/Three.js loaded site-wide — Should be route-specific
+  4. Inconsistent heading structure — Sections need proper h1-h6 hierarchy
+  5. Nav lacks keyboard accessibility — Focus trap missing
+
+  ---
+  Positive Findings
+
+  - Excellent use of OKLCH color model for perceptually uniform palette
+  - Custom distinctive font (Post No Bills Colombo) — not generic
+  - Good use of CSS custom properties for theming foundation
+  - prefers-reduced-motion properly handled
+  - memo() used appropriately on pure components
+  - Proper ARIA attributes on some interactive elements
+  - Good scroll-based animations using Framer Motion transforms (not layout properties)
+  - Proper use of React.lazy for code splitting
+
+  ---
+  Recommendations by Priority
+
+  Immediate (Critical)
+
+  1. Add keyboard navigation and focus trap to Nav
+  2. Lazy load Three.js/GlassHero only on GlassHeroPage
+  3. Add loading="lazy" to all images
+
+  Short-term (High)
+
+  4. Convert hardcoded hex colors to CSS variables
+  5. Fix alt text descriptions
+  6. Add section headings for accessibility
+  7. Remove duplicate key prop
+
+  Medium-term (Medium)
+
+  8. Consider removing/reducing glassmorphism
+  9. Add light mode tokens (optional)
+  10. Fix footer responsive height
+  11. Add image dimensions for CLS
+
+  Long-term (Low)
+
+  12. Extract repeated hover:background-radial
+  13. Clean up magic numbers
+  14. Verify bundle optimization
+
+  ---
+  Suggested Commands for Fixes
+
+  ┌─────────────────┬────────────┬───────────────────────────────────────────────┐
+  │   Issue Count   │  Command   │                    Purpose                    │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 8 theming       │ /normalize │ Convert hardcoded colors to design tokens     │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 5 performance   │ /optimize  │ Lazy loading, image optimization, bundle size │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 4 accessibility │ /harden    │ Focus traps, ARIA, keyboard nav, alt text     │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 2 anti-patterns │ /quieter   │ Reduce glassmorphism, simplify decorations    │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 1 responsive    │ /adapt     │ Mobile/tablet adaptations                     │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 1 code quality  │ /polish    │ Fix duplicate keys, spinner styles            │
+  ├─────────────────┼────────────┼───────────────────────────────────────────────┤
+  │ 1 DRY           │ /extract   │ Extract repeated background-radial            │
+  └─────────────────┴────────────┴───────────────────────────────────────────────┘

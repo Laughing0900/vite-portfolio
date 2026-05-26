@@ -1,7 +1,7 @@
 import Lenis from "lenis";
 import { ReactLenis } from "lenis/react";
 import Snap from "lenis/snap";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 declare global {
   interface Window {
@@ -15,8 +15,6 @@ interface LenisProviderProps {
 }
 
 function LenisProvider({ children }: LenisProviderProps) {
-  const [initialized, setInitialized] = useState(false);
-
   useEffect(() => {
     // Defer Lenis initialization until after mount
     const lenis = new Lenis({ lerp: 0.1 });
@@ -37,17 +35,12 @@ function LenisProvider({ children }: LenisProviderProps) {
     }
 
     const rafId = requestAnimationFrame(raf);
-    setInitialized(true);
 
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
-
-  if (!initialized) {
-    return <>{children}</>;
-  }
 
   return <ReactLenis root>{children}</ReactLenis>;
 }

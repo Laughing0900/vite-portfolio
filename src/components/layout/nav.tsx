@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, m } from "motion/react";
+import { domAnimation } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -51,7 +52,7 @@ const Nav = () => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, closeMenu]);
+  }, [isOpen]);
 
   // Focus trap when menu is open
   useEffect(() => {
@@ -100,45 +101,49 @@ const Nav = () => {
       </Button>
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            id="nav-menu"
-            ref={menuRef}
-            role="dialog"
-            aria-label="Navigation menu"
-            className="relative flex h-full w-full flex-col items-center justify-center gap-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {route.map(({ label, href }) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.15 }}
-              >
-                <Button
-                  variant={"link"}
-                  className="text-4xl"
-                  onClick={handleClick}
+          <LazyMotion features={domAnimation}>
+            <m.div
+              id="nav-menu"
+              ref={menuRef}
+              role="dialog"
+              aria-label="Navigation menu"
+              className="relative flex h-full w-full flex-col items-center justify-center gap-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {route.map(({ label, href }) => (
+                <m.div
+                  key={label}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.15 }}
                 >
-                  <Link to={href}>{label}</Link>
-                </Button>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <Button
+                    variant={"link"}
+                    className="text-4xl"
+                    onClick={handleClick}
+                  >
+                    <Link to={href}>{label}</Link>
+                  </Button>
+                </m.div>
+              ))}
+            </m.div>
+          </LazyMotion>
         )}
       </AnimatePresence>
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            className="-z-10 pointer-events-auto absolute inset-0 origin-top-right bg-background duration-150 ease-out"
-            initial={{ scaleY: 0.2 }}
-            animate={{ scaleY: 1 }}
-            exit={{ scaleY: 0.2 }}
-            onClick={closeMenu}
-          />
+          <LazyMotion features={domAnimation}>
+            <m.div
+              className="-z-10 pointer-events-auto absolute inset-0 origin-top-right bg-background duration-150 ease-out"
+              initial={{ scaleY: 0.2 }}
+              animate={{ scaleY: 1 }}
+              exit={{ scaleY: 0.2 }}
+              onClick={closeMenu}
+            />
+          </LazyMotion>
         )}
       </AnimatePresence>
     </div>

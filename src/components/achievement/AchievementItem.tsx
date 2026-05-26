@@ -1,10 +1,11 @@
 import { scrollAtom } from "@/atoms/scrollAtom";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, m } from "motion/react";
+import { domAnimation } from "motion/react";
 import { useMemo } from "react";
 
-interface AchievementItemProps {
+interface AchievementFieldProps {
   item: {
     title: string;
     institution: string;
@@ -24,7 +25,7 @@ export const AchievementItem = ({
   onMouseEnter,
   onMouseLeave,
   onMouseMove,
-}: AchievementItemProps) => {
+}: AchievementFieldProps) => {
   const onScroll = useAtomValue(scrollAtom);
 
   const headline = useMemo(() => {
@@ -40,32 +41,34 @@ export const AchievementItem = ({
   }, [side, index]);
 
   return (
-    <div
-      className={cn(
-        "relative flex h-fit min-h-40 flex-col p-5 md:p-10 lg:cursor-pointer",
-        side === "academic" ? "lg:items-end" : "",
-      )}
-      onMouseEnter={() => onMouseEnter(side, item.imageId)}
-      onMouseLeave={onMouseLeave}
-      onMouseMove={onMouseMove}
-    >
-      <span className="text-base">{headline}</span>
-      <span className="mt-1 nd:text-nowrap text-balance text-4xl md:overflow-clip md:text-ellipsis">
-        {item.institution}
-      </span>
-      <span className="text-sm">{item.title}</span>
-      <AnimatePresence>
-        {!onScroll && (
-          <motion.div
-            className={cn(
-              "absolute bottom-0 left-0 w-full border-accent border-b-2 transition-all duration-100 ease-in-out-circ",
-            )}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: index * 0.05 } }}
-            exit={{ opacity: 0 }}
-          />
+    <LazyMotion features={domAnimation}>
+      <div
+        className={cn(
+          "relative flex h-fit min-h-40 flex-col p-5 md:p-10 lg:cursor-pointer",
+          side === "academic" ? "lg:items-end" : "",
         )}
-      </AnimatePresence>
-    </div>
+        onMouseEnter={() => onMouseEnter(side, item.imageId)}
+        onMouseLeave={onMouseLeave}
+        onMouseMove={onMouseMove}
+      >
+        <span className="text-base">{headline}</span>
+        <span className="mt-1 nd:text-nowrap text-balance text-4xl md:overflow-clip md:text-ellipsis">
+          {item.institution}
+        </span>
+        <span className="text-sm">{item.title}</span>
+        <AnimatePresence>
+          {!onScroll && (
+            <m.div
+              className={cn(
+                "absolute bottom-0 left-0 w-full border-accent border-b-2 transition-all duration-100 ease-in-out-circ",
+              )}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { delay: index * 0.05 } }}
+              exit={{ opacity: 0 }}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    </LazyMotion>
   );
 };
