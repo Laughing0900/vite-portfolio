@@ -8,8 +8,8 @@ export type Projects = {
 
 export const projects: Projects[] = [
   {
-    id: "CEX Market Making Enging",
-    name: "CEX Market Making Enging",
+    id: "CEX Market Making Engine",
+    name: "CEX MM Engine",
     company: "HumbleBee Capital",
     previewImageId: "mmengine_ify4im",
     shorts:

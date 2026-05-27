@@ -10,7 +10,8 @@ const Project = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const projects = projectRecords.slice(0, 6);
+  const projects = projectRecords;
+  // const projects = projectRecords.slice(0, );
   const pageSize = projects.length > 1 ? 1 / (projects.length - 1) : 1;
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const newIndex = Math.round(latest / pageSize);
