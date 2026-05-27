@@ -29,6 +29,7 @@ const Nav = () => {
 
   const handleLinkClick = useCallback(() => {
     closeMenu();
+    window.scrollTo(0, 0);
   }, [closeMenu]);
 
   // Close on escape key

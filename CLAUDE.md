@@ -18,7 +18,6 @@ bun run preview # Preview production build
 - **Vite** for bundling and dev server
 - **Tailwind CSS v4** with `@tailwindcss/vite` plugin - custom theme defined in `src/index.css` using oklch color values
 - **React Router v7** for client-side routing
-- **Lenis** for smooth scrolling with snap functionality
 - **Jotai** for atomic state management
 - **Framer Motion** for animations
 - **Biome** for formatting and linting (not ESLint)
