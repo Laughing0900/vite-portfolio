@@ -114,11 +114,7 @@ export function GlassGrid({
   }
   const centerX = (bboxLeft + bboxRight) * 0.5;
   const centerY = (bboxTop + bboxBottom) * 0.5;
-  const boardPos: [number, number, number] = [
-    -centerX,
-    -centerY,
-    0,
-  ];
+  const boardPos: [number, number, number] = [-centerX, -centerY, 0];
 
   return (
     <group position={boardPos}>

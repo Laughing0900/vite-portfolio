@@ -51,7 +51,10 @@ export const Compare = ({
   const handleMove = useCallback(
     (clientX: number) => {
       if (!sliderRef.current) return;
-      if (slideMode === "hover" || (slideMode === "drag" && isDragging.current)) {
+      if (
+        slideMode === "hover" ||
+        (slideMode === "drag" && isDragging.current)
+      ) {
         const rect = sliderRef.current.getBoundingClientRect();
         const x = clientX - rect.left;
         const percent = (x / rect.width) * 100;

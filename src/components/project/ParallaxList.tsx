@@ -12,14 +12,15 @@ type ParallaxListProps = {
 const ParallaxList = memo(({ project, index }: ParallaxListProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref });
-  const y = useTransform(scrollYProgress, [0, 1], [-100, 50]);
+  const y = useTransform(scrollYProgress, [0, 1], [-150, 50]);
 
   return (
     <LazyMotion features={domAnimation}>
+      {/* anchor */}
+      <div className="pt-one-six-dvh" id={`${project.id}-project`} />
       <div
         className="relative flex h-max-container items-end justify-end shadow-2xs md:items-center"
         ref={ref}
-        id={`${project.id}-project`}
       >
         <m.div
           className="-left-4 -z-10 absolute top-1/3 aspect-video w-4/5 md:hidden"

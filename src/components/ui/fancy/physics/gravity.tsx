@@ -170,7 +170,7 @@ const Gravity = ({
 
       const angle = (props.angle || 0) * (Math.PI / 180);
 
- const x = calculatePosition(props.x, canvasRect.width, width);
+      const x = calculatePosition(props.x, canvasRect.width, width);
       const y = calculatePosition(props.y, canvasRect.height, height);
 
       let body: Matter.Body | undefined;
