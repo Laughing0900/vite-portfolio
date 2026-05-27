@@ -101,13 +101,22 @@ export function GlassGrid({
   /** World Z of glass tiles — matches `getCurrentViewport` target so margins track frustum. */
   const gridPlaneZ = 0.19;
   const v = viewport.getCurrentViewport(camera, [0, 0, gridPlaneZ], size);
-  const marginX = v.width * (width < 640 ? 0.04 : width < 1024 ? 0.045 : 0.04);
-  const marginY = v.height * (width < 640 ? 0.12 : 0.08);
-  const anchorX = v.width / 2 - marginX;
-  const anchorY = -v.height / 2 + marginY;
+  let bboxLeft = Number.POSITIVE_INFINITY;
+  let bboxTop = Number.NEGATIVE_INFINITY;
+  for (const layout of layouts) {
+    const half = layout.inner * 0.5;
+    bboxLeft = Math.min(bboxLeft, layout.cx - half);
+    bboxTop = Math.max(bboxTop, layout.cy + half);
+  }
+  if (!Number.isFinite(bboxLeft) || !Number.isFinite(bboxTop)) {
+    bboxLeft = -v.width / 2;
+    bboxTop = v.height / 2;
+  }
+  const centerX = (bboxLeft + bboxRight) * 0.5;
+  const centerY = (bboxTop + bboxBottom) * 0.5;
   const boardPos: [number, number, number] = [
-    anchorX - bboxRight,
-    anchorY - bboxBottom,
+    -centerX,
+    -centerY,
     0,
   ];
 
