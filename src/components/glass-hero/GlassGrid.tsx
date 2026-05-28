@@ -60,12 +60,16 @@ export function GlassGrid({
       const dx = px - cx;
       const dy = py - cy;
       const dist = Math.max(Math.hypot(dx, dy), 0.001);
-      const falloff = Math.exp(-dist * 0.42);
-      const w = 0.12 + falloff * 0.55;
+      const invDist = 1 / dist;
+      const dirX = dx * invDist;
+      const dirY = dy * invDist;
+      const proximity = Math.exp(-dist * 0.42);
+      const distanceWeight = 1 - proximity;
+      const w = 0.12 + distanceWeight * 0.55;
 
-      const targetRx = -p.y * 0.52 * w;
-      const targetRy = p.x * 0.62 * w;
-      const targetRz = ((dx * p.y - dy * p.x) / dist) * 0.06 * w;
+      const targetRx = -dirY * 0.52 * w;
+      const targetRy = dirX * 0.62 * w;
+      const targetRz = (dirX * p.y - dirY * p.x) * 0.04 * w;
 
       shard.rotation.x = THREE.MathUtils.lerp(
         shard.rotation.x,
