@@ -56,7 +56,7 @@ export const CodeBlock = ({ language, code, className }: CodeBlockProps) => {
   if (!highlightedCode) {
     return (
       <div className={className}>
-        <div className="relative flex h-full w-full items-center justify-center rounded-lg p-4 text-sm">
+        <div className="relative flex h-full w-full items-center justify-center rounded-lg text-sm">
           <div className="animate-pulse text-muted-foreground">Loading…</div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export const CodeBlock = ({ language, code, className }: CodeBlockProps) => {
 
   return (
     <div className={className}>
-      <div className="relative h-full w-full rounded-lg p-4 font-mono text-sm">
+      <div className="relative h-full w-full rounded-lg font-mono text-sm">
         <style>{`
           .shiki-container {
             background: transparent !important;
