@@ -89,7 +89,7 @@ export const Compare = ({
       >
         <AnimatePresence initial={false}>
           <m.div
-            className="absolute top-0 z-30 m-auto h-full w-px bg-gradient-to-b from-[5%] from-transparent via-indigo-500 to-[95%] to-transparent"
+            className="absolute top-0 z-30 m-auto h-full w-px"
             style={{
               left: `${sliderXPercent}%`,
               top: "0",
@@ -110,26 +110,21 @@ export const Compare = ({
         <div className="pointer-events-none relative z-20 h-full w-full overflow-hidden">
           <m.div
             className={cn(
-              "absolute inset-0 z-20 h-full w-full shrink-0 select-none overflow-hidden rounded-2xl bg-slate-900",
+              "absolute inset-0 z-20 h-full w-full shrink-0 select-none overflow-hidden rounded-2xl ",
             )}
             style={{
               clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)`,
             }}
             transition={{ duration: 0 }}
           >
-            <CodeBlock
-              language="jsx"
-              highlightLines={[2, 4, 6, 9, 15]}
-              code={firstCode}
-            />
+            <CodeBlock language="jsx" code={firstCode} />
           </m.div>
         </div>
 
         <CodeBlock
           language="jsx"
-          highlightLines={[2, 4, 9, 10, 14, 18, 19]}
           code={secondCode}
-          className="absolute top-0 left-0 h-full w-full select-none bg-slate-900"
+          className="absolute top-0 left-0 h-full w-full select-none "
         />
       </div>
     </LazyMotion>

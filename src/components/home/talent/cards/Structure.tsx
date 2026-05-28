@@ -68,7 +68,7 @@ const Schedule = memo(() => {
 
       <Suspense
         fallback={
-          <div className="flex aspect-square w-[110%] items-center justify-center">
+          <div className="flex w-full items-center justify-center">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           </div>
         }
@@ -76,7 +76,7 @@ const Schedule = memo(() => {
         <Compare
           firstCode={betterCode}
           secondCode={worseCode}
-          className="aspect-square w-[110%]"
+          // className=" w-[110%]"
           slideMode="drag"
         />
       </Suspense>

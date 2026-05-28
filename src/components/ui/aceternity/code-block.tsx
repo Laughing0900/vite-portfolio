@@ -65,18 +65,19 @@ export const CodeBlock = ({ language, code, className }: CodeBlockProps) => {
 
   return (
     <div className={className}>
-      <div className="relative h-full w-full rounded-lg p-4 text-sm font-mono">
+      <div className="relative h-full w-full rounded-lg p-4 font-mono text-sm">
         <style>{`
           .shiki-container {
             background: transparent !important;
             margin: 0;
             padding: 0;
-            font-size: 8px;
+            font-size: 10px;
             overflow-x: auto;
           }
           .shiki code {
             display: block;
             width: 100%;
+            padding: 4px;
           }
           .line {
             display: block;
