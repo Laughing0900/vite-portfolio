@@ -26,22 +26,24 @@ const Introduction = memo(({ paragraph }: IntroductionProps) => {
   return (
     <div className="h-max-container" ref={container}>
       <div className="sticky top-1/4 h-fit px-4 md:px-10">
-        <p
-          className={cn(
-            "flex flex-wrap text-sm leading-tight",
-            "md:text-2xl md:leading-snug",
-          )}
-        >
-          {words.map((word, i) => {
-            const start = i / words.length;
-            const end = start + 1 / words.length;
-            return (
-              <Word key={i} progress={scrollYProgress} range={[start, end]}>
-                {word}
-              </Word>
-            );
-          })}
-        </p>
+        <LazyMotion features={domAnimation}>
+          <p
+            className={cn(
+              "flex flex-wrap text-sm leading-tight",
+              "md:text-2xl md:leading-snug",
+            )}
+          >
+            {words.map((word, i) => {
+              const start = i / words.length;
+              const end = start + 1 / words.length;
+              return (
+                <Word key={i} progress={scrollYProgress} range={[start, end]}>
+                  {word}
+                </Word>
+              );
+            })}
+          </p>
+        </LazyMotion>
       </div>
     </div>
   );
@@ -86,13 +88,11 @@ const Char = ({
 }) => {
   const opacity = useTransform(progress, range, [0.2, 1]);
   return (
-    <LazyMotion features={domAnimation}>
-      <m.span
-        className="mx-[0.05ch] will-change-[opacity]"
-        style={{ opacity: opacity }}
-      >
-        {children}
-      </m.span>
-    </LazyMotion>
+    <m.span
+      className="mx-[0.05ch] will-change-[opacity]"
+      style={{ opacity: opacity }}
+    >
+      {children}
+    </m.span>
   );
 };

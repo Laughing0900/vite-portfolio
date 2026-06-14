@@ -44,8 +44,8 @@ const ParallaxList = memo(({ project, index }: ParallaxListProps) => {
           initial={{ visibility: "hidden" }}
           animate={{ visibility: "visible" }}
           style={{ y }}
-          will-change="transform"
           className={cn(
+            "will-change-transform",
             "-translate-y-1/2 -right-10 absolute top-1/2 flex flex-col items-end pr-5 text-6xl",
             "md:top-1/4 md:right-0 md:pr-10",
           )}

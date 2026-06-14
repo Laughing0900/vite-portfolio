@@ -102,23 +102,25 @@ export function GlassGrid({
     }
   });
 
-  /** World Z of glass tiles — matches `getCurrentViewport` target so margins track frustum. */
-  const gridPlaneZ = 0.19;
-  const v = viewport.getCurrentViewport(camera, [0, 0, gridPlaneZ], size);
-  let bboxLeft = Number.POSITIVE_INFINITY;
-  let bboxTop = Number.NEGATIVE_INFINITY;
-  for (const layout of layouts) {
-    const half = layout.inner * 0.5;
-    bboxLeft = Math.min(bboxLeft, layout.cx - half);
-    bboxTop = Math.max(bboxTop, layout.cy + half);
-  }
-  if (!Number.isFinite(bboxLeft) || !Number.isFinite(bboxTop)) {
-    bboxLeft = -v.width / 2;
-    bboxTop = v.height / 2;
-  }
-  const centerX = (bboxLeft + bboxRight) * 0.5;
-  const centerY = (bboxTop + bboxBottom) * 0.5;
-  const boardPos: [number, number, number] = [-centerX, -centerY, 0];
+  const boardPos = useMemo<[number, number, number]>(() => {
+    /** World Z of glass tiles — matches `getCurrentViewport` target so margins track frustum. */
+    const gridPlaneZ = 0.19;
+    const v = viewport.getCurrentViewport(camera, [0, 0, gridPlaneZ], size);
+    let bboxLeft = Number.POSITIVE_INFINITY;
+    let bboxTop = Number.NEGATIVE_INFINITY;
+    for (const layout of layouts) {
+      const half = layout.inner * 0.5;
+      bboxLeft = Math.min(bboxLeft, layout.cx - half);
+      bboxTop = Math.max(bboxTop, layout.cy + half);
+    }
+    if (!Number.isFinite(bboxLeft) || !Number.isFinite(bboxTop)) {
+      bboxLeft = -v.width / 2;
+      bboxTop = v.height / 2;
+    }
+    const centerX = (bboxLeft + bboxRight) * 0.5;
+    const centerY = (bboxTop + bboxBottom) * 0.5;
+    return [-centerX, -centerY, 0];
+  }, [viewport, camera, size, layouts, bboxRight, bboxBottom]);
 
   return (
     <group position={boardPos}>

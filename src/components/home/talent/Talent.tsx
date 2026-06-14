@@ -57,9 +57,9 @@ const Talent = memo(() => {
                   "relative col-span-1 row-span-full h-one-two-dvh border-accent max-lg:border-t-2",
                   "lg:col-span-1 lg:h-full lg:border-r-2",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
+                  "will-change-[opacity]",
                 )}
                 style={{ opacity: isLg ? opacity[0] : 1 }}
-                will-change="opacity"
               >
                 <Skills />
               </m.div>
@@ -69,9 +69,9 @@ const Talent = memo(() => {
                   "col-span-1 h-one-two-dvh",
                   "border-accent lg:row-span-3 lg:h-full lg:border-r-2",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
+                  "will-change-[opacity]",
                 )}
                 style={{ opacity: isLg ? opacity[2] : 1 }}
-                will-change="opacity"
               >
                 <Structure />
               </m.div>
@@ -81,9 +81,9 @@ const Talent = memo(() => {
                   "col-span-1 h-one-two-dvh",
                   "lg:col-span-1 lg:row-span-3 lg:h-full",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
+                  "will-change-[opacity]",
                 )}
                 style={{ opacity: isLg ? opacity[3] : 1 }}
-                will-change="opacity"
               >
                 <Productivity />
               </m.div>
@@ -92,9 +92,9 @@ const Talent = memo(() => {
                   "col-span-1 h-one-two-dvh",
                   "border-accent lg:col-span-2 lg:row-span-1 lg:row-start-4 lg:h-full lg:border-t-2",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
+                  "will-change-[opacity]",
                 )}
                 style={{ opacity: isLg ? opacity[1] : 1 }}
-                will-change="opacity"
               >
                 <Schedule />
               </m.div>

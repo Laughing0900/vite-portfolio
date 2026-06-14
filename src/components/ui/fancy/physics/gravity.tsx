@@ -42,6 +42,8 @@ type PhysicsBody = {
   element: HTMLElement;
   body: Matter.Body;
   props: MatterBodyProps;
+  halfWidth: number;
+  halfHeight: number;
 };
 
 type MatterBodyProps = {
@@ -159,6 +161,9 @@ const Gravity = ({
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   const isRunning = useRef(false);
+  const isInView = useRef(true);
+  const mouseEventCleanup = useRef<(() => void) | null>(null);
+  const resizeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   // Register Matter.js body in the physics world
   const registerElement = useCallback(
@@ -219,7 +224,13 @@ const Gravity = ({
 
       if (body) {
         World.add(engine.current.world, [body]);
-        bodiesMap.current.set(id, { element, body, props });
+        bodiesMap.current.set(id, {
+          element,
+          body,
+          props,
+          halfWidth: width / 2,
+          halfHeight: height / 2,
+        });
       }
     },
     [debug],
@@ -236,13 +247,14 @@ const Gravity = ({
 
   // Keep react elements in sync with the physics world
   const updateElements = useCallback(() => {
-    bodiesMap.current.forEach(({ element, body }) => {
+    // Dimensions are cached at registration so this loop never forces layout.
+    bodiesMap.current.forEach(({ element, body, halfWidth, halfHeight }) => {
       const { x, y } = body.position;
       const rotation = body.angle * (180 / Math.PI);
 
       element.style.transform = `translate(${
-        x - element.offsetWidth / 2
-      }px, ${y - element.offsetHeight / 2}px) rotate(${rotation}deg)`;
+        x - halfWidth
+      }px, ${y - halfHeight}px) rotate(${rotation}deg)`;
     });
 
     frameId.current = requestAnimationFrame(updateElements);
@@ -348,7 +360,8 @@ const Gravity = ({
         }
       });
 
-      canvas.current.addEventListener("mousedown", () => {
+      const canvasEl = canvas.current;
+      const onMouseDown = () => {
         mouseDown.current = true;
 
         if (canvas.current) {
@@ -358,8 +371,8 @@ const Gravity = ({
             canvas.current.style.cursor = "default";
           }
         }
-      });
-      canvas.current.addEventListener("mouseup", () => {
+      };
+      const onMouseUp = () => {
         mouseDown.current = false;
 
         if (canvas.current) {
@@ -369,7 +382,13 @@ const Gravity = ({
             canvas.current.style.cursor = "default";
           }
         }
-      });
+      };
+      canvasEl.addEventListener("mousedown", onMouseDown);
+      canvasEl.addEventListener("mouseup", onMouseUp);
+      mouseEventCleanup.current = () => {
+        canvasEl.removeEventListener("mousedown", onMouseDown);
+        canvasEl.removeEventListener("mouseup", onMouseUp);
+      };
     }
 
     World.add(engine.current.world, [mouseConstraint.current, ...walls]);
@@ -385,17 +404,6 @@ const Gravity = ({
       runner.current.enabled = true;
       startEngine();
     }
-
-    return () => {
-      if (canvas.current) {
-        canvas.current.removeEventListener("mousedown", () => {
-          mouseDown.current = true;
-        });
-        canvas.current.removeEventListener("mouseup", () => {
-          mouseDown.current = false;
-        });
-      }
-    };
   }, [updateElements, debug, autoStart, gravity, grabCursor]);
 
   // Clear the Matter.js world
@@ -403,6 +411,9 @@ const Gravity = ({
     if (frameId.current) {
       cancelAnimationFrame(frameId.current);
     }
+
+    mouseEventCleanup.current?.();
+    mouseEventCleanup.current = null;
 
     if (mouseConstraint.current) {
       World.remove(engine.current.world, mouseConstraint.current);
@@ -424,22 +435,12 @@ const Gravity = ({
     }
 
     bodiesMap.current.clear();
+    isRunning.current = false;
   }, []);
 
-  const handleResize = useCallback(() => {
-    if (!canvas.current || !resetOnResize) return;
-
-    const newWidth = canvas.current.offsetWidth;
-    const newHeight = canvas.current.offsetHeight;
-
-    setCanvasSize({ width: newWidth, height: newHeight });
-
-    // Clear and reinitialize
-    clearRenderer();
-    initializeRenderer();
-  }, [clearRenderer, initializeRenderer, resetOnResize]);
-
   const startEngine = useCallback(() => {
+    if (isRunning.current) return;
+
     if (runner.current) {
       runner.current.enabled = true;
 
@@ -466,6 +467,29 @@ const Gravity = ({
     }
     isRunning.current = false;
   }, []);
+
+  // Debounced: rebuilding the whole engine per resize event is expensive.
+  const handleResize = useCallback(() => {
+    if (!canvas.current || !resetOnResize) return;
+
+    clearTimeout(resizeTimer.current);
+    resizeTimer.current = setTimeout(() => {
+      if (!canvas.current) return;
+
+      setCanvasSize({
+        width: canvas.current.offsetWidth,
+        height: canvas.current.offsetHeight,
+      });
+
+      // Clear and reinitialize
+      clearRenderer();
+      initializeRenderer();
+
+      if (!isInView.current || document.hidden) {
+        stopEngine();
+      }
+    }, 150);
+  }, [clearRenderer, initializeRenderer, resetOnResize, stopEngine]);
 
   const reset = useCallback(() => {
     stopEngine();
@@ -514,9 +538,35 @@ const Gravity = ({
     window.addEventListener("resize", handleResize);
 
     return () => {
+      clearTimeout(resizeTimer.current);
       window.removeEventListener("resize", handleResize);
     };
   }, [handleResize, resetOnResize]);
+
+  // Pause the simulation while offscreen or in a hidden tab.
+  useEffect(() => {
+    if (!canvas.current) return;
+
+    const syncRunningState = () => {
+      if (document.hidden || !isInView.current) {
+        stopEngine();
+      } else if (autoStart) {
+        startEngine();
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isInView.current = entry.isIntersecting;
+      syncRunningState();
+    });
+    observer.observe(canvas.current);
+    document.addEventListener("visibilitychange", syncRunningState);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", syncRunningState);
+    };
+  }, [autoStart, startEngine, stopEngine]);
 
   useEffect(() => {
     initializeRenderer();

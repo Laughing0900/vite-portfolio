@@ -2,10 +2,16 @@
 import { CodeBlock } from "@/components/ui/aceternity/code-block";
 import { cn } from "@/lib/utils";
 import { EllipsisVertical } from "lucide-react";
-import { AnimatePresence, LazyMotion, m } from "motion/react";
+import {
+  AnimatePresence,
+  LazyMotion,
+  m,
+  useMotionValue,
+  useTransform,
+} from "motion/react";
 import { domAnimation } from "motion/react";
 import type React from "react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 interface CompareProps {
   firstCode?: string;
   secondCode?: string;
@@ -22,14 +28,28 @@ export const Compare = ({
   slideMode = "hover",
   showHandlebar = true,
 }: CompareProps) => {
-  const [sliderXPercent, setSliderXPercent] = useState(initialSliderPercentage);
+  // Motion value instead of state: pointer moves update the DOM directly
+  // without re-rendering the component (and both CodeBlock children).
+  const sliderXPercent = useMotionValue(initialSliderPercentage);
+  const sliderLeft = useTransform(sliderXPercent, (v) => `${v}%`);
+  const clipPath = useTransform(
+    sliderXPercent,
+    (v) => `inset(0 ${100 - v}% 0 0)`,
+  );
   const isDragging = useRef(false);
+  const rafId = useRef<number>(undefined);
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    return () => {
+      if (rafId.current !== undefined) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
+
   function mouseLeaveHandler() {
     if (slideMode === "hover") {
-      setSliderXPercent(initialSliderPercentage);
+      sliderXPercent.set(initialSliderPercentage);
     }
     if (slideMode === "drag") {
       isDragging.current = false;
@@ -55,15 +75,18 @@ export const Compare = ({
         slideMode === "hover" ||
         (slideMode === "drag" && isDragging.current)
       ) {
-        const rect = sliderRef.current.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const percent = (x / rect.width) * 100;
-        requestAnimationFrame(() => {
-          setSliderXPercent(Math.max(0, Math.min(100, percent)));
+        // Batch to one update per frame; read layout inside the callback so
+        // the mousemove handler itself never forces a synchronous layout.
+        if (rafId.current !== undefined) cancelAnimationFrame(rafId.current);
+        rafId.current = requestAnimationFrame(() => {
+          const rect = sliderRef.current?.getBoundingClientRect();
+          if (!rect) return;
+          const percent = ((clientX - rect.left) / rect.width) * 100;
+          sliderXPercent.set(Math.max(0, Math.min(100, percent)));
         });
       }
     },
-    [slideMode],
+    [slideMode, sliderXPercent],
   );
 
   const handleMouseDown = useCallback(() => handleStart(), [handleStart]);
@@ -91,7 +114,7 @@ export const Compare = ({
           <m.div
             className="absolute top-0 z-30 m-auto h-full w-px"
             style={{
-              left: `${sliderXPercent}%`,
+              left: sliderLeft,
               top: "0",
               zIndex: 40,
             }}
@@ -113,7 +136,7 @@ export const Compare = ({
               "absolute inset-0 z-20 h-full w-full shrink-0 select-none overflow-hidden rounded-2xl ",
             )}
             style={{
-              clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)`,
+              clipPath,
             }}
             transition={{ duration: 0 }}
           >

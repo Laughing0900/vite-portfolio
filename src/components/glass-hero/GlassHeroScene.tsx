@@ -11,7 +11,7 @@ export function GlassHeroScene() {
   const reducedMotion = usePrefersReducedMotion();
   const pointer = useGlassPointer(reducedMotion);
   const backdropTexture = useBackdropTexture();
-  const liveBackdrop = useLiveBackdrop();
+  const liveBackdrop = useLiveBackdrop(pointer, backdropTexture);
 
   return (
     <>

@@ -1,12 +1,19 @@
 "use client";
-import { createHighlighter } from "shiki";
 import { useEffect, useState } from "react";
+import type { Highlighter } from "shiki";
 
-// Pre-create highlighter with only needed languages
-const highlighterPromise = createHighlighter({
-  themes: ["one-dark-pro"],
-  langs: ["javascript", "typescript", "jsx", "tsx"],
-});
+// Lazily create the highlighter on first use so shiki (grammars + themes)
+// is split into its own async chunk and only loads when a CodeBlock mounts.
+let highlighterPromise: Promise<Highlighter> | null = null;
+function getHighlighter() {
+  highlighterPromise ??= import("shiki").then(({ createHighlighter }) =>
+    createHighlighter({
+      themes: ["one-dark-pro"],
+      langs: ["javascript", "typescript", "jsx", "tsx"],
+    }),
+  );
+  return highlighterPromise;
+}
 
 type CodeBlockProps = {
   language: string;
@@ -38,7 +45,7 @@ export const CodeBlock = ({ language, code, className }: CodeBlockProps) => {
   useEffect(() => {
     let mounted = true;
 
-    highlighterPromise.then((highlighter) => {
+    getHighlighter().then((highlighter) => {
       if (mounted) {
         const html = highlighter.codeToHtml(String(activeCode), {
           lang: activeLanguage,
@@ -66,24 +73,6 @@ export const CodeBlock = ({ language, code, className }: CodeBlockProps) => {
   return (
     <div className={className}>
       <div className="relative h-full w-full rounded-lg font-mono text-sm">
-        <style>{`
-          .shiki-container {
-            background: transparent !important;
-            margin: 0;
-            padding: 0;
-            font-size: 10px;
-            overflow-x: auto;
-          }
-          .shiki code {
-            display: block;
-            width: 100%;
-            padding: 4px;
-          }
-          .line {
-            display: block;
-            width: 100%;
-          }
-        `}</style>
         <div
           className="shiki-container"
           dangerouslySetInnerHTML={{ __html: highlightedCode }}

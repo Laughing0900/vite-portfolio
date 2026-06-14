@@ -10,8 +10,12 @@ export function paintHeroBackdrop(
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const w = Math.max(1024, Math.round(window.innerWidth * dpr));
   const h = Math.max(768, Math.round(window.innerHeight * dpr));
-  canvas.width = w;
-  canvas.height = h;
+  // Resizing destroys the backing store and forces a full GPU re-upload —
+  // only do it when the dimensions actually changed.
+  if (canvas.width !== w || canvas.height !== h) {
+    canvas.width = w;
+    canvas.height = h;
+  }
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
 

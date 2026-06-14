@@ -4,16 +4,8 @@ import { cn } from "@/lib/utils";
 const BackgroundGraphic = () => {
   return (
     <div className={cn("pointer-events-none absolute inset-0 w-full")}>
-      <div
-        className="absolute top-1/6 left-0 h-0.5 w-dvw origin-right bg-accent"
-        // style={{ scaleX: width }}
-        will-change="transform"
-      />
-      <div
-        className="absolute right-0 bottom-1/6 h-0.5 w-dvw origin-left bg-accent"
-        // style={{ scaleX: width }}
-        will-change="transform"
-      />
+      <div className="absolute top-1/6 left-0 h-0.5 w-dvw origin-right bg-accent" />
+      <div className="absolute right-0 bottom-1/6 h-0.5 w-dvw origin-left bg-accent" />
       <div className="absolute top-0 left-1/6 h-full w-0.5 bg-accent delay-75 duration-300 ease-in-out-circ" />
       <div className="absolute right-1/6 bottom-0 h-full w-0.5 bg-accent duration-500 ease-in-out-circ" />
       <div>

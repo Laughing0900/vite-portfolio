@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import type React from "react";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useId } from "react";
 
 /**
  *  DotPattern Component Props
@@ -13,7 +13,6 @@ import { useLayoutEffect, useRef, useState } from "react";
  * @param {number} [cy=1] - The y-offset of individual dots
  * @param {number} [cr=1] - The radius of each dot
  * @param {string} [className] - Additional CSS classes to apply to the SVG container
- * @param {boolean} [glow=false] - Whether dots should have a glowing animation effect
  */
 interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
@@ -24,16 +23,16 @@ interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
   cy?: number;
   cr?: number;
   className?: string;
-  glow?: boolean;
   [key: string]: unknown;
 }
 
 /**
  * DotPattern Component
- * from https://magicui.design/docs/components/dot-pattern
+ * adapted from https://magicui.design/docs/components/dot-pattern
  *
- * A React component that creates an animated or static dot pattern background using SVG.
- * The pattern automatically adjusts to fill its container and can optionally display glowing dots.
+ * A React component that creates a static dot pattern background using a
+ * single SVG <pattern>, so the browser tiles it natively — two DOM nodes
+ * regardless of viewport size, and no resize listener needed.
  *
  * @component
  *
@@ -43,20 +42,8 @@ interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
  * // Basic usage
  * <DotPattern />
  *
- * // With glowing effect and custom spacing
- * <DotPattern
- *   width={20}
- *   height={20}
- *   glow={true}
- *   className="opacity-50"
- * />
- *
- * @notes
- * - The component is client-side only ("use client")
- * - Automatically responds to container size changes
- * - When glow is enabled, dots will animate with random delays and durations
- * - Uses Motion for animations
- * - Dots color can be controlled via the text color utility classes
+ * // With custom spacing
+ * <DotPattern width={20} height={20} className="opacity-50" />
  */
 
 export function DotPattern({
@@ -68,49 +55,12 @@ export function DotPattern({
   cy = 2,
   cr = 1,
   className,
-  glow = false,
   ...props
 }: DotPatternProps) {
-  const containerRef = useRef<SVGSVGElement>(null);
-  const [dimensions, setDimensions] = useState<{
-    width: number;
-    height: number;
-  }>();
-
-  useLayoutEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        setDimensions({ width, height });
-      }
-    };
-
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
-
-  const dots = Array.from(
-    {
-      length:
-        Math.ceil((dimensions?.width ?? 0) / width) *
-        Math.ceil((dimensions?.height ?? 0) / height),
-    },
-    (_, i) => {
-      const col = i % Math.ceil((dimensions?.width ?? 0) / width);
-      const row = Math.floor(i / Math.ceil((dimensions?.width ?? 0) / width));
-      return {
-        x: col * width + cx + cx / 2,
-        y: row * height + cy + cy / 2,
-        delay: Math.random() * 5,
-        duration: Math.random() * 3 + 2,
-      };
-    },
-  );
+  const patternId = useId();
 
   return (
     <svg
-      ref={containerRef}
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full",
@@ -118,17 +68,25 @@ export function DotPattern({
       )}
       {...props}
     >
-      {dimensions &&
-        dots.map((dot) => (
+      <defs>
+        <pattern
+          id={patternId}
+          width={width}
+          height={height}
+          x={x}
+          y={y}
+          patternUnits="userSpaceOnUse"
+        >
           <circle
-            key={`${dot.x}-${dot.y}`}
-            cx={dot.x}
-            cy={dot.y}
+            cx={cx + cx / 2}
+            cy={cy + cy / 2}
             r={cr}
-            fill={"#FFFFFF22"}
-            className="text-neutral-400/80 "
+            fill="#FFFFFF22"
+            className="text-neutral-400/80"
           />
-        ))}
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
     </svg>
   );
 }
