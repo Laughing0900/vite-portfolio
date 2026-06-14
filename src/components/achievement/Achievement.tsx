@@ -4,6 +4,7 @@ import { academic } from "@/components/achievement/constants/academic";
 import { credentials } from "@/components/achievement/constants/credentials";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import RightTitleCard from "@/components/views/RightTitleCard";
+import { cn } from "@/lib/utils";
 import { useMotionValue, useSpring } from "motion/react";
 import { memo, useState } from "react";
 
@@ -54,7 +55,7 @@ const Achievement = memo(() => {
       <LeftTitleCard title="Credentials" />
       <RightTitleCard title="Academic" className="max-lg:hidden" />
 
-      <div className="container grid grid-cols-1 divide-accent lg:grid-cols-2 lg:divide-x-2">
+      <div className="container grid grid-cols-1 divide-accent lg:grid-cols-2 lg:divide-x-2 pt-0">
         <AchievementPreview
           selected={selected}
           translateX={translateX}
@@ -62,6 +63,10 @@ const Achievement = memo(() => {
         />
 
         <div className="flex flex-col">
+          <div
+            className="h-one-six-dvh"
+            aria-hidden="true"
+          />
           {credentials.map((item, index) => (
             <AchievementItem
               key={item.title}
@@ -76,6 +81,10 @@ const Achievement = memo(() => {
         </div>
 
         <div className="flex flex-col">
+          <div
+            className="h-one-six-dvh"
+            aria-hidden="true"
+          />
           {academic.map((item, index) => (
             <AchievementItem
               key={item.title}

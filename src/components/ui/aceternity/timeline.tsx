@@ -13,14 +13,14 @@ interface TimelineEntry {
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   return (
     <div className="w-full">
-      <div className="relative pb-20">
+      <div className="relative">
         {data.map((item, index) => (
           <div
             key={item.company}
             className="flex border-accent last:border-b-2 "
             id={`${item.company}-experience`}
           >
-            <div className="sticky top-[calc(100dvh/6)] flex w-1/2 flex-col items-center self-start border-accent border-t-2 px-10 py-8 max-md:hidden md:w-1/2 md:items-end">
+            <div className="sticky top-[calc(100dvh/6)] flex flex-col items-center self-start border-accent border-t-2 px-10 py-8 max-md:hidden [width:calc(50%-2px)] md:items-end">
               <div className="-translate-y-1/2 absolute top-1/2 right-0 h-6 w-6 translate-x-1/2 rotate-45 rounded-full border-4 border-primary" />
               <p className="mb-2.5 text-base">0{index + 1}</p>
               <h3 className="text-balance text-right text-4xl">
