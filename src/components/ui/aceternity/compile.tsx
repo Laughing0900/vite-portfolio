@@ -36,6 +36,12 @@ export const Compare = ({
     sliderXPercent,
     (v) => `inset(0 ${100 - v}% 0 0)`,
   );
+  // Complementary clip so the lower (second) layer only fills the area the
+  // first layer doesn't — prevents overlap now that backgrounds are transparent.
+  const clipPathRight = useTransform(
+    sliderXPercent,
+    (v) => `inset(0 0 0 ${v}%)`,
+  );
   const isDragging = useRef(false);
   const rafId = useRef<number>(undefined);
 
@@ -144,11 +150,13 @@ export const Compare = ({
           </m.div>
         </div>
 
-        <CodeBlock
-          language="jsx"
-          code={secondCode}
-          className="absolute top-0 left-0 h-full w-full select-none "
-        />
+        <m.div
+          className="absolute top-0 left-0 z-10 h-full w-full select-none overflow-hidden"
+          style={{ clipPath: clipPathRight }}
+          transition={{ duration: 0 }}
+        >
+          <CodeBlock language="jsx" code={secondCode} className="h-full w-full" />
+        </m.div>
       </div>
     </LazyMotion>
   );

@@ -60,7 +60,7 @@ const worseCode = `function UserProfile(props) {
 
 const Schedule = memo(() => {
   return (
-    <div className="flex h-full w-full flex-col items-start justify-between gap-4 overflow-hidden pb-5 lg:items-center">
+    <div className="flex h-full w-full flex-col justify-between gap-4 overflow-hidden pb-5 ">
       <Title
         title="Maintainable"
         description="Built with a clear and organized programme structure."
@@ -73,12 +73,14 @@ const Schedule = memo(() => {
           </div>
         }
       >
-        <Compare
-          firstCode={betterCode}
-          secondCode={worseCode}
-          // className=" w-[110%]"
-          slideMode="drag"
-        />
+        <div className="min-h-0 w-full flex-1">
+          <Compare
+            firstCode={betterCode}
+            secondCode={worseCode}
+            className="h-full w-full"
+            slideMode="drag"
+          />
+        </div>
       </Suspense>
     </div>
   );

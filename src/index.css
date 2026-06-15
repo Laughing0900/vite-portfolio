@@ -190,6 +190,12 @@ address {
   overflow-x: auto;
 }
 
+/* Shiki inlines background-color on the <pre>; force it transparent. */
+.shiki,
+.shiki-container .shiki {
+  background-color: transparent !important;
+}
+
 .shiki code {
   display: block;
   width: 100%;
