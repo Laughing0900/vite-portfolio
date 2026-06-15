@@ -4,7 +4,6 @@ import { academic } from "@/components/achievement/constants/academic";
 import { credentials } from "@/components/achievement/constants/credentials";
 import LeftTitleCard from "@/components/views/LeftTitleCard";
 import RightTitleCard from "@/components/views/RightTitleCard";
-import { cn } from "@/lib/utils";
 import { useMotionValue, useSpring } from "motion/react";
 import { memo, useState } from "react";
 
