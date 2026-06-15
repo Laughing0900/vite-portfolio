@@ -63,10 +63,7 @@ const Achievement = memo(() => {
         />
 
         <div className="flex flex-col">
-          <div
-            className="h-one-six-dvh"
-            aria-hidden="true"
-          />
+          <div className="h-one-six-dvh" aria-hidden="true" />
           {credentials.map((item, index) => (
             <AchievementItem
               key={item.title}
@@ -81,10 +78,7 @@ const Achievement = memo(() => {
         </div>
 
         <div className="flex flex-col">
-          <div
-            className="h-one-six-dvh"
-            aria-hidden="true"
-          />
+          <div className="h-one-six-dvh" aria-hidden="true" />
           {academic.map((item, index) => (
             <AchievementItem
               key={item.title}

@@ -1,6 +1,6 @@
 import Introduction from "@/components/home/talent/cards/Introduction";
 import Productivity from "@/components/home/talent/cards/Productivity";
-import Schedule from "@/components/home/talent/cards/Schedule";
+import ScheduleV2 from "@/components/home/talent/cards/ScheduleV2";
 import Skills from "@/components/home/talent/cards/Skills";
 import Structure from "@/components/home/talent/cards/Structure";
 import useMediaQuery from "@/hooks/useMediaQuery";
@@ -67,7 +67,7 @@ const Talent = memo(() => {
               <m.div
                 className={cn(
                   "col-span-1 h-one-two-dvh",
-                  "border-accent lg:row-span-3 lg:h-full lg:border-r-2",
+                  "border-accent lg:row-span-2 lg:h-full lg:border-r-2",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
                   "will-change-[opacity]",
                 )}
@@ -79,7 +79,7 @@ const Talent = memo(() => {
               <m.div
                 className={cn(
                   "col-span-1 h-one-two-dvh",
-                  "lg:col-span-1 lg:row-span-3 lg:h-full",
+                  "lg:col-span-1 lg:row-span-2 lg:h-full",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
                   "will-change-[opacity]",
                 )}
@@ -90,13 +90,13 @@ const Talent = memo(() => {
               <m.div
                 className={cn(
                   "col-span-1 h-one-two-dvh",
-                  "border-accent lg:col-span-2 lg:row-span-1 lg:row-start-4 lg:h-full lg:border-t-2",
+                  "border-accent lg:col-span-2 lg:row-span-2 lg:row-start-3 lg:h-full lg:border-t-2",
                   "hover:background-radial transition-colors duration-200 ease-in-out-circ",
                   "will-change-[opacity]",
                 )}
                 style={{ opacity: isLg ? opacity[1] : 1 }}
               >
-                <Schedule />
+                <ScheduleV2 />
               </m.div>
             </div>
           </LazyMotion>
