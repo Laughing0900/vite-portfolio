@@ -1,7 +1,7 @@
 import Title from "@/components/home/talent/cards/Title";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { m } from "motion/react";
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState } from "react";
 
 // GitHub-style contribution heatmap: 53 weeks (columns) x 7 days (rows).
 const WEEKS = 53;
@@ -10,10 +10,13 @@ const CELL = 11;
 const GAP = 3;
 const STEP = CELL + GAP;
 
+// Hover spotlight: Manhattan radius of the rhombus (2 -> 13-cell diamond).
+const RHOMBUS_RADIUS = 2;
+
 // Teal -> green intensity scale, level 0 = no activity.
 const levelFill = [
-  "oklch(45% 0.1 175)",
-  "var(--color-chart-bar-inactive)",
+  "oklch(60% 0.1 175)",
+  "var(--input)",
   "oklch(75% 0.18 140)",
   "oklch(58% 0.13 165)",
   "oklch(68% 0.16 150)",
@@ -84,6 +87,9 @@ const buildLayout = (lines: number) => {
       y: line * bandStep + LABEL_H + day * STEP,
       order: line * weeksPerLine + col,
       level,
+      line,
+      col,
+      day,
     };
   });
 
@@ -114,6 +120,22 @@ const ScheduleV2 = memo(() => {
     [lines],
   );
 
+  // Cell under the cursor; drives a rhombus "spotlight" that dims everything else.
+  const [hover, setHover] = useState<{
+    line: number;
+    col: number;
+    day: number;
+  } | null>(null);
+
+  const isDimmed = (cell: { line: number; col: number; day: number }) => {
+    if (!hover || cell.line !== hover.line) return hover !== null;
+    const dc = cell.col - hover.col;
+    const dd = cell.day - hover.day;
+    // Diamond/rhombus centered on the hovered cell. Bump RHOMBUS_RADIUS to grow it.
+    const inBlock = Math.abs(dc) + Math.abs(dd) <= RHOMBUS_RADIUS;
+    return !inBlock;
+  };
+
   return (
     <div className="flex h-full w-full flex-col">
       <Title
@@ -128,6 +150,7 @@ const ScheduleV2 = memo(() => {
           viewBox={`0 0 ${width} ${height}`}
           role="img"
           aria-label="A year of commit activity shown as a contribution heatmap"
+          onMouseLeave={() => setHover(null)}
         >
           <title>Commit contribution heatmap</title>
 
@@ -154,14 +177,19 @@ const ScheduleV2 = memo(() => {
               rx={2}
               ry={2}
               fill={levelFill[cell.level]}
-              initial={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, scale: 0, fillOpacity: 1 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
+              animate={{ fillOpacity: isDimmed(cell) ? 0.2 : 1 }}
               transition={{
                 delay: cell.order * 0.012,
                 duration: 0.3,
                 ease: "backOut",
+                fillOpacity: { delay: 0, duration: 0.25, ease: "easeOut" },
               }}
+              onMouseEnter={() =>
+                setHover({ line: cell.line, col: cell.col, day: cell.day })
+              }
               style={{
                 transformOrigin: `${cell.x + CELL / 2}px ${cell.y + CELL / 2}px`,
               }}
