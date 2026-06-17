@@ -155,7 +155,11 @@ export const Compare = ({
           style={{ clipPath: clipPathRight }}
           transition={{ duration: 0 }}
         >
-          <CodeBlock language="jsx" code={secondCode} className="h-full w-full" />
+          <CodeBlock
+            language="jsx"
+            code={secondCode}
+            className="h-full w-full"
+          />
         </m.div>
       </div>
     </LazyMotion>
