@@ -1,6 +1,6 @@
 import Title from "@/components/home/talent/cards/Title";
-import { m } from "motion/react";
-import { memo } from "react";
+import { animate, m, useMotionValue, useSpring } from "motion/react";
+import { type PointerEvent, memo, useCallback, useEffect, useRef } from "react";
 
 // Clean reference snippet rendered as a VSCode-style minimap (colored token bars).
 const code = `const UserProfile = ({ user, onUpdate, isLoading }) => {
@@ -124,36 +124,67 @@ lines.forEach((segs, row) => {
 });
 const contentH = lines.length * LINE_H;
 
-const scanTransition = {
-  duration: 6,
-  repeat: Number.POSITIVE_INFINITY,
-  repeatType: "reverse" as const,
-  ease: "easeInOut" as const,
-};
+// Idle ping-pong scan — deliberately slow so it reads as ambient motion.
+const AUTO_DURATION = 14;
 
 const Structure = memo(() => {
   const travel = (lines.length - VIEW_LINES) * LINE_H;
+  const svgRef = useRef<SVGSVGElement>(null);
+  const autoControls = useRef<ReturnType<typeof animate> | null>(null);
+
+  // targetY is the driver; y is a spring that smooths both the cursor
+  // follow and the hand-off back to the auto-scan.
+  const targetY = useMotionValue(0);
+  const y = useSpring(targetY, { stiffness: 180, damping: 28, mass: 0.6 });
+
+  const startAuto = useCallback(() => {
+    autoControls.current?.stop();
+    autoControls.current = animate(targetY, [0, travel], {
+      duration: AUTO_DURATION,
+      ease: "easeInOut",
+      repeat: Number.POSITIVE_INFINITY,
+      repeatType: "reverse",
+    });
+  }, [targetY, travel]);
+
+  useEffect(() => {
+    startAuto();
+    return () => autoControls.current?.stop();
+  }, [startAuto]);
+
+  // While the cursor is in the minimap, center the viewport box on it.
+  const follow = (e: PointerEvent<SVGSVGElement>) => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const svgY = ((e.clientY - rect.top) / rect.height) * contentH;
+    targetY.set(Math.max(0, Math.min(travel, svgY - VIEW_H / 2)));
+  };
 
   return (
-    <div className="flex h-full w-full flex-col gap-4 overflow-hidden pb-5">
+    <div className="flex h-full w-full flex-col overflow-hidden pb-5">
       <Title
         title="Maintainable"
         description="Built with a clear and organized programme structure."
       />
 
-      <div className="flex min-h-0 w-full flex-1 items-center px-5 md:px-10">
+      <div className="flex min-h-0 w-full flex-1 items-center justify-center px-5 md:px-10">
         <m.div
-          className="w-full rounded-lg p-3"
+          className="flex h-full w-full items-center justify-center rounded-lg"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <svg
-            className="w-full"
+            ref={svgRef}
+            className="h-full w-full"
             viewBox={`0 0 ${contentW} ${contentH}`}
             preserveAspectRatio="xMidYMid meet"
-            style={{ aspectRatio: `${contentW} / ${contentH}` }}
+            style={{ cursor: "ns-resize" }}
+            onPointerEnter={() => autoControls.current?.stop()}
+            onPointerMove={follow}
+            onPointerLeave={startAuto}
             role="img"
             aria-label="Source code structure minimap"
           >
@@ -161,14 +192,7 @@ const Structure = memo(() => {
               {/* Reveal window: a band that scans down in lockstep with the
                   viewport box, clipping the color layer to its bounds. */}
               <clipPath id="structure-reveal">
-                <m.rect
-                  x={0}
-                  width={contentW}
-                  height={VIEW_H}
-                  initial={{ y: 0 }}
-                  animate={{ y: travel }}
-                  transition={scanTransition}
-                />
+                <m.rect x={0} width={contentW} height={VIEW_H} style={{ y }} />
               </clipPath>
             </defs>
 
@@ -212,9 +236,7 @@ const Structure = memo(() => {
               fill="rgba(255,255,255,0.07)"
               stroke="rgba(255,255,255,0.2)"
               strokeWidth={0.4}
-              initial={{ y: 0 }}
-              animate={{ y: travel }}
-              transition={scanTransition}
+              style={{ y }}
             />
           </svg>
         </m.div>
