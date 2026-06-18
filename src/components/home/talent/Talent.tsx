@@ -1,5 +1,5 @@
 import Introduction from "@/components/home/talent/cards/Introduction";
-import Productivity from "@/components/home/talent/cards/Productivity";
+import ProblemSolving from "@/components/home/talent/cards/ProblemSolving";
 import ScheduleV2 from "@/components/home/talent/cards/ScheduleV2";
 import Skills from "@/components/home/talent/cards/Skills";
 import Structure from "@/components/home/talent/cards/Structure";
@@ -85,7 +85,7 @@ const Talent = memo(() => {
                 )}
                 style={{ opacity: isLg ? opacity[3] : 1 }}
               >
-                <Productivity />
+                <ProblemSolving />
               </m.div>
               <m.div
                 className={cn(
