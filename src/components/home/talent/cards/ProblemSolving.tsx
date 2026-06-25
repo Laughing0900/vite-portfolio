@@ -233,7 +233,8 @@ const ProblemSolving = memo(() => {
             r={4}
             fill="oklch(98% 0 0)"
             filter="url(#ps-glow)"
-            style={{ cx: dotX, cy: dotY }}
+            cx={dotX}
+            cy={dotY}
           />
         </svg>
       </div>
